@@ -1,0 +1,8 @@
+{
+  "request": "GET https://images-assets.nasa.gov/image/s66-54530/s66-54530~large.jpg",
+  "finalUrl": "https://images-assets.nasa.gov/image/s66-54530/s66-54530~large.jpg",
+  "contentType": "image/jpeg",
+  "retrievedAt": "2026-11-15T05:28:50Z",
+  "sha256": "ee0c0c2f52d68bf8b58a13cf620c018ecd75e8b9656f3fe8fd0004fd21a42415",
+  "bytes": 332952
+}

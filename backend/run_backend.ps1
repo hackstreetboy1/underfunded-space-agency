@@ -11,7 +11,16 @@ $candidates = @(
     (Join-Path $backendDir '.venv\Scripts\python.exe'),
     (Join-Path $env:LOCALAPPDATA 'USA-venv\Scripts\python.exe')
 )
-$python = $candidates | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
+# The first one that actually runs: a backend\.venv copied from another PC (it is committed to the repo) points at that
+# PC's Python install and fails to start here.
+$python = $null
+$ErrorActionPreference = 'Continue'   # a broken venv writes to stderr; only the exit code matters here
+foreach ($candidate in $candidates) {
+    if (-not (Test-Path -LiteralPath $candidate)) { continue }
+    & $candidate -c 'import fastapi, uvicorn' *> $null
+    if ($LASTEXITCODE -eq 0) { $python = $candidate; break }
+}
+$ErrorActionPreference = 'Stop'
 
 if (-not $python) {
     Write-Error "Backend Python environment not found (looked for $($candidates -join ' and ')). Run Start-Demo.bat once to create it, or see backend/README.md."

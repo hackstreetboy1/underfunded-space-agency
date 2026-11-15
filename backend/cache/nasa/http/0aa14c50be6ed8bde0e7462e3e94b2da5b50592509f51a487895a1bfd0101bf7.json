@@ -1,0 +1,8 @@
+{
+  "request": "GET https://images-api.nasa.gov/search?media_type=image&page_size=25&q=Gemini+8+Agena+docking&year_end=1966&year_start=1966",
+  "finalUrl": "https://images-api.nasa.gov/search",
+  "contentType": "application/json",
+  "retrievedAt": "2026-11-15T05:24:46Z",
+  "sha256": "b5dfa3885101d00a1c8f5480aa0085642735c548c4498443c027085e325de5c0",
+  "bytes": 17747
+}

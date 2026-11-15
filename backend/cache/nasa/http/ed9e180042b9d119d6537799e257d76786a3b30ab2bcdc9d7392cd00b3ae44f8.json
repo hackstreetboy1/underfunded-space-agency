@@ -1,0 +1,8 @@
+{
+  "request": "GET https://images-api.nasa.gov/search?media_type=image&page_size=25&q=Gemini+parachute&year_end=1966&year_start=1964",
+  "finalUrl": "https://images-api.nasa.gov/search",
+  "contentType": "application/json",
+  "retrievedAt": "2026-11-15T05:24:47Z",
+  "sha256": "56a6ff2e90fc03d200fb9f7dce01c61c8770ce54a17b2061815abbfbe879ce5e",
+  "bytes": 2849
+}

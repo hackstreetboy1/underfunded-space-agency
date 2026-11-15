@@ -1,0 +1,8 @@
+{
+  "request": "GET https://images-api.nasa.gov/search?media_type=image&page_size=25&q=Gemini+7+seen+from+Gemini+6&year_end=1965&year_start=1965",
+  "finalUrl": "https://images-api.nasa.gov/search",
+  "contentType": "application/json",
+  "retrievedAt": "2026-11-15T05:24:46Z",
+  "sha256": "b335fa00eb3e730f1e9b30e2544d95257048bd3ceebe45fc95bfb9711011d0ee",
+  "bytes": 13493
+}

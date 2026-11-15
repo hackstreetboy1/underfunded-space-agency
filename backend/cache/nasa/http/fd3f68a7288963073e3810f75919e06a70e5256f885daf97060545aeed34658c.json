@@ -1,0 +1,8 @@
+{
+  "request": "GET https://images-assets.nasa.gov/image/S66-24465/S66-24465~medium.jpg",
+  "finalUrl": "https://images-assets.nasa.gov/image/S66-24465/S66-24465~medium.jpg",
+  "contentType": "image/jpeg",
+  "retrievedAt": "2026-11-15T05:28:47Z",
+  "sha256": "e9726d3009f1658e119a7b6a88e6cdbe038041f3af3c6e60915897559609c92e",
+  "bytes": 58514
+}

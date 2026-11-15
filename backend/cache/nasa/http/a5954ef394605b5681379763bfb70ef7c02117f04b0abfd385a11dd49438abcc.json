@@ -1,0 +1,8 @@
+{
+  "request": "GET https://images-assets.nasa.gov/image/S63-16250/S63-16250~large.jpg",
+  "finalUrl": "https://images-assets.nasa.gov/image/S63-16250/S63-16250~large.jpg",
+  "contentType": "image/jpeg",
+  "retrievedAt": "2026-11-15T05:28:30Z",
+  "sha256": "9e3674a98ee0c7f39548fc8568d3b56895ace1f0b93df98f36aaec1fa7cd643a",
+  "bytes": 491847
+}

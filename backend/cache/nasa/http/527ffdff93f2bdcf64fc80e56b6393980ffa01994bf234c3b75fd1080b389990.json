@@ -1,0 +1,8 @@
+{
+  "request": "GET https://images-assets.nasa.gov/image/S66-34126/S66-34126~large.jpg",
+  "finalUrl": "https://images-assets.nasa.gov/image/S66-34126/S66-34126~large.jpg",
+  "contentType": "image/jpeg",
+  "retrievedAt": "2026-11-15T05:28:48Z",
+  "sha256": "451210ad333afb62e9479dd03adac4955d99165390b336283521b625ec270132",
+  "bytes": 223859
+}

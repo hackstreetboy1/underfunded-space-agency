@@ -1,0 +1,8 @@
+{
+  "request": "GET https://images-api.nasa.gov/search?media_type=image&page_size=25&q=heat+shield&year_end=1966&year_start=1962",
+  "finalUrl": "https://images-api.nasa.gov/search",
+  "contentType": "application/json",
+  "retrievedAt": "2026-11-15T05:25:32Z",
+  "sha256": "fdea69cc06e8b59cbaf20999386d1b1071e1999fccfdff6d9e3950093e42ca11",
+  "bytes": 8980
+}

@@ -1,0 +1,8 @@
+{
+  "request": "GET https://images-assets.nasa.gov/image/s64-03507/s64-03507~large.jpg",
+  "finalUrl": "https://images-assets.nasa.gov/image/s64-03507/s64-03507~large.jpg",
+  "contentType": "image/jpeg",
+  "retrievedAt": "2026-11-15T05:28:49Z",
+  "sha256": "f91276a9b9844508452c2d87c29fa10b6a5984802b1107246f788efea7dc188c",
+  "bytes": 158986
+}

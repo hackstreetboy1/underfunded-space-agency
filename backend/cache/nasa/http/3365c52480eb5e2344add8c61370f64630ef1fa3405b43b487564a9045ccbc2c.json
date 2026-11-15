@@ -1,0 +1,8 @@
+{
+  "request": "GET https://images-api.nasa.gov/search?media_type=image&page_size=25&q=retrograde+rockets&year_end=1966&year_start=1962",
+  "finalUrl": "https://images-api.nasa.gov/search",
+  "contentType": "application/json",
+  "retrievedAt": "2026-11-15T05:25:32Z",
+  "sha256": "4e25b57a1ef2e6b34019e6cf32d78be45287d19c650765a535794341f7361223",
+  "bytes": 195
+}

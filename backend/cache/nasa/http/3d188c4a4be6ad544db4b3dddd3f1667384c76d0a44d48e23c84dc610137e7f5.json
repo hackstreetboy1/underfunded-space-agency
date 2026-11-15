@@ -1,0 +1,8 @@
+{
+  "request": "GET https://epic.gsfc.nasa.gov/api/natural",
+  "finalUrl": "https://epic.gsfc.nasa.gov/api/natural",
+  "contentType": "application/json",
+  "retrievedAt": "2026-11-15T03:26:57Z",
+  "sha256": "40d13a997d5ee4357e812cf5eea942ecbb01c84e9d825eb8e0afa7a24bca1551",
+  "bytes": 11839
+}

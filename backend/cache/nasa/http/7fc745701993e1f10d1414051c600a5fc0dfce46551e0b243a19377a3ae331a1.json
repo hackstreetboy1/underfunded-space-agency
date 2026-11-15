@@ -1,0 +1,8 @@
+{
+  "request": "GET https://images-api.nasa.gov/search?media_type=image&page_size=25&q=Gemini+fuel+cell&year_end=1966&year_start=1962",
+  "finalUrl": "https://images-api.nasa.gov/search",
+  "contentType": "application/json",
+  "retrievedAt": "2026-11-15T05:24:47Z",
+  "sha256": "7439900eab25b8d276723077f246be380f4872c8bd97ac538bfcd72cd51fcf48",
+  "bytes": 3021
+}

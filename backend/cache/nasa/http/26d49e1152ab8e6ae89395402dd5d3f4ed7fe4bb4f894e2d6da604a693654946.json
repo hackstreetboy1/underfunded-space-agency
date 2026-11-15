@@ -1,0 +1,8 @@
+{
+  "request": "GET https://images-api.nasa.gov/search?media_type=image&page_size=25&q=Gemini+Earth+view&year_end=1966&year_start=1965",
+  "finalUrl": "https://images-api.nasa.gov/search",
+  "contentType": "application/json",
+  "retrievedAt": "2026-11-15T05:24:48Z",
+  "sha256": "8a2cc43ea93a3ca98170b3f7bebd132418dcd938b8d26551d16849be2515efda",
+  "bytes": 37818
+}

@@ -1,0 +1,8 @@
+{
+  "request": "GET https://images-api.nasa.gov/search?media_type=image&page_size=25&q=Gemini+aircraft+carrier+recovery&year_end=1966&year_start=1965",
+  "finalUrl": "https://images-api.nasa.gov/search",
+  "contentType": "application/json",
+  "retrievedAt": "2026-11-15T05:24:48Z",
+  "sha256": "95df92db4f2f5be1ebd7d9187664f1e1c5ac317e273aa42a61d27e954d5e8098",
+  "bytes": 34851
+}

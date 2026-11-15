@@ -1,0 +1,8 @@
+{
+  "request": "GET https://images-assets.nasa.gov/image/s65-45280/s65-45280~medium.jpg",
+  "finalUrl": "https://images-assets.nasa.gov/image/s65-45280/s65-45280~medium.jpg",
+  "contentType": "image/jpeg",
+  "retrievedAt": "2026-11-15T05:28:49Z",
+  "sha256": "36f20b65fa9273edd22dcabe33bd5f05eb3ede2bd5bf66e35b5a4d047a59fe87",
+  "bytes": 114949
+}

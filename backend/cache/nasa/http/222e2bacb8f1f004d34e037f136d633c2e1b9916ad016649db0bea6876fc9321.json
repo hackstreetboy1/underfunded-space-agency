@@ -1,0 +1,8 @@
+{
+  "request": "GET https://images-api.nasa.gov/search?media_type=image&page_size=25&q=Mission+Control+Center+Gemini&year_end=1966&year_start=1965",
+  "finalUrl": "https://images-api.nasa.gov/search",
+  "contentType": "application/json",
+  "retrievedAt": "2026-11-15T05:24:48Z",
+  "sha256": "a9c0c96477972cb7fe772584d2791b318debfd7b1816b903050adb7957a239a4",
+  "bytes": 33613
+}

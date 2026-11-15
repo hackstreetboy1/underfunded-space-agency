@@ -1,0 +1,8 @@
+{
+  "request": "GET https://images-api.nasa.gov/search?media_type=image&page_size=25&q=Gemini+pressure+suit&year_end=1966&year_start=1964",
+  "finalUrl": "https://images-api.nasa.gov/search",
+  "contentType": "application/json",
+  "retrievedAt": "2026-11-15T05:24:47Z",
+  "sha256": "0bc3d3291e213af149e82ba317a94f6f04de11f1bbe182e5b667866899cd5a78",
+  "bytes": 7686
+}

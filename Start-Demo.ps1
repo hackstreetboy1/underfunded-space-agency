@@ -46,9 +46,11 @@ function Stop-Tree([int]$ProcessId) {
 
 $backendDir = Join-Path $repo 'backend'
 $requirements = Join-Path $backendDir 'requirements.txt'
-# Where the backend environment lives. backend\.venv when it already exists or the path is short enough; otherwise a
-# short per-user folder, because some packages (elevenlabs) nest files ~210 characters deep and a fresh install fails
-# past Windows' 260-character limit unless long paths are enabled. run_backend.ps1 checks the same two places.
+# Where the backend environment lives. backend\.venv is committed to the repo, but it only runs on the PC that built it
+# (it points at that PC's Python install). So: backend\.venv when it runs here; else a fresh backend\.venv when none
+# exists and the path is short enough; else a short per-user folder, because some packages (elevenlabs) nest files
+# ~210 characters deep and a fresh install fails past Windows' 260-character limit unless long paths are enabled.
+# run_backend.ps1 picks the first of the same two places that runs.
 $repoVenv = Join-Path $backendDir '.venv'
 $shortVenv = Join-Path $env:LOCALAPPDATA 'USA-venv'
 $deepestPackageFile = 215   # longest file path inside a venv for requirements.txt today (208), plus headroom
@@ -56,7 +58,17 @@ function Test-LongPathsEnabled {
     try { return (Get-ItemPropertyValue 'HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem' 'LongPathsEnabled') -eq 1 } catch { return $false }
 }
 function Test-VenvFits([string]$Dir) { return (Test-LongPathsEnabled) -or ($Dir.Length + 1 + $deepestPackageFile -le 259) }
-if ((Test-Path -LiteralPath (Join-Path $repoVenv 'Scripts\python.exe')) -or (Test-VenvFits $repoVenv)) { $venvDir = $repoVenv }
+function Test-VenvWorks([string]$Dir) {
+    $exe = Join-Path $Dir 'Scripts\python.exe'
+    if (-not (Test-Path -LiteralPath $exe)) { return $false }
+    $previousPref = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    try { & $exe -c 'import fastapi, uvicorn' *> $null; return $LASTEXITCODE -eq 0 }
+    catch { return $false }
+    finally { $ErrorActionPreference = $previousPref }
+}
+if (Test-VenvWorks $repoVenv) { $venvDir = $repoVenv }
+elseif (-not (Test-Path -LiteralPath (Join-Path $repoVenv 'Scripts\python.exe')) -and (Test-VenvFits $repoVenv)) { $venvDir = $repoVenv }
 else { $venvDir = $shortVenv }
 $venvPython = Join-Path $venvDir 'Scripts\python.exe'
 $installedStamp = Join-Path $venvDir 'usa-requirements.sha256'
@@ -74,15 +86,27 @@ function Find-BasePython {
 }
 
 function Initialize-Backend {
-    # Creates backend\.venv and installs backend\requirements.txt when the environment is missing or the requirements
-    # changed since the last install (a fresh clone has neither .venv nor .env: both are git-ignored).
+    # Creates the environment and installs backend\requirements.txt when it is missing, does not run here, or the
+    # requirements changed since the last install. A fresh clone has no backend\.env (git-ignored): copy the example.
+    $envFile = Join-Path $backendDir '.env'
+    if (-not (Test-Path -LiteralPath $envFile)) {
+        Copy-Item -LiteralPath (Join-Path $backendDir '.env.example') -Destination $envFile
+        Write-Host 'Created backend\.env from .env.example. Add your GEMINI_API_KEY and ELEVENLABS_API_KEY there for live mode,' -ForegroundColor Yellow
+        Write-Host 'or run Start-Demo.bat -Offline to play with the fake providers (no keys needed).' -ForegroundColor Yellow
+    }
+
     $wantedHash = (Get-FileHash -LiteralPath $requirements -Algorithm SHA256).Hash
     $haveHash = if (Test-Path -LiteralPath $installedStamp) { (Get-Content -LiteralPath $installedStamp -Raw).Trim() } else { '' }
-    if ((Test-Path -LiteralPath $venvPython) -and $haveHash -eq $wantedHash) { return }
+    $works = Test-VenvWorks $venvDir
+    if ($works -and $haveHash -eq $wantedHash) { return }
 
     $previousPref = $ErrorActionPreference
     $ErrorActionPreference = 'Continue'   # pip writes notices to stderr; only exit codes decide failure here
     try {
+        if (-not $works -and $venvDir -eq $shortVenv -and (Test-Path -LiteralPath $venvDir)) {
+            Write-Host "The backend environment in $venvDir does not run; rebuilding it ..." -ForegroundColor Yellow
+            Remove-Item -LiteralPath $venvDir -Recurse -Force
+        }
         if (-not (Test-Path -LiteralPath $venvPython)) {
             if (-not (Test-VenvFits $venvDir)) {
                 throw "The backend packages need file paths longer than Windows allows here ($venvDir). Turn on Windows long paths (Settings > System > Advanced > Enable long paths, or ask an administrator), then run the demo again."
@@ -102,13 +126,6 @@ function Initialize-Backend {
         Write-Host 'Backend environment ready.' -ForegroundColor Green
     }
     finally { $ErrorActionPreference = $previousPref }
-
-    $envFile = Join-Path $backendDir '.env'
-    if (-not (Test-Path -LiteralPath $envFile)) {
-        Copy-Item -LiteralPath (Join-Path $backendDir '.env.example') -Destination $envFile
-        Write-Host 'Created backend\.env from .env.example. Add your GEMINI_API_KEY and ELEVENLABS_API_KEY there for live mode,' -ForegroundColor Yellow
-        Write-Host 'or run Start-Demo.bat -Offline to play with the fake providers (no keys needed).' -ForegroundColor Yellow
-    }
 }
 
 Write-Host ''

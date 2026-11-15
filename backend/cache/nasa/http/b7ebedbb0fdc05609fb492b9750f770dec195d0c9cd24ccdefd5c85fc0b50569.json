@@ -1,0 +1,8 @@
+{
+  "request": "GET https://images-api.nasa.gov/search?media_type=image&page_size=25&q=Gemini+Titan+liftoff&year_end=1966&year_start=1965",
+  "finalUrl": "https://images-api.nasa.gov/search",
+  "contentType": "application/json",
+  "retrievedAt": "2026-11-15T05:24:46Z",
+  "sha256": "8515b8e0173397ebaec1a2daaa7dc460b6be4b6726cfa2e997dda44918e624f8",
+  "bytes": 32022
+}

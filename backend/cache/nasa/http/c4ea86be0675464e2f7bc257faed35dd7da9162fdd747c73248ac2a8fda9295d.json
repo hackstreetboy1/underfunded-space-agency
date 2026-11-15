@@ -1,0 +1,8 @@
+{
+  "request": "GET https://images-api.nasa.gov/search?media_type=image&page_size=25&q=Gemini+adapter+section&year_end=1966&year_start=1963",
+  "finalUrl": "https://images-api.nasa.gov/search",
+  "contentType": "application/json",
+  "retrievedAt": "2026-11-15T05:24:47Z",
+  "sha256": "ff1c4739a325b725a7f575ad2eeb990e5da840af904e71f3813cfa4a831f5de2",
+  "bytes": 19211
+}

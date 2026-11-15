@@ -13,15 +13,14 @@ obj/
 *.user
 TestResults/
 
-# Python
-backend/.venv/
+# Python. backend/.venv is committed on purpose so the repo is the full package. It only runs on a PC with the same
+# Python install; elsewhere Start-Demo builds a fresh environment.
 __pycache__/
 *.pyc
 .pytest_cache/
 
-# Exported builds (Godot export_presets.cfg writes to build/)
-build/
+# Exported builds (Godot export_presets.cfg writes to build/); anchored so pip's own build/ package stays in .venv
+/build/
 
-# Runtime caches
-backend/cache/
+# Runtime logs (backend/cache is committed: cached NASA media and crew voice lines)
 user_logs/

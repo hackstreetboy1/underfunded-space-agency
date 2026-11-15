@@ -1,0 +1,8 @@
+{
+  "request": "GET https://images-api.nasa.gov/search?media_type=image&page_size=25&q=Gemini+recovery+swimmers+flotation+collar&year_end=1966&year_start=1965",
+  "finalUrl": "https://images-api.nasa.gov/search",
+  "contentType": "application/json",
+  "retrievedAt": "2026-11-15T05:24:46Z",
+  "sha256": "d7daa3c8ace2a5cae461663b59cd83882469009dab5e004eff18ba3083552747",
+  "bytes": 1513
+}

@@ -1,0 +1,8 @@
+{
+  "request": "GET https://images-api.nasa.gov/search?media_type=image&page_size=25&q=Gemini+8+recovery&year_end=1966&year_start=1966",
+  "finalUrl": "https://images-api.nasa.gov/search",
+  "contentType": "application/json",
+  "retrievedAt": "2026-11-15T05:24:46Z",
+  "sha256": "20dd129492c3605f495cb7fbb720add851765bd508cdac1f6a458160c2672a80",
+  "bytes": 4405
+}

@@ -1,0 +1,8 @@
+{
+  "request": "GET https://images-api.nasa.gov/search?media_type=image&page_size=25&q=Gemini+heat+shield&year_end=1966&year_start=1964",
+  "finalUrl": "https://images-api.nasa.gov/search",
+  "contentType": "application/json",
+  "retrievedAt": "2026-11-15T05:24:47Z",
+  "sha256": "bd9f833d7faab6b08412f52d0fa4a1c686fd28eca6ea5e3048f44be36643d4f8",
+  "bytes": 195
+}

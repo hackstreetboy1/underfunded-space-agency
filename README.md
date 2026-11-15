@@ -14,9 +14,17 @@ Needs Godot 4.7.2 .NET, the .NET 11 SDK and Python 3.12 or newer.
 
 ### First run after cloning
 
-`backend/.venv` and `backend/.env` are not in the repo. On the first run `Start-Demo.bat` sets them up:
+The repo is the full package: the game, the backend, its Python environment (`backend/.venv`) and its cache of NASA media and crew voice lines. Only `backend/.env`, which holds the API keys, is left out.
 
-- It creates the Python environment and installs `backend/requirements.txt` (needs internet, about a minute). If the folder's path is too long for the packages' deeply nested files and Windows long paths are off, the environment goes in `%LOCALAPPDATA%\USA-venv` instead. It reinstalls when `requirements.txt` changes.
+Some files in `backend/.venv` sit more than 200 characters deep, so clone with long paths on, or Windows git reports "Filename too long":
+
+```
+git clone -c core.longpaths=true https://github.com/hackstreetboy1/underfunded-space-agency.git
+```
+
+On the first run `Start-Demo.bat` fills in what a new PC is missing:
+
+- `backend/.venv` points at the Python install of the PC that built it. If it doesn't run on yours, the launcher builds a fresh environment from `backend/requirements.txt` (needs internet, about a minute) in `%LOCALAPPDATA%\USA-venv`. It reinstalls when `requirements.txt` changes.
 - It copies `backend/.env.example` to `backend/.env`. Put your own `GEMINI_API_KEY` and `ELEVENLABS_API_KEY` in it for live mode, or play with `-Offline`.
 
 Logs, saves and repros: `%APPDATA%\Godot\app_userdata\Underfunded Space Agency\`. Press F12 in the game for the debug overlay.

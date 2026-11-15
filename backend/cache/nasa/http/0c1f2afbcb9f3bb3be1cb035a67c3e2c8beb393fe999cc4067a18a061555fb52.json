@@ -1,0 +1,8 @@
+{
+  "request": "GET https://images-api.nasa.gov/search?media_type=image&page_size=25&q=Gemini+cockpit&year_end=1966&year_start=1964",
+  "finalUrl": "https://images-api.nasa.gov/search",
+  "contentType": "application/json",
+  "retrievedAt": "2026-11-15T05:24:47Z",
+  "sha256": "4adde5a84cf99bac118c0afc43e6e230021c1a0a32c5de4ca43cea1fdd04cdd7",
+  "bytes": 2522
+}

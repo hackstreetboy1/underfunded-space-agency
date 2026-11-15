@@ -1,0 +1,8 @@
+{
+  "request": "GET https://epic.gsfc.nasa.gov/archive/natural/2026/11/12/png/epic_1b_20261112143251.png",
+  "finalUrl": "https://epic.gsfc.nasa.gov/archive/natural/2026/11/12/png/epic_1b_20261112143251.png",
+  "contentType": "image/png",
+  "retrievedAt": "2026-11-15T05:28:29Z",
+  "sha256": "8fb422157dadffd580f038328eec2bd28bb2f68ec452de1edbcf175fc386c513",
+  "bytes": 3079479
+}

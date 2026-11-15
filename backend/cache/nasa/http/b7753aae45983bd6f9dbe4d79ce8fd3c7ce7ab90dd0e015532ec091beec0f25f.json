@@ -1,0 +1,8 @@
+{
+  "request": "GET https://images-assets.nasa.gov/image/s65-18645/s65-18645~large.jpg",
+  "finalUrl": "https://images-assets.nasa.gov/image/s65-18645/s65-18645~large.jpg",
+  "contentType": "image/jpeg",
+  "retrievedAt": "2026-11-15T05:28:49Z",
+  "sha256": "e517f5d32dace25d17d800d0a3bd29e456866bf104b41fa2c394feb04eed06f6",
+  "bytes": 436857
+}

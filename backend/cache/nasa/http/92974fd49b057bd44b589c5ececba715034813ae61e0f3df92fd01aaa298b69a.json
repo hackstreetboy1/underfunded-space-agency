@@ -1,0 +1,8 @@
+{
+  "request": "GET https://images-assets.nasa.gov/image/s66-22686/s66-22686~large.jpg",
+  "finalUrl": "https://images-assets.nasa.gov/image/s66-22686/s66-22686~large.jpg",
+  "contentType": "image/jpeg",
+  "retrievedAt": "2026-11-15T05:28:50Z",
+  "sha256": "bf6985925a02695482ac9c5c58ae09d1a3c3a05f879672487d2aca144c0f7e64",
+  "bytes": 432817
+}
