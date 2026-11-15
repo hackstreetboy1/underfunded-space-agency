@@ -11,13 +11,15 @@ Playable demo of mission 1, *Out of Control* (Godot 4.7.2 .NET, C#). You are CAP
 
 ## Get it
 
-**ZIP:** on GitHub, *Code > Download ZIP*, then extract it. Windows' built-in extractor may say some files in `backend\.venv` have a path that is too long; choose **Skip** for those (that folder is rebuilt on your PC anyway), or extract with 7-Zip, which has no such limit.
+**ZIP:** on GitHub, *Code > Download ZIP*, then extract it anywhere.
 
-**Git:** clone with long paths on, or Windows git reports "Filename too long" for the same files:
+**Git:**
 
 ```
-git clone -c core.longpaths=true https://github.com/hackstreetboy1/underfunded-space-agency.git
+git clone https://github.com/hackstreetboy1/underfunded-space-agency.git
 ```
+
+The longest path in the repo is 157 characters, so both work in an ordinary folder. Only if you extract or clone into a folder whose own path is over about 100 characters can Windows refuse a file as "Path too long"; pick a shorter folder such as `C:\Games` then. If a file does go missing, the launcher notices that `backend\.venv` no longer runs and builds a fresh one.
 
 ## Play
 
@@ -36,7 +38,7 @@ The launcher starts the local AI proxy (`backend\`, live Gemini + ElevenLabs), b
 
 ### First run
 
-The repo is the full package: the game, the backend, its Python environment (`backend\.venv`) and its cache of NASA media and crew voice lines. Only `backend\.env`, which holds the API keys, is left out.
+The repo is the full package: the game, the backend, its Python environment (`backend\.venv`) and its cache of NASA media and crew voice lines. Left out: `backend\.env`, which holds the API keys, and 28 ElevenLabs SDK files for features the game never uses, whose paths are too long for a Windows ZIP extract (listed in `.gitignore`).
 
 `backend\.venv` points at the Python install of the PC that built it. If it does not run on yours, the launcher builds a fresh environment from `backend\requirements.txt` in `%LOCALAPPDATA%\USA-venv` (about a minute). It reinstalls when `requirements.txt` changes. If `backend\.env` is missing, it copies `.env.example` there and says which keys to add.
 

@@ -95,7 +95,8 @@ function Test-VenvWorks([string]$Dir) {
     if (-not (Test-Path -LiteralPath $exe)) { return $false }
     $previousPref = $ErrorActionPreference
     $ErrorActionPreference = 'Continue'
-    try { & $exe -c 'import fastapi, uvicorn' *> $null; return $LASTEXITCODE -eq 0 }
+    # Import what the backend loads at startup, so a venv with missing files (a partial ZIP extract) counts as broken.
+    try { & $exe -c 'import fastapi, uvicorn, google.genai, elevenlabs.client' *> $null; return $LASTEXITCODE -eq 0 }
     catch { return $false }
     finally { $ErrorActionPreference = $previousPref }
 }

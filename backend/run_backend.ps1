@@ -17,7 +17,7 @@ $python = $null
 $ErrorActionPreference = 'Continue'   # a broken venv writes to stderr; only the exit code matters here
 foreach ($candidate in $candidates) {
     if (-not (Test-Path -LiteralPath $candidate)) { continue }
-    & $candidate -c 'import fastapi, uvicorn' *> $null
+    & $candidate -c 'import fastapi, uvicorn, google.genai, elevenlabs.client' *> $null
     if ($LASTEXITCODE -eq 0) { $python = $candidate; break }
 }
 $ErrorActionPreference = 'Stop'
