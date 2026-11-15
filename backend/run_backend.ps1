@@ -6,10 +6,15 @@
 $ErrorActionPreference = 'Stop'
 
 $backendDir = $PSScriptRoot
-$python = Join-Path $backendDir '.venv\Scripts\python.exe'
+# backend\.venv, or the short per-user folder Start-Demo.ps1 uses when the repo path is too long for the packages.
+$candidates = @(
+    (Join-Path $backendDir '.venv\Scripts\python.exe'),
+    (Join-Path $env:LOCALAPPDATA 'USA-venv\Scripts\python.exe')
+)
+$python = $candidates | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
 
-if (-not (Test-Path $python)) {
-    Write-Error "Virtual environment not found at $python. See backend/README.md to create it."
+if (-not $python) {
+    Write-Error "Backend Python environment not found (looked for $($candidates -join ' and ')). Run Start-Demo.bat once to create it, or see backend/README.md."
     exit 1
 }
 

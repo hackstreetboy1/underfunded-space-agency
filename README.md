@@ -10,7 +10,14 @@ Double-click `Start-Demo.bat`. It starts the local AI proxy (`backend/`, live Ge
 - `-NoBackend`: game only
 - `-Godot <exe>` or `$env:USA_GODOT`: Godot .NET executable if it is not in the default Downloads location
 
-Needs Godot 4.7.2 .NET, the .NET 11 SDK, and Python 3.13 (the backend's `.venv` was built against `%LOCALAPPDATA%\Programs\Python\Python313`).
+Needs Godot 4.7.2 .NET, the .NET 11 SDK and Python 3.12 or newer.
+
+### First run after cloning
+
+`backend/.venv` and `backend/.env` are not in the repo. On the first run `Start-Demo.bat` sets them up:
+
+- It creates the Python environment and installs `backend/requirements.txt` (needs internet, about a minute). If the folder's path is too long for the packages' deeply nested files and Windows long paths are off, the environment goes in `%LOCALAPPDATA%\USA-venv` instead. It reinstalls when `requirements.txt` changes.
+- It copies `backend/.env.example` to `backend/.env`. Put your own `GEMINI_API_KEY` and `ELEVENLABS_API_KEY` in it for live mode, or play with `-Offline`.
 
 Logs, saves and repros: `%APPDATA%\Godot\app_userdata\Underfunded Space Agency\`. Press F12 in the game for the debug overlay.
 

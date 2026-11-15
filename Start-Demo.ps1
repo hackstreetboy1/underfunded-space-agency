@@ -44,6 +44,73 @@ function Stop-Tree([int]$ProcessId) {
     & taskkill.exe /PID $ProcessId /T /F *> $null
 }
 
+$backendDir = Join-Path $repo 'backend'
+$requirements = Join-Path $backendDir 'requirements.txt'
+# Where the backend environment lives. backend\.venv when it already exists or the path is short enough; otherwise a
+# short per-user folder, because some packages (elevenlabs) nest files ~210 characters deep and a fresh install fails
+# past Windows' 260-character limit unless long paths are enabled. run_backend.ps1 checks the same two places.
+$repoVenv = Join-Path $backendDir '.venv'
+$shortVenv = Join-Path $env:LOCALAPPDATA 'USA-venv'
+$deepestPackageFile = 215   # longest file path inside a venv for requirements.txt today (208), plus headroom
+function Test-LongPathsEnabled {
+    try { return (Get-ItemPropertyValue 'HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem' 'LongPathsEnabled') -eq 1 } catch { return $false }
+}
+function Test-VenvFits([string]$Dir) { return (Test-LongPathsEnabled) -or ($Dir.Length + 1 + $deepestPackageFile -le 259) }
+if ((Test-Path -LiteralPath (Join-Path $repoVenv 'Scripts\python.exe')) -or (Test-VenvFits $repoVenv)) { $venvDir = $repoVenv }
+else { $venvDir = $shortVenv }
+$venvPython = Join-Path $venvDir 'Scripts\python.exe'
+$installedStamp = Join-Path $venvDir 'usa-requirements.sha256'
+
+function Find-BasePython {
+    # Python 3.12+ from the py launcher, else from PATH (skipping the Microsoft Store stub, which fails the check).
+    foreach ($candidate in @(@('py', '-3'), @('python'))) {
+        if (-not (Get-Command $candidate[0] -ErrorAction SilentlyContinue)) { continue }
+        $exe = $candidate[0]
+        $pre = @($candidate | Select-Object -Skip 1)
+        $ok = & $exe @pre -c 'import sys; print(sys.version_info >= (3, 12))' 2>$null
+        if ($LASTEXITCODE -eq 0 -and "$ok".Trim() -eq 'True') { return , $candidate }
+    }
+    return $null
+}
+
+function Initialize-Backend {
+    # Creates backend\.venv and installs backend\requirements.txt when the environment is missing or the requirements
+    # changed since the last install (a fresh clone has neither .venv nor .env: both are git-ignored).
+    $wantedHash = (Get-FileHash -LiteralPath $requirements -Algorithm SHA256).Hash
+    $haveHash = if (Test-Path -LiteralPath $installedStamp) { (Get-Content -LiteralPath $installedStamp -Raw).Trim() } else { '' }
+    if ((Test-Path -LiteralPath $venvPython) -and $haveHash -eq $wantedHash) { return }
+
+    $previousPref = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'   # pip writes notices to stderr; only exit codes decide failure here
+    try {
+        if (-not (Test-Path -LiteralPath $venvPython)) {
+            if (-not (Test-VenvFits $venvDir)) {
+                throw "The backend packages need file paths longer than Windows allows here ($venvDir). Turn on Windows long paths (Settings > System > Advanced > Enable long paths, or ask an administrator), then run the demo again."
+            }
+            $base = Find-BasePython
+            if (-not $base) { throw 'Python 3.12 or newer was not found. Install it from python.org (tick "Add python.exe to PATH" or keep the py launcher), then run the demo again.' }
+            Write-Host "First run: creating the backend Python environment in $venvDir with '$($base -join ' ')' ..." -ForegroundColor Cyan
+            $exe = $base[0]
+            $pre = @($base | Select-Object -Skip 1)
+            & $exe @pre -m venv $venvDir
+            if ($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath $venvPython)) { throw "Creating $venvDir failed (exit $LASTEXITCODE)." }
+        }
+        Write-Host 'Installing backend packages from backend\requirements.txt (needs internet; about a minute) ...' -ForegroundColor Cyan
+        & $venvPython -m pip install --disable-pip-version-check -q -r $requirements
+        if ($LASTEXITCODE -ne 0) { throw "Installing backend packages failed (exit $LASTEXITCODE). Check the internet connection and run the demo again." }
+        Set-Content -LiteralPath $installedStamp -Value $wantedHash -Encoding ascii
+        Write-Host 'Backend environment ready.' -ForegroundColor Green
+    }
+    finally { $ErrorActionPreference = $previousPref }
+
+    $envFile = Join-Path $backendDir '.env'
+    if (-not (Test-Path -LiteralPath $envFile)) {
+        Copy-Item -LiteralPath (Join-Path $backendDir '.env.example') -Destination $envFile
+        Write-Host 'Created backend\.env from .env.example. Add your GEMINI_API_KEY and ELEVENLABS_API_KEY there for live mode,' -ForegroundColor Yellow
+        Write-Host 'or run Start-Demo.bat -Offline to play with the fake providers (no keys needed).' -ForegroundColor Yellow
+    }
+}
+
 Write-Host ''
 Write-Host '=== Underfunded Space Agency demo ===' -ForegroundColor Cyan
 if ($NoBackend) { $mode = 'game only (no backend)' }
@@ -62,6 +129,8 @@ if ($DryRun) {
     if (-not $NoBackend) {
         $fake = if ($Live) { 'false' } else { 'true' }
         Write-Host "  (reuse the proxy if $healthUrl already answers)"
+        Write-Host "  if $venvDir is missing or requirements.txt changed: py -3 -m venv; pip install -r backend\requirements.txt"
+        Write-Host '  if backend\.env is missing: copy backend\.env.example to backend\.env'
         Write-Host "  child env USE_FAKE_PROVIDERS=$fake"
         Write-Host "  powershell -NoProfile -ExecutionPolicy Bypass -File `"$backendScript`"   (hidden; logs: $logDir\backend.out.log, backend.err.log)"
         Write-Host "  wait up to 30 s for $healthUrl"
@@ -102,6 +171,7 @@ try {
         }
         else {
             if (-not (Test-Path -LiteralPath $backendScript)) { throw "Missing $backendScript" }
+            Initialize-Backend
             New-Item -ItemType Directory -Force -Path $logDir | Out-Null
             $outLog = Join-Path $logDir 'backend.out.log'
             $errLog = Join-Path $logDir 'backend.err.log'
