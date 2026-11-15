@@ -40,6 +40,8 @@ The launcher starts the local AI proxy (`backend\`, live Gemini + ElevenLabs), b
 
 The repo is the full package: the game, the backend, its Python environment (`backend\.venv`) and its cache of NASA media and crew voice lines. Left out: `backend\.env`, which holds the API keys, and 28 ElevenLabs SDK files for features the game never uses, whose paths are too long for a Windows ZIP extract (listed in `.gitignore`).
 
+Godot's imported copies of the fonts, textures and models (the `.godot` folder) are not in the repo, so the launcher imports them first (about 20 seconds the first time, a few seconds after). Running the game straight from Godot without that step shows broken UI and missing images; opening the project once in the Godot editor also imports them.
+
 `backend\.venv` points at the Python install of the PC that built it. If it does not run on yours, the launcher builds a fresh environment from `backend\requirements.txt` in `%LOCALAPPDATA%\USA-venv` (about a minute). It reinstalls when `requirements.txt` changes. If `backend\.env` is missing, it copies `.env.example` there and says which keys to add.
 
 Logs, saves and repros: `%APPDATA%\Godot\app_userdata\Underfunded Space Agency\`. Press F12 in the game for the debug overlay.

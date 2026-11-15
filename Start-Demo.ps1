@@ -187,6 +187,7 @@ if ($DryRun) {
     }
     if (-not $BackendOnly) {
         Write-Host "  dotnet build UnderfundedSpaceAgency.csproj -v q --nologo   (cwd $repo)"
+        Write-Host "  `"$Godot`" --headless --path `"$repo`" --import   (imports fonts, textures and models into .godot)"
         Write-Host '  child env USA_BACKEND_AUTOSTART=0'
         Write-Host "  `"$Godot`" --path `"$repo`"   (waits for the window to close)"
     }
@@ -288,6 +289,36 @@ try {
         try { & dotnet build UnderfundedSpaceAgency.csproj -v q --nologo; $buildCode = $LASTEXITCODE }
         finally { Pop-Location }
         if ($buildCode -ne 0) { throw "dotnet build failed (exit $buildCode). Fix the errors above, then run the demo again." }
+
+        # A download or clone has no .godot folder (git-ignored): Godot's converted fonts, textures and models live there,
+        # and the game cannot load any of them until they are imported. The editor does this when it opens a project;
+        # launching the game directly does not, so import here (about 20 s the first time, a few seconds after).
+        $firstImport = -not (Test-Path -LiteralPath (Join-Path $repo '.godot\imported'))
+        Write-Host $(if ($firstImport) { 'Importing game assets (first run, about 20 seconds) ...' } else { 'Checking game assets ...' })
+        $consoleGodot = $Godot -replace '\.exe$', '_console.exe'
+        $importer = if (Test-Path -LiteralPath $consoleGodot) { $consoleGodot } else { $Godot }
+        # Godot 4.7.2's first import sometimes crashes partway (access violation while importing a font); running it
+        # again resumes where it stopped, so retry a few times.
+        $importLog = Join-Path $env:TEMP 'usa-import.out.log'
+        $prevAuto = $env:USA_BACKEND_AUTOSTART
+        $env:USA_BACKEND_AUTOSTART = '0'
+        try {
+            $importCode = $null
+            foreach ($attempt in 1..3) {
+                if ($attempt -gt 1) { Write-Host "  Godot's importer stopped early (exit $importCode); retrying ($attempt of 3) ..." -ForegroundColor Yellow }
+                $import = Start-Process -FilePath $importer -ArgumentList @('--headless', '--path', "`"$repo`"", '--import') `
+                    -NoNewWindow -PassThru -Wait -RedirectStandardOutput $importLog `
+                    -RedirectStandardError (Join-Path $env:TEMP 'usa-import.err.log')
+                $importCode = $import.ExitCode
+                if ($importCode -eq 0) { break }
+            }
+        }
+        finally {
+            if ($null -eq $prevAuto) { Remove-Item Env:\USA_BACKEND_AUTOSTART -ErrorAction SilentlyContinue } else { $env:USA_BACKEND_AUTOSTART = $prevAuto }
+        }
+        if ($importCode -ne 0 -or -not (Test-Path -LiteralPath (Join-Path $repo '.godot\imported'))) {
+            throw "Importing the game assets failed (exit $importCode) after 3 attempts. Details: $importLog. Opening the project once in the Godot editor also imports them."
+        }
 
         Write-Host ''
         Write-Host 'Launching the game. Close its window to end the demo.' -ForegroundColor Cyan
