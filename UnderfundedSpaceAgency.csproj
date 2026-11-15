@@ -13,6 +13,13 @@
     <Compile Remove="docs/**" />
   </ItemGroup>
 
+  <!-- The game is exactly src/Game. Default globbing would also compile any other copy of the sources under the project
+       folder (e.g. a zip extracted into itself, giving duplicate-type errors), so only src/Game is included. -->
+  <ItemGroup Condition="'$(UsaGameAreas)' == ''">
+    <Compile Remove="@(Compile)" />
+    <Compile Include="src/Game/**/*.cs" />
+  </ItemGroup>
+
   <!-- Isolated builds: the composition root (Bootstrap → Integration/Runtime) now wires nearly all of src/Game, so the core
        set covers every folder it depends on; -p:UsaGameAreas still adds any extra folder (e.g. a new one being written). -->
   <PropertyGroup Condition="'$(UsaGameAreas)' != ''">

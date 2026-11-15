@@ -68,6 +68,14 @@ $logDir = Join-Path $env:TEMP 'usa-demo'
 $backendScript = Join-Path $repo 'backend\run_backend.ps1'
 $userData = Join-Path $env:APPDATA 'Godot\app_userdata\Underfunded Space Agency'
 
+# A ZIP extracted into a folder of the same name can leave a second copy of the project inside this one.
+$nestedCopies = Get-ChildItem -LiteralPath $repo -Directory -ErrorAction SilentlyContinue |
+    Where-Object { $_.Name -notin @('.godot', 'backend', 'build') -and (Test-Path -LiteralPath (Join-Path $_.FullName 'project.godot')) }
+foreach ($copy in $nestedCopies) {
+    Write-Host "WARNING: '$($copy.FullName)' is a second copy of the project inside this one (a ZIP extracted twice?)." -ForegroundColor Yellow
+    Write-Host '         Delete that folder (keep this one) to avoid confusion; the build ignores it.' -ForegroundColor Yellow
+}
+
 function Get-Health {
     try { return Invoke-RestMethod -Uri $healthUrl -TimeoutSec 2 } catch { return $null }
 }
