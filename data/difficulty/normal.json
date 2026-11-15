@@ -1,0 +1,16 @@
+{
+  "schema": "difficulty/1",
+  "id": "normal",
+  "displayName": "Normal",
+  "values": {
+    "stuck_thrust_fraction": 0.12,
+    "resource_margin": 0.0,
+    "tip_escalation_s": 150,
+    "nav_assist": "preview",
+    "critical_alert_slowdown": false,
+    "tutorial_default": true,
+    "tutorial_every_play": false,
+    "workspace_explain": false,
+    "nav_uncertainty_scale": 1.0
+  }
+}

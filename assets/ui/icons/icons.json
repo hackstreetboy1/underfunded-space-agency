@@ -1,0 +1,472 @@
+{
+  "schema": "icons/1",
+  "source": "Figma H8hAm4dZXNMaLDSdJKK3BO",
+  "tint": "#FFFFFF",
+  "import_scale": 2.0,
+  "icons": {
+    "icon_action_advance": {
+      "path": "res://assets/ui/icons/action/icon_action_advance.svg",
+      "size": 16
+    },
+    "icon_action_ask": {
+      "path": "res://assets/ui/icons/action/icon_action_ask.svg",
+      "size": 16
+    },
+    "icon_action_assign": {
+      "path": "res://assets/ui/icons/action/icon_action_assign.svg",
+      "size": 24
+    },
+    "icon_action_back": {
+      "path": "res://assets/ui/icons/action/icon_action_back.svg",
+      "size": 24
+    },
+    "icon_action_check": {
+      "path": "res://assets/ui/icons/action/icon_action_check.svg",
+      "size": 16
+    },
+    "icon_action_chevron": {
+      "path": "res://assets/ui/icons/action/icon_action_chevron.svg",
+      "size": 16
+    },
+    "icon_action_close": {
+      "path": "res://assets/ui/icons/action/icon_action_close.svg",
+      "size": 16
+    },
+    "icon_action_crew": {
+      "path": "res://assets/ui/icons/action/icon_action_crew.svg",
+      "size": 16
+    },
+    "icon_action_edit": {
+      "path": "res://assets/ui/icons/action/icon_action_edit.svg",
+      "size": 16
+    },
+    "icon_action_encyclopedia": {
+      "path": "res://assets/ui/icons/action/icon_action_encyclopedia.svg",
+      "size": 24
+    },
+    "icon_action_exit": {
+      "path": "res://assets/ui/icons/action/icon_action_exit.svg",
+      "size": 24
+    },
+    "icon_action_focus": {
+      "path": "res://assets/ui/icons/action/icon_action_focus.svg",
+      "size": 16
+    },
+    "icon_action_inspect": {
+      "path": "res://assets/ui/icons/action/icon_action_inspect.svg",
+      "size": 16
+    },
+    "icon_action_keyboard": {
+      "path": "res://assets/ui/icons/action/icon_action_keyboard.svg",
+      "size": 16
+    },
+    "icon_action_labels": {
+      "path": "res://assets/ui/icons/action/icon_action_labels.svg",
+      "size": 24
+    },
+    "icon_action_layers": {
+      "path": "res://assets/ui/icons/action/icon_action_layers.svg",
+      "size": 16
+    },
+    "icon_action_menu": {
+      "path": "res://assets/ui/icons/action/icon_action_menu.svg",
+      "size": 16
+    },
+    "icon_action_mic": {
+      "path": "res://assets/ui/icons/action/icon_action_mic.svg",
+      "size": 16
+    },
+    "icon_action_play": {
+      "path": "res://assets/ui/icons/action/icon_action_play.svg",
+      "size": 24
+    },
+    "icon_action_repair": {
+      "path": "res://assets/ui/icons/action/icon_action_repair.svg",
+      "size": 16
+    },
+    "icon_action_request": {
+      "path": "res://assets/ui/icons/action/icon_action_request.svg",
+      "size": 24
+    },
+    "icon_action_resend": {
+      "path": "res://assets/ui/icons/action/icon_action_resend.svg",
+      "size": 16
+    },
+    "icon_action_reset": {
+      "path": "res://assets/ui/icons/action/icon_action_reset.svg",
+      "size": 16
+    },
+    "icon_action_search": {
+      "path": "res://assets/ui/icons/action/icon_action_search.svg",
+      "size": 24
+    },
+    "icon_action_send": {
+      "path": "res://assets/ui/icons/action/icon_action_send.svg",
+      "size": 16
+    },
+    "icon_action_settings": {
+      "path": "res://assets/ui/icons/action/icon_action_settings.svg",
+      "size": 24
+    },
+    "icon_action_stop": {
+      "path": "res://assets/ui/icons/action/icon_action_stop.svg",
+      "size": 16
+    },
+    "icon_action_test": {
+      "path": "res://assets/ui/icons/action/icon_action_test.svg",
+      "size": 24
+    },
+    "icon_action_undo": {
+      "path": "res://assets/ui/icons/action/icon_action_undo.svg",
+      "size": 16
+    },
+    "icon_action_zoom_in": {
+      "path": "res://assets/ui/icons/action/icon_action_zoom_in.svg",
+      "size": 24
+    },
+    "icon_action_zoom_out": {
+      "path": "res://assets/ui/icons/action/icon_action_zoom_out.svg",
+      "size": 24
+    },
+    "icon_category_command": {
+      "path": "res://assets/ui/icons/category/icon_category_command.svg",
+      "size": 16
+    },
+    "icon_category_decision": {
+      "path": "res://assets/ui/icons/category/icon_category_decision.svg",
+      "size": 16
+    },
+    "icon_category_system": {
+      "path": "res://assets/ui/icons/category/icon_category_system.svg",
+      "size": 16
+    },
+    "icon_content_image": {
+      "path": "res://assets/ui/icons/content/icon_content_image.svg",
+      "size": 24
+    },
+    "icon_crew_fatigue": {
+      "path": "res://assets/ui/icons/crew/icon_crew_fatigue.svg",
+      "size": 16
+    },
+    "icon_crew_health": {
+      "path": "res://assets/ui/icons/crew/icon_crew_health.svg",
+      "size": 24
+    },
+    "icon_crew_hydration": {
+      "path": "res://assets/ui/icons/crew/icon_crew_hydration.svg",
+      "size": 16
+    },
+    "icon_crew_nutrition": {
+      "path": "res://assets/ui/icons/crew/icon_crew_nutrition.svg",
+      "size": 24
+    },
+    "icon_crew_task": {
+      "path": "res://assets/ui/icons/crew/icon_crew_task.svg",
+      "size": 24
+    },
+    "icon_family_battery": {
+      "path": "res://assets/ui/icons/family/icon_family_battery.svg",
+      "size": 24
+    },
+    "icon_family_breaker": {
+      "path": "res://assets/ui/icons/family/icon_family_breaker.svg",
+      "size": 24
+    },
+    "icon_family_bus": {
+      "path": "res://assets/ui/icons/family/icon_family_bus.svg",
+      "size": 24
+    },
+    "icon_family_compartment": {
+      "path": "res://assets/ui/icons/family/icon_family_compartment.svg",
+      "size": 24
+    },
+    "icon_family_docking": {
+      "path": "res://assets/ui/icons/family/icon_family_docking.svg",
+      "size": 24
+    },
+    "icon_family_driver": {
+      "path": "res://assets/ui/icons/family/icon_family_driver.svg",
+      "size": 24
+    },
+    "icon_family_fan": {
+      "path": "res://assets/ui/icons/family/icon_family_fan.svg",
+      "size": 24
+    },
+    "icon_family_fuel_cell": {
+      "path": "res://assets/ui/icons/family/icon_family_fuel_cell.svg",
+      "size": 24
+    },
+    "icon_family_harness": {
+      "path": "res://assets/ui/icons/family/icon_family_harness.svg",
+      "size": 24
+    },
+    "icon_family_hatch": {
+      "path": "res://assets/ui/icons/family/icon_family_hatch.svg",
+      "size": 24
+    },
+    "icon_family_heat_shield": {
+      "path": "res://assets/ui/icons/family/icon_family_heat_shield.svg",
+      "size": 24
+    },
+    "icon_family_heater": {
+      "path": "res://assets/ui/icons/family/icon_family_heater.svg",
+      "size": 24
+    },
+    "icon_family_load": {
+      "path": "res://assets/ui/icons/family/icon_family_load.svg",
+      "size": 24
+    },
+    "icon_family_outlet": {
+      "path": "res://assets/ui/icons/family/icon_family_outlet.svg",
+      "size": 24
+    },
+    "icon_family_parachute": {
+      "path": "res://assets/ui/icons/family/icon_family_parachute.svg",
+      "size": 24
+    },
+    "icon_family_payload": {
+      "path": "res://assets/ui/icons/family/icon_family_payload.svg",
+      "size": 24
+    },
+    "icon_family_pump": {
+      "path": "res://assets/ui/icons/family/icon_family_pump.svg",
+      "size": 24
+    },
+    "icon_family_radiator": {
+      "path": "res://assets/ui/icons/family/icon_family_radiator.svg",
+      "size": 24
+    },
+    "icon_family_regulator": {
+      "path": "res://assets/ui/icons/family/icon_family_regulator.svg",
+      "size": 24
+    },
+    "icon_family_retro_rocket": {
+      "path": "res://assets/ui/icons/family/icon_family_retro_rocket.svg",
+      "size": 24
+    },
+    "icon_family_scrubber": {
+      "path": "res://assets/ui/icons/family/icon_family_scrubber.svg",
+      "size": 24
+    },
+    "icon_family_sensor": {
+      "path": "res://assets/ui/icons/family/icon_family_sensor.svg",
+      "size": 24
+    },
+    "icon_family_structure": {
+      "path": "res://assets/ui/icons/family/icon_family_structure.svg",
+      "size": 24
+    },
+    "icon_family_switch": {
+      "path": "res://assets/ui/icons/family/icon_family_switch.svg",
+      "size": 24
+    },
+    "icon_family_tank": {
+      "path": "res://assets/ui/icons/family/icon_family_tank.svg",
+      "size": 24
+    },
+    "icon_family_thermal_node": {
+      "path": "res://assets/ui/icons/family/icon_family_thermal_node.svg",
+      "size": 24
+    },
+    "icon_family_thruster": {
+      "path": "res://assets/ui/icons/family/icon_family_thruster.svg",
+      "size": 24
+    },
+    "icon_family_thruster_group": {
+      "path": "res://assets/ui/icons/family/icon_family_thruster_group.svg",
+      "size": 24
+    },
+    "icon_map_ap": {
+      "path": "res://assets/ui/icons/map/icon_map_ap.svg",
+      "size": 24
+    },
+    "icon_map_impact": {
+      "path": "res://assets/ui/icons/map/icon_map_impact.svg",
+      "size": 24
+    },
+    "icon_map_lodestar": {
+      "path": "res://assets/ui/icons/map/icon_map_lodestar.svg",
+      "size": 24
+    },
+    "icon_map_node": {
+      "path": "res://assets/ui/icons/map/icon_map_node.svg",
+      "size": 24
+    },
+    "icon_map_pe": {
+      "path": "res://assets/ui/icons/map/icon_map_pe.svg",
+      "size": 24
+    },
+    "icon_map_prograde": {
+      "path": "res://assets/ui/icons/map/icon_map_prograde.svg",
+      "size": 24
+    },
+    "icon_map_radial_in": {
+      "path": "res://assets/ui/icons/map/icon_map_radial_in.svg",
+      "size": 24
+    },
+    "icon_map_radial_out": {
+      "path": "res://assets/ui/icons/map/icon_map_radial_out.svg",
+      "size": 24
+    },
+    "icon_map_retrograde": {
+      "path": "res://assets/ui/icons/map/icon_map_retrograde.svg",
+      "size": 24
+    },
+    "icon_map_tandem": {
+      "path": "res://assets/ui/icons/map/icon_map_tandem.svg",
+      "size": 24
+    },
+    "icon_map_zone": {
+      "path": "res://assets/ui/icons/map/icon_map_zone.svg",
+      "size": 24
+    },
+    "icon_part_adapter": {
+      "path": "res://assets/ui/icons/part/icon_part_adapter.svg",
+      "size": 24
+    },
+    "icon_part_breaker": {
+      "path": "res://assets/ui/icons/part/icon_part_breaker.svg",
+      "size": 24
+    },
+    "icon_part_extension": {
+      "path": "res://assets/ui/icons/part/icon_part_extension.svg",
+      "size": 24
+    },
+    "icon_part_fuse": {
+      "path": "res://assets/ui/icons/part/icon_part_fuse.svg",
+      "size": 24
+    },
+    "icon_part_harness": {
+      "path": "res://assets/ui/icons/part/icon_part_harness.svg",
+      "size": 24
+    },
+    "icon_part_lioh_canister": {
+      "path": "res://assets/ui/icons/part/icon_part_lioh_canister.svg",
+      "size": 24
+    },
+    "icon_part_spare": {
+      "path": "res://assets/ui/icons/part/icon_part_spare.svg",
+      "size": 24
+    },
+    "icon_part_tape": {
+      "path": "res://assets/ui/icons/part/icon_part_tape.svg",
+      "size": 24
+    },
+    "icon_port_d_type": {
+      "path": "res://assets/ui/icons/port/icon_port_d_type.svg",
+      "size": 24
+    },
+    "icon_port_round": {
+      "path": "res://assets/ui/icons/port/icon_port_round.svg",
+      "size": 24
+    },
+    "icon_recovery_helicopter": {
+      "path": "res://assets/ui/icons/recovery/icon_recovery_helicopter.svg",
+      "size": 24
+    },
+    "icon_recovery_ship": {
+      "path": "res://assets/ui/icons/recovery/icon_recovery_ship.svg",
+      "size": 24
+    },
+    "icon_state_conflict": {
+      "path": "res://assets/ui/icons/state/icon_state_conflict.svg",
+      "size": 16
+    },
+    "icon_state_estimated": {
+      "path": "res://assets/ui/icons/state/icon_state_estimated.svg",
+      "size": 24
+    },
+    "icon_state_ground_band": {
+      "path": "res://assets/ui/icons/state/icon_state_ground_band.svg",
+      "size": 24
+    },
+    "icon_state_info": {
+      "path": "res://assets/ui/icons/state/icon_state_info.svg",
+      "size": 16
+    },
+    "icon_state_link_lost": {
+      "path": "res://assets/ui/icons/state/icon_state_link_lost.svg",
+      "size": 16
+    },
+    "icon_state_locked": {
+      "path": "res://assets/ui/icons/state/icon_state_locked.svg",
+      "size": 24
+    },
+    "icon_state_report": {
+      "path": "res://assets/ui/icons/state/icon_state_report.svg",
+      "size": 16
+    },
+    "icon_state_stale": {
+      "path": "res://assets/ui/icons/state/icon_state_stale.svg",
+      "size": 16
+    },
+    "icon_status_caution": {
+      "path": "res://assets/ui/icons/status/icon_status_caution.svg",
+      "size": 16
+    },
+    "icon_status_failed": {
+      "path": "res://assets/ui/icons/status/icon_status_failed.svg",
+      "size": 16
+    },
+    "icon_status_isolated": {
+      "path": "res://assets/ui/icons/status/icon_status_isolated.svg",
+      "size": 16
+    },
+    "icon_status_nominal": {
+      "path": "res://assets/ui/icons/status/icon_status_nominal.svg",
+      "size": 16
+    },
+    "icon_status_suspect": {
+      "path": "res://assets/ui/icons/status/icon_status_suspect.svg",
+      "size": 16
+    },
+    "icon_status_unknown": {
+      "path": "res://assets/ui/icons/status/icon_status_unknown.svg",
+      "size": 16
+    },
+    "icon_system_attitude": {
+      "path": "res://assets/ui/icons/system/icon_system_attitude.svg",
+      "size": 24
+    },
+    "icon_system_comms": {
+      "path": "res://assets/ui/icons/system/icon_system_comms.svg",
+      "size": 24
+    },
+    "icon_system_inventory": {
+      "path": "res://assets/ui/icons/system/icon_system_inventory.svg",
+      "size": 24
+    },
+    "icon_system_life_support": {
+      "path": "res://assets/ui/icons/system/icon_system_life_support.svg",
+      "size": 24
+    },
+    "icon_system_navigation": {
+      "path": "res://assets/ui/icons/system/icon_system_navigation.svg",
+      "size": 24
+    },
+    "icon_system_power": {
+      "path": "res://assets/ui/icons/system/icon_system_power.svg",
+      "size": 24
+    },
+    "icon_system_propulsion": {
+      "path": "res://assets/ui/icons/system/icon_system_propulsion.svg",
+      "size": 24
+    },
+    "icon_system_structure": {
+      "path": "res://assets/ui/icons/system/icon_system_structure.svg",
+      "size": 24
+    },
+    "icon_system_thermal": {
+      "path": "res://assets/ui/icons/system/icon_system_thermal.svg",
+      "size": 24
+    },
+    "icon_trend_down": {
+      "path": "res://assets/ui/icons/trend/icon_trend_down.svg",
+      "size": 16
+    },
+    "icon_trend_up": {
+      "path": "res://assets/ui/icons/trend/icon_trend_up.svg",
+      "size": 16
+    }
+  }
+}

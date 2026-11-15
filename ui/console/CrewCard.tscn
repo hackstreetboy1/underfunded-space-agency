@@ -1,0 +1,172 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Console/Regions/CrewCard.cs" id="1_crewcard"]
+[ext_resource type="PackedScene" path="res://ui/console/components/Badge.tscn" id="2_badge"]
+[ext_resource type="Script" path="res://src/Game/UI/Console/Components/SpeakingMeter.cs" id="3_speaking"]
+
+[node name="CrewCard" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 176)
+script = ExtResource("1_crewcard")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Row" type="HBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Feed" type="VBoxContainer" parent="Margin/Row"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="FeedSlot" type="Panel" parent="Margin/Row/Feed"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(192, 144)
+
+[node name="FeedPlaceholder" type="Label" parent="Margin/Row/Feed/FeedSlot"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Meta"
+text = "CrewFeed.tscn"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NameTag" type="Label" parent="Margin/Row/Feed"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"BadgeLabel"
+text = "CAL BRANDT · COMMAND PILOT"
+horizontal_alignment = 1
+uppercase = true
+clip_text = true
+text_overrun_behavior = 3
+custom_minimum_size = Vector2(0, 16)
+
+[node name="Info" type="VBoxContainer" parent="Margin/Row"]
+layout_mode = 2
+theme_override_constants/separation = 6
+size_flags_horizontal = 3
+
+[node name="NameRow" type="HBoxContainer" parent="Margin/Row/Info"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Name" type="Label" parent="Margin/Row/Info/NameRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"H2"
+text = "Cal Brandt"
+size_flags_horizontal = 3
+uppercase = true
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Speaking" type="Control" parent="Margin/Row/Info/NameRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(14, 12)
+size_flags_vertical = 4
+visible = false
+tooltip_text = "Speaking"
+script = ExtResource("3_speaking")
+
+[node name="Role" type="Label" parent="Margin/Row/Info"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Command pilot"
+
+[node name="HealthRow" type="HBoxContainer" parent="Margin/Row/Info"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Health" type="ProgressBar" parent="Margin/Row/Info/HealthRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(91, 6)
+size_flags_horizontal = 3
+size_flags_vertical = 4
+value = 96.0
+show_percentage = false
+
+[node name="HealthPercent" type="Label" parent="Margin/Row/Info/HealthRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ReadoutSmall"
+text = "96%"
+vertical_alignment = 1
+
+[node name="HealthBand" parent="Margin/Row/Info/HealthRow" instance=ExtResource("2_badge")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Activity" type="Label" parent="Margin/Row/Info"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Reporting rates (glance)"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="States" type="HBoxContainer" parent="Margin/Row/Info"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Fatigue" type="PanelContainer" parent="Margin/Row/Info/States"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"BadgeCaution"
+visible = false
+
+[node name="FatigueText" type="Label" parent="Margin/Row/Info/States/Fatigue"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"BadgeLabelCaution"
+text = "Fatigue"
+uppercase = true
+
+[node name="Hydration" type="PanelContainer" parent="Margin/Row/Info/States"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"BadgeCaution"
+visible = false
+
+[node name="HydrationText" type="Label" parent="Margin/Row/Info/States/Hydration"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"BadgeLabelCaution"
+text = "Hydration"
+uppercase = true
+
+[node name="Lost" type="Label" parent="Margin/Row/Info"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "LOST · MET 07:40"
+visible = false
+
+[node name="Spacer" type="Control" parent="Margin/Row/Info"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Talk" type="Button" parent="Margin/Row/Info"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Talk"
+size_flags_horizontal = 0
+custom_minimum_size = Vector2(58, 32)

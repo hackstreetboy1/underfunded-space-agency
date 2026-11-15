@@ -1,0 +1,47 @@
+{
+  "schema": "attitude/1",
+  "rateThresholdsDegPerSec": [1, 5, 10, 20, 120, 250],
+  "thresholdHysteresisDegPerSec": 0.2,
+  "minAxisTorqueFraction": 0.1,
+  "firingDutyTimeConstantS": 5,
+  "rateDamp": {
+    "deadbandDegPerSec": 0.5,
+    "settleDegPerSec": 0.05,
+    "rateTimeConstantS": 0.1
+  },
+  "attitudeHold": {
+    "deadbandDegPerSec": 0.2,
+    "settleDegPerSec": 0.02,
+    "rateTimeConstantS": 0.1,
+    "pointingGainPerS": 0.3,
+    "maxSlewDegPerSec": 4
+  },
+  "vehicles": [
+    {
+      "id": "lodestar",
+      "initialMode": "rate_damp",
+      "initialControlSet": "acs",
+      "controlSets": [
+        { "id": "acs", "groups": ["lodestar/acs"] }
+      ]
+    },
+    {
+      "id": "tandem",
+      "initialMode": "rate_damp",
+      "initialControlSet": "oams",
+      "controlSets": [
+        {
+          "id": "oams",
+          "thrusters": [
+            "tandem/oams/thruster_01", "tandem/oams/thruster_02", "tandem/oams/thruster_03", "tandem/oams/thruster_04",
+            "tandem/oams/thruster_05", "tandem/oams/thruster_06", "tandem/oams/thruster_07", "tandem/oams/thruster_08"
+          ]
+        },
+        { "id": "rcs", "groups": ["tandem/rcs/ring_a", "tandem/rcs/ring_b"] }
+      ]
+    }
+  ],
+  "docking": [
+    { "primary": "tandem", "secondary": "lodestar", "secondaryComOffsetXM": 6.5, "secondaryReversed": true }
+  ]
+}

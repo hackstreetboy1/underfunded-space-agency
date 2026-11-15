@@ -1,0 +1,27 @@
+[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://assets/shaders/reveal_transition.gdshader" id="1_shader"]
+[ext_resource type="Texture2D" path="res://assets/materials/usa_palette.png" id="2_albedo"]
+[ext_resource type="Texture2D" path="res://assets/materials/usa_palette_rm.png" id="3_rm"]
+
+[resource]
+resource_name = "USA_RevealTransition"
+shader = ExtResource("1_shader")
+shader_parameter/palette_albedo = ExtResource("2_albedo")
+shader_parameter/palette_rm = ExtResource("3_rm")
+shader_parameter/indicator_emission = true
+shader_parameter/emissive_swatch = 9
+shader_parameter/indicator_energy = 2.5
+shader_parameter/unknown_grey = Color(0.604, 0.631, 0.667, 1)
+shader_parameter/unknown_value_keep = 0.3
+shader_parameter/unknown_roughness = 0.85
+shader_parameter/unknown_specular = 0.2
+shader_parameter/reveal_origin = Vector3(0, 0, 0)
+shader_parameter/reveal_radius_m = 1.0
+shader_parameter/reveal_progress = 0.0
+shader_parameter/edge_width_m = 0.02
+shader_parameter/edge_color = Color(1, 0.839, 0.302, 1)
+shader_parameter/edge_energy = 3.0
+shader_parameter/breakup_m = 0.04
+shader_parameter/breakup_scale = 9.0
+shader_parameter/reduced_motion = false

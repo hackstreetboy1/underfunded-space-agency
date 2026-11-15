@@ -1,0 +1,87 @@
+{
+  "schema": "parts/1",
+  "connectorTypes": [
+    { "id": "d_type", "name": "D-type" },
+    { "id": "round", "name": "round" }
+  ],
+  "parts": [
+    {
+      "id": "harness_2m",
+      "name": "spare harness (2 m)",
+      "kind": "harness",
+      "connectors": ["round", "round"],
+      "lengthM": 2.0,
+      "currentRatingA": 15,
+      "description": "Shielded two-conductor harness with round connectors at both ends."
+    },
+    {
+      "id": "harness_ext_1m",
+      "name": "extension harness (1 m)",
+      "kind": "harness",
+      "connectors": ["round", "round"],
+      "lengthM": 1.0,
+      "currentRatingA": 15,
+      "description": "Short extension with round connectors at both ends."
+    },
+    {
+      "id": "adapter_round_d",
+      "name": "round-to-D adapter",
+      "kind": "adapter",
+      "connectors": ["round", "d_type"],
+      "currentRatingA": 15,
+      "description": "Joins a round connector to a D-type connector."
+    },
+    {
+      "id": "fuse_10a",
+      "name": "inline fuse (10 A)",
+      "kind": "fuse",
+      "connectors": ["round", "round"],
+      "currentRatingA": 10,
+      "consumedOnFailure": true,
+      "description": "Single-use inline fuse that blows above 10 A."
+    },
+    {
+      "id": "breaker_5a",
+      "name": "spare breaker (5 A)",
+      "kind": "breaker",
+      "connectors": ["round", "round"],
+      "currentRatingA": 5,
+      "description": "Resettable breaker that trips above 5 A."
+    },
+    {
+      "id": "gaffer_tape",
+      "name": "gaffer tape",
+      "kind": "tape",
+      "connectors": [],
+      "description": "Holds things in place. Carries no current."
+    },
+    {
+      "id": "lioh_canister",
+      "name": "LiOH canister",
+      "kind": "canister",
+      "connectors": [],
+      "description": "Lithium hydroxide canister that scrubs CO2 from the cabin air."
+    },
+    {
+      "id": "cable_cutter",
+      "name": "cable cutter jaws",
+      "kind": "tool",
+      "connectors": [],
+      "description": "Long-handled cutter for straps and cable. A tool: tasks use it and hand it back."
+    },
+    {
+      "id": "pry_bar",
+      "name": "pry bar with hook",
+      "kind": "tool",
+      "connectors": [],
+      "description": "Hooked bar for levering and pulling. A tool: tasks use it and hand it back."
+    },
+    {
+      "id": "hand_thermometer",
+      "name": "hand thermometer",
+      "kind": "tool",
+      "connectors": [],
+      "description": "Probe thermometer for surveying air and wall temperatures. A tool: tasks use it and hand it back."
+    }
+  ]
+}

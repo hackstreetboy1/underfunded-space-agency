@@ -1,0 +1,16 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Console/Components/ObjectiveChipView.cs" id="1_objectivechip"]
+
+[node name="ObjectiveChip" type="HBoxContainer"]
+theme_override_constants/separation = 4
+tooltip_text = "DONE"
+mouse_filter = 1
+script = ExtResource("1_objectivechip")
+
+[node name="Text" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "O1"
+mouse_filter = 1

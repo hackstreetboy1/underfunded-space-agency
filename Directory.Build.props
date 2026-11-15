@@ -1,0 +1,24 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- Docs are written where they add information (SCRIPTING.md 5), so missing or partial docs are not errors. -->
+    <NoWarn>$(NoWarn);CS1591;CS1573</NoWarn>
+    <!-- Only the .NET 11 runtime is installed. UnderfundedSpaceAgency.csproj repeats this value as a
+         literal because the Godot editor rewrites a TargetFramework it can't read. -->
+    <UsaTargetFramework>net11.0</UsaTargetFramework>
+  </PropertyGroup>
+
+  <!-- -p:UsaIsolatedOut=<dir> gives every project in the build its own bin/obj under <dir>, so parallel
+       builds never share intermediate files (including Godot's .godot/mono/temp). -->
+  <PropertyGroup Condition="'$(UsaIsolatedOut)' != ''">
+    <BaseIntermediateOutputPath>$(UsaIsolatedOut)\obj\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
+    <BaseOutputPath>$(UsaIsolatedOut)\bin\$(MSBuildProjectName)\</BaseOutputPath>
+    <!-- A non-isolated build may have left bin/obj inside the project; never compile their generated files. -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);bin/**;obj/**</DefaultItemExcludes>
+  </PropertyGroup>
+</Project>

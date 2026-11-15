@@ -1,0 +1,267 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Entry/EntryHudView.cs" id="view"]
+[ext_resource type="Script" path="res://src/Game/UI/Entry/HudBarGauge.cs" id="bar"]
+[ext_resource type="PackedScene" path="res://ui/entry/HudReadoutRow.tscn" id="row"]
+[ext_resource type="PackedScene" path="res://ui/entry/SequenceStepChip.tscn" id="step"]
+[ext_resource type="PackedScene" path="res://ui/entry/CrewMiniRow.tscn" id="crew"]
+
+[node name="EntryHud" type="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("view")
+StepScene = ExtResource("step")
+CrewScene = ExtResource("crew")
+
+[node name="EntryPanel" type="PanelContainer" parent="."]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 316.0
+offset_bottom = 456.0
+
+[node name="Pad" type="MarginContainer" parent="EntryPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="Rows" type="VBoxContainer" parent="EntryPanel/Pad"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Header" type="HBoxContainer" parent="EntryPanel/Pad/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="EntryPanel/Pad/Rows/Header"]
+layout_mode = 2
+theme_type_variation = &"H2"
+text = "ENTRY"
+size_flags_horizontal = 3
+
+[node name="TelemetryAside" type="Label" parent="EntryPanel/Pad/Rows/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = ""
+visible = false
+
+[node name="Top" type="HBoxContainer" parent="EntryPanel/Pad/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Altitude" parent="EntryPanel/Pad/Rows/Top" instance=ExtResource("row")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+Title = "Altitude"
+Large = true
+
+[node name="Velocity" parent="EntryPanel/Pad/Rows/Top" instance=ExtResource("row")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+Title = "Velocity"
+Large = true
+
+[node name="FlightPathAngle" parent="EntryPanel/Pad/Rows" instance=ExtResource("row")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+Title = "Flight-path angle"
+Large = true
+
+[node name="GLoad" parent="EntryPanel/Pad/Rows" instance=ExtResource("row")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+Title = "G-load"
+Large = false
+
+[node name="GGauge" type="Control" parent="EntryPanel/Pad/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 22)
+mouse_filter = 2
+script = ExtResource("bar")
+
+[node name="Heating" parent="EntryPanel/Pad/Rows" instance=ExtResource("row")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+Title = "heating (predicted)"
+Large = false
+
+[node name="HeatingGauge" type="Control" parent="EntryPanel/Pad/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 10)
+mouse_filter = 2
+script = ExtResource("bar")
+
+[node name="HeatingMarks" type="Label" parent="EntryPanel/Pad/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = ""
+
+[node name="DrogueRow" type="HBoxContainer" parent="EntryPanel/Pad/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="DrogueTitle" type="Label" parent="EntryPanel/Pad/Rows/DrogueRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Drogue"
+size_flags_horizontal = 3
+
+[node name="DrogueText" type="Label" parent="EntryPanel/Pad/Rows/DrogueRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ReadoutSmall"
+text = "—"
+
+[node name="DrogueBadge" type="PanelContainer" parent="EntryPanel/Pad/Rows/DrogueRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"BadgeInfo"
+visible = false
+
+[node name="Text" type="Label" parent="EntryPanel/Pad/Rows/DrogueRow/DrogueBadge"]
+layout_mode = 2
+theme_type_variation = &"BadgeLabelInfo"
+text = "EST"
+
+[node name="MainRow" type="HBoxContainer" parent="EntryPanel/Pad/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="MainTitle" type="Label" parent="EntryPanel/Pad/Rows/MainRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Main"
+size_flags_horizontal = 3
+
+[node name="MainText" type="Label" parent="EntryPanel/Pad/Rows/MainRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ReadoutSmall"
+text = "—"
+
+[node name="MainBadge" type="PanelContainer" parent="EntryPanel/Pad/Rows/MainRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"BadgeInfo"
+visible = false
+
+[node name="Text" type="Label" parent="EntryPanel/Pad/Rows/MainRow/MainBadge"]
+layout_mode = 2
+theme_type_variation = &"BadgeLabelInfo"
+text = "EST"
+
+[node name="CrewPanel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -288.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 112.0
+grow_horizontal = 0
+
+[node name="Pad" type="MarginContainer" parent="CrewPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="Rows" type="VBoxContainer" parent="CrewPanel/Pad"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="CrewPanel/Pad/Rows"]
+layout_mode = 2
+theme_type_variation = &"H2"
+text = "CREW"
+
+[node name="CrewRows" type="VBoxContainer" parent="CrewPanel/Pad/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Bottom" type="VBoxContainer" parent="."]
+layout_mode = 1
+theme_override_constants/separation = 8
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -120.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_vertical = 0
+anchor_right = 1.0
+mouse_filter = 2
+
+[node name="Checklist" type="PanelContainer" parent="Bottom"]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false
+
+[node name="Pad" type="MarginContainer" parent="Bottom/Checklist"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 6
+
+[node name="Row" type="HBoxContainer" parent="Bottom/Checklist/Pad"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Bottom/Checklist/Pad/Row"]
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = "ENTRY CHECKLIST"
+
+[node name="ChecklistBar" type="ProgressBar" parent="Bottom/Checklist/Pad/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+custom_minimum_size = Vector2(0, 6)
+show_percentage = false
+
+[node name="ChecklistText" type="Label" parent="Bottom/Checklist/Pad/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ReadoutSmall"
+text = ""
+
+[node name="SequencePanel" type="PanelContainer" parent="Bottom"]
+layout_mode = 2
+
+[node name="Pad" type="MarginContainer" parent="Bottom/SequencePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 8
+
+[node name="Sequence" type="HBoxContainer" parent="Bottom/SequencePanel/Pad"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8

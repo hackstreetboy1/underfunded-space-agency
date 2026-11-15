@@ -1,0 +1,19 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/Presentation/Views/ExternalView.cs" id="1_view"]
+[ext_resource type="PackedScene" path="res://scenes/SpacecraftView.tscn" id="2_spacecraft"]
+
+[node name="ExternalView" type="SubViewportContainer"]
+offset_right = 1000.0
+offset_bottom = 600.0
+stretch = true
+script = ExtResource("1_view")
+
+[node name="Viewport" type="SubViewport" parent="."]
+unique_name_in_owner = true
+own_world_3d = true
+msaa_3d = 2
+size = Vector2i(1000, 600)
+
+[node name="SpacecraftView" parent="Viewport" instance=ExtResource("2_spacecraft")]
+unique_name_in_owner = true

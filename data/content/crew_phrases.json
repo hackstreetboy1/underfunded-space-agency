@@ -1,0 +1,39 @@
+{
+  "schema": "crew_phrases/1",
+  "notes": "Fixed openers for cached TTS and deterministic fallbacks. Refusal and clarification openers are followed by the validator's reason or the clarifying question. No numbers and no facts by design.",
+  "categories": {
+    "acknowledge": "Clear, possible, low-impact order accepted.",
+    "standby": "A glance read or check is starting.",
+    "stop": "The player said stop; the current task is being stopped.",
+    "refusal": "Opener before the validator's reason.",
+    "clarification": "Opener before the one clarifying question."
+  },
+  "members": {
+    "cal_brandt": [
+      { "id": "cal.ack.01", "category": "acknowledge", "text": "Copy." },
+      { "id": "cal.ack.02", "category": "acknowledge", "text": "Copy. Working it." },
+      { "id": "cal.ack.03", "category": "acknowledge", "text": "Understood." },
+      { "id": "cal.ack.04", "category": "acknowledge", "text": "Will do." },
+      { "id": "cal.standby.01", "category": "standby", "text": "Stand by." },
+      { "id": "cal.standby.02", "category": "standby", "text": "Checking." },
+      { "id": "cal.stop.01", "category": "stop", "text": "Copy. Stopping." },
+      { "id": "cal.refusal.01", "category": "refusal", "text": "Can't do that." },
+      { "id": "cal.refusal.02", "category": "refusal", "text": "Unable. Here's why." },
+      { "id": "cal.clarify.01", "category": "clarification", "text": "Say again?" },
+      { "id": "cal.clarify.02", "category": "clarification", "text": "Which one?" }
+    ],
+    "june_okafor": [
+      { "id": "june.ack.01", "category": "acknowledge", "text": "Copy that, I'm on it." },
+      { "id": "june.ack.02", "category": "acknowledge", "text": "Okay, got it. Starting now." },
+      { "id": "june.ack.03", "category": "acknowledge", "text": "Understood. I'll call it out when it's done." },
+      { "id": "june.standby.01", "category": "standby", "text": "Give me a second, I'm looking." },
+      { "id": "june.standby.02", "category": "standby", "text": "Checking now." },
+      { "id": "june.stop.01", "category": "stop", "text": "Okay, stopping. Leaving everything as it is." },
+      { "id": "june.refusal.01", "category": "refusal", "text": "Sorry, I can't do that one. Here's the problem." },
+      { "id": "june.refusal.02", "category": "refusal", "text": "I'd like to, but it won't work as asked. Let me explain." },
+      { "id": "june.clarify.01", "category": "clarification", "text": "Sorry, can you say that again? I want to get it exactly right." },
+      { "id": "june.clarify.02", "category": "clarification", "text": "Just so I'm sure, which one do you mean?" },
+      { "id": "june.clarify.03", "category": "clarification", "text": "Before I touch anything, can you confirm that for me?" }
+    ]
+  }
+}

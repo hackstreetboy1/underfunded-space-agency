@@ -1,0 +1,1043 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/Presentation/Spacecraft/Placeholders/PlaceholderPaletteMeshes.cs" id="1_palette"]
+[ext_resource type="Material" path="res://assets/materials/usa_glass.tres" id="2_glass"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.4
+bottom_radius = 0.86
+height = 1.3
+radial_segments = 48
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2"]
+top_radius = 0.34
+bottom_radius = 0.4
+height = 0.7
+radial_segments = 32
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3"]
+top_radius = 0.73354
+bottom_radius = 0.75477
+height = 0.06
+radial_segments = 48
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4"]
+top_radius = 0.592
+bottom_radius = 0.61323
+height = 0.06
+radial_segments = 48
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5"]
+top_radius = 0.46815
+bottom_radius = 0.48938
+height = 0.06
+radial_segments = 48
+rings = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_6"]
+size = Vector3(0.46, 0.025, 0.32)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7"]
+size = Vector3(0.08, 0.025, 0.04)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8"]
+size = Vector3(0.15, 0.012, 0.12)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_9"]
+top_radius = 0.86
+bottom_radius = 0.78
+height = 0.06
+radial_segments = 48
+rings = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_10"]
+size = Vector3(0.1, 0.62, 0.06)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_11"]
+top_radius = 0.1
+bottom_radius = 0.07
+height = 0.03
+radial_segments = 32
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_12"]
+top_radius = 0.39914
+bottom_radius = 0.39914
+height = 0.07
+radial_segments = 32
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_13"]
+top_radius = 0.028
+bottom_radius = 0.0154
+height = 0.05
+radial_segments = 16
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_14"]
+top_radius = 0.36914
+bottom_radius = 0.36914
+height = 0.07
+radial_segments = 32
+rings = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_15"]
+size = Vector3(0.13, 0.015, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_16"]
+size = Vector3(0.07, 0.02, 0.06)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_17"]
+top_radius = 0.12
+bottom_radius = 0.12
+height = 0.2
+radial_segments = 32
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_18"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.3
+radial_segments = 32
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_19"]
+top_radius = 0.86
+bottom_radius = 0.95
+height = 0.45
+radial_segments = 48
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_20"]
+top_radius = 0.55
+bottom_radius = 0.55
+height = 0.01
+radial_segments = 32
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_21"]
+top_radius = 0.04
+bottom_radius = 0.04
+height = 0.05
+radial_segments = 12
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_22"]
+top_radius = 0.11
+bottom_radius = 0.0605
+height = 0.18
+radial_segments = 16
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_23"]
+top_radius = 0.095
+bottom_radius = 0.095
+height = 0.01
+radial_segments = 32
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_24"]
+top_radius = 0.95
+bottom_radius = 1.145
+height = 1.4
+radial_segments = 48
+rings = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_25"]
+size = Vector3(1.15, 0.025, 0.07)
+
+[sub_resource type="BoxMesh" id="BoxMesh_26"]
+size = Vector3(0.52, 0.02, 0.36)
+
+[sub_resource type="BoxMesh" id="BoxMesh_27"]
+size = Vector3(0.05, 0.02, 0.1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_28"]
+top_radius = 0.016
+bottom_radius = 0.016
+height = 0.71251
+radial_segments = 12
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_29"]
+top_radius = 0.016
+bottom_radius = 0.016
+height = 0.75644
+radial_segments = 12
+rings = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_30"]
+size = Vector3(0.08, 0.06, 0.08)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_31"]
+top_radius = 0.035
+bottom_radius = 0.01925
+height = 0.07
+radial_segments = 16
+rings = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_32"]
+size = Vector3(0.26, 0.004, 0.09)
+
+[sub_resource type="BoxMesh" id="BoxMesh_33"]
+size = Vector3(0.21, 0.004, 0.09)
+
+[sub_resource type="BoxMesh" id="BoxMesh_34"]
+size = Vector3(0.16, 0.004, 0.09)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_35"]
+top_radius = 0.0364
+bottom_radius = 0.02002
+height = 0.02
+radial_segments = 16
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_36"]
+top_radius = 0.05
+bottom_radius = 0.0275
+height = 0.07
+radial_segments = 16
+rings = 1
+
+[node name="Tandem8" type="Node3D"]
+script = ExtResource("1_palette")
+
+[node name="Tandem_Capsule" type="Node3D" parent="."]
+
+[node name="Tandem_RM_Structure" type="Node3D" parent="Tandem_Capsule"]
+metadata/component_id = "tandem/rm/structure"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="RM_Shell" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RM_Structure"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, 0.65, 0, 0)
+mesh = SubResource("CylinderMesh_1")
+metadata/placeholder_swatch = 19
+
+[node name="Nose_Shell" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RM_Structure"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, 1.65, 0, 0)
+mesh = SubResource("CylinderMesh_2")
+metadata/placeholder_swatch = 19
+
+[node name="Shingle_Band_1" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RM_Structure"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, 0.35, 0, 0)
+mesh = SubResource("CylinderMesh_3")
+metadata/placeholder_swatch = 20
+
+[node name="Shingle_Band_2" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RM_Structure"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, 0.75, 0, 0)
+mesh = SubResource("CylinderMesh_4")
+metadata/placeholder_swatch = 20
+
+[node name="Shingle_Band_3" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RM_Structure"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, 1.1, 0, 0)
+mesh = SubResource("CylinderMesh_5")
+metadata/placeholder_swatch = 20
+
+[node name="Tandem_RM_Hatch_1" type="Node3D" parent="Tandem_Capsule"]
+metadata/component_id = "tandem/rm/hatch_1"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Hatch_Panel" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RM_Hatch_1"]
+transform = Transform3D(0.94272, 0.33358, 0, -0.29453, 0.83237, 0.46947, 0.15661, -0.44258, 0.88295, 0.62417, 0.57603, -0.30628)
+mesh = SubResource("BoxMesh_6")
+metadata/placeholder_swatch = 20
+
+[node name="Hatch_Handle" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RM_Hatch_1"]
+transform = Transform3D(0.94272, 0.33358, 0, -0.29453, 0.83237, 0.46947, 0.15661, -0.44258, 0.88295, 0.45417, 0.65122, -0.34626)
+mesh = SubResource("BoxMesh_7")
+metadata/placeholder_swatch = 4
+
+[node name="Tandem_RM_Hatch_2" type="Node3D" parent="Tandem_Capsule"]
+metadata/component_id = "tandem/rm/hatch_2"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Hatch_Panel" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RM_Hatch_2"]
+transform = Transform3D(0.94272, 0.33358, 0, -0.29453, 0.83237, -0.46947, -0.15661, 0.44258, 0.88295, 0.62417, 0.57603, 0.30628)
+mesh = SubResource("BoxMesh_6")
+metadata/placeholder_swatch = 20
+
+[node name="Hatch_Handle" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RM_Hatch_2"]
+transform = Transform3D(0.94272, 0.33358, 0, -0.29453, 0.83237, -0.46947, -0.15661, 0.44258, 0.88295, 0.45417, 0.65122, 0.34626)
+mesh = SubResource("BoxMesh_7")
+metadata/placeholder_swatch = 4
+
+[node name="Tandem_RM_Windows" type="Node3D" parent="Tandem_Capsule"]
+metadata/component_id = "tandem/rm/windows"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Window_1" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RM_Windows"]
+transform = Transform3D(0.94272, 0.33358, 0, -0.29453, 0.83237, 0.46947, 0.15661, -0.44258, 0.88295, 0.722, 0.56145, -0.29853)
+mesh = SubResource("BoxMesh_8")
+material_override = ExtResource("2_glass")
+
+[node name="Window_2" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RM_Windows"]
+transform = Transform3D(0.94272, 0.33358, 0, -0.29453, 0.83237, -0.46947, -0.15661, 0.44258, 0.88295, 0.722, 0.56145, 0.29853)
+mesh = SubResource("BoxMesh_8")
+material_override = ExtResource("2_glass")
+
+[node name="Tandem_RM_Heatshield" type="Node3D" parent="Tandem_Capsule"]
+metadata/component_id = "tandem/rm/heatshield"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Heatshield_Disc" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RM_Heatshield"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -0.03, 0, 0)
+mesh = SubResource("CylinderMesh_9")
+metadata/placeholder_swatch = 21
+
+[node name="Heatshield_Char" type="Node3D" parent="Tandem_Capsule/Tandem_RM_Heatshield"]
+visible = false
+metadata/damage_variant = "char"
+metadata/damage_conditions = "char"
+metadata/variant_mode = "replace"
+
+[node name="Heatshield_Char_Disc" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RM_Heatshield/Heatshield_Char"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -0.03, 0, 0)
+mesh = SubResource("CylinderMesh_9")
+metadata/placeholder_swatch = 22
+
+[node name="Tandem_Docking_Bar" type="Node3D" parent="Tandem_Capsule"]
+metadata/component_id = "tandem/nose/docking_bar"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Bar" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Docking_Bar"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.05, 0, 0)
+mesh = SubResource("BoxMesh_10")
+metadata/placeholder_swatch = 8
+
+[node name="Docking_Bar_Overstress" type="Node3D" parent="Tandem_Capsule/Tandem_Docking_Bar"]
+visible = false
+metadata/damage_variant = "overstress"
+metadata/damage_conditions = "overstress"
+metadata/variant_mode = "replace"
+
+[node name="Bar_Bent" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Docking_Bar/Docking_Bar_Overstress"]
+transform = Transform3D(0.99027, -0.13917, 0, 0.13917, 0.99027, 0, 0, 0, 1, 2.05, 0, 0)
+mesh = SubResource("BoxMesh_10")
+metadata/placeholder_swatch = 2
+
+[node name="Tandem_Radar" type="Node3D" parent="Tandem_Capsule"]
+metadata/component_id = "tandem/nose/radar"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Dish" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Radar"]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 2.015, -0.16, 0)
+mesh = SubResource("CylinderMesh_11")
+metadata/placeholder_swatch = 10
+
+[node name="Tandem_RCS_RingA" type="Node3D" parent="Tandem_Capsule"]
+metadata/component_id = "tandem/rcs/ring_a"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Band" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RCS_RingA"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, 1.45, 0, 0)
+mesh = SubResource("CylinderMesh_12")
+metadata/placeholder_swatch = 8
+
+[node name="Nozzle_1" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RCS_RingA"]
+transform = Transform3D(0, 0, 1, -0.38268, 0.92388, 0, -0.92388, -0.38268, 0, 1.45, 0.36229, -0.15007)
+mesh = SubResource("CylinderMesh_13")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_rcs_ring_a_t01" type="Marker3D" parent="Tandem_Capsule/Tandem_RCS_RingA"]
+transform = Transform3D(0, 0, -1, 0.92388, -0.38268, 0, -0.38268, -0.92388, 0, 1.45, 0.38539, -0.15963)
+metadata/socket_for = "tandem/rcs/ring_a/t01"
+
+[node name="Nozzle_2" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RCS_RingA"]
+transform = Transform3D(-1, 0, 0, 0, 0.38268, -0.92388, 0, -0.92388, -0.38268, 1.45, 0.15007, -0.36229)
+mesh = SubResource("CylinderMesh_13")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_rcs_ring_a_t02" type="Marker3D" parent="Tandem_Capsule/Tandem_RCS_RingA"]
+transform = Transform3D(0, -1, 0, 0.38268, 0, 0.92388, -0.92388, 0, 0.38268, 1.45, 0.15963, -0.38539)
+metadata/socket_for = "tandem/rcs/ring_a/t02"
+
+[node name="Nozzle_3" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RCS_RingA"]
+transform = Transform3D(-1, 0, 0, 0, -0.38268, -0.92388, 0, -0.92388, 0.38268, 1.45, -0.15007, -0.36229)
+mesh = SubResource("CylinderMesh_13")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_rcs_ring_a_t03" type="Marker3D" parent="Tandem_Capsule/Tandem_RCS_RingA"]
+transform = Transform3D(0, -1, 0, -0.38268, 0, 0.92388, -0.92388, 0, -0.38268, 1.45, -0.15963, -0.38539)
+metadata/socket_for = "tandem/rcs/ring_a/t03"
+
+[node name="Nozzle_4" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RCS_RingA"]
+transform = Transform3D(0, 0, 1, -0.38268, -0.92388, 0, 0.92388, -0.38268, 0, 1.45, -0.36229, -0.15007)
+mesh = SubResource("CylinderMesh_13")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_rcs_ring_a_t04" type="Marker3D" parent="Tandem_Capsule/Tandem_RCS_RingA"]
+transform = Transform3D(0, 0, -1, -0.92388, -0.38268, 0, -0.38268, 0.92388, 0, 1.45, -0.38539, -0.15963)
+metadata/socket_for = "tandem/rcs/ring_a/t04"
+
+[node name="Nozzle_5" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RCS_RingA"]
+transform = Transform3D(0, 0, 1, 0.38268, -0.92388, 0, 0.92388, 0.38268, 0, 1.45, -0.36229, 0.15007)
+mesh = SubResource("CylinderMesh_13")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_rcs_ring_a_t05" type="Marker3D" parent="Tandem_Capsule/Tandem_RCS_RingA"]
+transform = Transform3D(0, 0, -1, -0.92388, 0.38268, 0, 0.38268, 0.92388, 0, 1.45, -0.38539, 0.15963)
+metadata/socket_for = "tandem/rcs/ring_a/t05"
+
+[node name="Nozzle_6" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RCS_RingA"]
+transform = Transform3D(1, 0, 0, 0, -0.38268, -0.92388, 0, 0.92388, -0.38268, 1.45, -0.15007, 0.36229)
+mesh = SubResource("CylinderMesh_13")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_rcs_ring_a_t06" type="Marker3D" parent="Tandem_Capsule/Tandem_RCS_RingA"]
+transform = Transform3D(0, 1, 0, -0.38268, 0, 0.92388, 0.92388, 0, 0.38268, 1.45, -0.15963, 0.38539)
+metadata/socket_for = "tandem/rcs/ring_a/t06"
+
+[node name="Nozzle_7" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RCS_RingA"]
+transform = Transform3D(1, 0, 0, 0, 0.38268, -0.92388, 0, 0.92388, 0.38268, 1.45, 0.15007, 0.36229)
+mesh = SubResource("CylinderMesh_13")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_rcs_ring_a_t07" type="Marker3D" parent="Tandem_Capsule/Tandem_RCS_RingA"]
+transform = Transform3D(0, 1, 0, 0.38268, 0, 0.92388, 0.92388, 0, -0.38268, 1.45, 0.15963, 0.38539)
+metadata/socket_for = "tandem/rcs/ring_a/t07"
+
+[node name="Nozzle_8" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RCS_RingA"]
+transform = Transform3D(0, 0, 1, 0.38268, 0.92388, 0, -0.92388, 0.38268, 0, 1.45, 0.36229, 0.15007)
+mesh = SubResource("CylinderMesh_13")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_rcs_ring_a_t08" type="Marker3D" parent="Tandem_Capsule/Tandem_RCS_RingA"]
+transform = Transform3D(0, 0, -1, 0.92388, 0.38268, 0, 0.38268, -0.92388, 0, 1.45, 0.38539, 0.15963)
+metadata/socket_for = "tandem/rcs/ring_a/t08"
+
+[node name="Tandem_RCS_RingB" type="Node3D" parent="Tandem_Capsule"]
+metadata/component_id = "tandem/rcs/ring_b"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Band" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RCS_RingB"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, 1.8, 0, 0)
+mesh = SubResource("CylinderMesh_14")
+metadata/placeholder_swatch = 8
+
+[node name="Nozzle_1" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RCS_RingB"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 1.8, 0.36214, 0)
+mesh = SubResource("CylinderMesh_13")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_rcs_ring_b_t01" type="Marker3D" parent="Tandem_Capsule/Tandem_RCS_RingB"]
+transform = Transform3D(0, 0, -1, 1, 0, 0, 0, -1, 0, 1.8, 0.38714, 0)
+metadata/socket_for = "tandem/rcs/ring_b/t01"
+
+[node name="Nozzle_2" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RCS_RingB"]
+transform = Transform3D(-1, 0, 0, 0, 0.70711, -0.70711, 0, -0.70711, -0.70711, 1.8, 0.25607, -0.25607)
+mesh = SubResource("CylinderMesh_13")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_rcs_ring_b_t02" type="Marker3D" parent="Tandem_Capsule/Tandem_RCS_RingB"]
+transform = Transform3D(0, -1, 0, 0.70711, 0, 0.70711, -0.70711, 0, 0.70711, 1.8, 0.27375, -0.27375)
+metadata/socket_for = "tandem/rcs/ring_b/t02"
+
+[node name="Nozzle_3" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RCS_RingB"]
+transform = Transform3D(-1, 0, 0, 0, 0, -1, 0, -1, 0, 1.8, 0, -0.36214)
+mesh = SubResource("CylinderMesh_13")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_rcs_ring_b_t03" type="Marker3D" parent="Tandem_Capsule/Tandem_RCS_RingB"]
+transform = Transform3D(0, -1, 0, 0, 0, 1, -1, 0, 0, 1.8, 0, -0.38714)
+metadata/socket_for = "tandem/rcs/ring_b/t03"
+
+[node name="Nozzle_4" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RCS_RingB"]
+transform = Transform3D(-1, 0, 0, 0, -0.70711, -0.70711, 0, -0.70711, 0.70711, 1.8, -0.25607, -0.25607)
+mesh = SubResource("CylinderMesh_13")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_rcs_ring_b_t04" type="Marker3D" parent="Tandem_Capsule/Tandem_RCS_RingB"]
+transform = Transform3D(0, -1, 0, -0.70711, 0, 0.70711, -0.70711, 0, -0.70711, 1.8, -0.27375, -0.27375)
+metadata/socket_for = "tandem/rcs/ring_b/t04"
+
+[node name="Nozzle_5" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RCS_RingB"]
+transform = Transform3D(0, 0, 1, 0, -1, 0, 1, 0, 0, 1.8, -0.36214, 0)
+mesh = SubResource("CylinderMesh_13")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_rcs_ring_b_t05" type="Marker3D" parent="Tandem_Capsule/Tandem_RCS_RingB"]
+transform = Transform3D(0, 0, -1, -1, 0, 0, 0, 1, 0, 1.8, -0.38714, 0)
+metadata/socket_for = "tandem/rcs/ring_b/t05"
+
+[node name="Nozzle_6" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RCS_RingB"]
+transform = Transform3D(1, 0, 0, 0, -0.70711, -0.70711, 0, 0.70711, -0.70711, 1.8, -0.25607, 0.25607)
+mesh = SubResource("CylinderMesh_13")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_rcs_ring_b_t06" type="Marker3D" parent="Tandem_Capsule/Tandem_RCS_RingB"]
+transform = Transform3D(0, 1, 0, -0.70711, 0, 0.70711, 0.70711, 0, 0.70711, 1.8, -0.27375, 0.27375)
+metadata/socket_for = "tandem/rcs/ring_b/t06"
+
+[node name="Nozzle_7" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RCS_RingB"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 1.8, 0, 0.36214)
+mesh = SubResource("CylinderMesh_13")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_rcs_ring_b_t07" type="Marker3D" parent="Tandem_Capsule/Tandem_RCS_RingB"]
+transform = Transform3D(0, 1, 0, 0, 0, 1, 1, 0, 0, 1.8, 0, 0.38714)
+metadata/socket_for = "tandem/rcs/ring_b/t07"
+
+[node name="Nozzle_8" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RCS_RingB"]
+transform = Transform3D(1, 0, 0, 0, 0.70711, -0.70711, 0, 0.70711, 0.70711, 1.8, 0.25607, 0.25607)
+mesh = SubResource("CylinderMesh_13")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_rcs_ring_b_t08" type="Marker3D" parent="Tandem_Capsule/Tandem_RCS_RingB"]
+transform = Transform3D(0, 1, 0, 0.70711, 0, 0.70711, 0.70711, 0, -0.70711, 1.8, 0.27375, 0.27375)
+metadata/socket_for = "tandem/rcs/ring_b/t08"
+
+[node name="Tandem_RCS_RingA_DriverPanel" type="Node3D" parent="Tandem_Capsule"]
+metadata/component_id = "tandem/rcs/ring_a_driver_panel"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Panel" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RCS_RingA_DriverPanel"]
+transform = Transform3D(0.99635, 0.0854, 0, 0, 0, 1, 0.0854, -0.99635, 0, 1.56064, 0, -0.39719)
+mesh = SubResource("BoxMesh_15")
+metadata/placeholder_swatch = 6
+
+[node name="Burnt_Connector" type="Node3D" parent="Tandem_Capsule/Tandem_RCS_RingA_DriverPanel"]
+visible = false
+metadata/damage_variant = "burnt_connector"
+metadata/damage_conditions = "burnt_connector"
+
+[node name="Connector_Scorch" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RCS_RingA_DriverPanel/Burnt_Connector"]
+transform = Transform3D(0.99635, 0.0854, 0, 0, 0, 1, 0.0854, -0.99635, 0, 1.56085, 0, -0.41468)
+mesh = SubResource("BoxMesh_16")
+metadata/placeholder_swatch = 22
+
+[node name="Tandem_RCS_RingB_DriverPanel" type="Node3D" parent="Tandem_Capsule"]
+metadata/component_id = "tandem/rcs/ring_b_driver_panel"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Panel" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RCS_RingB_DriverPanel"]
+transform = Transform3D(0.99635, 0.0854, 0, 0, 0, -1, -0.0854, 0.99635, 0, 1.69064, 0, 0.38604)
+mesh = SubResource("BoxMesh_15")
+metadata/placeholder_swatch = 6
+
+[node name="Burnt_Connector" type="Node3D" parent="Tandem_Capsule/Tandem_RCS_RingB_DriverPanel"]
+visible = false
+metadata/damage_variant = "burnt_connector"
+metadata/damage_conditions = "burnt_connector"
+
+[node name="Connector_Scorch" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_RCS_RingB_DriverPanel/Burnt_Connector"]
+transform = Transform3D(0.99635, 0.0854, 0, 0, 0, -1, -0.0854, 0.99635, 0, 1.69085, 0, 0.40353)
+mesh = SubResource("BoxMesh_16")
+metadata/placeholder_swatch = 22
+
+[node name="Tandem_Chute_Drogue" type="Node3D" parent="Tandem_Capsule"]
+metadata/component_id = "tandem/chute/drogue"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Packed" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Chute_Drogue"]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 1.75, 0, 0)
+mesh = SubResource("CylinderMesh_17")
+metadata/placeholder_swatch = 32
+
+[node name="Tandem_Chute_Main" type="Node3D" parent="Tandem_Capsule"]
+metadata/component_id = "tandem/chute/main"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Packed" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Chute_Main"]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 1.45, 0, 0)
+mesh = SubResource("CylinderMesh_18")
+metadata/placeholder_swatch = 31
+
+[node name="Tandem_Retro" type="Node3D" parent="Tandem_Capsule"]
+metadata/section_id = "retro"
+
+[node name="Tandem_Retro_Structure" type="Node3D" parent="Tandem_Capsule/Tandem_Retro"]
+metadata/component_id = "tandem/retro/structure"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Retro_Shell" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Retro/Tandem_Retro_Structure"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -0.225, 0, 0)
+mesh = SubResource("CylinderMesh_19")
+metadata/placeholder_swatch = 3
+
+[node name="Foil_Patch" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Retro/Tandem_Retro_Structure"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -0.455, 0, 0)
+mesh = SubResource("CylinderMesh_20")
+metadata/placeholder_swatch = 23
+
+[node name="Separation_Bolt_1" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Retro/Tandem_Retro_Structure"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -0.47, 0.57983, -0.57983)
+mesh = SubResource("CylinderMesh_21")
+metadata/placeholder_swatch = 8
+
+[node name="Separation_Bolt_2" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Retro/Tandem_Retro_Structure"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -0.47, -0.57983, -0.57983)
+mesh = SubResource("CylinderMesh_21")
+metadata/placeholder_swatch = 8
+
+[node name="Separation_Bolt_3" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Retro/Tandem_Retro_Structure"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -0.47, -0.57983, 0.57983)
+mesh = SubResource("CylinderMesh_21")
+metadata/placeholder_swatch = 8
+
+[node name="Separation_Bolt_4" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Retro/Tandem_Retro_Structure"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -0.47, 0.57983, 0.57983)
+mesh = SubResource("CylinderMesh_21")
+metadata/placeholder_swatch = 8
+
+[node name="Tandem_Retro_Rocket_1" type="Node3D" parent="Tandem_Capsule/Tandem_Retro"]
+metadata/component_id = "tandem/retro/rocket_1"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Bell" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Retro/Tandem_Retro_Rocket_1"]
+transform = Transform3D(0, -1, 0, 0, 0, -1, 1, 0, 0, -0.54, 0.3, -0.3)
+mesh = SubResource("CylinderMesh_22")
+metadata/placeholder_swatch = 8
+
+[node name="Rocket_Fired" type="Node3D" parent="Tandem_Capsule/Tandem_Retro/Tandem_Retro_Rocket_1"]
+visible = false
+metadata/damage_variant = "fired"
+metadata/damage_conditions = "fired"
+
+[node name="Soot_Ring" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Retro/Tandem_Retro_Rocket_1/Rocket_Fired"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -0.625, 0.3, -0.3)
+mesh = SubResource("CylinderMesh_23")
+metadata/placeholder_swatch = 22
+
+[node name="Socket_tandem_retro_rocket_1" type="Marker3D" parent="Tandem_Capsule/Tandem_Retro/Tandem_Retro_Rocket_1"]
+transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, 1, 0, -0.63, 0.3, -0.3)
+metadata/socket_for = "tandem/retro/rocket_1"
+
+[node name="Tandem_Retro_Rocket_2" type="Node3D" parent="Tandem_Capsule/Tandem_Retro"]
+metadata/component_id = "tandem/retro/rocket_2"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Bell" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Retro/Tandem_Retro_Rocket_2"]
+transform = Transform3D(0, -1, 0, 0, 0, -1, 1, 0, 0, -0.54, 0.3, 0.3)
+mesh = SubResource("CylinderMesh_22")
+metadata/placeholder_swatch = 8
+
+[node name="Rocket_Fired" type="Node3D" parent="Tandem_Capsule/Tandem_Retro/Tandem_Retro_Rocket_2"]
+visible = false
+metadata/damage_variant = "fired"
+metadata/damage_conditions = "fired"
+
+[node name="Soot_Ring" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Retro/Tandem_Retro_Rocket_2/Rocket_Fired"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -0.625, 0.3, 0.3)
+mesh = SubResource("CylinderMesh_23")
+metadata/placeholder_swatch = 22
+
+[node name="Socket_tandem_retro_rocket_2" type="Marker3D" parent="Tandem_Capsule/Tandem_Retro/Tandem_Retro_Rocket_2"]
+transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, 1, 0, -0.63, 0.3, 0.3)
+metadata/socket_for = "tandem/retro/rocket_2"
+
+[node name="Tandem_Retro_Rocket_3" type="Node3D" parent="Tandem_Capsule/Tandem_Retro"]
+metadata/component_id = "tandem/retro/rocket_3"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Bell" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Retro/Tandem_Retro_Rocket_3"]
+transform = Transform3D(0, -1, 0, 0, 0, -1, 1, 0, 0, -0.54, -0.3, 0.3)
+mesh = SubResource("CylinderMesh_22")
+metadata/placeholder_swatch = 8
+
+[node name="Rocket_Fired" type="Node3D" parent="Tandem_Capsule/Tandem_Retro/Tandem_Retro_Rocket_3"]
+visible = false
+metadata/damage_variant = "fired"
+metadata/damage_conditions = "fired"
+
+[node name="Soot_Ring" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Retro/Tandem_Retro_Rocket_3/Rocket_Fired"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -0.625, -0.3, 0.3)
+mesh = SubResource("CylinderMesh_23")
+metadata/placeholder_swatch = 22
+
+[node name="Socket_tandem_retro_rocket_3" type="Marker3D" parent="Tandem_Capsule/Tandem_Retro/Tandem_Retro_Rocket_3"]
+transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, 1, 0, -0.63, -0.3, 0.3)
+metadata/socket_for = "tandem/retro/rocket_3"
+
+[node name="Tandem_Retro_Rocket_4" type="Node3D" parent="Tandem_Capsule/Tandem_Retro"]
+metadata/component_id = "tandem/retro/rocket_4"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Bell" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Retro/Tandem_Retro_Rocket_4"]
+transform = Transform3D(0, -1, 0, 0, 0, -1, 1, 0, 0, -0.54, -0.3, -0.3)
+mesh = SubResource("CylinderMesh_22")
+metadata/placeholder_swatch = 8
+
+[node name="Rocket_Fired" type="Node3D" parent="Tandem_Capsule/Tandem_Retro/Tandem_Retro_Rocket_4"]
+visible = false
+metadata/damage_variant = "fired"
+metadata/damage_conditions = "fired"
+
+[node name="Soot_Ring" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Retro/Tandem_Retro_Rocket_4/Rocket_Fired"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -0.625, -0.3, -0.3)
+mesh = SubResource("CylinderMesh_23")
+metadata/placeholder_swatch = 22
+
+[node name="Socket_tandem_retro_rocket_4" type="Marker3D" parent="Tandem_Capsule/Tandem_Retro/Tandem_Retro_Rocket_4"]
+transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, 1, 0, -0.63, -0.3, -0.3)
+metadata/socket_for = "tandem/retro/rocket_4"
+
+[node name="Tandem_Adapter" type="Node3D" parent="Tandem_Capsule"]
+metadata/section_id = "adapter"
+
+[node name="Tandem_Adapter_Structure" type="Node3D" parent="Tandem_Capsule/Tandem_Adapter"]
+metadata/component_id = "tandem/adapter/structure"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Adapter_Shell" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_Adapter_Structure"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -1.15, 0, 0)
+mesh = SubResource("CylinderMesh_24")
+metadata/placeholder_swatch = 3
+
+[node name="Tandem_Adapter_Radiator" type="Node3D" parent="Tandem_Capsule/Tandem_Adapter"]
+metadata/component_id = "tandem/adapter/radiator"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Rib_1" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_Adapter_Radiator"]
+transform = Transform3D(0.99044, 0.13795, 0, 0.04718, -0.33875, 0.93969, 0.12963, -0.93071, -0.34202, -1.17328, -0.36369, -0.99923)
+mesh = SubResource("BoxMesh_25")
+metadata/placeholder_swatch = 29
+
+[node name="Rib_2" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_Adapter_Radiator"]
+transform = Transform3D(0.99044, 0.13795, 0, 0.08868, -0.63664, 0.76604, 0.10568, -0.75872, -0.64279, -1.17328, -0.68352, -0.81458)
+mesh = SubResource("BoxMesh_25")
+metadata/placeholder_swatch = 29
+
+[node name="Rib_3" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_Adapter_Radiator"]
+transform = Transform3D(0.99044, 0.13795, 0, 0.11947, -0.85775, 0.5, 0.06898, -0.49522, -0.86603, -1.17328, -0.9209, -0.53168)
+mesh = SubResource("BoxMesh_25")
+metadata/placeholder_swatch = 29
+
+[node name="Rib_4" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_Adapter_Radiator"]
+transform = Transform3D(0.99044, 0.13795, 0, 0.13586, -0.97539, 0.17365, 0.02396, -0.17199, -0.98481, -1.17328, -1.04721, -0.18465)
+mesh = SubResource("BoxMesh_25")
+metadata/placeholder_swatch = 29
+
+[node name="Rib_5" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_Adapter_Radiator"]
+transform = Transform3D(0.99044, 0.13795, 0, 0.13586, -0.97539, -0.17365, -0.02396, 0.17199, -0.98481, -1.17328, -1.04721, 0.18465)
+mesh = SubResource("BoxMesh_25")
+metadata/placeholder_swatch = 29
+
+[node name="Rib_6" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_Adapter_Radiator"]
+transform = Transform3D(0.99044, 0.13795, 0, 0.11947, -0.85775, -0.5, -0.06898, 0.49522, -0.86603, -1.17328, -0.9209, 0.53168)
+mesh = SubResource("BoxMesh_25")
+metadata/placeholder_swatch = 29
+
+[node name="Rib_7" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_Adapter_Radiator"]
+transform = Transform3D(0.99044, 0.13795, 0, 0.08868, -0.63664, -0.76604, -0.10568, 0.75872, -0.64279, -1.17328, -0.68352, 0.81458)
+mesh = SubResource("BoxMesh_25")
+metadata/placeholder_swatch = 29
+
+[node name="Rib_8" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_Adapter_Radiator"]
+transform = Transform3D(0.99044, 0.13795, 0, 0.04718, -0.33875, -0.93969, -0.12963, 0.93071, -0.34202, -1.17328, -0.36369, 0.99923)
+mesh = SubResource("BoxMesh_25")
+metadata/placeholder_swatch = 29
+
+[node name="Tandem_Adapter_ExperimentBay" type="Node3D" parent="Tandem_Capsule/Tandem_Adapter"]
+metadata/component_id = "tandem/adapter/experiment_bay"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Bay_Door" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_Adapter_ExperimentBay"]
+transform = Transform3D(0.99044, 0.13795, 0, 0, 0, -1, -0.13795, 0.99044, 0, -1.14862, 0, 1.0574)
+mesh = SubResource("BoxMesh_26")
+metadata/placeholder_swatch = 10
+
+[node name="Bay_Latch" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_Adapter_ExperimentBay"]
+transform = Transform3D(0.99044, 0.13795, 0, 0, 0, -1, -0.13795, 0.99044, 0, -0.91862, 0, 1.04537)
+mesh = SubResource("BoxMesh_27")
+metadata/placeholder_swatch = 4
+
+[node name="Tandem_Adapter_Handrail" type="Node3D" parent="Tandem_Capsule/Tandem_Adapter"]
+metadata/component_id = "tandem/adapter/handrail"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Rail_Fwd" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_Adapter_Handrail"]
+transform = Transform3D(0.51474, -0.8421, 0.16098, 0, -0.18777, -0.98221, 0.85734, 0.50559, -0.09665, 0, 0.55655, 0.70325)
+mesh = SubResource("CylinderMesh_28")
+metadata/placeholder_swatch = 4
+
+[node name="Rail_Aft" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_Adapter_Handrail"]
+transform = Transform3D(0.2748, -0.85929, 0.43141, 0, -0.44868, -0.89369, 0.9615, 0.24558, -0.1233, -0.625, 0.31996, 0.97625)
+mesh = SubResource("CylinderMesh_29")
+metadata/placeholder_swatch = 4
+
+[node name="Tandem_OAMS_T01" type="Node3D" parent="Tandem_Capsule/Tandem_Adapter"]
+metadata/component_id = "tandem/oams/thruster_01"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Pod" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T01"]
+transform = Transform3D(1, 0, 0, 0, 0.70711, 0.70711, 0, -0.70711, 0.70711, -1.78, 0.81689, -0.81689)
+mesh = SubResource("BoxMesh_30")
+metadata/placeholder_swatch = 10
+
+[node name="Nozzle" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T01"]
+transform = Transform3D(-1, 0, 0, 0, -0.70711, -0.70711, 0, -0.70711, 0.70711, -1.78, 0.82749, -0.8487)
+mesh = SubResource("CylinderMesh_31")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_oams_thruster_01" type="Marker3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T01"]
+transform = Transform3D(0, -1, 0, -0.70711, 0, 0.70711, -0.70711, 0, -0.70711, -1.78, 0.80274, -0.87345)
+metadata/socket_for = "tandem/oams/thruster_01"
+
+[node name="Tandem_OAMS_T02" type="Node3D" parent="Tandem_Capsule/Tandem_Adapter"]
+metadata/component_id = "tandem/oams/thruster_02"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Pod" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T02"]
+transform = Transform3D(1, 0, 0, 0, 0.70711, 0.70711, 0, -0.70711, 0.70711, -1.78, 0.81689, -0.81689)
+mesh = SubResource("BoxMesh_30")
+metadata/placeholder_swatch = 10
+
+[node name="Nozzle" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T02"]
+transform = Transform3D(1, 0, 0, 0, 0.70711, -0.70711, 0, 0.70711, 0.70711, -1.78, 0.8487, -0.82749)
+mesh = SubResource("CylinderMesh_31")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_oams_thruster_02" type="Marker3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T02"]
+transform = Transform3D(0, 1, 0, 0.70711, 0, 0.70711, 0.70711, 0, -0.70711, -1.78, 0.87345, -0.80274)
+metadata/socket_for = "tandem/oams/thruster_02"
+
+[node name="Tandem_OAMS_T03" type="Node3D" parent="Tandem_Capsule/Tandem_Adapter"]
+metadata/component_id = "tandem/oams/thruster_03"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Pod" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T03"]
+transform = Transform3D(1, 0, 0, 0, -0.70711, 0.70711, 0, -0.70711, -0.70711, -1.78, -0.81689, -0.81689)
+mesh = SubResource("BoxMesh_30")
+metadata/placeholder_swatch = 10
+
+[node name="Nozzle" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T03"]
+transform = Transform3D(1, 0, 0, 0, -0.70711, -0.70711, 0, 0.70711, -0.70711, -1.78, -0.8487, -0.82749)
+mesh = SubResource("CylinderMesh_31")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_oams_thruster_03" type="Marker3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T03"]
+transform = Transform3D(0, 1, 0, -0.70711, 0, 0.70711, 0.70711, 0, 0.70711, -1.78, -0.87345, -0.80274)
+metadata/socket_for = "tandem/oams/thruster_03"
+
+[node name="Tandem_OAMS_T04" type="Node3D" parent="Tandem_Capsule/Tandem_Adapter"]
+metadata/component_id = "tandem/oams/thruster_04"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Pod" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T04"]
+transform = Transform3D(1, 0, 0, 0, -0.70711, 0.70711, 0, -0.70711, -0.70711, -1.78, -0.81689, -0.81689)
+mesh = SubResource("BoxMesh_30")
+metadata/placeholder_swatch = 10
+
+[node name="Nozzle" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T04"]
+transform = Transform3D(-1, 0, 0, 0, 0.70711, -0.70711, 0, -0.70711, -0.70711, -1.78, -0.82749, -0.8487)
+mesh = SubResource("CylinderMesh_31")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_oams_thruster_04" type="Marker3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T04"]
+transform = Transform3D(0, -1, 0, 0.70711, 0, 0.70711, -0.70711, 0, 0.70711, -1.78, -0.80274, -0.87345)
+metadata/socket_for = "tandem/oams/thruster_04"
+
+[node name="Tandem_OAMS_T05" type="Node3D" parent="Tandem_Capsule/Tandem_Adapter"]
+metadata/component_id = "tandem/oams/thruster_05"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Pod" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T05"]
+transform = Transform3D(1, 0, 0, 0, -0.70711, -0.70711, 0, 0.70711, -0.70711, -1.78, -0.81689, 0.81689)
+mesh = SubResource("BoxMesh_30")
+metadata/placeholder_swatch = 10
+
+[node name="Nozzle" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T05"]
+transform = Transform3D(1, 0, 0, 0, 0.70711, -0.70711, 0, 0.70711, 0.70711, -1.78, -0.82749, 0.8487)
+mesh = SubResource("CylinderMesh_31")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_oams_thruster_05" type="Marker3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T05"]
+transform = Transform3D(0, 1, 0, 0.70711, 0, 0.70711, 0.70711, 0, -0.70711, -1.78, -0.80274, 0.87345)
+metadata/socket_for = "tandem/oams/thruster_05"
+
+[node name="Tandem_OAMS_T06" type="Node3D" parent="Tandem_Capsule/Tandem_Adapter"]
+metadata/component_id = "tandem/oams/thruster_06"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Pod" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T06"]
+transform = Transform3D(1, 0, 0, 0, -0.70711, -0.70711, 0, 0.70711, -0.70711, -1.78, -0.81689, 0.81689)
+mesh = SubResource("BoxMesh_30")
+metadata/placeholder_swatch = 10
+
+[node name="Nozzle" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T06"]
+transform = Transform3D(-1, 0, 0, 0, -0.70711, -0.70711, 0, -0.70711, 0.70711, -1.78, -0.8487, 0.82749)
+mesh = SubResource("CylinderMesh_31")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_oams_thruster_06" type="Marker3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T06"]
+transform = Transform3D(0, -1, 0, -0.70711, 0, 0.70711, -0.70711, 0, -0.70711, -1.78, -0.87345, 0.80274)
+metadata/socket_for = "tandem/oams/thruster_06"
+
+[node name="Tandem_OAMS_T07" type="Node3D" parent="Tandem_Capsule/Tandem_Adapter"]
+metadata/component_id = "tandem/oams/thruster_07"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Pod" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T07"]
+transform = Transform3D(1, 0, 0, 0, 0.70711, -0.70711, 0, 0.70711, 0.70711, -1.78, 0.81689, 0.81689)
+mesh = SubResource("BoxMesh_30")
+metadata/placeholder_swatch = 10
+
+[node name="Nozzle" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T07"]
+transform = Transform3D(-1, 0, 0, 0, 0.70711, -0.70711, 0, -0.70711, -0.70711, -1.78, 0.8487, 0.82749)
+mesh = SubResource("CylinderMesh_31")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_oams_thruster_07" type="Marker3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T07"]
+transform = Transform3D(0, -1, 0, 0.70711, 0, 0.70711, -0.70711, 0, 0.70711, -1.78, 0.87345, 0.80274)
+metadata/socket_for = "tandem/oams/thruster_07"
+
+[node name="Tandem_OAMS_T08" type="Node3D" parent="Tandem_Capsule/Tandem_Adapter"]
+metadata/component_id = "tandem/oams/thruster_08"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Pod" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T08"]
+transform = Transform3D(1, 0, 0, 0, 0.70711, -0.70711, 0, 0.70711, 0.70711, -1.78, 0.81689, 0.81689)
+mesh = SubResource("BoxMesh_30")
+metadata/placeholder_swatch = 10
+
+[node name="Nozzle" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T08"]
+transform = Transform3D(1, 0, 0, 0, -0.70711, -0.70711, 0, 0.70711, -0.70711, -1.78, 0.82749, 0.8487)
+mesh = SubResource("CylinderMesh_31")
+metadata/placeholder_swatch = 24
+
+[node name="Thruster_08_Stuck_Scorched" type="Node3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T08"]
+visible = false
+metadata/damage_variant = "stuck_scorched"
+metadata/damage_conditions = "stuck_open"
+
+[node name="Scorch_1" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T08/Thruster_08_Stuck_Scorched"]
+transform = Transform3D(0.99044, 0.13795, 0, -0.08302, 0.59606, -0.79864, -0.11017, 0.791, 0.60182, -1.65972, 0.68561, 0.90983)
+mesh = SubResource("BoxMesh_32")
+metadata/placeholder_swatch = 30
+
+[node name="Scorch_2" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T08/Thruster_08_Stuck_Scorched"]
+transform = Transform3D(0.99044, 0.13795, 0, -0.06898, 0.49522, -0.86603, -0.11947, 0.85775, 0.5, -1.63972, 0.57062, 0.98833)
+mesh = SubResource("BoxMesh_33")
+metadata/placeholder_swatch = 30
+
+[node name="Scorch_3" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T08/Thruster_08_Stuck_Scorched"]
+transform = Transform3D(0.99044, 0.13795, 0, -0.0539, 0.387, -0.9205, -0.12699, 0.9117, 0.39073, -1.61972, 0.4467, 1.05235)
+mesh = SubResource("BoxMesh_34")
+metadata/placeholder_swatch = 30
+
+[node name="Bell_Char" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T08/Thruster_08_Stuck_Scorched"]
+transform = Transform3D(1, 0, 0, 0, -0.70711, -0.70711, 0, 0.70711, -0.70711, -1.78, 0.8084, 0.8678)
+mesh = SubResource("CylinderMesh_35")
+metadata/placeholder_swatch = 22
+
+[node name="Socket_tandem_oams_thruster_08" type="Marker3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T08"]
+transform = Transform3D(0, 1, 0, -0.70711, 0, 0.70711, 0.70711, 0, 0.70711, -1.78, 0.80274, 0.87345)
+metadata/socket_for = "tandem/oams/thruster_08"
+
+[node name="Tandem_OAMS_T09" type="Node3D" parent="Tandem_Capsule/Tandem_Adapter"]
+metadata/component_id = "tandem/oams/thruster_09"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Nozzle" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T09"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -1, 1.05161, 0)
+mesh = SubResource("CylinderMesh_36")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_oams_thruster_09" type="Marker3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T09"]
+transform = Transform3D(0, 0, -1, 1, 0, 0, 0, -1, 0, -1, 1.08661, 0)
+metadata/socket_for = "tandem/oams/thruster_09"
+
+[node name="Tandem_OAMS_T10" type="Node3D" parent="Tandem_Capsule/Tandem_Adapter"]
+metadata/component_id = "tandem/oams/thruster_10"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Nozzle" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T10"]
+transform = Transform3D(-1, 0, 0, 0, 0, -1, 0, -1, 0, -1, 0, -1.05161)
+mesh = SubResource("CylinderMesh_36")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_oams_thruster_10" type="Marker3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T10"]
+transform = Transform3D(0, -1, 0, 0, 0, 1, -1, 0, 0, -1, 0, -1.08661)
+metadata/socket_for = "tandem/oams/thruster_10"
+
+[node name="Tandem_OAMS_T11" type="Node3D" parent="Tandem_Capsule/Tandem_Adapter"]
+metadata/component_id = "tandem/oams/thruster_11"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Nozzle" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T11"]
+transform = Transform3D(0, 0, 1, 0, -1, 0, 1, 0, 0, -1, -1.05161, 0)
+mesh = SubResource("CylinderMesh_36")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_oams_thruster_11" type="Marker3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T11"]
+transform = Transform3D(0, 0, -1, -1, 0, 0, 0, 1, 0, -1, -1.08661, 0)
+metadata/socket_for = "tandem/oams/thruster_11"
+
+[node name="Tandem_OAMS_T12" type="Node3D" parent="Tandem_Capsule/Tandem_Adapter"]
+metadata/component_id = "tandem/oams/thruster_12"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Nozzle" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T12"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -1, 0, 1.05161)
+mesh = SubResource("CylinderMesh_36")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_oams_thruster_12" type="Marker3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T12"]
+transform = Transform3D(0, 1, 0, 0, 0, 1, 1, 0, 0, -1, 0, 1.08661)
+metadata/socket_for = "tandem/oams/thruster_12"
+
+[node name="Tandem_OAMS_T13" type="Node3D" parent="Tandem_Capsule/Tandem_Adapter"]
+metadata/component_id = "tandem/oams/thruster_13"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Pod" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T13"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.86603, 0, -0.86603, 0.5, -0.55, 0.49196, -0.85211)
+mesh = SubResource("BoxMesh_30")
+metadata/placeholder_swatch = 10
+
+[node name="Nozzle" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T13"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -0.535, 0.50696, -0.87809)
+mesh = SubResource("CylinderMesh_36")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_oams_thruster_13" type="Marker3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T13"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, -0.5, 0.50696, -0.87809)
+metadata/socket_for = "tandem/oams/thruster_13"
+
+[node name="Tandem_OAMS_T14" type="Node3D" parent="Tandem_Capsule/Tandem_Adapter"]
+metadata/component_id = "tandem/oams/thruster_14"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Pod" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T14"]
+transform = Transform3D(1, 0, 0, 0, -0.5, -0.86603, 0, 0.86603, -0.5, -0.55, -0.49196, 0.85211)
+mesh = SubResource("BoxMesh_30")
+metadata/placeholder_swatch = 10
+
+[node name="Nozzle" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T14"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -0.535, -0.50696, 0.87809)
+mesh = SubResource("CylinderMesh_36")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_oams_thruster_14" type="Marker3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T14"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, -0.5, -0.50696, 0.87809)
+metadata/socket_for = "tandem/oams/thruster_14"
+
+[node name="Tandem_OAMS_T15" type="Node3D" parent="Tandem_Capsule/Tandem_Adapter"]
+metadata/component_id = "tandem/oams/thruster_15"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Nozzle" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T15"]
+transform = Transform3D(0, -1, 0, 0, 0, -1, 1, 0, 0, -1.865, -0.5, -0.86603)
+mesh = SubResource("CylinderMesh_36")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_oams_thruster_15" type="Marker3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T15"]
+transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, 1, 0, -1.9, -0.5, -0.86603)
+metadata/socket_for = "tandem/oams/thruster_15"
+
+[node name="Tandem_OAMS_T16" type="Node3D" parent="Tandem_Capsule/Tandem_Adapter"]
+metadata/component_id = "tandem/oams/thruster_16"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Nozzle" type="MeshInstance3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T16"]
+transform = Transform3D(0, -1, 0, 0, 0, -1, 1, 0, 0, -1.865, 0.5, 0.86603)
+mesh = SubResource("CylinderMesh_36")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_tandem_oams_thruster_16" type="Marker3D" parent="Tandem_Capsule/Tandem_Adapter/Tandem_OAMS_T16"]
+transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, 1, 0, -1.9, 0.5, 0.86603)
+metadata/socket_for = "tandem/oams/thruster_16"

@@ -1,0 +1,495 @@
+{
+  "schema": "tasks/1",
+  // Mission 1 crew tasks (merged with catalog/tasks.json at load; see MissionDataSource).
+  "tasks": [
+    {
+      "id": "dock",
+      "name": "Dock with Agena",
+      "kind": "procedure",
+      "skills": ["flight_ops"],
+      "baseDurationS": 90,
+      "complexity": 2,
+      "location": "cabin",
+      "interruptible": true,
+      "preconditions": [
+        { "condition": "not @flight.docked", "reason": "already_docked" },
+        { "condition": "@attitude.tandem.rate_total_dps < 2", "reason": "rates_too_high" }
+      ],
+      // Docked, Lodestar's cold-gas ACS flies the stack and Tandem's OAMS auto-hold is switched off.
+      "onSuccess": [
+        { "target": "flight.docked", "operation": "set", "value": "true" },
+        { "target": "lodestar/docking_cone.latched", "operation": "set", "value": "true" },
+        { "target": "attitude.tandem.mode", "operation": "set", "value": "'off'" },
+        { "target": "attitude.lodestar.control_set", "operation": "set", "value": "'acs'" },
+        { "target": "attitude.lodestar.mode", "operation": "set", "value": "'rate_damp'" }
+      ]
+    },
+    {
+      "id": "undock",
+      "name": "Undock from Agena",
+      "kind": "procedure",
+      "skills": ["flight_ops"],
+      "baseDurationS": 20,
+      "complexity": 1,
+      "location": "cabin",
+      "interruptible": false,
+      "preconditions": [
+        { "condition": "@flight.docked", "reason": "not_docked" }
+      ],
+      // Tandem's attitude mode is left as it is ('off' after docking): the crew must order rate_damp.
+      "onSuccess": [
+        { "target": "flight.docked", "operation": "set", "value": "false" },
+        { "target": "lodestar/docking_cone.latched", "operation": "set", "value": "false" }
+      ]
+    },
+    {
+      "id": "open_breaker",
+      "name": "Open breaker",
+      "kind": "operate",
+      "skills": ["electrical"],
+      "baseDurationS": 15,
+      "complexity": 1,
+      "location": "cabin",
+      "interruptible": true,
+      "parameters": [
+        {
+          "name": "breaker",
+          "type": "choice",
+          "values": [
+            "tandem/power/breaker_oams_01", "tandem/power/breaker_oams_02", "tandem/power/breaker_oams_03", "tandem/power/breaker_oams_04",
+            "tandem/power/breaker_oams_05", "tandem/power/breaker_oams_06", "tandem/power/breaker_oams_07", "tandem/power/breaker_oams_08",
+            "tandem/power/breaker_oams_09", "tandem/power/breaker_oams_10", "tandem/power/breaker_oams_11", "tandem/power/breaker_oams_12",
+            "tandem/power/breaker_oams_13", "tandem/power/breaker_oams_14", "tandem/power/breaker_oams_15", "tandem/power/breaker_oams_16",
+            "tandem/power/breaker_rcs_a", "tandem/power/breaker_rcs_b", "tandem/power/breaker_cabin_heater", "tandem/power/breaker_experiment",
+            "tandem/power/breaker_lights", "tandem/power/breaker_radar"
+          ]
+        }
+      ],
+      "preconditions": [
+        { "condition": "@{breaker}.closed", "reason": "already_open" }
+      ],
+      "onSuccess": [
+        { "target": "{breaker}.closed", "operation": "set", "value": "false" }
+      ]
+    },
+    {
+      "id": "close_breaker",
+      "name": "Close breaker",
+      "kind": "operate",
+      "skills": ["electrical"],
+      "baseDurationS": 15,
+      "complexity": 1,
+      "location": "cabin",
+      "interruptible": true,
+      "parameters": [
+        {
+          "name": "breaker",
+          "type": "choice",
+          "values": [
+            "tandem/power/breaker_oams_01", "tandem/power/breaker_oams_02", "tandem/power/breaker_oams_03", "tandem/power/breaker_oams_04",
+            "tandem/power/breaker_oams_05", "tandem/power/breaker_oams_06", "tandem/power/breaker_oams_07", "tandem/power/breaker_oams_08",
+            "tandem/power/breaker_oams_09", "tandem/power/breaker_oams_10", "tandem/power/breaker_oams_11", "tandem/power/breaker_oams_12",
+            "tandem/power/breaker_oams_13", "tandem/power/breaker_oams_14", "tandem/power/breaker_oams_15", "tandem/power/breaker_oams_16",
+            "tandem/power/breaker_rcs_a", "tandem/power/breaker_rcs_b", "tandem/power/breaker_cabin_heater", "tandem/power/breaker_experiment",
+            "tandem/power/breaker_lights", "tandem/power/breaker_radar"
+          ]
+        }
+      ],
+      "preconditions": [
+        { "condition": "not @{breaker}.closed", "reason": "already_closed" }
+      ],
+      "onSuccess": [
+        { "target": "{breaker}.closed", "operation": "set", "value": "true" }
+      ]
+    },
+    {
+      "id": "cycle_oams_breakers",
+      "name": "Cycle OAMS thruster breakers",
+      "kind": "test",
+      "skills": ["electrical"],
+      "baseDurationS": 60,
+      "complexity": 2,
+      "location": "cabin",
+      "interruptible": true,
+      "parameters": [
+        {
+          "name": "group",
+          "type": "choice",
+          "values": ["t01_t04", "t05_t08", "t09_t12", "t13_t16"],
+          "derived": {
+            "t01_t04": { "n1": "01", "n2": "02", "n3": "03", "n4": "04" },
+            "t05_t08": { "n1": "05", "n2": "06", "n3": "07", "n4": "08" },
+            "t09_t12": { "n1": "09", "n2": "10", "n3": "11", "n4": "12" },
+            "t13_t16": { "n1": "13", "n2": "14", "n3": "15", "n4": "16" }
+          }
+        }
+      ],
+      // Each breaker is opened and re-closed in turn; whether the torque stopped identifies a driver fault.
+      "observations": [
+        { "fact": "component.tandem/oams/driver_{n1}.condition", "method": "test", "scope": ["tandem/oams/driver_{n1}"] },
+        { "fact": "component.tandem/oams/driver_{n2}.condition", "method": "test", "scope": ["tandem/oams/driver_{n2}"] },
+        { "fact": "component.tandem/oams/driver_{n3}.condition", "method": "test", "scope": ["tandem/oams/driver_{n3}"] },
+        { "fact": "component.tandem/oams/driver_{n4}.condition", "method": "test", "scope": ["tandem/oams/driver_{n4}"] }
+      ]
+    },
+    {
+      "id": "oams_master",
+      "name": "Switch OAMS master power",
+      "kind": "operate",
+      "skills": ["propulsion"],
+      "baseDurationS": 10,
+      "complexity": 1,
+      "location": "cabin",
+      "interruptible": true,
+      "parameters": [
+        { "name": "on", "type": "boolean" }
+      ],
+      "preconditions": [
+        { "condition": "@tandem/oams/master.closed != {on}", "reason": "already_in_state" }
+      ],
+      "onSuccess": [
+        { "target": "tandem/oams/master.closed", "operation": "set", "value": "{on}" }
+      ]
+    },
+    {
+      "id": "arm_rcs_ring",
+      "name": "Arm RCS ring",
+      "kind": "operate",
+      "skills": ["propulsion"],
+      "baseDurationS": 15,
+      "complexity": 1,
+      "location": "cabin",
+      "interruptible": true,
+      "parameters": [
+        { "name": "ring", "type": "choice", "values": ["a", "b"] }
+      ],
+      "preconditions": [
+        { "condition": "not @tandem/rcs/ring_{ring}.armed", "reason": "already_armed" }
+      ],
+      "onSuccess": [
+        { "target": "tandem/rcs/ring_{ring}.armed", "operation": "set", "value": "true" }
+      ],
+      // Arming pulses the valves: a damaged ring answers "no response".
+      "observations": [
+        { "fact": "rcs.ring_{ring}.status", "method": "test", "scope": ["tandem/rcs/ring_{ring}"] }
+      ]
+    },
+    {
+      "id": "disarm_rcs_ring",
+      "name": "Disarm RCS ring",
+      "kind": "operate",
+      "skills": ["propulsion"],
+      "baseDurationS": 15,
+      "complexity": 1,
+      "location": "cabin",
+      "interruptible": true,
+      "parameters": [
+        { "name": "ring", "type": "choice", "values": ["a", "b"] }
+      ],
+      "preconditions": [
+        { "condition": "@tandem/rcs/ring_{ring}.armed", "reason": "not_armed" }
+      ],
+      "onSuccess": [
+        { "target": "tandem/rcs/ring_{ring}.armed", "operation": "set", "value": "false" }
+      ]
+    },
+    {
+      "id": "rate_damp",
+      "name": "Rate damp",
+      "kind": "procedure",
+      "skills": ["attitude"],
+      "baseDurationS": 20,
+      "complexity": 2,
+      "location": "cabin",
+      "interruptible": true,
+      "parameters": [
+        { "name": "system", "type": "choice", "values": ["oams", "rcs"] }
+      ],
+      "preconditions": [
+        {
+          "condition": "('{system}' == 'oams' and @tandem/oams/master.closed) or ('{system}' == 'rcs' and (@tandem/rcs/ring_a.armed or @tandem/rcs/ring_b.armed))",
+          "reason": "control_system_unavailable"
+        }
+      ],
+      // Control set first, then the mode, so the damping starts on the chosen thrusters.
+      "onSuccess": [
+        { "target": "attitude.tandem.control_set", "operation": "set", "value": "'{system}'" },
+        { "target": "attitude.tandem.mode", "operation": "set", "value": "'rate_damp'" }
+      ]
+    },
+    {
+      "id": "test_rcs_ring",
+      "name": "Test RCS ring",
+      "kind": "test",
+      "skills": ["propulsion"],
+      "baseDurationS": 30,
+      "complexity": 2,
+      "location": "cabin",
+      "interruptible": true,
+      "parameters": [
+        { "name": "ring", "type": "choice", "values": ["a", "b"] }
+      ],
+      "observations": [
+        { "fact": "rcs.ring_{ring}.status", "method": "test", "scope": ["tandem/rcs/ring_{ring}"] }
+      ]
+    },
+    {
+      "id": "inspect_thruster_quad",
+      "name": "Inspect the thruster quad through the window",
+      "kind": "inspection",
+      "skills": ["propulsion"],
+      "baseDurationS": 45,
+      "complexity": 2,
+      "location": "cabin",
+      "interruptible": true,
+      "preconditions": [
+        { "condition": "abs(@attitude.tandem.rate_roll_dps) < 10", "reason": "roll_too_high" }
+      ],
+      "observations": [
+        { "fact": "component.tandem/oams/thruster_05.condition", "method": "inspection", "scope": ["tandem/oams/thruster_05"] },
+        { "fact": "component.tandem/oams/thruster_06.condition", "method": "inspection", "scope": ["tandem/oams/thruster_06"] },
+        { "fact": "component.tandem/oams/thruster_07.condition", "method": "inspection", "scope": ["tandem/oams/thruster_07"] },
+        { "fact": "component.tandem/oams/thruster_08.condition", "method": "inspection", "scope": ["tandem/oams/thruster_08"] }
+      ]
+    },
+    {
+      "id": "inspect_rcs_driver_panel",
+      "name": "Inspect RCS driver access panel",
+      "kind": "inspection",
+      "skills": ["electrical"],
+      "baseDurationS": 120,
+      "complexity": 2,
+      "location": "cabin",
+      "interruptible": true,
+      "parameters": [
+        { "name": "ring", "type": "choice", "values": ["a", "b"] }
+      ],
+      "observations": [
+        { "fact": "component.tandem/rcs/ring_{ring}_driver_panel.condition", "method": "inspection", "scope": ["tandem/rcs/ring_{ring}_driver_panel"] },
+        { "fact": "component.tandem/rcs/driver_{ring}.condition", "method": "inspection", "scope": ["tandem/rcs/driver_{ring}"] },
+        { "fact": "component.tandem/rcs/harness_j14_{ring}.condition", "method": "inspection", "scope": ["tandem/rcs/harness_j14_{ring}"] }
+      ]
+    },
+    {
+      "id": "portable_co2_check",
+      "name": "Portable CO2 check",
+      "kind": "test",
+      "skills": ["life_support"],
+      "baseDurationS": 45,
+      "complexity": 1,
+      "location": "cabin",
+      "interruptible": true,
+      "observations": [
+        { "fact": "ls.ppco2_portable_mmhg", "method": "instrument", "scope": ["tandem/ls/cabin"] }
+      ]
+    },
+    {
+      "id": "replace_lioh",
+      "name": "Replace LiOH canister",
+      "kind": "repair",
+      "skills": ["life_support"],
+      "baseDurationS": 180,
+      "complexity": 2,
+      "location": "cabin",
+      "interruptible": true,
+      "requiredParts": [
+        { "part": "lioh_canister", "count": 1 }
+      ],
+      "onSuccess": [
+        { "target": "cabin.tandem.lioh_replace", "operation": "set", "value": "true" }
+      ]
+    },
+    {
+      "id": "eva_retrieve_package",
+      "name": "EVA: retrieve the experiment package",
+      "kind": "eva",
+      "skills": ["eva"],
+      "baseDurationS": 1200,
+      "complexity": 4,
+      "location": "eva",
+      "interruptible": true,
+      "preconditions": [
+        { "condition": "abs(@attitude.tandem.rate_roll_dps) < 1", "reason": "rates_too_high" },
+        { "condition": "@tandem/rm/hatch_2.condition != 'failed'", "reason": "hatch_unavailable" },
+        { "condition": "@tandem/adapter/structure.attached", "reason": "adapter_jettisoned" }
+      ]
+      // Success raises mission event eva_package_retrieved (source task:eva_retrieve_package); the
+      // eva_retrieve_package action refuses a second EVA once that event has fired.
+    },
+    {
+      "id": "install_repair",
+      "name": "Install repair assembly",
+      "kind": "repair",
+      "skills": ["electrical"],
+      "baseDurationS": 360,
+      "complexity": 3,
+      "location": "cabin",
+      "interruptible": true,
+      "parameters": [
+        { "name": "assembly", "type": "identifier" }
+      ],
+      "preconditions": [
+        { "condition": "abs(@attitude.tandem.rate_roll_dps) < 10", "reason": "rates_too_high" },
+        { "condition": "@session.repair.{assembly}.ready", "reason": "assembly_not_ready" }
+      ],
+      "onSuccess": [
+        { "target": "session.repair.install", "operation": "set", "value": "'{assembly}'" }
+      ],
+      // A half-installed repair leaves its parts in place.
+      "onStop": [
+        { "target": "session.repair.partial", "operation": "set", "value": "'{assembly}'" }
+      ]
+    },
+    {
+      "id": "jettison_equipment",
+      "name": "Jettison the equipment section",
+      "kind": "procedure",
+      "skills": ["flight_ops"],
+      "baseDurationS": 10,
+      "complexity": 1,
+      "location": "cabin",
+      "interruptible": false,
+      "preconditions": [
+        { "condition": "not @flight.docked", "reason": "docked" },
+        { "condition": "@tandem/adapter/structure.attached", "reason": "already_jettisoned" }
+      ],
+      "onSuccess": [
+        { "target": "vehicle.tandem.jettison", "operation": "set", "value": "'equipment_sep'" },
+        { "target": "thermal.tandem/thermal/adapter_bay.attached", "operation": "set", "value": "false" }
+      ]
+    },
+    {
+      "id": "retrofire",
+      "name": "Retrofire",
+      "kind": "procedure",
+      "skills": ["flight_ops"],
+      "baseDurationS": 30,
+      "complexity": 3,
+      "location": "cabin",
+      "interruptible": false,
+      // Attitude hold is not required: firing without it is legal and gives an off-axis burn (GDD 12.7).
+      "preconditions": [
+        { "condition": "not @flight.docked", "reason": "docked" },
+        { "condition": "not @tandem/adapter/structure.attached", "reason": "equipment_attached" },
+        { "condition": "@tandem/retro/structure.attached", "reason": "retro_jettisoned" },
+        { "condition": "not @tandem/retro/rocket_1.fired", "reason": "already_fired" }
+      ],
+      // flight.retrofire turns the capsule to retro attitude (when it has attitude control) and flies the staggered retro
+      // sequence; the session ignites the vehicle's rockets on that schedule (docs/dev/SESSION_EFFECTS_NEEDED.md hook 3).
+      "onSuccess": [
+        { "target": "flight.retrofire", "operation": "set", "value": "true" }
+      ]
+    },
+    {
+      "id": "jettison_retro",
+      "name": "Jettison the retro section",
+      "kind": "procedure",
+      "skills": ["flight_ops"],
+      "baseDurationS": 10,
+      "complexity": 1,
+      "location": "cabin",
+      "interruptible": false,
+      "preconditions": [
+        { "condition": "@tandem/retro/structure.attached", "reason": "already_jettisoned" },
+        { "condition": "@tandem/retro/rocket_4.fired and not @tandem/retro/rocket_1.burning and not @tandem/retro/rocket_2.burning and not @tandem/retro/rocket_3.burning and not @tandem/retro/rocket_4.burning", "reason": "retro_still_burning" }
+      ],
+      "onSuccess": [
+        { "target": "vehicle.tandem.jettison", "operation": "set", "value": "'retro_sep'" }
+      ]
+    },
+    {
+      "id": "deploy_drogue",
+      "name": "Deploy drogue parachute",
+      "kind": "operate",
+      "skills": ["flight_ops"],
+      "baseDurationS": 5,
+      "complexity": 1,
+      "location": "cabin",
+      "interruptible": false,
+      "preconditions": [
+        { "condition": "@tandem/chute/drogue.state == 'stowed'", "reason": "already_deployed" }
+      ],
+      // Flight decides whether the chute survives the deployment limits; the vehicle shows it deployed.
+      "onSuccess": [
+        { "target": "tandem/chute/drogue.state", "operation": "set", "value": "'deployed'" },
+        { "target": "flight.drogue_deployed", "operation": "set", "value": "true" }
+      ]
+    },
+    {
+      "id": "deploy_main",
+      "name": "Deploy main parachute",
+      "kind": "operate",
+      "skills": ["flight_ops"],
+      "baseDurationS": 5,
+      "complexity": 1,
+      "location": "cabin",
+      "interruptible": false,
+      "preconditions": [
+        { "condition": "@tandem/chute/main.state == 'stowed'", "reason": "already_deployed" }
+      ],
+      "onSuccess": [
+        { "target": "tandem/chute/main.state", "operation": "set", "value": "'deployed'" },
+        { "target": "flight.main_deployed", "operation": "set", "value": "true" }
+      ]
+    },
+    {
+      "id": "entry_checklist",
+      "name": "Entry checklist",
+      "kind": "procedure",
+      "skills": ["flight_ops"],
+      "baseDurationS": 120,
+      "complexity": 3,
+      "location": "cabin",
+      "interruptible": true,
+      "preconditions": [
+        { "condition": "not @flight.docked", "reason": "docked" }
+      ],
+      // Arms automatic deployment: the session deploys drogue and main at their nominal altitudes
+      // (docs/dev/SESSION_EFFECTS_NEEDED.md).
+      "onSuccess": [
+        { "target": "session.entry_checklist.armed", "operation": "set", "value": "true" }
+      ]
+    },
+    {
+      "id": "set_ration",
+      "name": "Set food and water rations",
+      "kind": "procedure",
+      "skills": ["life_support"],
+      "baseDurationS": 10,
+      "complexity": 1,
+      "location": "cabin",
+      "interruptible": true,
+      "parameters": [
+        { "name": "food_pct", "type": "number", "min": 0, "max": 100 },
+        { "name": "water_pct", "type": "number", "min": 0, "max": 100 }
+      ],
+      "onSuccess": [
+        { "target": "provisions.food_ration_pct", "operation": "set", "value": "{food_pct}" },
+        { "target": "provisions.water_ration_pct", "operation": "set", "value": "{water_pct}" }
+      ]
+    },
+    {
+      "id": "oams_burn",
+      "name": "OAMS translation burn",
+      "kind": "procedure",
+      "skills": ["flight_ops", "navigation"],
+      "baseDurationS": 20,
+      "complexity": 2,
+      "location": "cabin",
+      "interruptible": true,
+      "parameters": [
+        { "name": "direction_deg", "type": "number", "min": 0, "max": 360 },
+        { "name": "duration_s", "type": "number", "min": 0.5, "max": 120 }
+      ],
+      "preconditions": [
+        { "condition": "@tandem/oams/master.closed", "reason": "oams_off" }
+      ],
+      // Direction and duration are staged first; start=true then fires the burn with them.
+      "onSuccess": [
+        { "target": "session.burn.oams.direction_deg", "operation": "set", "value": "{direction_deg}" },
+        { "target": "session.burn.oams.duration_s", "operation": "set", "value": "{duration_s}" },
+        { "target": "session.burn.oams.start", "operation": "set", "value": "true" }
+      ]
+    }
+  ]
+}

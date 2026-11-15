@@ -1,0 +1,157 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Console/Regions/SystemsBoard.cs" id="1_systemsboard"]
+[ext_resource type="PackedScene" path="res://ui/console/components/AlarmRow.tscn" id="2_alarmrow"]
+[ext_resource type="PackedScene" path="res://ui/console/components/ReadoutGroup.tscn" id="3_readoutgroup"]
+[ext_resource type="PackedScene" path="res://ui/console/components/LoadRow.tscn" id="4_loadrow"]
+[ext_resource type="PackedScene" path="res://ui/console/components/RemoteControlRow.tscn" id="5_remotecontrolrow"]
+[ext_resource type="PackedScene" path="res://ui/console/components/PanelHeader.tscn" id="6_panelheader"]
+
+[node name="SystemsBoard" type="PanelContainer"]
+size_flags_vertical = 3
+script = ExtResource("1_systemsboard")
+AlarmRowScene = ExtResource("2_alarmrow")
+ReadoutGroupScene = ExtResource("3_readoutgroup")
+LoadRowScene = ExtResource("4_loadrow")
+ControlRowScene = ExtResource("5_remotecontrolrow")
+
+[node name="Layout" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Header" parent="Layout" instance=ExtResource("6_panelheader")]
+unique_name_in_owner = true
+layout_mode = 2
+Title = "Systems"
+Aside = "Power"
+
+[node name="Tabs" type="TabBar" parent="Layout"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 40)
+clip_tabs = true
+tab_count = 7
+tab_0/title = "Power"
+tab_1/title = "Life sup."
+tab_2/title = "Prop & att."
+tab_3/title = "Thermal"
+tab_4/title = "Nav"
+tab_5/title = "Structure"
+tab_6/title = "Inventory"
+
+[node name="Scroll" type="ScrollContainer" parent="Layout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Margin" type="MarginContainer" parent="Layout/Scroll"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+size_flags_horizontal = 3
+
+[node name="Content" type="VBoxContainer" parent="Layout/Scroll/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+size_flags_horizontal = 3
+
+[node name="Alarms" type="VBoxContainer" parent="Layout/Scroll/Margin/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+visible = false
+
+[node name="Groups" type="VBoxContainer" parent="Layout/Scroll/Margin/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="LegacyPanel" type="PanelContainer" parent="Layout/Scroll/Margin/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false
+theme_type_variation = &"Program2Panel"
+
+[node name="LegacyLayout" type="VBoxContainer" parent="Layout/Scroll/Margin/Content/LegacyPanel"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="LegacyHeader" parent="Layout/Scroll/Margin/Content/LegacyPanel/LegacyLayout" instance=ExtResource("6_panelheader")]
+unique_name_in_owner = true
+layout_mode = 2
+Title = "Thermal"
+Aside = "Program 2"
+Legacy = true
+
+[node name="LegacyMargin" type="MarginContainer" parent="Layout/Scroll/Margin/Content/LegacyPanel/LegacyLayout"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="LegacyBody" type="VBoxContainer" parent="Layout/Scroll/Margin/Content/LegacyPanel/LegacyLayout/LegacyMargin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LegacyGroups" type="VBoxContainer" parent="Layout/Scroll/Margin/Content/LegacyPanel/LegacyLayout/LegacyMargin/LegacyBody"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TapeLabel" type="Label" parent="Layout/Scroll/Margin/Content/LegacyPanel/LegacyLayout/LegacyMargin/LegacyBody"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"TapeLabel"
+text = "PANEL FROM PROGRAM 2, STILL WORKS"
+size_flags_horizontal = 0
+
+[node name="LoadsSection" type="VBoxContainer" parent="Layout/Scroll/Margin/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+visible = false
+
+[node name="LoadsCaption" type="Label" parent="Layout/Scroll/Margin/Content/LoadsSection"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"BadgeLabel"
+text = "Loads"
+uppercase = true
+
+[node name="Loads" type="VBoxContainer" parent="Layout/Scroll/Margin/Content/LoadsSection"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ControlsSection" type="VBoxContainer" parent="Layout/Scroll/Margin/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+visible = false
+
+[node name="ControlsHead" type="HBoxContainer" parent="Layout/Scroll/Margin/Content/ControlsSection"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ControlsCaption" type="Label" parent="Layout/Scroll/Margin/Content/ControlsSection/ControlsHead"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"BadgeLabel"
+text = "Remote controls"
+size_flags_horizontal = 3
+uppercase = true
+
+[node name="ControlsAside" type="Label" parent="Layout/Scroll/Margin/Content/ControlsSection/ControlsHead"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Ground"
+
+[node name="Controls" type="VBoxContainer" parent="Layout/Scroll/Margin/Content/ControlsSection"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8

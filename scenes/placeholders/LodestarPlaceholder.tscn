@@ -1,0 +1,294 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/Presentation/Spacecraft/Placeholders/PlaceholderPaletteMeshes.cs" id="1_palette"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.72
+bottom_radius = 0.5
+height = 0.45
+radial_segments = 48
+rings = 1
+cap_top = false
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2"]
+top_radius = 0.75
+bottom_radius = 0.75
+height = 0.035
+radial_segments = 48
+rings = 1
+cap_top = false
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_15"]
+top_radius = 0.75
+bottom_radius = 0.35
+height = 0.001
+radial_segments = 48
+rings = 1
+cap_top = false
+cap_bottom = false
+flip_faces = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_16"]
+top_radius = 0.7
+bottom_radius = 0.48
+height = 0.449
+radial_segments = 48
+rings = 1
+cap_top = false
+cap_bottom = false
+flip_faces = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_3"]
+size = Vector3(0.12, 0.06, 0.08)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4"]
+size = Vector3(0.14, 0.05, 0.08)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5"]
+size = Vector3(0.03, 0.2, 0.26)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6"]
+size = Vector3(0.02, 0.06, 0.05)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7"]
+top_radius = 0.575
+bottom_radius = 0.575
+height = 1.75
+radial_segments = 48
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8"]
+top_radius = 0.585
+bottom_radius = 0.585
+height = 0.16
+radial_segments = 48
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_9"]
+top_radius = 0.575
+bottom_radius = 0.575
+height = 2.8
+radial_segments = 48
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_10"]
+top_radius = 0.015
+bottom_radius = 0.015
+height = 0.5
+radial_segments = 12
+rings = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_11"]
+size = Vector3(0.16, 0.08, 0.14)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_12"]
+top_radius = 0.022
+bottom_radius = 0.0121
+height = 0.04
+radial_segments = 16
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_13"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.08
+radial_segments = 32
+rings = 1
+cap_top = false
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_14"]
+top_radius = 0.42
+bottom_radius = 0.231
+height = 0.6
+radial_segments = 16
+rings = 1
+cap_bottom = false
+
+[node name="Lodestar" type="Node3D"]
+script = ExtResource("1_palette")
+
+[node name="Lodestar_Root" type="Node3D" parent="."]
+
+[node name="Lodestar_DockingCone" type="Node3D" parent="Lodestar_Root"]
+metadata/component_id = "lodestar/docking_cone"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Cone" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_DockingCone"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -0.225, 0, 0)
+mesh = SubResource("CylinderMesh_1")
+metadata/placeholder_swatch = 8
+
+[node name="Cone_Lining" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_DockingCone"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -0.2255, 0, 0)
+mesh = SubResource("CylinderMesh_16")
+metadata/placeholder_swatch = 8
+
+[node name="Cone_Rim" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_DockingCone"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -0.0175, 0, 0)
+mesh = SubResource("CylinderMesh_2")
+metadata/placeholder_swatch = 5
+
+[node name="Mouth_Face" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_DockingCone"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -0.0005, 0, 0)
+mesh = SubResource("CylinderMesh_15")
+metadata/placeholder_swatch = 5
+
+[node name="Latch_Arm_1" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_DockingCone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.062, 0.77, 0)
+mesh = SubResource("BoxMesh_3")
+metadata/placeholder_swatch = 4
+
+[node name="Latch_Arm_2" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_DockingCone"]
+transform = Transform3D(1, 0, 0, 0, -0.5, 0.86603, 0, -0.86603, -0.5, -0.062, -0.385, -0.66684)
+mesh = SubResource("BoxMesh_3")
+metadata/placeholder_swatch = 4
+
+[node name="Latch_Arm_3" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_DockingCone"]
+transform = Transform3D(1, 0, 0, 0, -0.5, -0.86603, 0, 0.86603, -0.5, -0.062, -0.385, 0.66684)
+mesh = SubResource("BoxMesh_3")
+metadata/placeholder_swatch = 4
+
+[node name="Docking_Cone_Overstress" type="Node3D" parent="Lodestar_Root/Lodestar_DockingCone"]
+visible = false
+metadata/damage_variant = "overstress"
+metadata/damage_conditions = "overstress"
+
+[node name="Latch_Arm_Bent" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_DockingCone/Docking_Cone_Overstress"]
+transform = Transform3D(1, 0, 0, 0, -0.5, 0.86603, 0, -0.86603, -0.5, -0.02, -0.4125, -0.71447)
+mesh = SubResource("BoxMesh_4")
+metadata/placeholder_swatch = 30
+
+[node name="Lodestar_StatusPanel" type="Node3D" parent="Lodestar_Root"]
+metadata/component_id = "lodestar/status_panel"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Panel" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_StatusPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04, 0.88, 0)
+mesh = SubResource("BoxMesh_5")
+metadata/placeholder_swatch = 6
+
+[node name="Light_1" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_StatusPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02, 0.925, -0.065)
+mesh = SubResource("BoxMesh_6")
+metadata/placeholder_swatch = 9
+
+[node name="Light_2" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_StatusPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02, 0.925, 0.065)
+mesh = SubResource("BoxMesh_6")
+metadata/placeholder_swatch = 9
+
+[node name="Light_3" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_StatusPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02, 0.835, -0.065)
+mesh = SubResource("BoxMesh_6")
+metadata/placeholder_swatch = 9
+
+[node name="Light_4" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_StatusPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02, 0.835, 0.065)
+mesh = SubResource("BoxMesh_6")
+metadata/placeholder_swatch = 9
+
+[node name="Lodestar_ForwardBody" type="Node3D" parent="Lodestar_Root"]
+metadata/component_id = "lodestar/forward_body"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Body" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_ForwardBody"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -1.325, 0, 0)
+mesh = SubResource("CylinderMesh_7")
+metadata/placeholder_swatch = 26
+
+[node name="Band" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_ForwardBody"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -1, 0, 0)
+mesh = SubResource("CylinderMesh_8")
+metadata/placeholder_swatch = 27
+
+[node name="Lodestar_AftBody" type="Node3D" parent="Lodestar_Root"]
+metadata/component_id = "lodestar/aft_body"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Body" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_AftBody"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -3.6, 0, 0)
+mesh = SubResource("CylinderMesh_9")
+metadata/placeholder_swatch = 26
+
+[node name="Band" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_AftBody"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -3.6, 0, 0)
+mesh = SubResource("CylinderMesh_8")
+metadata/placeholder_swatch = 27
+
+[node name="Antenna_1" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_AftBody"]
+transform = Transform3D(-1, 0, 0, 0, 0.70711, -0.70711, 0, -0.70711, -0.70711, -2.6, 0.58336, -0.58336)
+mesh = SubResource("CylinderMesh_10")
+metadata/placeholder_swatch = 8
+
+[node name="Antenna_2" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_AftBody"]
+transform = Transform3D(1, 0, 0, 0, -0.70711, -0.70711, 0, 0.70711, -0.70711, -2.6, -0.58336, 0.58336)
+mesh = SubResource("CylinderMesh_10")
+metadata/placeholder_swatch = 8
+
+[node name="Lodestar_ACS" type="Node3D" parent="Lodestar_Root"]
+metadata/component_id = "lodestar/acs"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Cluster_1" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_ACS"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, -4.8, 0, -0.615)
+mesh = SubResource("BoxMesh_11")
+metadata/placeholder_swatch = 6
+
+[node name="Nozzle_t01" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_ACS"]
+transform = Transform3D(0, 0, 1, 0, -1, 0, 1, 0, 0, -4.8, -0.06, -0.62)
+mesh = SubResource("CylinderMesh_12")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_lodestar_acs_t01" type="Marker3D" parent="Lodestar_Root/Lodestar_ACS"]
+transform = Transform3D(0, 0, -1, -1, 0, 0, 0, 1, 0, -4.8, -0.08, -0.62)
+metadata/socket_for = "lodestar/acs/t01"
+
+[node name="Nozzle_t02" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_ACS"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -4.8, 0.06, -0.62)
+mesh = SubResource("CylinderMesh_12")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_lodestar_acs_t02" type="Marker3D" parent="Lodestar_Root/Lodestar_ACS"]
+transform = Transform3D(0, 0, -1, 1, 0, 0, 0, -1, 0, -4.8, 0.08, -0.62)
+metadata/socket_for = "lodestar/acs/t02"
+
+[node name="Cluster_2" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_ACS"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -4.8, 0, 0.615)
+mesh = SubResource("BoxMesh_11")
+metadata/placeholder_swatch = 6
+
+[node name="Nozzle_t03" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_ACS"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -4.8, 0.06, 0.62)
+mesh = SubResource("CylinderMesh_12")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_lodestar_acs_t03" type="Marker3D" parent="Lodestar_Root/Lodestar_ACS"]
+transform = Transform3D(0, 0, -1, 1, 0, 0, 0, -1, 0, -4.8, 0.08, 0.62)
+metadata/socket_for = "lodestar/acs/t03"
+
+[node name="Nozzle_t04" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_ACS"]
+transform = Transform3D(0, 0, 1, 0, -1, 0, 1, 0, 0, -4.8, -0.06, 0.62)
+mesh = SubResource("CylinderMesh_12")
+metadata/placeholder_swatch = 24
+
+[node name="Socket_lodestar_acs_t04" type="Marker3D" parent="Lodestar_Root/Lodestar_ACS"]
+transform = Transform3D(0, 0, -1, -1, 0, 0, 0, 1, 0, -4.8, -0.08, 0.62)
+metadata/socket_for = "lodestar/acs/t04"
+
+[node name="Lodestar_Engine" type="Node3D" parent="Lodestar_Root"]
+metadata/component_id = "lodestar/engine"
+metadata/usa_unknown_override = "res://assets/materials/component_unknown.tres"
+
+[node name="Gimbal_Collar" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_Engine"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -5.04, 0, 0)
+mesh = SubResource("CylinderMesh_13")
+metadata/placeholder_swatch = 6
+
+[node name="Bell" type="MeshInstance3D" parent="Lodestar_Root/Lodestar_Engine"]
+transform = Transform3D(0, -1, 0, 0, 0, -1, 1, 0, 0, -5.3, 0, 0)
+mesh = SubResource("CylinderMesh_14")
+metadata/placeholder_swatch = 8
+
+[node name="Socket_lodestar_engine" type="Marker3D" parent="Lodestar_Root/Lodestar_Engine"]
+transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, 1, 0, -5.6, 0, 0)
+metadata/socket_for = "lodestar/engine"

@@ -1,0 +1,66 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/Presentation/Spacecraft/RecoveryDressing.cs" id="1_dressing"]
+[ext_resource type="Material" path="res://assets/materials/ocean.tres" id="2_ocean"]
+[ext_resource type="PackedScene" path="res://assets/models/environment/albatross.glb" id="3_ship"]
+[ext_resource type="PackedScene" path="res://assets/models/environment/helicopter.glb" id="4_heli"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sea"]
+sky_top_color = Color(0.36, 0.55, 0.78, 1)
+sky_horizon_color = Color(0.74, 0.82, 0.9, 1)
+sky_curve = 0.12
+ground_bottom_color = Color(0.74, 0.82, 0.9, 1)
+ground_horizon_color = Color(0.74, 0.82, 0.9, 1)
+sun_angle_max = 20.0
+sun_curve = 0.1
+
+[sub_resource type="Sky" id="Sky_sea"]
+sky_material = SubResource("ProceduralSkyMaterial_sea")
+
+[sub_resource type="Environment" id="Environment_sea"]
+background_mode = 2
+sky = SubResource("Sky_sea")
+ambient_light_source = 3
+ambient_light_energy = 0.6
+reflected_light_source = 2
+tonemap_mode = 2
+tonemap_exposure = 1.1
+tonemap_white = 4.0
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.74, 0.82, 0.9, 1)
+fog_density = 1.0
+fog_sky_affect = 0.0
+fog_depth_begin = 100.0
+fog_depth_end = 200.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ocean"]
+size = Vector2(400, 400)
+subdivide_width = 31
+subdivide_depth = 31
+
+[node name="Recovery" type="Node3D" node_paths=PackedStringArray("Ship", "Helicopter")]
+visible = false
+script = ExtResource("1_dressing")
+Ship = NodePath("Albatross")
+Helicopter = NodePath("Helicopter")
+SeaEnvironment = SubResource("Environment_sea")
+
+[node name="Ocean" type="MeshInstance3D" parent="."]
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_ocean")
+material_override = ExtResource("2_ocean")
+
+[node name="Albatross" parent="." instance=ExtResource("3_ship")]
+transform = Transform3D(-0.57358, 0, -0.81915, 0, 1, 0, 0.81915, 0, -0.57358, -51.6, 0, -73.7)
+
+[node name="Helicopter" parent="." instance=ExtResource("4_heli")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 14, 0)
+
+[node name="SeaSun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.60691, 0.57301, -0.55074, 0, 0.69296, 0.72097, 0.79477, -0.43757, 0.42057, 0, 0, 0)
+light_color = Color(1, 0.96, 0.9, 1)
+light_energy = 1.3
+shadow_enabled = true
+shadow_blur = 1.5
+directional_shadow_max_distance = 80.0

@@ -1,0 +1,66 @@
+{
+  "schema": "mission_flight/1",
+  "body": "earth",
+  "startOrbit": {
+    "periapsisKm": 290,
+    "apoapsisKm": 305,
+    "argPeriapsisDeg": 40,
+    "trueAnomalyDeg": 120,
+    "direction": "prograde"
+  },
+  "vehicles": [
+    { "id": "tandem", "role": "crewed" },
+    { "id": "lodestar", "role": "target", "leadM": 50 }
+  ],
+  "dockingPair": ["tandem", "lodestar"],
+  "undockSeparationSpeedMps": 0.3,
+  "earthRotationAngleAtMetZeroDeg": 0,
+  "recoveryZones": [
+    { "id": "primary_atlantic", "westLongitudeDeg": -75, "eastLongitudeDeg": -55, "waitHours": 0.5 },
+    { "id": "secondary_west_pacific", "westLongitudeDeg": 125, "eastLongitudeDeg": 145, "waitHours": 3 },
+    { "id": "contingency_indian", "westLongitudeDeg": 60, "eastLongitudeDeg": 80, "waitHours": 12 }
+  ],
+  "outsideZonesWaitHours": 18,
+  "entryCorridor": {
+    "interfaceAltitudeM": 120000,
+    "steepestFlightPathAngleDeg": -2.5,
+    "shallowestFlightPathAngleDeg": -1.0
+  },
+  "capsule": {
+    "ballisticCoefficientKgPerM2": 370,
+    "drogue": {
+      "ballisticCoefficientKgPerM2": 60,
+      "nominalDeployAltitudeM": 15000,
+      "maxDeployAltitudeM": 21000,
+      "maxDeploySpeedMps": 320
+    },
+    "main": {
+      "ballisticCoefficientKgPerM2": 5,
+      "nominalDeployAltitudeM": 3200,
+      "maxDeployAltitudeM": 5000,
+      "maxDeploySpeedMps": 90
+    }
+  },
+  // Tandem's retro rockets in firing order; thrust, burn time, propellant and ignition offsets are in vehicles/tandem.json.
+  "retroRockets": ["tandem/retro/rocket_1", "tandem/retro/rocket_2", "tandem/retro/rocket_3", "tandem/retro/rocket_4"],
+  "planning": {
+    "previewHorizonS": 10800,
+    "zoneScanStepS": 60,
+    "zoneSearchWindowOrbits": 1.2,
+    "maxBurnDurationS": 600,
+    "startTimeToleranceS": 1
+  },
+  // X8 ground tracking: radar stations by longitude on the rim; a pass counts above the minimum elevation.
+  "tracking": {
+    "minElevationDeg": 5,
+    "stations": [
+      { "id": "east_pacific", "longitudeDeg": -120 },
+      { "id": "caribbean", "longitudeDeg": -80 },
+      { "id": "canary_atlantic", "longitudeDeg": -15 },
+      { "id": "east_africa", "longitudeDeg": 35 },
+      { "id": "indian_ocean", "longitudeDeg": 75 },
+      { "id": "west_australia", "longitudeDeg": 115 },
+      { "id": "pacific_island", "longitudeDeg": 160 }
+    ]
+  }
+}

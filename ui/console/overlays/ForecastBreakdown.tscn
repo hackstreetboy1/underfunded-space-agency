@@ -1,0 +1,87 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Console/Overlays/ForecastBreakdownPopup.cs" id="1_breakdown"]
+[ext_resource type="PackedScene" path="res://ui/console/components/Badge.tscn" id="2_badge"]
+
+[node name="ForecastBreakdown" type="PopupPanel"]
+size = Vector2i(400, 320)
+script = ExtResource("1_breakdown")
+
+[node name="Margin" type="MarginContainer" parent="."]
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 12
+
+[node name="Rows" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+custom_minimum_size = Vector2(368, 0)
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"PanelHeaderTitle"
+text = "Forecast breakdown"
+uppercase = true
+
+[node name="Headline" type="Label" parent="Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(368, 0)
+text = "Safe autonomy ≈ 7.5–9 h · Limit: re-entry battery · Confidence: medium"
+autowrap_mode = 3
+
+[node name="ComputedAt" type="Label" parent="Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Computed MET 06:58"
+
+[node name="Confidence" type="Label" parent="Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(368, 0)
+theme_type_variation = &"Small"
+text = "Confidence: medium (fuel cell 2 output not checked)"
+autowrap_mode = 3
+
+[node name="CoverageRow" type="HBoxContainer" parent="Margin/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Coverage" parent="Margin/Rows/CoverageRow" instance=ExtResource("2_badge")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CoverageText" type="Label" parent="Margin/Rows/CoverageRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"Small"
+text = "Covers the planned return."
+autowrap_mode = 3
+
+[node name="ResourceRows" type="VBoxContainer" parent="Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="AssumptionsCaption" type="Label" parent="Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"BadgeLabel"
+text = "Assumptions"
+uppercase = true
+
+[node name="Assumptions" type="VBoxContainer" parent="Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Close" type="Button" parent="Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+custom_minimum_size = Vector2(0, 32)
+text = "Close"

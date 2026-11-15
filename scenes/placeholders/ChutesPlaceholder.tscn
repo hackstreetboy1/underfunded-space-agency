@@ -1,0 +1,62 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/Presentation/Spacecraft/Placeholders/PlaceholderPaletteMeshes.cs" id="1_palette"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.9
+height = 1.8
+radial_segments = 24
+rings = 8
+is_hemisphere = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2"]
+top_radius = 0.02
+bottom_radius = 0.02
+height = 5
+radial_segments = 12
+rings = 1
+
+[sub_resource type="SphereMesh" id="SphereMesh_3"]
+radius = 3.2
+height = 6.4
+radial_segments = 24
+rings = 8
+is_hemisphere = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4"]
+top_radius = 0.02
+bottom_radius = 0.02
+height = 11
+radial_segments = 12
+rings = 1
+
+[node name="Chutes" type="Node3D"]
+script = ExtResource("1_palette")
+
+[node name="Drogue" type="Node3D" parent="."]
+visible = false
+metadata/chute_for = "tandem/chute/drogue"
+
+[node name="Canopy" type="MeshInstance3D" parent="Drogue"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, 5, 0, 0)
+mesh = SubResource("SphereMesh_1")
+metadata/placeholder_swatch = 32
+
+[node name="Riser" type="MeshInstance3D" parent="Drogue"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, 2.5, 0, 0)
+mesh = SubResource("CylinderMesh_2")
+metadata/placeholder_swatch = 36
+
+[node name="Main" type="Node3D" parent="."]
+visible = false
+metadata/chute_for = "tandem/chute/main"
+
+[node name="Canopy" type="MeshInstance3D" parent="Main"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, 11, 0, 0)
+mesh = SubResource("SphereMesh_3")
+metadata/placeholder_swatch = 31
+
+[node name="Riser" type="MeshInstance3D" parent="Main"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, 5.5, 0, 0)
+mesh = SubResource("CylinderMesh_4")
+metadata/placeholder_swatch = 36

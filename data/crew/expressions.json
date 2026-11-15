@@ -1,0 +1,37 @@
+{
+  "schema": "expressions/1",
+  "notes": "Face expression presets for the comm feed (MODELING 4.4). Each preset sets shape-key weights 0..1; keys left out are 0. Neutral must stay all 0 (the approved face). Values are the combinations used in the gate-2 review (REVIEW_MODELS G2-03). blink, mouth_open and mouth_o are also driven by the blink timer and lip-flap on top of these.",
+  "presets": {
+    "neutral": {},
+    "focused": {
+      "brow_down": 0.55,
+      "eyes_squint": 0.2,
+      "mouth_flat": 0.85
+    },
+    "concerned": {
+      "brow_worry": 1.0,
+      "mouth_frown": 0.9
+    },
+    "strained": {
+      "brow_down": 0.8,
+      "eyes_squint": 0.85,
+      "mouth_frown": 0.45,
+      "mouth_flat": 0.4
+    },
+    "alarmed": {
+      "eyes_wide": 1.0,
+      "brow_up": 1.0,
+      "mouth_o": 0.9
+    },
+    "relieved": {
+      "mouth_smile_big": 1.0,
+      "brow_up": 0.35,
+      "eyes_squint": 0.25
+    },
+    "impaired": {
+      "blink": 0.8,
+      "mouth_flat": 0.5,
+      "brow_worry": 0.3
+    }
+  }
+}

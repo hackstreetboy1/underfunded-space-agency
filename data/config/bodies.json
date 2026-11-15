@@ -1,0 +1,40 @@
+{
+  "schema": "bodies/1",
+  "bodies": [
+    {
+      "id": "earth",
+      "muM3PerS2": 3.986004418e14,
+      "radiusM": 6371000,
+      "soiRadiusM": null,
+      "rotationRateRadPerS": 7.2921159e-5,
+      "atmosphere": {
+        "scaleHeightM": 7200,
+        "seaLevelDensityKgPerM3": 1.225,
+        "interfaceAltitudeM": 120000,
+        "upperAtmosphere": {
+          "baseAltitudeM": 120000,
+          "baseDensityKgPerM3": 2.2e-8,
+          "scaleHeightM": 50000,
+          "layers": [
+            { "baseAltitudeM": 190000, "scaleHeightM": 17000 }
+          ]
+        }
+      },
+      "orbit": null
+    },
+    {
+      "id": "moon",
+      "muM3PerS2": 4.9048695e12,
+      "radiusM": 1737400,
+      "soiRadiusM": 66100000,
+      "rotationRateRadPerS": 2.6617e-6,
+      "atmosphere": null,
+      "orbit": {
+        "parent": "earth",
+        "radiusM": 384400000,
+        "phaseAtMetZeroDeg": 0,
+        "direction": "prograde"
+      }
+    }
+  ]
+}

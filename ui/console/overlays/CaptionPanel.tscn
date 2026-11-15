@@ -1,0 +1,27 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Console/Overlays/CaptionPanel.cs" id="1_captionpanel"]
+
+[node name="CaptionPanel" type="PanelContainer"]
+mouse_filter = 2
+script = ExtResource("1_captionpanel")
+
+[node name="Rows" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Speaker" type="Label" parent="Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Caption"
+text = "Brandt"
+uppercase = true
+horizontal_alignment = 1
+
+[node name="Text" type="Label" parent="Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Caption"
+text = "Roll's still building. Thirty-eight a second."
+horizontal_alignment = 1
+autowrap_mode = 3

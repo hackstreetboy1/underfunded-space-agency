@@ -1,0 +1,44 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Console/Components/RemoteControl.cs" id="1_remotecontrol"]
+[ext_resource type="PackedScene" path="res://ui/console/components/GuardedSwitch.tscn" id="2_guardedswitch"]
+
+[node name="RemoteControl" type="HBoxContainer"]
+theme_override_constants/separation = 8
+alignment = 2
+script = ExtResource("1_remotecontrol")
+
+[node name="CrewState" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "UNKNOWN"
+visible = false
+vertical_alignment = 1
+
+[node name="Toggle" type="CheckButton" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+text = "OFF"
+
+[node name="Guarded" parent="." instance=ExtResource("2_guardedswitch")]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false
+
+[node name="Action" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Activate"
+visible = false
+size_flags_vertical = 4
+custom_minimum_size = Vector2(0, 32)
+
+[node name="Request" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Request…"
+visible = false
+size_flags_vertical = 4
+custom_minimum_size = Vector2(96, 32)

@@ -1,0 +1,36 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Console/Components/VirtualLogList.cs" id="1_virtuallog"]
+[ext_resource type="PackedScene" path="res://ui/console/components/EventLogRow.tscn" id="2_eventlogrow"]
+
+[node name="VirtualLogList" type="Control"]
+custom_minimum_size = Vector2(0, 56)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+clip_contents = true
+script = ExtResource("1_virtuallog")
+RowScene = ExtResource("2_eventlogrow")
+
+[node name="Rows" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+clip_contents = true
+mouse_filter = 2
+
+[node name="Bar" type="VScrollBar" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10.0
+grow_horizontal = 0
+grow_vertical = 2
+visible = false

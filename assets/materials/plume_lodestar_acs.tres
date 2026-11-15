@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://assets/shaders/thruster_plume.gdshader" id="1_shader"]
+
+[resource]
+resource_name = "Plume_Lodestar_ACS"
+shader = ExtResource("1_shader")
+shader_parameter/core_color = Color(1, 1, 1, 1)
+shader_parameter/outer_color = Color(0.82, 0.88, 1, 1)
+shader_parameter/energy = 0.55
+shader_parameter/length_m = 0.45
+shader_parameter/exit_radius_m = 0.016
+shader_parameter/end_radius_m = 0.08
+shader_parameter/core_tightness = 4.0
+shader_parameter/core_boost = 0.4
+shader_parameter/edge_softness = 1.8
+shader_parameter/tail_falloff = 1.7
+shader_parameter/nozzle_fade = 0.06
+shader_parameter/flicker_hz = 24.0
+shader_parameter/flicker_amount = 0.3
+shader_parameter/length_flicker = 0.1

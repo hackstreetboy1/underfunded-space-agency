@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://assets/shaders/thruster_plume.gdshader" id="1_shader"]
+
+[resource]
+resource_name = "Plume_Retro"
+shader = ExtResource("1_shader")
+shader_parameter/core_color = Color(1, 0.93, 0.8, 1)
+shader_parameter/outer_color = Color(1, 0.52, 0.16, 1)
+shader_parameter/energy = 0.8
+shader_parameter/length_m = 1.2
+shader_parameter/exit_radius_m = 0.1
+shader_parameter/end_radius_m = 0.4
+shader_parameter/core_tightness = 3.0
+shader_parameter/core_boost = 0.5
+shader_parameter/edge_softness = 1.0
+shader_parameter/tail_falloff = 1.0
+shader_parameter/nozzle_fade = 0.06
+shader_parameter/flicker_hz = 20.0
+shader_parameter/flicker_amount = 0.25
+shader_parameter/length_flicker = 0.08

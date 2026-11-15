@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://assets/shaders/thruster_plume.gdshader" id="1_shader"]
+
+[resource]
+resource_name = "Plume_OAMS_Stuck"
+shader = ExtResource("1_shader")
+shader_parameter/core_color = Color(1, 0.72, 0.42, 1)
+shader_parameter/outer_color = Color(0.95, 0.86, 0.78, 1)
+shader_parameter/energy = 0.75
+shader_parameter/length_m = 0.75
+shader_parameter/exit_radius_m = 0.024
+shader_parameter/end_radius_m = 0.13
+shader_parameter/core_tightness = 3.5
+shader_parameter/core_boost = 0.5
+shader_parameter/edge_softness = 1.4
+shader_parameter/tail_falloff = 1.4
+shader_parameter/nozzle_fade = 0.06
+shader_parameter/flicker_hz = 18.0
+shader_parameter/flicker_amount = 0.2
+shader_parameter/length_flicker = 0.08

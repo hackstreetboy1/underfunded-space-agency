@@ -1,0 +1,195 @@
+{
+  "schema": "nasa_selection/1",
+  "items": [
+    {
+      "key": "epic:epic_1b_20261112162053",
+      "status": "approved",
+      "touchpoint": "art_reference",
+      "era": "modern_reference",
+      "displayCaption": null,
+      "rightsCleared": false,
+      "reviewedBy": "content pipeline (art reference, not shipped)",
+      "notes": "Reference for the stylized Earth texture (Phase 4); stays out of the shipped package."
+    },
+    {
+      "key": "epic:epic_1b_20261112053238",
+      "status": "approved",
+      "touchpoint": "art_reference",
+      "era": "modern_reference",
+      "displayCaption": null,
+      "rightsCleared": false,
+      "reviewedBy": "content pipeline (art reference, not shipped)",
+      "notes": "Reference for the stylized Earth texture (Phase 4); stays out of the shipped package."
+    },
+    {
+      "key": "image_library:S66-24465",
+      "status": "approved",
+      "touchpoint": "briefing",
+      "era": "historical",
+      "displayCaption": "A two-person capsule lifts off on a converted military rocket, 1966.",
+      "rightsCleared": false,
+      "reviewedBy": "content curation, Gate 6 proposal (awaiting user approval)",
+      "notes": "briefing slot img_launch"
+    },
+    {
+      "key": "image_library:S66-25781",
+      "status": "approved",
+      "touchpoint": "briefing",
+      "era": "historical",
+      "displayCaption": "An uncrewed docking target seen from an approaching capsule, 1966. Until that year, no two spacecraft had ever been joined in orbit.",
+      "rightsCleared": false,
+      "reviewedBy": "content curation, Gate 6 proposal (awaiting user approval)",
+      "notes": "briefing slot img_docking; debrief real-history card"
+    },
+    {
+      "key": "image_library:S66-34126",
+      "status": "approved",
+      "touchpoint": "briefing",
+      "era": "historical",
+      "displayCaption": "A two-seat orbital capsule after splashdown, 1966, with both hatches open. Each crew member had a hatch overhead and roughly the room of a small car's front seat.",
+      "rightsCleared": false,
+      "reviewedBy": "content curation, Gate 6 proposal (awaiting user approval)",
+      "notes": "briefing slot img_capsule"
+    },
+    {
+      "key": "image_library:s65-18645",
+      "status": "approved",
+      "touchpoint": "briefing",
+      "era": "historical",
+      "displayCaption": "Swimmers secure a floating capsule for recovery after splashdown, mid-1960s.",
+      "rightsCleared": false,
+      "reviewedBy": "content curation, Gate 6 proposal (awaiting user approval)",
+      "notes": "briefing slot img_recovery"
+    },
+    {
+      "key": "image_library:s66-18613",
+      "status": "approved",
+      "touchpoint": "debrief",
+      "era": "historical",
+      "displayCaption": "After the emergency return in March 1966, the capsule is hoisted aboard a navy destroyer in the western Pacific with its crew still inside.",
+      "rightsCleared": false,
+      "reviewedBy": "content curation, Gate 6 proposal (awaiting user approval)",
+      "notes": "debrief real-history card (alternative to img_docking)"
+    },
+    {
+      "key": "image_library:s64-03506",
+      "status": "approved",
+      "touchpoint": "encyclopedia",
+      "era": "historical",
+      "displayCaption": "A 1964 planning diagram: firing different combinations of the re-entry thrusters turns the capsule in yaw, roll or pitch.",
+      "rightsCleared": false,
+      "reviewedBy": "content curation, Gate 6 proposal (awaiting user approval)",
+      "notes": "encyclopedia entry rcs"
+    },
+    {
+      "key": "image_library:s64-03507",
+      "status": "approved",
+      "touchpoint": "encyclopedia",
+      "era": "historical",
+      "displayCaption": "A 1964 planning diagram of how the capsule responds to its orbital attitude thrusters: each combination of firings produces pitch, roll or yaw.",
+      "rightsCleared": false,
+      "reviewedBy": "content curation, Gate 6 proposal (awaiting user approval)",
+      "notes": "encyclopedia entries oams, roll_pitch_yaw"
+    },
+    {
+      "key": "image_library:S66-54555",
+      "status": "approved",
+      "touchpoint": "encyclopedia",
+      "era": "historical",
+      "displayCaption": "A capsule docked to its target vehicle, photographed from the capsule's open hatch during a spacewalk, 1966.",
+      "rightsCleared": false,
+      "reviewedBy": "content curation, Gate 6 proposal (awaiting user approval)",
+      "notes": "encyclopedia entry docking"
+    },
+    {
+      "key": "image_library:s66-22686",
+      "status": "approved",
+      "touchpoint": "encyclopedia",
+      "era": "historical",
+      "displayCaption": "A full-size mock-up of a capsule's equipment section, 1966. Fuel cells, the main oxygen supply and the maneuvering thrusters all had to fit inside it.",
+      "rightsCleared": false,
+      "reviewedBy": "content curation, Gate 6 proposal (awaiting user approval)",
+      "notes": "encyclopedia entries fuel_cells, electrical_buses"
+    },
+    {
+      "key": "image_library:s65-05398",
+      "status": "rejected",
+      "touchpoint": "encyclopedia",
+      "era": "historical",
+      "displayCaption": "A 1965 chart of the landing sequence: a small drogue chute at high altitude, then the main parachute, then release after splashdown.",
+      "rightsCleared": false,
+      "reviewedBy": "content curation, Gate 6 proposal (awaiting user approval)",
+      "notes": "encyclopedia entry parachutes; rejected: the chart's printed title names the real program"
+    },
+    {
+      "key": "image_library:S63-16250",
+      "status": "approved",
+      "touchpoint": "encyclopedia",
+      "era": "historical",
+      "displayCaption": "A technician cleans the metal frame of a capsule heat shield, 1963.",
+      "rightsCleared": false,
+      "reviewedBy": "content curation, Gate 6 proposal (awaiting user approval)",
+      "notes": "encyclopedia entry heat_shield"
+    },
+    {
+      "key": "image_library:S65-18695",
+      "status": "approved",
+      "touchpoint": "encyclopedia",
+      "era": "historical",
+      "displayCaption": "The cockpit of a two-seat orbital capsule, 1965: every switch and gauge within arm's reach of a seated crew.",
+      "rightsCleared": false,
+      "reviewedBy": "content curation, Gate 6 proposal (awaiting user approval)",
+      "notes": "encyclopedia entry cabin_atmosphere"
+    },
+    {
+      "key": "image_library:s65-45280",
+      "status": "approved",
+      "touchpoint": "encyclopedia",
+      "era": "historical",
+      "displayCaption": "The flight control room during a 1965 flight. The wall map at the front tracked the spacecraft around the world.",
+      "rightsCleared": false,
+      "reviewedBy": "content curation, Gate 6 proposal (awaiting user approval)",
+      "notes": "encyclopedia entry mission_control_capcom"
+    },
+    {
+      "key": "image_library:s65-65257",
+      "status": "approved",
+      "touchpoint": "encyclopedia",
+      "era": "historical",
+      "displayCaption": "Sunrise over Earth's curved horizon, photographed by a crew during a two-week orbital flight in December 1965.",
+      "rightsCleared": false,
+      "reviewedBy": "content curation, Gate 6 proposal (awaiting user approval)",
+      "notes": "encyclopedia entry orbit"
+    },
+    {
+      "key": "image_library:s66-54530",
+      "status": "approved",
+      "touchpoint": "encyclopedia",
+      "era": "historical",
+      "displayCaption": "The Nile Valley seen from a capsule about 550 kilometres above Earth, 1966, on a flight that tested a much higher orbit.",
+      "rightsCleared": false,
+      "reviewedBy": "content curation, Gate 6 proposal (awaiting user approval)",
+      "notes": "encyclopedia entry periapsis_apoapsis"
+    },
+    {
+      "key": "image_library:s66-34101",
+      "status": "approved",
+      "touchpoint": "encyclopedia",
+      "era": "historical",
+      "displayCaption": "An aircraft carrier hoists a capsule aboard with its crew still inside, 1966. It had splashed down about 6 kilometres from the ship.",
+      "rightsCleared": false,
+      "reviewedBy": "content curation, Gate 6 proposal (awaiting user approval)",
+      "notes": "encyclopedia entry recovery_zones"
+    },
+    {
+      "key": "epic:epic_1b_20261112143251",
+      "status": "approved",
+      "touchpoint": "main_menu",
+      "era": "modern_reference",
+      "displayCaption": "The whole sunlit Earth over the Atlantic, photographed from about one and a half million kilometres away.",
+      "rightsCleared": false,
+      "reviewedBy": "content curation, Gate 6 proposal (awaiting user approval)",
+      "notes": "main-menu backdrop (stand-in while the APOD step is blocked by HTTP 500)"
+    }
+  ]
+}

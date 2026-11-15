@@ -1,0 +1,39 @@
+{
+  "schema": "life_support/1",
+  "metabolic": {
+    "o2KgPerDayAtRest": 0.72,
+    "co2KgPerDayAtRest": 0.91,
+    "heatWAtRest": 100,
+    "activities": [
+      { "activity": "rest", "o2Multiplier": 1.0, "co2Multiplier": 1.0, "heatMultiplier": 1.0 },
+      { "activity": "nominal", "o2Multiplier": 1.139, "co2Multiplier": 1.143, "heatMultiplier": 1.15 },
+      { "activity": "work", "o2Multiplier": 1.5, "co2Multiplier": 1.55, "heatMultiplier": 1.6 },
+      { "activity": "eva", "o2Multiplier": 2.2, "co2Multiplier": 2.3, "heatMultiplier": 2.4 }
+    ]
+  },
+  "regulator": {
+    "ppO2SetpointMmhg": 255,
+    "maxFlowKgPerHour": 0.6
+  },
+  "scrubber": {
+    "efficiency": 0.9,
+    "breakthroughFraction": 0.3,
+    "passiveAirflowFraction": 0.05
+  },
+  "rations": {
+    "referenceKcalPerDay": 3035,
+    "referenceHydrationLPerDay": 2.5,
+    "hygieneLPerDay": 0.4,
+    "foodTiersPct": [100, 90, 75, 60],
+    "hydrationTiersPct": [100, 90, 80, 70]
+  },
+  "deficits": {
+    "nutrition": { "accumulationFactor": 1.0, "recoveryKcalPerDay": 600, "recoveryDelayS": 7200 },
+    "hydration": { "accumulationFactor": 1.0, "recoveryLPerDay": 0.75, "recoveryDelayS": 3600 }
+  },
+  "thermal": {
+    "defaultSinkTempK": 250,
+    "stabilityFraction": 0.25,
+    "maxSubsteps": 200
+  }
+}

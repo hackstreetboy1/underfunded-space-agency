@@ -1,0 +1,45 @@
+{
+  "schema": "mission_session/1",
+  // Engines the session fires on command; each is served as session.burn.<id>.* (docs/dev/STATE_PATHS.md).
+  "burns": [
+    // Task oams_burn: Tandem's ungrouped OAMS thrusters along +X (direction_deg, duration_s, start).
+    { "id": "oams", "kind": "translation", "vehicle": "tandem" },
+    // Remote action lodestar_burn: Lodestar's main engine, docked only (duration_s, docked_dv_mps).
+    { "id": "lodestar", "kind": "docked_main_engine", "vehicle": "lodestar", "engine": "lodestar/engine" }
+  ],
+  // The armed entry checklist applies these tasks' success effects at the nominal chute altitudes.
+  "entryChecklist": { "drogueTask": "deploy_drogue", "mainTask": "deploy_main" },
+  // Time compression treats these tasks as docking activity.
+  "dockingTasks": ["dock", "undock"],
+  "record": {
+    // A scenario-caused adapter overload (o2_docked_burn feasibility) is not held against the crew.
+    "dockingDamageRule": "docking_adapter_damaged",
+    // The equipment section should be gone before retrofire.
+    "stagingBeforeRetrofireEvent": "equipment_sep"
+  },
+  // Host time compression (never affects a run): the calm opening lasts until the T8 short; these events hold real time
+  // for a moment after they fire (flight's own predictions of burns, entry and chutes need no listing).
+  "pacing": {
+    "calmOpening": { "phases": ["docking_ops", "docked_ops"], "untilEvent": "incident_i1" },
+    "decisiveEvents": ["docked", "undocked", "retrofire", "entry_interface", "drogue", "main", "splashdown"]
+  },
+  // X8: during entry the accelerometer and the cabin altimeter (valid at or below 30 km) downlink precise readings each second.
+  "telemetry": {
+    "active": "@mission.phase == 'entry'",
+    "channels": [
+      { "fact": "entry.g_load", "path": "tandem/rm/accelerometer.reading" },
+      { "fact": "entry.altitude_km", "path": "tandem/rm/cabin_altimeter.reading", "validMax": 30 }
+    ]
+  },
+  // Scenario runner balance report only; never affects a run.
+  "report": {
+    "incidentEvent": "incident_i1",
+    "samples": [
+      { "label": "OAMS", "path": "tandem/oams/tank.quantity_kg", "unit": "kg" },
+      { "label": "RCS-A", "path": "tandem/rcs/tank_a.quantity_kg", "unit": "kg" },
+      { "label": "RCS-B", "path": "tandem/rcs/tank_b.quantity_kg", "unit": "kg" },
+      { "label": "N2", "path": "lodestar/acs/tank.quantity_kg", "unit": "kg" },
+      { "label": "dock", "path": "lodestar/docking_cone.load_pct", "unit": "%" }
+    ]
+  }
+}

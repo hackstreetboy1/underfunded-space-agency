@@ -1,0 +1,135 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Console/MissionConsole.cs" id="2_missionconsole"]
+[ext_resource type="PackedScene" path="res://ui/console/CrewCard.tscn" id="3_crewcard"]
+[ext_resource type="PackedScene" path="res://scenes/crew/CrewFeed.tscn" id="4_crewfeed"]
+[ext_resource type="PackedScene" path="res://ui/console/Header.tscn" id="5_header"]
+[ext_resource type="PackedScene" path="res://ui/console/ResourceStrip.tscn" id="6_resourcestrip"]
+[ext_resource type="PackedScene" path="res://ui/console/TipCard.tscn" id="7_tipcard"]
+[ext_resource type="PackedScene" path="res://ui/console/comms/CommsPanel.tscn" id="8_commspanel"]
+[ext_resource type="PackedScene" path="res://ui/console/MainViewTabs.tscn" id="9_mainviewtabs"]
+[ext_resource type="PackedScene" path="res://ui/console/TaskBar.tscn" id="10_taskbar"]
+[ext_resource type="PackedScene" path="res://ui/console/EventLog.tscn" id="11_eventlog"]
+[ext_resource type="PackedScene" path="res://ui/console/SystemsBoard.tscn" id="12_systemsboard"]
+[ext_resource type="PackedScene" path="res://ui/console/overlays/ConfirmDialog.tscn" id="13_confirmdialog"]
+
+[node name="MissionConsole" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_missionconsole")
+CrewCardScene = ExtResource("3_crewcard")
+CrewFeedScene = ExtResource("4_crewfeed")
+
+[node name="Background" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Shell" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Header" parent="Shell" instance=ExtResource("5_header")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="AlarmBand" type="ColorRect" parent="Shell"]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false
+custom_minimum_size = Vector2(0, 8)
+mouse_filter = 2
+
+[node name="ResourceStrip" parent="Shell" instance=ExtResource("6_resourcestrip")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Body" type="MarginContainer" parent="Shell"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+size_flags_vertical = 3
+
+[node name="Columns" type="HBoxContainer" parent="Shell/Body"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="LeftColumn" type="VBoxContainer" parent="Shell/Body/Columns"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 12
+custom_minimum_size = Vector2(432, 0)
+
+[node name="TipCard" parent="Shell/Body/Columns/LeftColumn" instance=ExtResource("7_tipcard")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CrewCards" type="VBoxContainer" parent="Shell/Body/Columns/LeftColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="CommsPanel" parent="Shell/Body/Columns/LeftColumn" instance=ExtResource("8_commspanel")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CentreColumn" type="VBoxContainer" parent="Shell/Body/Columns"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 12
+custom_minimum_size = Vector2(1000, 0)
+size_flags_horizontal = 3
+
+[node name="MainViewTabs" parent="Shell/Body/Columns/CentreColumn" instance=ExtResource("9_mainviewtabs")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TaskBar" parent="Shell/Body/Columns/CentreColumn" instance=ExtResource("10_taskbar")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="EventLog" parent="Shell/Body/Columns/CentreColumn" instance=ExtResource("11_eventlog")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RightColumn" type="VBoxContainer" parent="Shell/Body/Columns"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 12
+custom_minimum_size = Vector2(440, 0)
+
+[node name="SystemsBoard" parent="Shell/Body/Columns/RightColumn" instance=ExtResource("12_systemsboard")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ConfirmDialog" parent="." instance=ExtResource("13_confirmdialog")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+visible = false

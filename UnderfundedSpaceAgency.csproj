@@ -1,0 +1,56 @@
+<Project Sdk="Godot.NET.Sdk/4.7.2">
+  <PropertyGroup>
+    <TargetFramework>net11.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <RootNamespace>Usa.Game</RootNamespace>
+    <AssemblyName>UnderfundedSpaceAgency</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="src/Simulation/**" />
+    <Compile Remove="tests/**" />
+    <Compile Remove="backend/**" />
+    <Compile Remove="tools/**" />
+    <Compile Remove="docs/**" />
+  </ItemGroup>
+
+  <!-- Isolated builds: the composition root (Bootstrap → Integration/Runtime) now wires nearly all of src/Game, so the core
+       set covers every folder it depends on; -p:UsaGameAreas still adds any extra folder (e.g. a new one being written). -->
+  <PropertyGroup Condition="'$(UsaGameAreas)' != ''">
+    <UsaGameCoreGlobs>src/Game/Bootstrap/**/*.cs;src/Game/Input/**/*.cs;src/Game/Diagnostics/**/*.cs;src/Game/Integration/**/*.cs;src/Game/Comms/**/*.cs;src/Game/Guidance/**/*.cs;src/Game/Advisor/**/*.cs;src/Game/Presentation/**/*.cs;src/Game/UI/**/*.cs;src/Game/Flow/**/*.cs;src/Game/Hosting/**/*.cs;src/Game/Services/**/*.cs;src/Game/Content/**/*.cs;src/Game/Editor/**/*.cs</UsaGameCoreGlobs>
+    <UsaGameGlobs>src/Game/$([MSBuild]::Unescape($(UsaGameAreas.Replace('+', '/**/*.cs;src/Game/'))))/**/*.cs</UsaGameGlobs>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(UsaGameAreas)' != ''">
+    <Compile Remove="@(Compile)" />
+    <Compile Include="$(UsaGameCoreGlobs)" />
+    <Compile Include="$(UsaGameGlobs)" Exclude="@(Compile)" />
+  </ItemGroup>
+
+  <!-- Overlapping area names (e.g. Integration and Integration/Runtime) would list a file twice. -->
+  <Target Name="UsaDeduplicateCompile" BeforeTargets="CheckForDuplicateItems" Condition="'$(UsaGameAreas)' != ''">
+    <RemoveDuplicates Inputs="@(Compile)">
+      <Output TaskParameter="Filtered" ItemName="_UsaUniqueCompile" />
+    </RemoveDuplicates>
+    <ItemGroup>
+      <Compile Remove="@(Compile)" />
+      <Compile Include="@(_UsaUniqueCompile)" />
+    </ItemGroup>
+  </Target>
+
+  <!-- Godot.NET.Sdk pins outputs to .godot/mono/temp; isolated builds move them (see Directory.Build.props). -->
+  <PropertyGroup Condition="'$(UsaIsolatedOut)' != ''">
+    <OutputPath>$(UsaIsolatedOut)\bin\$(MSBuildProjectName)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>$(UsaIsolatedOut)\obj\$(MSBuildProjectName)\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+
+  <!-- The game composes whole mission sessions (Bootstrap -> Integration -> Simulation/Session), so it always needs the
+       whole simulation: a -p:UsaAreas filter meant for test projects is widened to every area for this reference. -->
+  <PropertyGroup>
+    <UsaSimulationAllAreas>Attitude+Commands+Crew+Engineering+Expressions+Flight+Forecast+Guidance+Knowledge+LifeSupport+Scenario+Scoring+Session+Time+Vehicle</UsaSimulationAllAreas>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(UsaAreas)' == ''">
+    <ProjectReference Include="src/Simulation/Usa.Simulation.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(UsaAreas)' != ''">
+    <ProjectReference Include="src/Simulation/Usa.Simulation.csproj" AdditionalProperties="UsaAreas=$(UsaSimulationAllAreas)" />
+  </ItemGroup>
+</Project>

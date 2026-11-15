@@ -1,0 +1,131 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Console/Regions/ResourceStrip.cs" id="1_resourcestrip"]
+[ext_resource type="PackedScene" path="res://ui/console/components/ReadoutTile.tscn" id="2_readouttile"]
+[ext_resource type="PackedScene" path="res://ui/console/components/CrewHealthMini.tscn" id="3_crewhealthmini"]
+[ext_resource type="PackedScene" path="res://ui/console/components/Badge.tscn" id="4_badge"]
+[ext_resource type="PackedScene" path="res://ui/console/overlays/ForecastBreakdown.tscn" id="5_breakdown"]
+
+[node name="ResourceStrip" type="MarginContainer"]
+custom_minimum_size = Vector2(0, 76)
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 6
+script = ExtResource("1_resourcestrip")
+TileScene = ExtResource("2_readouttile")
+CrewBarScene = ExtResource("3_crewhealthmini")
+
+[node name="Row" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TilesScroll" type="ScrollContainer" parent="Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+
+[node name="Tiles" type="HBoxContainer" parent="Row/TilesScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="CrewTile" type="PanelContainer" parent="Row"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(162, 64)
+
+[node name="Margin" type="MarginContainer" parent="Row/CrewTile"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="Rows" type="VBoxContainer" parent="Row/CrewTile/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="CrewCaption" type="Label" parent="Row/CrewTile/Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"BadgeLabel"
+text = "Crew"
+uppercase = true
+
+[node name="CrewBars" type="VBoxContainer" parent="Row/CrewTile/Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Spacer" type="Control" parent="Row"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Forecast" type="PanelContainer" parent="Row"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(366, 64)
+
+[node name="Margin" type="MarginContainer" parent="Row/Forecast"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 5
+
+[node name="Rows" type="VBoxContainer" parent="Row/Forecast/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Head" type="HBoxContainer" parent="Row/Forecast/Margin/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ForecastCaption" type="Label" parent="Row/Forecast/Margin/Rows/Head"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"BadgeLabel"
+text = "Safe autonomy"
+size_flags_horizontal = 3
+uppercase = true
+vertical_alignment = 1
+
+[node name="ForecastBadge" parent="Row/Forecast/Margin/Rows/Head" instance=ExtResource("4_badge")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="ForecastCoverage" parent="Row/Forecast/Margin/Rows/Head" instance=ExtResource("4_badge")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="ForecastToggle" type="Button" parent="Row/Forecast/Margin/Rows/Head"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+text = "▾"
+toggle_mode = true
+disabled = true
+tooltip_text = "Forecast breakdown"
+
+[node name="ForecastValue" type="Label" parent="Row/Forecast/Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Readout"
+text = "≈ 7.5–9 h"
+
+[node name="ForecastText" type="Label" parent="Row/Forecast/Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Limit: re-entry battery · Confidence: medium"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Breakdown" parent="." instance=ExtResource("5_breakdown")]
+unique_name_in_owner = true
+visible = false

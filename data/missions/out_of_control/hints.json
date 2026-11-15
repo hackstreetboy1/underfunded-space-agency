@@ -1,0 +1,241 @@
+{
+  "schema": "hints/1",
+  "missionId": "out_of_control",
+  "cooldownS": 40,
+  "stuck": {
+    "failedActionPenaltyS": 20,
+    "criticalAlarmExtraRate": 0.5,
+    "noNewInfoAfterS": 90,
+    "noNewInfoExtraRate": 0.25,
+    "diagnosticReliefS": 45,
+    "repairReliefS": 90,
+    "stabilizationReliefS": 90
+  },
+  "problems": [
+    {
+      "id": "roll_cause_unknown",
+      "priority": 10,
+      "activation": "@mission.event.incident_i1.fired and abs(@attitude.tandem.rate_roll_dps) > 1",
+      "resolution": "not @tandem/power/breaker_oams_08.closed or not @tandem/oams/master.closed",
+      "stages": [
+        {
+          "stage": "nudge",
+          "text": "The roll started while you were docked. Something is pushing.",
+          "factRefs": ["tandem.rate.roll_dps"],
+          "actionRefs": ["read_fact"]
+        },
+        {
+          "stage": "investigate",
+          "text": "Ask the crew whether Agena's attitude system is behaving, and what OAMS propellant reads.",
+          "factRefs": ["lodestar.acs.activity", "oams.prop_kg"],
+          "actionRefs": ["read_fact", "status_report"]
+        },
+        {
+          "stage": "connect",
+          "text": "OAMS propellant is falling faster than the plan. If Agena were the cause, our thrusters would be fighting it, not driving it.",
+          "factRefs": ["oams.prop_kg", "lodestar.acs.activity", "tandem.rate.roll_dps"],
+          "actionRefs": ["read_fact"]
+        },
+        {
+          "stage": "recommend",
+          "text": "Consider turning Agena's attitude control off and watching the roll, or reading the OAMS thruster temperatures.",
+          "factRefs": [
+            "tandem.rate.roll_dps",
+            "oams.temp.t01", "oams.temp.t02", "oams.temp.t03", "oams.temp.t04",
+            "oams.temp.t05", "oams.temp.t06", "oams.temp.t07", "oams.temp.t08"
+          ],
+          "actionRefs": ["lodestar_acs", "read_thruster_temps", "cycle_oams_breakers"]
+        },
+        {
+          "stage": "direct",
+          "text": "Have June read the OAMS thruster temperatures. Open the breaker for the hot thruster, T8, and leave OAMS on so it can damp the roll.",
+          "factRefs": ["oams.temp.t08"],
+          "actionRefs": ["read_thruster_temps", "open_breaker"]
+        }
+      ]
+    },
+    {
+      "id": "spin_too_fast",
+      "priority": 20,
+      "activation": "@mission.event.incident_i1.fired and abs(@attitude.tandem.rate_roll_dps) > 120",
+      "resolution": "@attitude.tandem.rate_total_dps < 10",
+      "stages": [
+        {
+          "stage": "nudge",
+          "text": "The roll is building faster than anyone can work a panel. Rates come first now.",
+          "factRefs": ["tandem.rate.roll_dps"],
+          "actionRefs": ["read_fact"]
+        },
+        {
+          "stage": "investigate",
+          "text": "How fast are we rolling now? Ask the crew for the rate gauges.",
+          "factRefs": ["tandem.rate.roll_dps", "tandem.rate.pitch_dps", "tandem.rate.yaw_dps"],
+          "actionRefs": ["read_fact"]
+        },
+        {
+          "stage": "connect",
+          "text": "Above about 120 °/s the crew can't keep up with breaker work, and every minute at this rate costs them.",
+          "factRefs": ["tandem.rate.roll_dps", "crew.cal_brandt.condition", "crew.june_okafor.condition"],
+          "actionRefs": ["status_report"]
+        },
+        {
+          "stage": "recommend",
+          "text": "Shutting OAMS off and using one RCS ring would stop the spin quickly. Once an RCS ring is live, we come home early.",
+          "factRefs": ["rcs.ring_a.prop_kg", "rcs.ring_b.prop_kg"],
+          "actionRefs": ["oams_master", "arm_rcs_ring", "rate_damp"]
+        },
+        {
+          "stage": "direct",
+          "text": "Cal: OAMS master off, arm RCS ring A, rate damp on RCS. Keep ring B sealed for entry.",
+          "factRefs": ["rcs.ring_a.prop_kg", "tandem.rate.roll_dps"],
+          "actionRefs": ["oams_master", "arm_rcs_ring", "rate_damp"],
+          "alternatives": [
+            {
+              "when": "@variant.damaged_ring_harness == 'tandem/rcs/harness_j14_a'",
+              "text": "Cal: OAMS master off, arm RCS ring B, rate damp on RCS. Keep ring A sealed for entry.",
+              "factRefs": ["rcs.ring_b.prop_kg", "tandem.rate.roll_dps"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rcs_ring_damaged",
+      "priority": 15,
+      "activation": "(not @tandem/rcs/ring_a.drivers_powered and (@tandem/rcs/ring_a.armed or @knowledge.fact.rcs.ring_a.status.state != 'unknown')) or (not @tandem/rcs/ring_b.drivers_powered and (@tandem/rcs/ring_b.armed or @knowledge.fact.rcs.ring_b.status.state != 'unknown'))",
+      "resolution": "(@tandem/rcs/ring_a.drivers_powered and @tandem/rcs/ring_b.drivers_powered) or @mission.event.entry_interface.fired",
+      "stages": [
+        {
+          "stage": "nudge",
+          "text": "That ring isn't answering. Thrusters that won't fire usually point upstream of the nozzles.",
+          "factRefs": ["rcs.ring_a.status", "rcs.ring_b.status"],
+          "actionRefs": ["test_rcs_ring"]
+        },
+        {
+          "stage": "investigate",
+          "text": "Have the crew test the ring, and once the rates are low, look behind its driver box access panel.",
+          "factRefs": ["rcs.ring_a.status", "rcs.ring_b.status"],
+          "actionRefs": ["test_rcs_ring", "inspect_rcs_driver_panel"]
+        },
+        {
+          "stage": "connect",
+          "text": "The same short that stuck the thruster ran through harness connector J-14. The ring's valve drivers lost their power feed, not their propellant.",
+          "factRefs": [
+            "rcs.ring_a.prop_kg", "rcs.ring_b.prop_kg",
+            "component.tandem/rcs/harness_j14_a.condition", "component.tandem/rcs/harness_j14_b.condition"
+          ],
+          "actionRefs": ["inspect_rcs_driver_panel"]
+        },
+        {
+          "stage": "recommend",
+          "text": "A jumper from a spare power outlet to the ring's driver input would bring it back. Build it in the workspace and check every rating.",
+          "factRefs": ["power.bus_a_v"],
+          "actionRefs": ["install_repair"]
+        },
+        {
+          "stage": "direct",
+          "text": "Open the workspace on the ring B driver: 2 m harness plus the 1 m extension, the adapter to Main bus A aux 3, and a 10 A fuse. Test it, then assign June.",
+          "factRefs": ["rcs.ring_b.status", "component.tandem/rcs/harness_j14_b.condition"],
+          "actionRefs": ["install_repair", "test_rcs_ring"],
+          "alternatives": [
+            {
+              "when": "@variant.damaged_ring_harness == 'tandem/rcs/harness_j14_a'",
+              "text": "Open the workspace on the ring A driver: 2 m harness plus the 1 m extension, the adapter to Main bus A aux 3, and a 10 A fuse. Test it, then assign June.",
+              "factRefs": ["rcs.ring_a.status", "component.tandem/rcs/harness_j14_a.condition"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "return_planning",
+      "priority": 5,
+      "activation": "(@mission.rule.rcs_activation_return.active or @mission.phase == 'return_prep') and not @mission.event.retrofire.fired",
+      "resolution": "@mission.event.retrofire.fired",
+      "stages": [
+        {
+          "stage": "nudge",
+          "text": "We're coming home. The next good pass over a recovery zone won't wait for us.",
+          "factRefs": [],
+          "actionRefs": []
+        },
+        {
+          "stage": "investigate",
+          "text": "Check the orbit map for the next pass over a recovery zone, and what attitude control you'll have for retrofire.",
+          "factRefs": ["rcs.ring_a.prop_kg", "rcs.ring_b.prop_kg"],
+          "actionRefs": ["read_fact"]
+        },
+        {
+          "stage": "connect",
+          "text": "Retrofire needs the capsule held steady and pointed. The equipment section has to go first, or the retros push dead weight off-axis.",
+          "factRefs": ["tandem.rate.roll_dps"],
+          "actionRefs": ["jettison_equipment"]
+        },
+        {
+          "stage": "recommend",
+          "text": "Aim for the West Pacific secondary zone on the next pass. Jettison the equipment section, hold attitude on RCS, then fire the retros.",
+          "factRefs": ["rcs.ring_a.prop_kg", "rcs.ring_b.prop_kg"],
+          "actionRefs": ["jettison_equipment", "rate_damp", "retrofire"],
+          "alternatives": [
+            {
+              "when": "not @mission.rule.rcs_activation_return.active or @mission.event.eva_package_retrieved.fired",
+              "text": "Aim for the next pass over the primary Atlantic zone. Jettison the equipment section, hold attitude, then fire the retros.",
+              "factRefs": ["tandem.rate.roll_dps"]
+            }
+          ]
+        },
+        {
+          "stage": "direct",
+          "text": "Plan retrofire for the West Pacific secondary zone at the next pass, and jettison the equipment section first.",
+          "factRefs": [],
+          "actionRefs": ["jettison_equipment", "retrofire"],
+          "alternatives": [
+            {
+              "when": "not @mission.rule.rcs_activation_return.active or @mission.event.eva_package_retrieved.fired",
+              "text": "Plan retrofire for the primary Atlantic zone at the next pass, and jettison the equipment section first.",
+              "factRefs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "co2_reading_suspect",
+      "priority": 8,
+      "activation": "@tandem/ls/co2_sensor.condition != 'nominal'",
+      "resolution": "@knowledge.fact.ls.ppco2_portable_mmhg.state == 'known' or @knowledge.component.tandem/ls/co2_sensor.state == 'confirmed_damaged'",
+      "stages": [
+        {
+          "stage": "nudge",
+          "text": "The cabin CO2 alarm is loud. Before acting on one gauge, ask how sure we are of it, and how the crew feel.",
+          "factRefs": ["ls.ppco2_mmhg"],
+          "actionRefs": ["read_fact"]
+        },
+        {
+          "stage": "investigate",
+          "text": "Ask the crew how they feel, and read the LiOH canister against that CO2 number.",
+          "factRefs": ["ls.ppco2_mmhg", "ls.lioh_pct", "crew.cal_brandt.condition", "crew.june_okafor.condition"],
+          "actionRefs": ["read_fact", "status_report"]
+        },
+        {
+          "stage": "connect",
+          "text": "A real CO2 rise would track the canister and the suit/cabin fan. If those look normal, the sensor itself is the suspect.",
+          "factRefs": ["ls.lioh_pct", "ls.ppco2_mmhg"],
+          "actionRefs": ["read_fact"]
+        },
+        {
+          "stage": "recommend",
+          "text": "Cross-check with the portable CO2 indicator before swapping canisters. A spare canister used early is one we won't have later.",
+          "factRefs": ["ls.ppco2_portable_mmhg"],
+          "actionRefs": ["portable_co2_check"]
+        },
+        {
+          "stage": "direct",
+          "text": "Have the crew run the portable CO2 check. If it reads normal, treat the cabin sensor as biased and save the spare LiOH.",
+          "factRefs": ["ls.ppco2_portable_mmhg"],
+          "actionRefs": ["portable_co2_check"]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "schema": "facts/1",
+  "phrases": {
+    "unobserved": "not checked yet",
+    "staleSuffix": "(as of MET {met})"
+  },
+  "methods": [
+    { "method": "glance", "requiresObserver": true, "canConfirmComponent": false, "yield": "measurement" },
+    { "method": "instrument", "requiresObserver": true, "canConfirmComponent": false, "yield": "measurement" },
+    { "method": "inspection", "requiresObserver": true, "canConfirmComponent": true, "yield": "measurement" },
+    { "method": "test", "requiresObserver": true, "canConfirmComponent": true, "yield": "measurement" },
+    { "method": "downlink", "requiresObserver": false, "canConfirmComponent": false, "yield": "band" },
+    { "method": "model", "requiresObserver": false, "canConfirmComponent": false, "yield": "estimate" }
+  ],
+  // Shared facts (open patterns); each mission adds its own in missions/<id>/catalog/facts.json.
+  "facts": [
+    {
+      "id": "crew.{crew}.condition",
+      "label": "{crew} condition",
+      "unit": "",
+      "kind": "text",
+      "format": "text",
+      "readMode": "glance",
+      "methods": ["glance"],
+      "source": "{crew}",
+      "sourceKind": "crew",
+      "staleAfterS": 600,
+      "matcher": { "kind": "crew" }
+    },
+    {
+      "id": "component.{component}.condition",
+      "label": "{component} condition",
+      "unit": "",
+      "kind": "text",
+      "format": "text",
+      "readMode": "inspection",
+      "methods": ["inspection", "test"],
+      "source": "{component}",
+      "sourceKind": "component",
+      "staleAfterS": 3600,
+      "confirmsComponent": true,
+      "nominalValues": ["nominal"],
+      "matcher": { "kind": "component" }
+    }
+  ]
+}

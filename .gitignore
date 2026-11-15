@@ -1,0 +1,27 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Secrets
+.env
+*.env
+!.env.example
+
+# .NET
+bin/
+obj/
+*.user
+TestResults/
+
+# Python
+backend/.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Exported builds (Godot export_presets.cfg writes to build/)
+build/
+
+# Runtime caches
+backend/cache/
+user_logs/

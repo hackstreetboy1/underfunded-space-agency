@@ -1,0 +1,1285 @@
+{
+  "schema": "vehicle/1",
+  "id": "tandem",
+  "displayName": "Gemini 8",
+  "sections": [
+    { "id": "rm", "name": "Re-entry module", "dryMassKg": 2100, "centerOfMassM": [0.85, 0, 0], "inertiaKgM2": { "roll": 580, "pitch": 300, "yaw": 300 }, "jettison": null },
+    { "id": "retro", "name": "Retro section", "dryMassKg": 140, "centerOfMassM": [-0.25, 0, 0], "inertiaKgM2": { "roll": 60, "pitch": 20, "yaw": 20 }, "jettison": "retro_sep" },
+    { "id": "adapter", "name": "Equipment section", "dryMassKg": 1070, "centerOfMassM": [-1.25, 0, 0], "inertiaKgM2": { "roll": 430, "pitch": 300, "yaw": 300 }, "jettison": "equipment_sep" }
+  ],
+  "components": [
+    {
+      "id": "tandem/rm/structure",
+      "family": "structure",
+      "name": "Re-entry module structure",
+      "section": "rm",
+      "revealable": true,
+      "diagram": { "x": 560, "y": 300, "compartment": "cabin" }
+    },
+    // The pressure shell sheds cabin heat on its own once the adapter coolant loop is gone (after equipment separation, afloat).
+    {
+      "id": "tandem/rm/cabin_wall",
+      "family": "radiator",
+      "name": "Cabin wall",
+      "section": "rm",
+      "diagram": { "x": 600, "y": 300, "compartment": "cabin" },
+      "radiator": { "node": "tandem/thermal/cabin", "areaM2": 3.5, "emissivity": 0.8, "absorptivity": 0.3 }
+    },
+    {
+      "id": "tandem/rm/hatch_1",
+      "family": "hatch",
+      "name": "Command pilot hatch",
+      "section": "rm",
+      "revealable": true,
+      "control": "crew",
+      "diagram": { "x": 520, "y": 220, "compartment": "cabin" }
+    },
+    {
+      "id": "tandem/rm/hatch_2",
+      "family": "hatch",
+      "name": "Pilot hatch",
+      "section": "rm",
+      "revealable": true,
+      "control": "crew",
+      "diagram": { "x": 600, "y": 220, "compartment": "cabin" }
+    },
+    {
+      "id": "tandem/rm/heatshield",
+      "family": "heat_shield",
+      "name": "Heat shield",
+      "section": "rm",
+      "revealable": true,
+      "diagram": { "x": 420, "y": 300, "compartment": "cabin" },
+      "heatShield": { "ablatorKg": 130 }
+    },
+    {
+      "id": "tandem/nose/docking_bar",
+      "family": "docking",
+      "name": "Docking bar",
+      "section": "rm",
+      "revealable": true,
+      "control": "crew",
+      "diagram": { "x": 900, "y": 300, "compartment": "nose" },
+      "docking": { "partner": "lodestar/docking_cone", "fullLoadRollRateDps": 25, "alarmRollRateDps": 20, "damageAfterS": 60 }
+    },
+    {
+      "id": "tandem/nose/radar",
+      "family": "load",
+      "name": "Rendezvous radar",
+      "section": "rm",
+      "revealable": true,
+      "diagram": { "x": 860, "y": 260, "compartment": "nose" },
+      "load": { "powerW": 90, "priority": "support", "thermalNode": "tandem/thermal/cabin" }
+    },
+    {
+      "id": "tandem/retro/structure",
+      "family": "structure",
+      "name": "Retro section structure",
+      "section": "retro",
+      "revealable": true,
+      "diagram": { "x": 360, "y": 300, "compartment": "retro" }
+    },
+    {
+      "id": "tandem/adapter/structure",
+      "family": "structure",
+      "name": "Equipment section structure",
+      "section": "adapter",
+      "revealable": true,
+      "diagram": { "x": 200, "y": 300, "compartment": "adapter_fwd" }
+    },
+    {
+      "id": "tandem/adapter/radiator",
+      "family": "radiator",
+      "name": "Adapter radiator",
+      "section": "adapter",
+      "revealable": true,
+      "diagram": { "x": 180, "y": 180, "compartment": "adapter_fwd" },
+      "radiator": { "node": "tandem/thermal/adapter_bay", "areaM2": 7.5, "emissivity": 0.9, "absorptivity": 0.2 }
+    },
+    {
+      "id": "tandem/adapter/experiment_bay",
+      "family": "structure",
+      "name": "Experiment bay",
+      "section": "adapter",
+      "revealable": true,
+      "diagram": { "x": 240, "y": 420, "compartment": "adapter_fwd" }
+    },
+    {
+      "id": "tandem/adapter/experiment_package",
+      "family": "payload",
+      "name": "Experiment package",
+      "section": "adapter",
+      "diagram": { "x": 240, "y": 450, "compartment": "adapter_fwd" },
+      "payload": { "massKg": 18 },
+      "load": { "powerW": 120, "priority": "discretionary", "thermalNode": "tandem/thermal/adapter_bay" }
+    },
+    {
+      "id": "tandem/oams/tank",
+      "family": "tank",
+      "name": "OAMS propellant tank",
+      "section": "adapter",
+      "diagram": { "x": 150, "y": 300, "compartment": "adapter_aft" },
+      "sensors": ["tandem/oams/prop_gauge"],
+      "tank": { "resource": "propellant", "capacityKg": 310, "initialKg": 290, "positionM": [-1.2, 0, 0] }
+    },
+    {
+      "id": "tandem/oams/prop_gauge",
+      "family": "sensor",
+      "name": "OAMS propellant gauge",
+      "section": "adapter",
+      "diagram": { "x": 150, "y": 340, "compartment": "adapter_aft" },
+      "sensor": { "channels": [{ "field": "kg", "measures": "tandem/oams/tank.quantity_kg" }], "noiseStd": 2, "quantization": 5 }
+    },
+    {
+      "id": "tandem/rm/accelerometer",
+      "family": "sensor",
+      "name": "Accelerometer",
+      "section": "rm",
+      "diagram": { "x": 680, "y": 500, "compartment": "cabin" },
+      "sensor": { "channels": [{ "field": "reading", "measures": "flight.g_load" }], "noiseStd": 0.05, "quantization": 0.1 }
+    },
+    {
+      "id": "tandem/rm/cabin_altimeter",
+      "family": "sensor",
+      "name": "Cabin altimeter",
+      "section": "rm",
+      "diagram": { "x": 720, "y": 500, "compartment": "cabin" },
+      "sensor": { "channels": [{ "field": "reading", "measures": "flight.altitude_km" }], "noiseStd": 0.1, "quantization": 0.1 }
+    },
+    {
+      "id": "tandem/oams/master",
+      "family": "switch",
+      "name": "OAMS master power",
+      "section": "rm",
+      "control": "crew",
+      "diagram": { "x": 520, "y": 600, "compartment": "cabin" },
+      "switch": { "from": "tandem/power/bus_a" }
+    },
+    {
+      "id": "tandem/oams/thruster_01",
+      "family": "thruster",
+      "name": "OAMS thruster 1",
+      "section": "adapter",
+      "revealable": true,
+      "diagram": { "x": 40, "y": 120, "compartment": "adapter_aft" },
+      "sensors": ["tandem/oams/temp_01"],
+      "thruster": { "thrustN": 110, "ispS": 262, "positionM": [-2.2, 0, -1.1], "directionUnit": [0, 0, 1], "tank": "tandem/oams/tank", "driver": "tandem/oams/driver_01", "coldC": 15, "hotC": 520, "thermalTimeConstantS": 120 }
+    },
+    {
+      "id": "tandem/oams/driver_01",
+      "family": "driver",
+      "name": "OAMS thruster 1 driver",
+      "section": "adapter",
+      "diagram": { "x": 40, "y": 160, "compartment": "adapter_aft" },
+      "load": { "powerW": 6, "priority": "return", "thermalNode": "tandem/thermal/adapter_bay" }
+    },
+    {
+      "id": "tandem/oams/temp_01",
+      "family": "sensor",
+      "name": "OAMS thruster 1 temperature",
+      "section": "adapter",
+      "diagram": { "x": 40, "y": 200, "compartment": "adapter_aft" },
+      "sensor": { "channels": [{ "field": "thruster_c", "measures": "tandem/oams/thruster_01.temperature_c" }], "noiseStd": 3, "quantization": 5 }
+    },
+    {
+      "id": "tandem/power/breaker_oams_01",
+      "family": "breaker",
+      "name": "OAMS T1 breaker",
+      "section": "rm",
+      "control": "crew",
+      "diagram": { "x": 560, "y": 640, "compartment": "cabin" },
+      "breaker": { "from": "tandem/oams/master", "to": "tandem/oams/driver_01" }
+    },
+    {
+      "id": "tandem/oams/thruster_02",
+      "family": "thruster",
+      "name": "OAMS thruster 2",
+      "section": "adapter",
+      "revealable": true,
+      "diagram": { "x": 62, "y": 120, "compartment": "adapter_aft" },
+      "sensors": ["tandem/oams/temp_02"],
+      "thruster": { "thrustN": 110, "ispS": 262, "positionM": [-2.2, 0, 1.1], "directionUnit": [0, 0, -1], "tank": "tandem/oams/tank", "driver": "tandem/oams/driver_02", "coldC": 15, "hotC": 520, "thermalTimeConstantS": 120 }
+    },
+    {
+      "id": "tandem/oams/driver_02",
+      "family": "driver",
+      "name": "OAMS thruster 2 driver",
+      "section": "adapter",
+      "diagram": { "x": 62, "y": 160, "compartment": "adapter_aft" },
+      "load": { "powerW": 6, "priority": "return", "thermalNode": "tandem/thermal/adapter_bay" }
+    },
+    {
+      "id": "tandem/oams/temp_02",
+      "family": "sensor",
+      "name": "OAMS thruster 2 temperature",
+      "section": "adapter",
+      "diagram": { "x": 62, "y": 200, "compartment": "adapter_aft" },
+      "sensor": { "channels": [{ "field": "thruster_c", "measures": "tandem/oams/thruster_02.temperature_c" }], "noiseStd": 3, "quantization": 5 }
+    },
+    {
+      "id": "tandem/power/breaker_oams_02",
+      "family": "breaker",
+      "name": "OAMS T2 breaker",
+      "section": "rm",
+      "control": "crew",
+      "diagram": { "x": 580, "y": 640, "compartment": "cabin" },
+      "breaker": { "from": "tandem/oams/master", "to": "tandem/oams/driver_02" }
+    },
+    {
+      "id": "tandem/oams/thruster_03",
+      "family": "thruster",
+      "name": "OAMS thruster 3",
+      "section": "adapter",
+      "revealable": true,
+      "diagram": { "x": 84, "y": 120, "compartment": "adapter_aft" },
+      "sensors": ["tandem/oams/temp_03"],
+      "thruster": { "thrustN": 110, "ispS": 262, "positionM": [-2.2, 1.1, 0], "directionUnit": [0, -1, 0], "tank": "tandem/oams/tank", "driver": "tandem/oams/driver_03", "coldC": 15, "hotC": 520, "thermalTimeConstantS": 120 }
+    },
+    {
+      "id": "tandem/oams/driver_03",
+      "family": "driver",
+      "name": "OAMS thruster 3 driver",
+      "section": "adapter",
+      "diagram": { "x": 84, "y": 160, "compartment": "adapter_aft" },
+      "load": { "powerW": 6, "priority": "return", "thermalNode": "tandem/thermal/adapter_bay" }
+    },
+    {
+      "id": "tandem/oams/temp_03",
+      "family": "sensor",
+      "name": "OAMS thruster 3 temperature",
+      "section": "adapter",
+      "diagram": { "x": 84, "y": 200, "compartment": "adapter_aft" },
+      "sensor": { "channels": [{ "field": "thruster_c", "measures": "tandem/oams/thruster_03.temperature_c" }], "noiseStd": 3, "quantization": 5 }
+    },
+    {
+      "id": "tandem/power/breaker_oams_03",
+      "family": "breaker",
+      "name": "OAMS T3 breaker",
+      "section": "rm",
+      "control": "crew",
+      "diagram": { "x": 600, "y": 640, "compartment": "cabin" },
+      "breaker": { "from": "tandem/oams/master", "to": "tandem/oams/driver_03" }
+    },
+    {
+      "id": "tandem/oams/thruster_04",
+      "family": "thruster",
+      "name": "OAMS thruster 4",
+      "section": "adapter",
+      "revealable": true,
+      "diagram": { "x": 106, "y": 120, "compartment": "adapter_aft" },
+      "sensors": ["tandem/oams/temp_04"],
+      "thruster": { "thrustN": 110, "ispS": 262, "positionM": [-2.2, -1.1, 0], "directionUnit": [0, 1, 0], "tank": "tandem/oams/tank", "driver": "tandem/oams/driver_04", "coldC": 15, "hotC": 520, "thermalTimeConstantS": 120 }
+    },
+    {
+      "id": "tandem/oams/driver_04",
+      "family": "driver",
+      "name": "OAMS thruster 4 driver",
+      "section": "adapter",
+      "diagram": { "x": 106, "y": 160, "compartment": "adapter_aft" },
+      "load": { "powerW": 6, "priority": "return", "thermalNode": "tandem/thermal/adapter_bay" }
+    },
+    {
+      "id": "tandem/oams/temp_04",
+      "family": "sensor",
+      "name": "OAMS thruster 4 temperature",
+      "section": "adapter",
+      "diagram": { "x": 106, "y": 200, "compartment": "adapter_aft" },
+      "sensor": { "channels": [{ "field": "thruster_c", "measures": "tandem/oams/thruster_04.temperature_c" }], "noiseStd": 3, "quantization": 5 }
+    },
+    {
+      "id": "tandem/power/breaker_oams_04",
+      "family": "breaker",
+      "name": "OAMS T4 breaker",
+      "section": "rm",
+      "control": "crew",
+      "diagram": { "x": 620, "y": 640, "compartment": "cabin" },
+      "breaker": { "from": "tandem/oams/master", "to": "tandem/oams/driver_04" }
+    },
+    {
+      "id": "tandem/oams/thruster_05",
+      "family": "thruster",
+      "name": "OAMS thruster 5",
+      "section": "adapter",
+      "revealable": true,
+      "diagram": { "x": 128, "y": 120, "compartment": "adapter_aft" },
+      "sensors": ["tandem/oams/temp_05"],
+      "thruster": { "thrustN": 110, "ispS": 262, "positionM": [-2.2, 0, 1.1], "directionUnit": [0, 1, 0], "tank": "tandem/oams/tank", "driver": "tandem/oams/driver_05", "coldC": 15, "hotC": 520, "thermalTimeConstantS": 120 }
+    },
+    {
+      "id": "tandem/oams/driver_05",
+      "family": "driver",
+      "name": "OAMS thruster 5 driver",
+      "section": "adapter",
+      "diagram": { "x": 128, "y": 160, "compartment": "adapter_aft" },
+      "load": { "powerW": 6, "priority": "return", "thermalNode": "tandem/thermal/adapter_bay" }
+    },
+    {
+      "id": "tandem/oams/temp_05",
+      "family": "sensor",
+      "name": "OAMS thruster 5 temperature",
+      "section": "adapter",
+      "diagram": { "x": 128, "y": 200, "compartment": "adapter_aft" },
+      "sensor": { "channels": [{ "field": "thruster_c", "measures": "tandem/oams/thruster_05.temperature_c" }], "noiseStd": 3, "quantization": 5 }
+    },
+    {
+      "id": "tandem/power/breaker_oams_05",
+      "family": "breaker",
+      "name": "OAMS T5 breaker",
+      "section": "rm",
+      "control": "crew",
+      "diagram": { "x": 640, "y": 640, "compartment": "cabin" },
+      "breaker": { "from": "tandem/oams/master", "to": "tandem/oams/driver_05" }
+    },
+    {
+      "id": "tandem/oams/thruster_06",
+      "family": "thruster",
+      "name": "OAMS thruster 6",
+      "section": "adapter",
+      "revealable": true,
+      "diagram": { "x": 150, "y": 120, "compartment": "adapter_aft" },
+      "sensors": ["tandem/oams/temp_06"],
+      "thruster": { "thrustN": 110, "ispS": 262, "positionM": [-2.2, 0, -1.1], "directionUnit": [0, -1, 0], "tank": "tandem/oams/tank", "driver": "tandem/oams/driver_06", "coldC": 15, "hotC": 520, "thermalTimeConstantS": 120 }
+    },
+    {
+      "id": "tandem/oams/driver_06",
+      "family": "driver",
+      "name": "OAMS thruster 6 driver",
+      "section": "adapter",
+      "diagram": { "x": 150, "y": 160, "compartment": "adapter_aft" },
+      "load": { "powerW": 6, "priority": "return", "thermalNode": "tandem/thermal/adapter_bay" }
+    },
+    {
+      "id": "tandem/oams/temp_06",
+      "family": "sensor",
+      "name": "OAMS thruster 6 temperature",
+      "section": "adapter",
+      "diagram": { "x": 150, "y": 200, "compartment": "adapter_aft" },
+      "sensor": { "channels": [{ "field": "thruster_c", "measures": "tandem/oams/thruster_06.temperature_c" }], "noiseStd": 3, "quantization": 5 }
+    },
+    {
+      "id": "tandem/power/breaker_oams_06",
+      "family": "breaker",
+      "name": "OAMS T6 breaker",
+      "section": "rm",
+      "control": "crew",
+      "diagram": { "x": 660, "y": 640, "compartment": "cabin" },
+      "breaker": { "from": "tandem/oams/master", "to": "tandem/oams/driver_06" }
+    },
+    {
+      "id": "tandem/oams/thruster_07",
+      "family": "thruster",
+      "name": "OAMS thruster 7",
+      "section": "adapter",
+      "revealable": true,
+      "diagram": { "x": 172, "y": 120, "compartment": "adapter_aft" },
+      "sensors": ["tandem/oams/temp_07"],
+      "thruster": { "thrustN": 110, "ispS": 262, "positionM": [-2.2, 0, -1.1], "directionUnit": [0, 1, 0], "tank": "tandem/oams/tank", "driver": "tandem/oams/driver_07", "coldC": 15, "hotC": 520, "thermalTimeConstantS": 120 }
+    },
+    {
+      "id": "tandem/oams/driver_07",
+      "family": "driver",
+      "name": "OAMS thruster 7 driver",
+      "section": "adapter",
+      "diagram": { "x": 172, "y": 160, "compartment": "adapter_aft" },
+      "load": { "powerW": 6, "priority": "return", "thermalNode": "tandem/thermal/adapter_bay" }
+    },
+    {
+      "id": "tandem/oams/temp_07",
+      "family": "sensor",
+      "name": "OAMS thruster 7 temperature",
+      "section": "adapter",
+      "diagram": { "x": 172, "y": 200, "compartment": "adapter_aft" },
+      "sensor": { "channels": [{ "field": "thruster_c", "measures": "tandem/oams/thruster_07.temperature_c" }], "noiseStd": 3, "quantization": 5 }
+    },
+    {
+      "id": "tandem/power/breaker_oams_07",
+      "family": "breaker",
+      "name": "OAMS T7 breaker",
+      "section": "rm",
+      "control": "crew",
+      "diagram": { "x": 680, "y": 640, "compartment": "cabin" },
+      "breaker": { "from": "tandem/oams/master", "to": "tandem/oams/driver_07" }
+    },
+    {
+      "id": "tandem/oams/thruster_08",
+      "family": "thruster",
+      "name": "OAMS thruster 8",
+      "section": "adapter",
+      "revealable": true,
+      "diagram": { "x": 194, "y": 120, "compartment": "adapter_aft" },
+      "sensors": ["tandem/oams/temp_08"],
+      "thruster": { "thrustN": 110, "ispS": 262, "positionM": [-2.2, 0, 1.1], "directionUnit": [0, -1, 0], "tank": "tandem/oams/tank", "driver": "tandem/oams/driver_08", "coldC": 15, "hotC": 520, "thermalTimeConstantS": 120 }
+    },
+    {
+      "id": "tandem/oams/driver_08",
+      "family": "driver",
+      "name": "OAMS thruster 8 driver",
+      "section": "adapter",
+      "diagram": { "x": 194, "y": 160, "compartment": "adapter_aft" },
+      "load": { "powerW": 6, "priority": "return", "thermalNode": "tandem/thermal/adapter_bay" }
+    },
+    {
+      "id": "tandem/oams/temp_08",
+      "family": "sensor",
+      "name": "OAMS thruster 8 temperature",
+      "section": "adapter",
+      "diagram": { "x": 194, "y": 200, "compartment": "adapter_aft" },
+      "sensor": { "channels": [{ "field": "thruster_c", "measures": "tandem/oams/thruster_08.temperature_c" }], "noiseStd": 3, "quantization": 5 }
+    },
+    {
+      "id": "tandem/power/breaker_oams_08",
+      "family": "breaker",
+      "name": "OAMS T8 breaker",
+      "section": "rm",
+      "control": "crew",
+      "diagram": { "x": 700, "y": 640, "compartment": "cabin" },
+      "breaker": { "from": "tandem/oams/master", "to": "tandem/oams/driver_08" }
+    },
+    {
+      "id": "tandem/oams/thruster_09",
+      "family": "thruster",
+      "name": "OAMS thruster 9",
+      "section": "adapter",
+      "revealable": true,
+      "diagram": { "x": 40, "y": 480, "compartment": "adapter_aft" },
+      "sensors": ["tandem/oams/temp_09"],
+      "thruster": { "thrustN": 400, "ispS": 268, "positionM": [-2.3, 0, 0.9], "directionUnit": [1, 0, 0], "tank": "tandem/oams/tank", "driver": "tandem/oams/driver_09", "coldC": 15, "hotC": 600, "thermalTimeConstantS": 120 }
+    },
+    {
+      "id": "tandem/oams/driver_09",
+      "family": "driver",
+      "name": "OAMS thruster 9 driver",
+      "section": "adapter",
+      "diagram": { "x": 40, "y": 520, "compartment": "adapter_aft" },
+      "load": { "powerW": 6, "priority": "return", "thermalNode": "tandem/thermal/adapter_bay" }
+    },
+    {
+      "id": "tandem/oams/temp_09",
+      "family": "sensor",
+      "name": "OAMS thruster 9 temperature",
+      "section": "adapter",
+      "diagram": { "x": 40, "y": 560, "compartment": "adapter_aft" },
+      "sensor": { "channels": [{ "field": "thruster_c", "measures": "tandem/oams/thruster_09.temperature_c" }], "noiseStd": 3, "quantization": 5 }
+    },
+    {
+      "id": "tandem/power/breaker_oams_09",
+      "family": "breaker",
+      "name": "OAMS T9 breaker",
+      "section": "rm",
+      "control": "crew",
+      "diagram": { "x": 560, "y": 670, "compartment": "cabin" },
+      "breaker": { "from": "tandem/oams/master", "to": "tandem/oams/driver_09" }
+    },
+    {
+      "id": "tandem/oams/thruster_10",
+      "family": "thruster",
+      "name": "OAMS thruster 10",
+      "section": "adapter",
+      "revealable": true,
+      "diagram": { "x": 62, "y": 480, "compartment": "adapter_aft" },
+      "sensors": ["tandem/oams/temp_10"],
+      "thruster": { "thrustN": 400, "ispS": 268, "positionM": [-2.3, 0, -0.9], "directionUnit": [1, 0, 0], "tank": "tandem/oams/tank", "driver": "tandem/oams/driver_10", "coldC": 15, "hotC": 600, "thermalTimeConstantS": 120 }
+    },
+    {
+      "id": "tandem/oams/driver_10",
+      "family": "driver",
+      "name": "OAMS thruster 10 driver",
+      "section": "adapter",
+      "diagram": { "x": 62, "y": 520, "compartment": "adapter_aft" },
+      "load": { "powerW": 6, "priority": "return", "thermalNode": "tandem/thermal/adapter_bay" }
+    },
+    {
+      "id": "tandem/oams/temp_10",
+      "family": "sensor",
+      "name": "OAMS thruster 10 temperature",
+      "section": "adapter",
+      "diagram": { "x": 62, "y": 560, "compartment": "adapter_aft" },
+      "sensor": { "channels": [{ "field": "thruster_c", "measures": "tandem/oams/thruster_10.temperature_c" }], "noiseStd": 3, "quantization": 5 }
+    },
+    {
+      "id": "tandem/power/breaker_oams_10",
+      "family": "breaker",
+      "name": "OAMS T10 breaker",
+      "section": "rm",
+      "control": "crew",
+      "diagram": { "x": 580, "y": 670, "compartment": "cabin" },
+      "breaker": { "from": "tandem/oams/master", "to": "tandem/oams/driver_10" }
+    },
+    {
+      "id": "tandem/oams/thruster_11",
+      "family": "thruster",
+      "name": "OAMS thruster 11",
+      "section": "adapter",
+      "revealable": true,
+      "diagram": { "x": 84, "y": 480, "compartment": "adapter_aft" },
+      "sensors": ["tandem/oams/temp_11"],
+      "thruster": { "thrustN": 400, "ispS": 268, "positionM": [-0.5, 0.9, 0], "directionUnit": [-1, 0, 0], "tank": "tandem/oams/tank", "driver": "tandem/oams/driver_11", "coldC": 15, "hotC": 600, "thermalTimeConstantS": 120 }
+    },
+    {
+      "id": "tandem/oams/driver_11",
+      "family": "driver",
+      "name": "OAMS thruster 11 driver",
+      "section": "adapter",
+      "diagram": { "x": 84, "y": 520, "compartment": "adapter_aft" },
+      "load": { "powerW": 6, "priority": "return", "thermalNode": "tandem/thermal/adapter_bay" }
+    },
+    {
+      "id": "tandem/oams/temp_11",
+      "family": "sensor",
+      "name": "OAMS thruster 11 temperature",
+      "section": "adapter",
+      "diagram": { "x": 84, "y": 560, "compartment": "adapter_aft" },
+      "sensor": { "channels": [{ "field": "thruster_c", "measures": "tandem/oams/thruster_11.temperature_c" }], "noiseStd": 3, "quantization": 5 }
+    },
+    {
+      "id": "tandem/power/breaker_oams_11",
+      "family": "breaker",
+      "name": "OAMS T11 breaker",
+      "section": "rm",
+      "control": "crew",
+      "diagram": { "x": 600, "y": 670, "compartment": "cabin" },
+      "breaker": { "from": "tandem/oams/master", "to": "tandem/oams/driver_11" }
+    },
+    {
+      "id": "tandem/oams/thruster_12",
+      "family": "thruster",
+      "name": "OAMS thruster 12",
+      "section": "adapter",
+      "revealable": true,
+      "diagram": { "x": 106, "y": 480, "compartment": "adapter_aft" },
+      "sensors": ["tandem/oams/temp_12"],
+      "thruster": { "thrustN": 400, "ispS": 268, "positionM": [-0.5, -0.9, 0], "directionUnit": [-1, 0, 0], "tank": "tandem/oams/tank", "driver": "tandem/oams/driver_12", "coldC": 15, "hotC": 600, "thermalTimeConstantS": 120 }
+    },
+    {
+      "id": "tandem/oams/driver_12",
+      "family": "driver",
+      "name": "OAMS thruster 12 driver",
+      "section": "adapter",
+      "diagram": { "x": 106, "y": 520, "compartment": "adapter_aft" },
+      "load": { "powerW": 6, "priority": "return", "thermalNode": "tandem/thermal/adapter_bay" }
+    },
+    {
+      "id": "tandem/oams/temp_12",
+      "family": "sensor",
+      "name": "OAMS thruster 12 temperature",
+      "section": "adapter",
+      "diagram": { "x": 106, "y": 560, "compartment": "adapter_aft" },
+      "sensor": { "channels": [{ "field": "thruster_c", "measures": "tandem/oams/thruster_12.temperature_c" }], "noiseStd": 3, "quantization": 5 }
+    },
+    {
+      "id": "tandem/power/breaker_oams_12",
+      "family": "breaker",
+      "name": "OAMS T12 breaker",
+      "section": "rm",
+      "control": "crew",
+      "diagram": { "x": 620, "y": 670, "compartment": "cabin" },
+      "breaker": { "from": "tandem/oams/master", "to": "tandem/oams/driver_12" }
+    },
+    {
+      "id": "tandem/oams/thruster_13",
+      "family": "thruster",
+      "name": "OAMS thruster 13",
+      "section": "adapter",
+      "revealable": true,
+      "diagram": { "x": 128, "y": 480, "compartment": "adapter_aft" },
+      "sensors": ["tandem/oams/temp_13"],
+      "thruster": { "thrustN": 400, "ispS": 268, "positionM": [-0.3, -1.1, 0], "directionUnit": [0, 1, 0], "tank": "tandem/oams/tank", "driver": "tandem/oams/driver_13", "coldC": 15, "hotC": 600, "thermalTimeConstantS": 120 }
+    },
+    {
+      "id": "tandem/oams/driver_13",
+      "family": "driver",
+      "name": "OAMS thruster 13 driver",
+      "section": "adapter",
+      "diagram": { "x": 128, "y": 520, "compartment": "adapter_aft" },
+      "load": { "powerW": 6, "priority": "return", "thermalNode": "tandem/thermal/adapter_bay" }
+    },
+    {
+      "id": "tandem/oams/temp_13",
+      "family": "sensor",
+      "name": "OAMS thruster 13 temperature",
+      "section": "adapter",
+      "diagram": { "x": 128, "y": 560, "compartment": "adapter_aft" },
+      "sensor": { "channels": [{ "field": "thruster_c", "measures": "tandem/oams/thruster_13.temperature_c" }], "noiseStd": 3, "quantization": 5 }
+    },
+    {
+      "id": "tandem/power/breaker_oams_13",
+      "family": "breaker",
+      "name": "OAMS T13 breaker",
+      "section": "rm",
+      "control": "crew",
+      "diagram": { "x": 640, "y": 670, "compartment": "cabin" },
+      "breaker": { "from": "tandem/oams/master", "to": "tandem/oams/driver_13" }
+    },
+    {
+      "id": "tandem/oams/thruster_14",
+      "family": "thruster",
+      "name": "OAMS thruster 14",
+      "section": "adapter",
+      "revealable": true,
+      "diagram": { "x": 150, "y": 480, "compartment": "adapter_aft" },
+      "sensors": ["tandem/oams/temp_14"],
+      "thruster": { "thrustN": 400, "ispS": 268, "positionM": [-0.3, 1.1, 0], "directionUnit": [0, -1, 0], "tank": "tandem/oams/tank", "driver": "tandem/oams/driver_14", "coldC": 15, "hotC": 600, "thermalTimeConstantS": 120 }
+    },
+    {
+      "id": "tandem/oams/driver_14",
+      "family": "driver",
+      "name": "OAMS thruster 14 driver",
+      "section": "adapter",
+      "diagram": { "x": 150, "y": 520, "compartment": "adapter_aft" },
+      "load": { "powerW": 6, "priority": "return", "thermalNode": "tandem/thermal/adapter_bay" }
+    },
+    {
+      "id": "tandem/oams/temp_14",
+      "family": "sensor",
+      "name": "OAMS thruster 14 temperature",
+      "section": "adapter",
+      "diagram": { "x": 150, "y": 560, "compartment": "adapter_aft" },
+      "sensor": { "channels": [{ "field": "thruster_c", "measures": "tandem/oams/thruster_14.temperature_c" }], "noiseStd": 3, "quantization": 5 }
+    },
+    {
+      "id": "tandem/power/breaker_oams_14",
+      "family": "breaker",
+      "name": "OAMS T14 breaker",
+      "section": "rm",
+      "control": "crew",
+      "diagram": { "x": 660, "y": 670, "compartment": "cabin" },
+      "breaker": { "from": "tandem/oams/master", "to": "tandem/oams/driver_14" }
+    },
+    {
+      "id": "tandem/oams/thruster_15",
+      "family": "thruster",
+      "name": "OAMS thruster 15",
+      "section": "adapter",
+      "revealable": true,
+      "diagram": { "x": 172, "y": 480, "compartment": "adapter_aft" },
+      "sensors": ["tandem/oams/temp_15"],
+      "thruster": { "thrustN": 400, "ispS": 268, "positionM": [-0.3, 0, -1.1], "directionUnit": [0, 0, 1], "tank": "tandem/oams/tank", "driver": "tandem/oams/driver_15", "coldC": 15, "hotC": 600, "thermalTimeConstantS": 120 }
+    },
+    {
+      "id": "tandem/oams/driver_15",
+      "family": "driver",
+      "name": "OAMS thruster 15 driver",
+      "section": "adapter",
+      "diagram": { "x": 172, "y": 520, "compartment": "adapter_aft" },
+      "load": { "powerW": 6, "priority": "return", "thermalNode": "tandem/thermal/adapter_bay" }
+    },
+    {
+      "id": "tandem/oams/temp_15",
+      "family": "sensor",
+      "name": "OAMS thruster 15 temperature",
+      "section": "adapter",
+      "diagram": { "x": 172, "y": 560, "compartment": "adapter_aft" },
+      "sensor": { "channels": [{ "field": "thruster_c", "measures": "tandem/oams/thruster_15.temperature_c" }], "noiseStd": 3, "quantization": 5 }
+    },
+    {
+      "id": "tandem/power/breaker_oams_15",
+      "family": "breaker",
+      "name": "OAMS T15 breaker",
+      "section": "rm",
+      "control": "crew",
+      "diagram": { "x": 680, "y": 670, "compartment": "cabin" },
+      "breaker": { "from": "tandem/oams/master", "to": "tandem/oams/driver_15" }
+    },
+    {
+      "id": "tandem/oams/thruster_16",
+      "family": "thruster",
+      "name": "OAMS thruster 16",
+      "section": "adapter",
+      "revealable": true,
+      "diagram": { "x": 194, "y": 480, "compartment": "adapter_aft" },
+      "sensors": ["tandem/oams/temp_16"],
+      "thruster": { "thrustN": 400, "ispS": 268, "positionM": [-0.3, 0, 1.1], "directionUnit": [0, 0, -1], "tank": "tandem/oams/tank", "driver": "tandem/oams/driver_16", "coldC": 15, "hotC": 600, "thermalTimeConstantS": 120 }
+    },
+    {
+      "id": "tandem/oams/driver_16",
+      "family": "driver",
+      "name": "OAMS thruster 16 driver",
+      "section": "adapter",
+      "diagram": { "x": 194, "y": 520, "compartment": "adapter_aft" },
+      "load": { "powerW": 6, "priority": "return", "thermalNode": "tandem/thermal/adapter_bay" }
+    },
+    {
+      "id": "tandem/oams/temp_16",
+      "family": "sensor",
+      "name": "OAMS thruster 16 temperature",
+      "section": "adapter",
+      "diagram": { "x": 194, "y": 560, "compartment": "adapter_aft" },
+      "sensor": { "channels": [{ "field": "thruster_c", "measures": "tandem/oams/thruster_16.temperature_c" }], "noiseStd": 3, "quantization": 5 }
+    },
+    {
+      "id": "tandem/power/breaker_oams_16",
+      "family": "breaker",
+      "name": "OAMS T16 breaker",
+      "section": "rm",
+      "control": "crew",
+      "diagram": { "x": 700, "y": 670, "compartment": "cabin" },
+      "breaker": { "from": "tandem/oams/master", "to": "tandem/oams/driver_16" }
+    },
+    {
+      "id": "tandem/rcs/ring_a",
+      "family": "thruster_group",
+      "name": "RCS ring A",
+      "section": "rm",
+      "revealable": true,
+      "control": "crew",
+      "diagram": { "x": 980, "y": 200, "compartment": "nose" },
+      "thrusterGroup": { "initiallyArmed": false }
+    },
+    {
+      "id": "tandem/rcs/tank_a",
+      "family": "tank",
+      "name": "RCS ring A propellant",
+      "section": "rm",
+      "diagram": { "x": 1020, "y": 200, "compartment": "nose" },
+      "tank": { "resource": "propellant", "capacityKg": 16.5, "initialKg": 16, "positionM": [1.9, 0.25, 0] }
+    },
+    {
+      "id": "tandem/rcs/ring_a/t01",
+      "family": "thruster",
+      "name": "RCS A thruster 1",
+      "section": "rm",
+      "diagram": { "x": 940, "y": 240, "compartment": "nose" },
+      "thruster": { "thrustN": 110, "ispS": 275, "positionM": [2.2, 0, 0.35], "directionUnit": [0, 0, -1], "tank": "tandem/rcs/tank_a", "driver": "tandem/rcs/driver_a", "group": "tandem/rcs/ring_a", "coldC": 10, "hotC": 450, "thermalTimeConstantS": 90 }
+    },
+    {
+      "id": "tandem/rcs/ring_a/t02",
+      "family": "thruster",
+      "name": "RCS A thruster 2",
+      "section": "rm",
+      "diagram": { "x": 954, "y": 240, "compartment": "nose" },
+      "thruster": { "thrustN": 110, "ispS": 275, "positionM": [2.2, 0, -0.35], "directionUnit": [0, 0, 1], "tank": "tandem/rcs/tank_a", "driver": "tandem/rcs/driver_a", "group": "tandem/rcs/ring_a", "coldC": 10, "hotC": 450, "thermalTimeConstantS": 90 }
+    },
+    {
+      "id": "tandem/rcs/ring_a/t03",
+      "family": "thruster",
+      "name": "RCS A thruster 3",
+      "section": "rm",
+      "diagram": { "x": 968, "y": 240, "compartment": "nose" },
+      "thruster": { "thrustN": 110, "ispS": 275, "positionM": [2.2, -0.35, 0], "directionUnit": [0, 1, 0], "tank": "tandem/rcs/tank_a", "driver": "tandem/rcs/driver_a", "group": "tandem/rcs/ring_a", "coldC": 10, "hotC": 450, "thermalTimeConstantS": 90 }
+    },
+    {
+      "id": "tandem/rcs/ring_a/t04",
+      "family": "thruster",
+      "name": "RCS A thruster 4",
+      "section": "rm",
+      "diagram": { "x": 982, "y": 240, "compartment": "nose" },
+      "thruster": { "thrustN": 110, "ispS": 275, "positionM": [2.2, 0.35, 0], "directionUnit": [0, -1, 0], "tank": "tandem/rcs/tank_a", "driver": "tandem/rcs/driver_a", "group": "tandem/rcs/ring_a", "coldC": 10, "hotC": 450, "thermalTimeConstantS": 90 }
+    },
+    {
+      "id": "tandem/rcs/ring_a/t05",
+      "family": "thruster",
+      "name": "RCS A thruster 5",
+      "section": "rm",
+      "diagram": { "x": 996, "y": 240, "compartment": "nose" },
+      "thruster": { "thrustN": 110, "ispS": 275, "positionM": [2.2, 0, 0.35], "directionUnit": [0, -1, 0], "tank": "tandem/rcs/tank_a", "driver": "tandem/rcs/driver_a", "group": "tandem/rcs/ring_a", "coldC": 10, "hotC": 450, "thermalTimeConstantS": 90 }
+    },
+    {
+      "id": "tandem/rcs/ring_a/t06",
+      "family": "thruster",
+      "name": "RCS A thruster 6",
+      "section": "rm",
+      "diagram": { "x": 1010, "y": 240, "compartment": "nose" },
+      "thruster": { "thrustN": 110, "ispS": 275, "positionM": [2.2, 0, -0.35], "directionUnit": [0, 1, 0], "tank": "tandem/rcs/tank_a", "driver": "tandem/rcs/driver_a", "group": "tandem/rcs/ring_a", "coldC": 10, "hotC": 450, "thermalTimeConstantS": 90 }
+    },
+    {
+      "id": "tandem/rcs/ring_a/t07",
+      "family": "thruster",
+      "name": "RCS A thruster 7",
+      "section": "rm",
+      "diagram": { "x": 1024, "y": 240, "compartment": "nose" },
+      "thruster": { "thrustN": 110, "ispS": 275, "positionM": [2.2, 0, 0.35], "directionUnit": [0, 1, 0], "tank": "tandem/rcs/tank_a", "driver": "tandem/rcs/driver_a", "group": "tandem/rcs/ring_a", "coldC": 10, "hotC": 450, "thermalTimeConstantS": 90 }
+    },
+    {
+      "id": "tandem/rcs/ring_a/t08",
+      "family": "thruster",
+      "name": "RCS A thruster 8",
+      "section": "rm",
+      "diagram": { "x": 1038, "y": 240, "compartment": "nose" },
+      "thruster": { "thrustN": 110, "ispS": 275, "positionM": [2.2, 0, -0.35], "directionUnit": [0, -1, 0], "tank": "tandem/rcs/tank_a", "driver": "tandem/rcs/driver_a", "group": "tandem/rcs/ring_a", "coldC": 10, "hotC": 450, "thermalTimeConstantS": 90 }
+    },
+    {
+      "id": "tandem/rcs/driver_a",
+      "family": "driver",
+      "name": "RCS ring A valve drivers",
+      "section": "rm",
+      "diagram": { "x": 900, "y": 280, "compartment": "nose" },
+      "load": { "powerW": 12, "priority": "return", "thermalNode": "tandem/thermal/cabin" }
+    },
+    {
+      "id": "tandem/rcs/harness_j14_a",
+      "family": "harness",
+      "name": "J-14 harness, ring A",
+      "section": "rm",
+      "diagram": { "x": 860, "y": 280, "compartment": "nose" },
+      "harness": { "from": "tandem/power/breaker_rcs_a", "to": "tandem/rcs/driver_a", "ratingA": 15 }
+    },
+    {
+      "id": "tandem/rcs/ring_a_driver_panel",
+      "family": "structure",
+      "name": "Ring A driver box access panel",
+      "section": "rm",
+      "revealable": true,
+      "diagram": { "x": 880, "y": 310, "compartment": "nose" }
+    },
+    {
+      "id": "tandem/power/breaker_rcs_a",
+      "family": "breaker",
+      "name": "RCS ring A breaker",
+      "section": "rm",
+      "control": "crew",
+      "diagram": { "x": 720, "y": 640, "compartment": "cabin" },
+      "breaker": { "from": "tandem/power/bus_a", "to": "tandem/rcs/harness_j14_a" }
+    },
+    {
+      "id": "tandem/rcs/ring_b",
+      "family": "thruster_group",
+      "name": "RCS ring B",
+      "section": "rm",
+      "revealable": true,
+      "control": "crew",
+      "diagram": { "x": 980, "y": 400, "compartment": "nose" },
+      "thrusterGroup": { "initiallyArmed": false }
+    },
+    {
+      "id": "tandem/rcs/tank_b",
+      "family": "tank",
+      "name": "RCS ring B propellant",
+      "section": "rm",
+      "diagram": { "x": 1020, "y": 400, "compartment": "nose" },
+      "tank": { "resource": "propellant", "capacityKg": 16.5, "initialKg": 16, "positionM": [1.9, -0.25, 0] }
+    },
+    {
+      "id": "tandem/rcs/ring_b/t01",
+      "family": "thruster",
+      "name": "RCS B thruster 1",
+      "section": "rm",
+      "diagram": { "x": 940, "y": 440, "compartment": "nose" },
+      "thruster": { "thrustN": 110, "ispS": 275, "positionM": [2, 0, 0.35], "directionUnit": [0, 0, -1], "tank": "tandem/rcs/tank_b", "driver": "tandem/rcs/driver_b", "group": "tandem/rcs/ring_b", "coldC": 10, "hotC": 450, "thermalTimeConstantS": 90 }
+    },
+    {
+      "id": "tandem/rcs/ring_b/t02",
+      "family": "thruster",
+      "name": "RCS B thruster 2",
+      "section": "rm",
+      "diagram": { "x": 954, "y": 440, "compartment": "nose" },
+      "thruster": { "thrustN": 110, "ispS": 275, "positionM": [2, 0, -0.35], "directionUnit": [0, 0, 1], "tank": "tandem/rcs/tank_b", "driver": "tandem/rcs/driver_b", "group": "tandem/rcs/ring_b", "coldC": 10, "hotC": 450, "thermalTimeConstantS": 90 }
+    },
+    {
+      "id": "tandem/rcs/ring_b/t03",
+      "family": "thruster",
+      "name": "RCS B thruster 3",
+      "section": "rm",
+      "diagram": { "x": 968, "y": 440, "compartment": "nose" },
+      "thruster": { "thrustN": 110, "ispS": 275, "positionM": [2, -0.35, 0], "directionUnit": [0, 1, 0], "tank": "tandem/rcs/tank_b", "driver": "tandem/rcs/driver_b", "group": "tandem/rcs/ring_b", "coldC": 10, "hotC": 450, "thermalTimeConstantS": 90 }
+    },
+    {
+      "id": "tandem/rcs/ring_b/t04",
+      "family": "thruster",
+      "name": "RCS B thruster 4",
+      "section": "rm",
+      "diagram": { "x": 982, "y": 440, "compartment": "nose" },
+      "thruster": { "thrustN": 110, "ispS": 275, "positionM": [2, 0.35, 0], "directionUnit": [0, -1, 0], "tank": "tandem/rcs/tank_b", "driver": "tandem/rcs/driver_b", "group": "tandem/rcs/ring_b", "coldC": 10, "hotC": 450, "thermalTimeConstantS": 90 }
+    },
+    {
+      "id": "tandem/rcs/ring_b/t05",
+      "family": "thruster",
+      "name": "RCS B thruster 5",
+      "section": "rm",
+      "diagram": { "x": 996, "y": 440, "compartment": "nose" },
+      "thruster": { "thrustN": 110, "ispS": 275, "positionM": [2, 0, 0.35], "directionUnit": [0, -1, 0], "tank": "tandem/rcs/tank_b", "driver": "tandem/rcs/driver_b", "group": "tandem/rcs/ring_b", "coldC": 10, "hotC": 450, "thermalTimeConstantS": 90 }
+    },
+    {
+      "id": "tandem/rcs/ring_b/t06",
+      "family": "thruster",
+      "name": "RCS B thruster 6",
+      "section": "rm",
+      "diagram": { "x": 1010, "y": 440, "compartment": "nose" },
+      "thruster": { "thrustN": 110, "ispS": 275, "positionM": [2, 0, -0.35], "directionUnit": [0, 1, 0], "tank": "tandem/rcs/tank_b", "driver": "tandem/rcs/driver_b", "group": "tandem/rcs/ring_b", "coldC": 10, "hotC": 450, "thermalTimeConstantS": 90 }
+    },
+    {
+      "id": "tandem/rcs/ring_b/t07",
+      "family": "thruster",
+      "name": "RCS B thruster 7",
+      "section": "rm",
+      "diagram": { "x": 1024, "y": 440, "compartment": "nose" },
+      "thruster": { "thrustN": 110, "ispS": 275, "positionM": [2, 0, 0.35], "directionUnit": [0, 1, 0], "tank": "tandem/rcs/tank_b", "driver": "tandem/rcs/driver_b", "group": "tandem/rcs/ring_b", "coldC": 10, "hotC": 450, "thermalTimeConstantS": 90 }
+    },
+    {
+      "id": "tandem/rcs/ring_b/t08",
+      "family": "thruster",
+      "name": "RCS B thruster 8",
+      "section": "rm",
+      "diagram": { "x": 1038, "y": 440, "compartment": "nose" },
+      "thruster": { "thrustN": 110, "ispS": 275, "positionM": [2, 0, -0.35], "directionUnit": [0, -1, 0], "tank": "tandem/rcs/tank_b", "driver": "tandem/rcs/driver_b", "group": "tandem/rcs/ring_b", "coldC": 10, "hotC": 450, "thermalTimeConstantS": 90 }
+    },
+    {
+      "id": "tandem/rcs/driver_b",
+      "family": "driver",
+      "name": "RCS ring B valve drivers",
+      "section": "rm",
+      "diagram": { "x": 900, "y": 480, "compartment": "nose" },
+      "load": { "powerW": 12, "priority": "return", "thermalNode": "tandem/thermal/cabin" }
+    },
+    {
+      "id": "tandem/rcs/harness_j14_b",
+      "family": "harness",
+      "name": "J-14 harness, ring B",
+      "section": "rm",
+      "diagram": { "x": 860, "y": 480, "compartment": "nose" },
+      "harness": { "from": "tandem/power/breaker_rcs_b", "to": "tandem/rcs/driver_b", "ratingA": 15 }
+    },
+    {
+      "id": "tandem/rcs/ring_b_driver_panel",
+      "family": "structure",
+      "name": "Ring B driver box access panel",
+      "section": "rm",
+      "revealable": true,
+      "diagram": { "x": 880, "y": 510, "compartment": "nose" }
+    },
+    {
+      "id": "tandem/power/breaker_rcs_b",
+      "family": "breaker",
+      "name": "RCS ring B breaker",
+      "section": "rm",
+      "control": "crew",
+      "diagram": { "x": 720, "y": 670, "compartment": "cabin" },
+      "breaker": { "from": "tandem/power/bus_b", "to": "tandem/rcs/harness_j14_b" }
+    },
+    {
+      "id": "tandem/power/bus_a",
+      "family": "bus",
+      "name": "Main bus A",
+      "section": "rm",
+      "diagram": { "x": 500, "y": 520, "compartment": "cabin" },
+      "bus": { "nominalV": 28, "brownoutV": 22, "droopV": 1.5 }
+    },
+    {
+      "id": "tandem/power/bus_b",
+      "family": "bus",
+      "name": "Main bus B",
+      "section": "rm",
+      "diagram": { "x": 500, "y": 560, "compartment": "cabin" },
+      "bus": { "nominalV": 28, "brownoutV": 22, "droopV": 1.5 }
+    },
+    {
+      "id": "tandem/power/bus_tie",
+      "family": "switch",
+      "name": "Bus A/B tie",
+      "section": "rm",
+      "control": "remote",
+      "diagram": { "x": 480, "y": 540, "compartment": "cabin" },
+      "switch": { "from": "tandem/power/bus_a", "to": "tandem/power/bus_b" }
+    },
+    {
+      "id": "tandem/power/aux_outlet_a3",
+      "family": "outlet",
+      "name": "Main bus A aux 3",
+      "section": "rm",
+      "control": "crew",
+      "diagram": { "x": 540, "y": 500, "compartment": "cabin" },
+      "outlet": { "bus": "tandem/power/bus_a", "connector": "d_type", "ratingA": 15 }
+    },
+    {
+      "id": "tandem/power/fuel_cell_1",
+      "family": "fuel_cell",
+      "name": "Fuel cell 1",
+      "section": "adapter",
+      "diagram": { "x": 260, "y": 160, "compartment": "adapter_fwd" },
+      "fuelCell": { "bus": "tandem/power/bus_a", "maxPowerW": 1000, "o2Tank": "tandem/cryo/o2_tank", "h2Tank": "tandem/cryo/h2_tank", "reactantKgPerKwh": 0.4, "waterTank": "tandem/ls/water_tank", "wasteHeatFraction": 0.6, "thermalNode": "tandem/thermal/adapter_bay" }
+    },
+    {
+      "id": "tandem/power/fuel_cell_2",
+      "family": "fuel_cell",
+      "name": "Fuel cell 2",
+      "section": "adapter",
+      "diagram": { "x": 260, "y": 220, "compartment": "adapter_fwd" },
+      "fuelCell": { "bus": "tandem/power/bus_b", "maxPowerW": 1000, "o2Tank": "tandem/cryo/o2_tank", "h2Tank": "tandem/cryo/h2_tank", "reactantKgPerKwh": 0.4, "waterTank": "tandem/ls/water_tank", "wasteHeatFraction": 0.6, "thermalNode": "tandem/thermal/adapter_bay" }
+    },
+    {
+      "id": "tandem/power/main_battery",
+      "family": "battery",
+      "name": "Main battery",
+      "section": "adapter",
+      "diagram": { "x": 300, "y": 300, "compartment": "adapter_fwd" },
+      "battery": { "bus": "tandem/power/bus_a", "capacityKwh": 2.5, "initialKwh": 2.4, "maxDischargeW": 1500, "maxChargeW": 150, "thermalNode": "tandem/thermal/adapter_bay" }
+    },
+    {
+      "id": "tandem/power/reentry_battery",
+      "family": "battery",
+      "name": "Re-entry batteries",
+      "section": "rm",
+      "diagram": { "x": 620, "y": 520, "compartment": "cabin" },
+      "battery": { "bus": "tandem/power/bus_b", "capacityKwh": 6.5, "initialKwh": 6.5, "maxDischargeW": 1400, "thermalNode": "tandem/thermal/battery" }
+    },
+    {
+      "id": "tandem/power/breaker_experiment",
+      "family": "breaker",
+      "name": "Experiment package breaker",
+      "section": "rm",
+      "control": "remote",
+      "diagram": { "x": 760, "y": 640, "compartment": "cabin" },
+      "breaker": { "from": "tandem/power/bus_b", "to": "tandem/adapter/experiment_package" }
+    },
+    {
+      "id": "tandem/power/breaker_radar",
+      "family": "breaker",
+      "name": "Rendezvous radar breaker",
+      "section": "rm",
+      "control": "remote",
+      "diagram": { "x": 780, "y": 640, "compartment": "cabin" },
+      "breaker": { "from": "tandem/power/bus_a", "to": "tandem/nose/radar" }
+    },
+    {
+      "id": "tandem/power/breaker_cabin_heater",
+      "family": "breaker",
+      "name": "Cabin heater breaker",
+      "section": "rm",
+      "control": "remote",
+      "diagram": { "x": 800, "y": 640, "compartment": "cabin" },
+      "breaker": { "from": "tandem/power/bus_b", "to": "tandem/thermal/cabin_heater" }
+    },
+    {
+      "id": "tandem/power/breaker_lights",
+      "family": "breaker",
+      "name": "Cabin lights breaker",
+      "section": "rm",
+      "control": "remote",
+      "diagram": { "x": 820, "y": 640, "compartment": "cabin" },
+      "breaker": { "from": "tandem/power/bus_b", "to": "tandem/cabin/lights" }
+    },
+    {
+      "id": "tandem/cryo/o2_tank",
+      "family": "tank",
+      "name": "Cryogenic O2",
+      "section": "adapter",
+      "diagram": { "x": 300, "y": 120, "compartment": "adapter_fwd" },
+      "tank": { "resource": "o2", "capacityKg": 60, "initialKg": 50, "positionM": [-1.1, 0.5, 0] }
+    },
+    {
+      "id": "tandem/cryo/h2_tank",
+      "family": "tank",
+      "name": "Cryogenic H2",
+      "section": "adapter",
+      "diagram": { "x": 300, "y": 80, "compartment": "adapter_fwd" },
+      "tank": { "resource": "h2", "capacityKg": 7, "initialKg": 6, "positionM": [-1.1, -0.5, 0] }
+    },
+    {
+      "id": "tandem/ls/cabin",
+      "family": "compartment",
+      "name": "Cabin",
+      "section": "rm",
+      "diagram": { "x": 560, "y": 360, "compartment": "cabin" },
+      "sensors": ["tandem/ls/co2_sensor", "tandem/ls/pressure_sensor"]
+    },
+    {
+      "id": "tandem/ls/o2_regulator",
+      "family": "regulator",
+      "name": "Cabin O2 regulator",
+      "section": "rm",
+      "diagram": { "x": 600, "y": 420, "compartment": "cabin" },
+      "regulator": { "tank": "tandem/cryo/o2_tank", "secondaryTank": "tandem/ls/o2_secondary", "setpointKpa": 34, "maxFlowKgPerS": 0.0001667 }
+    },
+    {
+      "id": "tandem/ls/o2_secondary",
+      "family": "tank",
+      "name": "Secondary O2 bottles",
+      "section": "rm",
+      "diagram": { "x": 640, "y": 420, "compartment": "cabin" },
+      "tank": { "resource": "o2", "capacityKg": 3.2, "initialKg": 3, "positionM": [0.9, 0, 0.5] }
+    },
+    {
+      "id": "tandem/ls/cabin_fan",
+      "family": "fan",
+      "name": "Suit/cabin fan",
+      "section": "rm",
+      "diagram": { "x": 520, "y": 420, "compartment": "cabin" },
+      "fan": { "airflowM3PerS": 0.12 },
+      "load": { "bus": "tandem/power/bus_b", "powerW": 45, "priority": "survival", "thermalNode": "tandem/thermal/cabin" }
+    },
+    {
+      "id": "tandem/ls/lioh_canister",
+      "family": "scrubber",
+      "name": "LiOH canister",
+      "section": "rm",
+      "control": "crew",
+      "diagram": { "x": 480, "y": 420, "compartment": "cabin" },
+      "scrubber": { "capacityKgCo2": 2.4, "removalEfficiency": 0.9 }
+    },
+    {
+      "id": "tandem/ls/co2_sensor",
+      "family": "sensor",
+      "name": "Cabin CO2 sensor",
+      "section": "rm",
+      "diagram": { "x": 520, "y": 460, "compartment": "cabin" },
+      "sensor": { "channels": [{ "field": "ppco2_mmhg", "measures": "cabin.tandem.ppco2_mmhg" }], "noiseStd": 0.2, "quantization": 0.1 },
+      "load": { "bus": "tandem/power/bus_b", "powerW": 3, "priority": "support" }
+    },
+    {
+      "id": "tandem/ls/pressure_sensor",
+      "family": "sensor",
+      "name": "Cabin pressure sensor",
+      "section": "rm",
+      "diagram": { "x": 560, "y": 460, "compartment": "cabin" },
+      "sensor": { "channels": [{ "field": "pressure_kpa", "measures": "cabin.tandem.pressure_kpa" }], "noiseStd": 0.1, "quantization": 0.1 },
+      "load": { "bus": "tandem/power/bus_b", "powerW": 2, "priority": "support" }
+    },
+    {
+      "id": "tandem/ls/water_tank",
+      "family": "tank",
+      "name": "Water tank",
+      "section": "rm",
+      "diagram": { "x": 640, "y": 460, "compartment": "cabin" },
+      "tank": { "resource": "water", "capacityKg": 30, "initialKg": 8, "positionM": [0.8, 0, -0.4] }
+    },
+    {
+      "id": "tandem/thermal/cabin",
+      "family": "thermal_node",
+      "name": "Cabin thermal node",
+      "section": "rm",
+      "diagram": { "x": 600, "y": 340, "compartment": "cabin" },
+      "sensors": ["tandem/thermal/cabin_temp_sensor"],
+      "thermalNode": { "heatCapacityJPerK": 250000, "initialC": 22, "minC": 5, "maxC": 35 }
+    },
+    {
+      "id": "tandem/thermal/adapter_bay",
+      "family": "thermal_node",
+      "name": "Equipment bay thermal node",
+      "section": "adapter",
+      "diagram": { "x": 220, "y": 340, "compartment": "adapter_fwd" },
+      "thermalNode": { "heatCapacityJPerK": 400000, "initialC": 15, "minC": -20, "maxC": 50 }
+    },
+    {
+      "id": "tandem/thermal/battery",
+      "family": "thermal_node",
+      "name": "Re-entry battery thermal node",
+      "section": "rm",
+      "diagram": { "x": 640, "y": 540, "compartment": "cabin" },
+      "thermalNode": { "heatCapacityJPerK": 80000, "initialC": 20, "minC": 0, "maxC": 45 }
+    },
+    {
+      "id": "tandem/thermal/coolant_pump",
+      "family": "pump",
+      "name": "Coolant pump",
+      "section": "adapter",
+      "diagram": { "x": 260, "y": 380, "compartment": "adapter_fwd" },
+      "pump": { "flowKgPerS": 0.08 },
+      "load": { "bus": "tandem/power/bus_a", "powerW": 70, "priority": "survival", "thermalNode": "tandem/thermal/adapter_bay" }
+    },
+    {
+      "id": "tandem/thermal/cabin_heater",
+      "family": "heater",
+      "name": "Cabin heater",
+      "section": "rm",
+      "control": "remote",
+      "diagram": { "x": 560, "y": 400, "compartment": "cabin" },
+      "heater": { "node": "tandem/thermal/cabin", "setpointC": 18, "hysteresisC": 2 },
+      "load": { "powerW": 150, "priority": "support", "thermalNode": "tandem/thermal/cabin", "initiallyOn": false }
+    },
+    {
+      "id": "tandem/thermal/cabin_temp_sensor",
+      "family": "sensor",
+      "name": "Cabin temperature sensor",
+      "section": "rm",
+      "diagram": { "x": 600, "y": 460, "compartment": "cabin" },
+      "sensor": { "channels": [{ "field": "cabin_c", "measures": "thermal.tandem/thermal/cabin.temp_c" }], "noiseStd": 0.2, "quantization": 0.5 },
+      "load": { "bus": "tandem/power/bus_b", "powerW": 2, "priority": "support" }
+    },
+    {
+      "id": "tandem/gnc/computer",
+      "family": "load",
+      "name": "Guidance computer",
+      "section": "rm",
+      "diagram": { "x": 680, "y": 300, "compartment": "cabin" },
+      "load": { "bus": "tandem/power/bus_a", "powerW": 95, "priority": "return", "thermalNode": "tandem/thermal/cabin" }
+    },
+    {
+      "id": "tandem/gnc/rate_gyros",
+      "family": "sensor",
+      "name": "Rate gyro package",
+      "section": "rm",
+      "diagram": { "x": 680, "y": 340, "compartment": "cabin" },
+      "sensor": { "channels": [{ "field": "roll_dps", "measures": "attitude.tandem.rate_roll_dps" },{ "field": "pitch_dps", "measures": "attitude.tandem.rate_pitch_dps" },{ "field": "yaw_dps", "measures": "attitude.tandem.rate_yaw_dps" }], "noiseStd": 0.3, "quantization": 0.5 },
+      "load": { "bus": "tandem/power/bus_a", "powerW": 25, "priority": "return", "thermalNode": "tandem/thermal/cabin" }
+    },
+    {
+      "id": "tandem/comms/transceiver",
+      "family": "load",
+      "name": "Voice/telemetry transceiver",
+      "section": "rm",
+      "diagram": { "x": 720, "y": 300, "compartment": "cabin" },
+      "load": { "bus": "tandem/power/bus_a", "powerW": 60, "priority": "survival", "thermalNode": "tandem/thermal/cabin" }
+    },
+    {
+      "id": "tandem/cabin/lights",
+      "family": "load",
+      "name": "Cabin lights",
+      "section": "rm",
+      "diagram": { "x": 560, "y": 260, "compartment": "cabin" },
+      "load": { "powerW": 40, "priority": "discretionary", "thermalNode": "tandem/thermal/cabin" }
+    },
+    {
+      "id": "tandem/retro/rocket_1",
+      "family": "retro_rocket",
+      "name": "Retro rocket 1",
+      "section": "retro",
+      "revealable": true,
+      "control": "crew",
+      "diagram": { "x": 340, "y": 270, "compartment": "retro" },
+      "retroRocket": { "thrustN": 12600, "burnS": 5.5, "propellantKg": 30.7, "ignitionOffsetS": 0, "positionM": [-0.3, 0.25, 0.25], "directionUnit": [1, 0, 0] }
+    },
+    {
+      "id": "tandem/retro/rocket_2",
+      "family": "retro_rocket",
+      "name": "Retro rocket 2",
+      "section": "retro",
+      "revealable": true,
+      "control": "crew",
+      "diagram": { "x": 370, "y": 270, "compartment": "retro" },
+      "retroRocket": { "thrustN": 12600, "burnS": 5.5, "propellantKg": 30.7, "ignitionOffsetS": 4, "positionM": [-0.3, -0.25, 0.25], "directionUnit": [1, 0, 0] }
+    },
+    {
+      "id": "tandem/retro/rocket_3",
+      "family": "retro_rocket",
+      "name": "Retro rocket 3",
+      "section": "retro",
+      "revealable": true,
+      "control": "crew",
+      "diagram": { "x": 340, "y": 330, "compartment": "retro" },
+      "retroRocket": { "thrustN": 12600, "burnS": 5.5, "propellantKg": 30.7, "ignitionOffsetS": 8, "positionM": [-0.3, -0.25, -0.25], "directionUnit": [1, 0, 0] }
+    },
+    {
+      "id": "tandem/retro/rocket_4",
+      "family": "retro_rocket",
+      "name": "Retro rocket 4",
+      "section": "retro",
+      "revealable": true,
+      "control": "crew",
+      "diagram": { "x": 370, "y": 330, "compartment": "retro" },
+      "retroRocket": { "thrustN": 12600, "burnS": 5.5, "propellantKg": 30.7, "ignitionOffsetS": 12, "positionM": [-0.3, 0.25, -0.25], "directionUnit": [1, 0, 0] }
+    },
+    {
+      "id": "tandem/chute/drogue",
+      "family": "parachute",
+      "name": "Drogue parachute",
+      "section": "rm",
+      "control": "crew",
+      "diagram": { "x": 820, "y": 340, "compartment": "nose" },
+      "parachute": { "dragAreaM2": 4.5, "dragCoefficient": 0.6, "nominalDeployAltitudeKm": 15 }
+    },
+    {
+      "id": "tandem/chute/main",
+      "family": "parachute",
+      "name": "Main parachute",
+      "section": "rm",
+      "control": "crew",
+      "diagram": { "x": 820, "y": 380, "compartment": "nose" },
+      "parachute": { "dragAreaM2": 450, "dragCoefficient": 0.8, "nominalDeployAltitudeKm": 3.2 }
+    }
+  ],
+  "thermalLinks": [
+    { "a": "tandem/thermal/cabin", "b": "tandem/thermal/battery", "conductanceWPerK": 6 },
+    { "a": "tandem/thermal/cabin", "b": "tandem/thermal/adapter_bay", "conductanceWPerK": 50 }
+  ],
+  "cabin": { "compartment": "tandem/ls/cabin", "thermalNode": "tandem/thermal/cabin", "volumeM3": 2.55, "initialPressureKpa": 34.5, "initialPpO2Kpa": 34.1, "initialPpCo2Kpa": 0.13, "leakRateKgPerS": 0.000001 },
+  "provisions": { "foodKcal": 18200, "potableWaterL": 16 }
+}

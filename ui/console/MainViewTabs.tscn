@@ -1,0 +1,153 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Console/Regions/MainViewTabs.cs" id="1_mainviewtabs"]
+[ext_resource type="PackedScene" path="res://ui/views/ExternalView.tscn" id="2_externalview"]
+[ext_resource type="PackedScene" path="res://ui/console/overlays/CaptionPanel.tscn" id="3_captionpanel"]
+[ext_resource type="PackedScene" path="res://ui/map/OrbitMapView.tscn" id="4_orbitmap"]
+[ext_resource type="PackedScene" path="res://ui/workspace/EngineeringWorkspace.tscn" id="5_workspace"]
+[ext_resource type="PackedScene" path="res://ui/entry/RecoveryCard.tscn" id="6_recoverycard"]
+[ext_resource type="PackedScene" path="res://ui/console/overlays/ClosingCard.tscn" id="7_closingcard"]
+[ext_resource type="PackedScene" path="res://ui/views/InternalDiagram.tscn" id="8_diagram"]
+
+[node name="MainViewTabs" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 640)
+script = ExtResource("1_mainviewtabs")
+
+[node name="Layout" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Tabs" type="TabBar" parent="Layout"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 40)
+clip_tabs = true
+tab_count = 4
+tab_0/title = "Orbit   1"
+tab_1/title = "External   2"
+tab_2/title = "Diagram   3"
+tab_3/title = "Workspace   4"
+tab_3/disabled = true
+
+[node name="Views" type="Control" parent="Layout"]
+layout_mode = 2
+size_flags_vertical = 3
+clip_contents = true
+mouse_filter = 1
+
+[node name="OrbitSlot" type="Control" parent="Layout/Views"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+visible = true
+mouse_filter = 1
+
+[node name="Orbit" parent="Layout/Views/OrbitSlot" instance=ExtResource("4_orbitmap")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ExternalSlot" type="Control" parent="Layout/Views"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+visible = false
+mouse_filter = 1
+
+[node name="External" parent="Layout/Views/ExternalSlot" instance=ExtResource("2_externalview")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DiagramSlot" type="Control" parent="Layout/Views"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+visible = false
+mouse_filter = 1
+
+[node name="Diagram" parent="Layout/Views/DiagramSlot" instance=ExtResource("8_diagram")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WorkspaceSlot" type="Control" parent="Layout/Views"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+visible = false
+mouse_filter = 1
+
+[node name="Workspace" parent="Layout/Views/WorkspaceSlot" instance=ExtResource("5_workspace")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RecoveryCard" parent="Layout/Views" instance=ExtResource("6_recoverycard")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -188.0
+offset_right = 260.0
+offset_bottom = 188.0
+grow_horizontal = 2
+grow_vertical = 2
+visible = false
+
+[node name="ClosingCard" parent="Layout/Views" instance=ExtResource("7_closingcard")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="Captions" parent="Layout/Views" instance=ExtResource("3_captionpanel")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_top = -220.0
+offset_right = 400.0
+offset_bottom = -124.0
+grow_horizontal = 2
+grow_vertical = 0

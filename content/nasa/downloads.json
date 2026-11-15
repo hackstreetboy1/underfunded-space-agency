@@ -1,0 +1,167 @@
+{
+  "schema": "nasa_downloads/1",
+  "items": {
+    "epic:epic_1b_20261112053238": {
+      "key": "epic:epic_1b_20261112053238",
+      "localPath": "content/nasa/reference/epic/epic_1b_20261112053238.png",
+      "mediaUrl": "https://epic.gsfc.nasa.gov/archive/natural/2026/11/12/png/epic_1b_20261112053238.png",
+      "mediaType": "image/png",
+      "sha256": "2f06c330e06f7f3e1a6d3c10909331330ed234304561192aa39abe22e754cc64",
+      "bytes": 3081904,
+      "retrievalDate": "2026-11-15T03:27:04Z"
+    },
+    "epic:epic_1b_20261112143251": {
+      "key": "epic:epic_1b_20261112143251",
+      "localPath": "content/nasa/media/epic/epic_1b_20261112143251.png",
+      "mediaUrl": "https://epic.gsfc.nasa.gov/archive/natural/2026/11/12/png/epic_1b_20261112143251.png",
+      "mediaType": "image/png",
+      "sha256": "8fb422157dadffd580f038328eec2bd28bb2f68ec452de1edbcf175fc386c513",
+      "bytes": 3079479,
+      "retrievalDate": "2026-11-15T05:28:29Z"
+    },
+    "epic:epic_1b_20261112162053": {
+      "key": "epic:epic_1b_20261112162053",
+      "localPath": "content/nasa/reference/epic/epic_1b_20261112162053.png",
+      "mediaUrl": "https://epic.gsfc.nasa.gov/archive/natural/2026/11/12/png/epic_1b_20261112162053.png",
+      "mediaType": "image/png",
+      "sha256": "89a91f711a4af5060cc18f5dd2a47ed5846ba9489161f899daf9c16b2557f7cb",
+      "bytes": 3254151,
+      "retrievalDate": "2026-11-15T03:27:04Z"
+    },
+    "image_library:S63-16250": {
+      "key": "image_library:S63-16250",
+      "localPath": "content/nasa/media/image_library/S63-16250.jpg",
+      "mediaUrl": "https://images-assets.nasa.gov/image/S63-16250/S63-16250~large.jpg",
+      "mediaType": "image/jpeg",
+      "sha256": "9e3674a98ee0c7f39548fc8568d3b56895ace1f0b93df98f36aaec1fa7cd643a",
+      "bytes": 491847,
+      "retrievalDate": "2026-11-15T05:28:30Z"
+    },
+    "image_library:S65-18695": {
+      "key": "image_library:S65-18695",
+      "localPath": "content/nasa/media/image_library/S65-18695.jpg",
+      "mediaUrl": "https://images-assets.nasa.gov/image/S65-18695/S65-18695~large.jpg",
+      "mediaType": "image/jpeg",
+      "sha256": "970f93359eed634258c6c71dbeead2052c55d2b846acd4c60be4cf56bfdb5306",
+      "bytes": 464746,
+      "retrievalDate": "2026-11-15T05:28:30Z"
+    },
+    "image_library:S66-24465": {
+      "key": "image_library:S66-24465",
+      "localPath": "content/nasa/media/image_library/S66-24465.jpg",
+      "mediaUrl": "https://images-assets.nasa.gov/image/S66-24465/S66-24465~medium.jpg",
+      "mediaType": "image/jpeg",
+      "sha256": "e9726d3009f1658e119a7b6a88e6cdbe038041f3af3c6e60915897559609c92e",
+      "bytes": 58514,
+      "retrievalDate": "2026-11-15T05:28:47Z"
+    },
+    "image_library:S66-25781": {
+      "key": "image_library:S66-25781",
+      "localPath": "content/nasa/media/image_library/S66-25781.jpg",
+      "mediaUrl": "https://images-assets.nasa.gov/image/S66-25781/S66-25781~large.jpg",
+      "mediaType": "image/jpeg",
+      "sha256": "c10d3f82ce51bc510e8011f6907f3a4db0c22645859e8889ba8fbfabe9f3fb73",
+      "bytes": 127146,
+      "retrievalDate": "2026-11-15T05:28:48Z"
+    },
+    "image_library:S66-34126": {
+      "key": "image_library:S66-34126",
+      "localPath": "content/nasa/media/image_library/S66-34126.jpg",
+      "mediaUrl": "https://images-assets.nasa.gov/image/S66-34126/S66-34126~large.jpg",
+      "mediaType": "image/jpeg",
+      "sha256": "451210ad333afb62e9479dd03adac4955d99165390b336283521b625ec270132",
+      "bytes": 223859,
+      "retrievalDate": "2026-11-15T05:28:48Z"
+    },
+    "image_library:S66-54555": {
+      "key": "image_library:S66-54555",
+      "localPath": "content/nasa/media/image_library/S66-54555.jpg",
+      "mediaUrl": "https://images-assets.nasa.gov/image/S66-54555/S66-54555~large.jpg",
+      "mediaType": "image/jpeg",
+      "sha256": "b8b64a7ae09bc15bdae4da99f6f28e4ae957aa7773d39ababe0a4d76c1cc5a09",
+      "bytes": 200351,
+      "retrievalDate": "2026-11-15T05:28:48Z"
+    },
+    "image_library:s64-03506": {
+      "key": "image_library:s64-03506",
+      "localPath": "content/nasa/media/image_library/s64-03506.jpg",
+      "mediaUrl": "https://images-assets.nasa.gov/image/s64-03506/s64-03506~large.jpg",
+      "mediaType": "image/jpeg",
+      "sha256": "07673cb2d9ed837a5871a699028ef1bd84a48e78f6078057d207d9b8b30b9fc7",
+      "bytes": 136268,
+      "retrievalDate": "2026-11-15T05:28:48Z"
+    },
+    "image_library:s64-03507": {
+      "key": "image_library:s64-03507",
+      "localPath": "content/nasa/media/image_library/s64-03507.jpg",
+      "mediaUrl": "https://images-assets.nasa.gov/image/s64-03507/s64-03507~large.jpg",
+      "mediaType": "image/jpeg",
+      "sha256": "f91276a9b9844508452c2d87c29fa10b6a5984802b1107246f788efea7dc188c",
+      "bytes": 158986,
+      "retrievalDate": "2026-11-15T05:28:49Z"
+    },
+    "image_library:s65-18645": {
+      "key": "image_library:s65-18645",
+      "localPath": "content/nasa/media/image_library/s65-18645.jpg",
+      "mediaUrl": "https://images-assets.nasa.gov/image/s65-18645/s65-18645~large.jpg",
+      "mediaType": "image/jpeg",
+      "sha256": "e517f5d32dace25d17d800d0a3bd29e456866bf104b41fa2c394feb04eed06f6",
+      "bytes": 436857,
+      "retrievalDate": "2026-11-15T05:28:49Z"
+    },
+    "image_library:s65-45280": {
+      "key": "image_library:s65-45280",
+      "localPath": "content/nasa/media/image_library/s65-45280.jpg",
+      "mediaUrl": "https://images-assets.nasa.gov/image/s65-45280/s65-45280~medium.jpg",
+      "mediaType": "image/jpeg",
+      "sha256": "36f20b65fa9273edd22dcabe33bd5f05eb3ede2bd5bf66e35b5a4d047a59fe87",
+      "bytes": 114949,
+      "retrievalDate": "2026-11-15T05:28:49Z"
+    },
+    "image_library:s65-65257": {
+      "key": "image_library:s65-65257",
+      "localPath": "content/nasa/media/image_library/s65-65257.jpg",
+      "mediaUrl": "https://images-assets.nasa.gov/image/s65-65257/s65-65257~large.jpg",
+      "mediaType": "image/jpeg",
+      "sha256": "844261c91bf225c13e5cde76dbfde86a12095b029a2844fff66f1f0478a52dd2",
+      "bytes": 137680,
+      "retrievalDate": "2026-11-15T05:28:49Z"
+    },
+    "image_library:s66-18613": {
+      "key": "image_library:s66-18613",
+      "localPath": "content/nasa/media/image_library/s66-18613.jpg",
+      "mediaUrl": "https://images-assets.nasa.gov/image/s66-18613/s66-18613~large.jpg",
+      "mediaType": "image/jpeg",
+      "sha256": "17d3133a348d8f92451be60dd1bb03b0c4393d08f8863f2b076521b83054dd65",
+      "bytes": 528207,
+      "retrievalDate": "2026-11-15T05:28:50Z"
+    },
+    "image_library:s66-22686": {
+      "key": "image_library:s66-22686",
+      "localPath": "content/nasa/media/image_library/s66-22686.jpg",
+      "mediaUrl": "https://images-assets.nasa.gov/image/s66-22686/s66-22686~large.jpg",
+      "mediaType": "image/jpeg",
+      "sha256": "bf6985925a02695482ac9c5c58ae09d1a3c3a05f879672487d2aca144c0f7e64",
+      "bytes": 432817,
+      "retrievalDate": "2026-11-15T05:28:50Z"
+    },
+    "image_library:s66-34101": {
+      "key": "image_library:s66-34101",
+      "localPath": "content/nasa/media/image_library/s66-34101.jpg",
+      "mediaUrl": "https://images-assets.nasa.gov/image/s66-34101/s66-34101~large.jpg",
+      "mediaType": "image/jpeg",
+      "sha256": "6b1c9365b3ecf016f5b5ace1b7d7c89350359eb8bee9278f6e3dac7ec1d82996",
+      "bytes": 360332,
+      "retrievalDate": "2026-11-15T05:28:50Z"
+    },
+    "image_library:s66-54530": {
+      "key": "image_library:s66-54530",
+      "localPath": "content/nasa/media/image_library/s66-54530.jpg",
+      "mediaUrl": "https://images-assets.nasa.gov/image/s66-54530/s66-54530~large.jpg",
+      "mediaType": "image/jpeg",
+      "sha256": "ee0c0c2f52d68bf8b58a13cf620c018ecd75e8b9656f3fe8fd0004fd21a42415",
+      "bytes": 332952,
+      "retrievalDate": "2026-11-15T05:28:50Z"
+    }
+  }
+}

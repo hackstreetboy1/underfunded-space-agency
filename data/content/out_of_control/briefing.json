@@ -1,0 +1,193 @@
+{
+  "schema": "briefing/1",
+  "missionId": "out_of_control",
+  "title": "Out of Control",
+  "header": {
+    "agency": "United Space Administration",
+    "vehicles": "Gemini 8 with Agena Target Vehicle",
+    "era": "1966",
+    "orbit": "Earth orbit, about 300 km",
+    "missionStart": "MET 06:20:00"
+  },
+  "premise": [
+    "MET 06:20:00. Gemini 8 is holding 50 metres behind the Agena Target Vehicle in a near-circular orbit about 300 km up. The rendezvous went to plan, which the agency would like noted in the record.",
+    "Today's flight plan attempts three things the agency has never done: join two spacecraft in orbit, use the target's engine to push the joined stack into a higher orbit, and send the Pilot outside to bring home an experiment package from the equipment section.",
+    "You are CAPCOM. You cannot see inside the cabin. You know what telemetry shows, what the crew tells you, and what you ask them to check. Ask often."
+  ],
+  "objectives": [
+    {
+      "id": "o1_dock",
+      "title": "Dock with Agena",
+      "summary": "Cal flies Gemini 8's docking bar into Agena's docking cone and confirms the latches.",
+      "successCriteria": [
+        "Docking latches confirmed by the crew.",
+        "One crew task for Cal, about 90 seconds of mission time."
+      ],
+      "weightNote": "30 % of the flight-objectives score."
+    },
+    {
+      "id": "o2_docked_burn",
+      "title": "Docked orbit-raise burn",
+      "summary": "With the stack docked, the ground commands Agena's main engine to add about 30 m/s prograde and raise the orbit of both vehicles together.",
+      "successCriteria": [
+        "Gemini 8 and Agena docked, docking adapter undamaged.",
+        "Agena engine burn reaches +30 m/s prograde.",
+        "Both re-entry control system (RCS) rings sealed (see Known constraints)."
+      ],
+      "weightNote": "30 % of the flight-objectives score."
+    },
+    {
+      "id": "o3_eva",
+      "title": "Pilot EVA: retrieve the experiment package",
+      "summary": "June leaves through the Pilot hatch, works her way back to the equipment section and brings the experiment package into the cabin. About 20 minutes of mission time.",
+      "successCriteria": [
+        "Go/no-go: the stack is stable, with a roll rate under 1 °/s.",
+        "Go/no-go: both RCS rings sealed.",
+        "Go/no-go: OAMS propellant at or above 120 kg.",
+        "Go/no-go: Pilot health at 80 % or better.",
+        "Package inside the cabin and the Pilot hatch closed."
+      ],
+      "weightNote": "40 % of the flight-objectives score."
+    },
+    {
+      "id": "r_safe_return",
+      "title": "Return the crew safely",
+      "summary": "The objective that outranks every other one. The flight ends with splashdown and recovery, whatever else happens.",
+      "successCriteria": [
+        "Equipment section jettisoned before retrofire.",
+        "Retrofire with attitude held retrograde.",
+        "Entry inside the corridor; drogue and main parachutes deployed within their limits.",
+        "Splashdown in a recovery zone, crew recovered in good health."
+      ],
+      "weightNote": "Crew outcome and safe return are worth 60 of 100 points. The three flight objectives together are worth 20."
+    }
+  ],
+  "crew": [
+    {
+      "id": "cal_brandt",
+      "name": "Cal Brandt",
+      "role": "Command Pilot",
+      "age": 41,
+      "bio": "Former naval test pilot, on his second flight. Flies the docking and holds the controls. Terse, calm and given to understatement: when Cal calls something new, write it down.",
+      "strengths": ["Flight operations", "Attitude control", "Navigation"],
+      "nameTag": "BRANDT"
+    },
+    {
+      "id": "june_okafor",
+      "name": "June Okafor",
+      "role": "Pilot",
+      "age": 34,
+      "bio": "Aerospace electrical engineer turned astronaut, on her first flight and assigned the EVA. Warm, precise and thinks out loud, which helps when you can't see what she sees.",
+      "strengths": ["Electrical systems", "EVA", "Propulsion", "Life support"],
+      "nameTag": "OKAFOR"
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "tandem",
+      "name": "Gemini 8",
+      "summary": "Two-seat Gemini spacecraft, about 3,800 kg, built in three sections.",
+      "sections": [
+        {
+          "name": "Re-entry module",
+          "text": "The cabin (two crew, pure oxygen at 34 kPa), the nose with the docking bar, re-entry control system (RCS) rings A and B (8 thrusters and about 16 kg of propellant each), the heat shield, re-entry batteries (about 6.5 kWh), drogue and main parachutes, the suit/cabin fan and LiOH canisters."
+        },
+        {
+          "name": "Retro section",
+          "text": "Four solid retro rockets that fire in an overlapping sequence to start the trip home."
+        },
+        {
+          "name": "Equipment section (adapter)",
+          "text": "The orbit attitude and maneuver system (OAMS): 16 thrusters, 8 for attitude and 8 for translation, sharing about 290 kg of propellant. Also two fuel cells (about 1 kW each, with drinking water as a by-product), cryogenic oxygen and hydrogen, the coolant loop and radiator, and main power buses A and B with their breakers."
+        }
+      ]
+    },
+    {
+      "id": "lodestar",
+      "name": "Agena Target Vehicle",
+      "summary": "Uncrewed docking target, about 3,250 kg docked. Commanded from the ground.",
+      "sections": [
+        {
+          "name": "Systems",
+          "text": "Docking cone with latches, a cold-gas attitude control system (ACS), a main engine rated for one docked burn, a battery, and a status display panel the crew can read through the window."
+        }
+      ]
+    }
+  ],
+  "knownConstraints": [
+    "Mission rule: arming either RCS ring commits the flight to landing at the next suitable recovery zone. RCS propellant is reserved for holding attitude during retrofire and entry.",
+    "One crew task at a time, across the whole crew. Reading a gauge does not use the task slot; throwing a switch or making an inspection does.",
+    "Ground-commanded: Agena's attitude control, its engine (while docked) and its status downlink; main bus tie, non-critical breakers, heaters, fuel cell purge and experiment power on Gemini 8.",
+    "Crew-only: OAMS power and thruster breakers, RCS rings, attitude control mode, docking and undocking, jettison, retrofire, parachutes, every inspection and repair, and the EVA.",
+    "Jettisoning the equipment section drops the OAMS, fuel cells and radiator. From then on the re-entry module runs on its batteries alone.",
+    "Recovery: Albatross waits in the primary Atlantic zone (about 30 minutes to recovery). Secondary West Pacific zone: about 3 hours. Contingency Indian Ocean zone: about 12 hours. Outside the zones: a day or more.",
+    "Cabin carbon dioxide is removed by LiOH canisters while the suit/cabin fan runs. Two spare canisters are aboard.",
+    "The flight does not pause. Time compresses automatically when nothing is happening and slows when something is.",
+    "Flight Director tips are there to be used. Asking for one, or for a stronger one, never affects your grade."
+  ],
+  "budgetNote": {
+    "title": "Budget note",
+    "text": "The EVA camera was borrowed from a weather service. They would like it back by the end of the month, in working order, with its lens cap. Please do not photograph the weather.",
+    "signedBy": "D. Marsh, Flight Director"
+  },
+  "historicalContext": {
+    "title": "Historical context",
+    "label": "Documented history",
+    "text": "By early 1966, two-person orbital capsules had shown that a crew could live and work in orbit for two weeks, and in December 1965 two crewed spacecraft had rendezvoused and held station as close as about 30 centimetres apart. No one had yet joined two spacecraft together in orbit. Docking, and steering a joined pair with one vehicle's engine, was considered essential for any future flight to the Moon. Only two spacewalks had ever been made, by crews of two different nations, and each lasted less than half an hour."
+  },
+  "imageSlots": [
+    {
+      "id": "img_launch",
+      "purpose": "Opening image: the era and the scale of a crewed launch.",
+      "suggestedQueries": [
+        "1966 two-man spacecraft launch",
+        "1966 crewed capsule liftoff Cape Kennedy",
+        "1960s orbital capsule launch pad night"
+      ],
+      "caption": "A two-person capsule lifts off on a converted military rocket, 1966.",
+      "altText": "A rocket rising from a launch pad on a column of flame and smoke.",
+      "credit": "NASA/JSC",
+      "nasaId": "S66-24465"
+    },
+    {
+      "id": "img_docking",
+      "purpose": "What a docking target looked like from an approaching capsule.",
+      "suggestedQueries": [
+        "1966 target vehicle rendezvous photographed from spacecraft",
+        "docking target vehicle in orbit 1966",
+        "target docking adapter orbit photograph"
+      ],
+      "caption": "An uncrewed docking target seen from an approaching capsule, 1966. Until that year, no two spacecraft had ever been joined in orbit.",
+      "altText": "A cylindrical target vehicle with a cone-shaped docking collar, against the Earth.",
+      "credit": "NASA/JSC",
+      "nasaId": "S66-25781"
+    },
+    {
+      "id": "img_capsule",
+      "purpose": "The kind of vehicle the crew is flying: two seats, two hatches, very little room.",
+      "suggestedQueries": [
+        "1960s two-seat spacecraft capsule hatches open",
+        "two-man capsule cockpit 1965",
+        "1960s spacecraft capsule heat shield display"
+      ],
+      "caption": "A two-seat orbital capsule after splashdown, 1966, with both hatches open. Each crew member had a hatch overhead and roughly the room of a small car's front seat.",
+      "altText": "A capsule floating in the sea on an inflated collar, both hatches open, two crew seated side by side, a helicopter behind.",
+      "credit": "NASA/JSC",
+      "nasaId": "S66-34126"
+    },
+    {
+      "id": "img_recovery",
+      "purpose": "How every flight ends: splashdown and a ship.",
+      "suggestedQueries": [
+        "1966 spacecraft recovery ship splashdown",
+        "capsule recovery flotation collar navy swimmers 1960s",
+        "capsule hoisted aboard recovery ship 1960s"
+      ],
+      "caption": "Swimmers secure a floating capsule for recovery after splashdown, mid-1960s.",
+      "altText": "A capsule floating in the ocean with an inflatable collar and swimmers alongside.",
+      "credit": "NASA/JSC",
+      "nasaId": "s65-18645"
+    }
+  ],
+  "curationNotes": "Captions describe the intended subject and are rewritten by hand once the curation tool and the team have picked each item. Credits and ids are filled from the source record. Queries deliberately avoid program names; expect to review more results by eye."
+}

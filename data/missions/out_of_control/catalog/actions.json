@@ -1,0 +1,688 @@
+{
+  "schema": "actions/1",
+  // Mission 1 actions (merged with catalog/actions.json at load; see MissionDataSource).
+  "actions": [
+    {
+      "id": "dock",
+      "kind": "crew_task",
+      "description": "Dock with the Agena Target Vehicle.",
+      "impact": "low",
+      "phases": ["docking_ops"],
+      "taskId": "dock",
+      "preconditions": [
+        {
+          "require": "not @flight.docked",
+          "reason": "already_docked"
+        },
+        {
+          "require": "@attitude.tandem.rate_total_dps < 2",
+          "reason": "rates_too_high"
+        }
+      ]
+    },
+    {
+      "id": "undock",
+      "kind": "crew_task",
+      "description": "Undock from the Agena Target Vehicle.",
+      "impact": "high",
+      "phases": ["docked_ops", "emergency", "return_prep"],
+      "taskId": "undock",
+      "preconditions": [
+        {
+          "require": "@flight.docked",
+          "reason": "not_docked"
+        }
+      ],
+      "effectTextKeys": ["impact.undock.separates_lodestar", "impact.undock.inertia_drops"],
+      "affects": ["tandem/nose/docking_bar", "lodestar/docking_cone"]
+    },
+    {
+      "id": "read_fact",
+      "kind": "glance_read",
+      "description": "Read one cabin gauge or display.",
+      "impact": "low",
+      "phases": ["docking_ops", "docked_ops", "emergency", "return_prep", "entry", "recovery"],
+      "parameters": [
+        {
+          "name": "fact",
+          "type": "enum",
+          "values": ["tandem.rate.roll_dps", "tandem.rate.pitch_dps", "tandem.rate.yaw_dps", "oams.prop_kg", "oams.temp.t01", "oams.temp.t02", "oams.temp.t03", "oams.temp.t04", "oams.temp.t05", "oams.temp.t06", "oams.temp.t07", "oams.temp.t08", "oams.temp.t09", "oams.temp.t10", "oams.temp.t11", "oams.temp.t12", "oams.temp.t13", "oams.temp.t14", "oams.temp.t15", "oams.temp.t16", "rcs.ring_a.prop_kg", "rcs.ring_b.prop_kg", "lodestar.acs.activity", "power.fc1_kw", "power.fc2_kw", "power.load_kw", "power.bus_a_v", "power.bus_b_v", "power.battery_kwh", "ls.cabin_pressure_kpa", "ls.ppco2_mmhg", "ls.o2_kg", "ls.lioh_pct", "ls.water_l", "ls.food_kcal", "ls.cabin_temp_c", "docking.load_pct", "crew.cal_brandt.condition", "crew.june_okafor.condition"]
+        }
+      ],
+      "glance": {
+        "delayS": 3,
+        "factParam": "fact"
+      }
+    },
+    {
+      "id": "read_thruster_temps",
+      "kind": "glance_read",
+      "description": "Read the sixteen OAMS thruster temperature gauges.",
+      "impact": "low",
+      "phases": ["docking_ops", "docked_ops", "emergency", "return_prep", "entry", "recovery"],
+      "glance": {
+        "delayS": 5,
+        "facts": ["oams.temp.t01", "oams.temp.t02", "oams.temp.t03", "oams.temp.t04", "oams.temp.t05", "oams.temp.t06", "oams.temp.t07", "oams.temp.t08", "oams.temp.t09", "oams.temp.t10", "oams.temp.t11", "oams.temp.t12", "oams.temp.t13", "oams.temp.t14", "oams.temp.t15", "oams.temp.t16"]
+      }
+    },
+    {
+      "id": "open_breaker",
+      "kind": "crew_task",
+      "description": "Open a circuit breaker on the cockpit panel.",
+      "impact": "low",
+      "phases": ["docking_ops", "docked_ops", "emergency", "return_prep"],
+      "taskId": "open_breaker",
+      "parameters": [
+        {
+          "name": "breaker",
+          "type": "enum",
+          "values": ["tandem/power/breaker_oams_01", "tandem/power/breaker_oams_02", "tandem/power/breaker_oams_03", "tandem/power/breaker_oams_04", "tandem/power/breaker_oams_05", "tandem/power/breaker_oams_06", "tandem/power/breaker_oams_07", "tandem/power/breaker_oams_08", "tandem/power/breaker_oams_09", "tandem/power/breaker_oams_10", "tandem/power/breaker_oams_11", "tandem/power/breaker_oams_12", "tandem/power/breaker_oams_13", "tandem/power/breaker_oams_14", "tandem/power/breaker_oams_15", "tandem/power/breaker_oams_16", "tandem/power/breaker_rcs_a", "tandem/power/breaker_rcs_b", "tandem/power/breaker_cabin_heater", "tandem/power/breaker_experiment", "tandem/power/breaker_lights", "tandem/power/breaker_radar"]
+        }
+      ],
+      "preconditions": [
+        {
+          "require": "@{breaker}.closed",
+          "reason": "breaker_already_open"
+        }
+      ],
+      "impactRules": [
+        {
+          "match": {
+            "breaker": ["tandem/power/breaker_oams_*"]
+          },
+          "impact": "high",
+          "effectTextKeys": ["impact.open_breaker.oams_thruster"]
+        },
+        {
+          "match": {
+            "breaker": ["tandem/power/breaker_rcs_*"]
+          },
+          "impact": "high",
+          "effectTextKeys": ["impact.open_breaker.rcs_ring"]
+        }
+      ],
+      "affects": ["{breaker}"]
+    },
+    {
+      "id": "close_breaker",
+      "kind": "crew_task",
+      "description": "Close a circuit breaker on the cockpit panel.",
+      "impact": "low",
+      "phases": ["docking_ops", "docked_ops", "emergency", "return_prep"],
+      "taskId": "close_breaker",
+      "parameters": [
+        {
+          "name": "breaker",
+          "type": "enum",
+          "values": ["tandem/power/breaker_oams_01", "tandem/power/breaker_oams_02", "tandem/power/breaker_oams_03", "tandem/power/breaker_oams_04", "tandem/power/breaker_oams_05", "tandem/power/breaker_oams_06", "tandem/power/breaker_oams_07", "tandem/power/breaker_oams_08", "tandem/power/breaker_oams_09", "tandem/power/breaker_oams_10", "tandem/power/breaker_oams_11", "tandem/power/breaker_oams_12", "tandem/power/breaker_oams_13", "tandem/power/breaker_oams_14", "tandem/power/breaker_oams_15", "tandem/power/breaker_oams_16", "tandem/power/breaker_rcs_a", "tandem/power/breaker_rcs_b", "tandem/power/breaker_cabin_heater", "tandem/power/breaker_experiment", "tandem/power/breaker_lights", "tandem/power/breaker_radar"]
+        }
+      ],
+      "preconditions": [
+        {
+          "require": "not @{breaker}.closed",
+          "reason": "breaker_already_closed"
+        }
+      ],
+      "impactRules": [
+        {
+          "match": {
+            "breaker": ["tandem/power/breaker_oams_*"]
+          },
+          "impact": "high",
+          "effectTextKeys": ["impact.close_breaker.oams_thruster"]
+        },
+        {
+          "match": {
+            "breaker": ["tandem/power/breaker_rcs_*"]
+          },
+          "impact": "high",
+          "effectTextKeys": ["impact.close_breaker.rcs_ring"]
+        }
+      ],
+      "affects": ["{breaker}"]
+    },
+    {
+      "id": "cycle_oams_breakers",
+      "kind": "crew_task",
+      "description": "Open and re-close a group of four OAMS thruster breakers one at a time, watching the rates.",
+      "impact": "low",
+      "phases": ["docking_ops", "docked_ops", "emergency", "return_prep"],
+      "taskId": "cycle_oams_breakers",
+      "parameters": [
+        {
+          "name": "group",
+          "type": "enum",
+          "values": ["t01_t04", "t05_t08", "t09_t12", "t13_t16"]
+        }
+      ],
+      "preconditions": [
+        {
+          "require": "@tandem/oams/master.closed",
+          "reason": "oams_master_off"
+        }
+      ]
+    },
+    {
+      "id": "oams_master",
+      "kind": "crew_task",
+      "description": "Switch the OAMS master power on or off.",
+      "impact": "high",
+      "phases": ["docking_ops", "docked_ops", "emergency", "return_prep"],
+      "taskId": "oams_master",
+      "parameters": [
+        {
+          "name": "on",
+          "type": "boolean"
+        }
+      ],
+      "preconditions": [
+        {
+          "require": "@tandem/oams/master.closed != {on}",
+          "reason": "oams_master_already_set"
+        }
+      ],
+      "effectTextKeys": ["impact.oams_master.attitude_control_changes"],
+      "affects": ["tandem/oams/master"]
+    },
+    {
+      "id": "arm_rcs_ring",
+      "kind": "crew_task",
+      "description": "Arm RCS ring A or B.",
+      "impact": "irreversible",
+      "phases": ["docking_ops", "docked_ops", "emergency", "return_prep", "entry"],
+      "taskId": "arm_rcs_ring",
+      "parameters": [
+        {
+          "name": "ring",
+          "type": "enum",
+          "values": ["a", "b"]
+        }
+      ],
+      "preconditions": [
+        {
+          "require": "not @tandem/rcs/ring_{ring}.armed",
+          "reason": "ring_already_armed"
+        }
+      ],
+      "effectTextKeys": ["impact.arm_rcs_ring.mission_rule_return", "impact.arm_rcs_ring.objectives_at_risk"],
+      "affects": ["tandem/rcs/ring_{ring}"]
+    },
+    {
+      "id": "disarm_rcs_ring",
+      "kind": "crew_task",
+      "description": "Disarm RCS ring A or B.",
+      "impact": "irreversible",
+      "phases": ["docking_ops", "docked_ops", "emergency", "return_prep", "entry"],
+      "taskId": "disarm_rcs_ring",
+      "parameters": [
+        {
+          "name": "ring",
+          "type": "enum",
+          "values": ["a", "b"]
+        }
+      ],
+      "preconditions": [
+        {
+          "require": "@tandem/rcs/ring_{ring}.armed",
+          "reason": "ring_not_armed"
+        }
+      ],
+      "effectTextKeys": ["impact.disarm_rcs_ring.ring_unavailable"],
+      "affects": ["tandem/rcs/ring_{ring}"]
+    },
+    {
+      "id": "rate_damp",
+      "kind": "crew_task",
+      "description": "Damp the spacecraft's rotation rates with OAMS or the armed RCS ring.",
+      "impact": "low",
+      "phases": ["docking_ops", "docked_ops", "emergency", "return_prep", "entry"],
+      "taskId": "rate_damp",
+      "parameters": [
+        {
+          "name": "system",
+          "type": "enum",
+          "values": ["oams", "rcs"]
+        }
+      ],
+      "preconditions": [
+        {
+          "require": "'{system}' != 'oams' or @tandem/oams/master.closed",
+          "reason": "oams_master_off"
+        },
+        {
+          "require": "'{system}' != 'rcs' or any(@tandem/rcs/ring_a.armed, @tandem/rcs/ring_b.armed)",
+          "reason": "no_rcs_ring_armed"
+        }
+      ]
+    },
+    {
+      "id": "test_rcs_ring",
+      "kind": "crew_task",
+      "description": "Pulse-test an RCS ring's thrusters and report the response.",
+      "impact": "low",
+      "phases": ["docking_ops", "docked_ops", "emergency", "return_prep"],
+      "taskId": "test_rcs_ring",
+      "parameters": [
+        {
+          "name": "ring",
+          "type": "enum",
+          "values": ["a", "b"]
+        }
+      ]
+    },
+    {
+      "id": "inspect_thruster_quad",
+      "kind": "crew_task",
+      "description": "Look at the OAMS thruster quad through the window.",
+      "impact": "low",
+      "phases": ["docking_ops", "docked_ops", "emergency", "return_prep"],
+      "taskId": "inspect_thruster_quad",
+      "preconditions": [
+        {
+          "require": "abs(@attitude.tandem.rate_roll_dps) < 10",
+          "reason": "spin_too_high_for_inspection"
+        }
+      ]
+    },
+    {
+      "id": "inspect_rcs_driver_panel",
+      "kind": "crew_task",
+      "description": "Open an RCS ring driver access panel and inspect the harness.",
+      "impact": "low",
+      "phases": ["docking_ops", "docked_ops", "emergency", "return_prep"],
+      "taskId": "inspect_rcs_driver_panel",
+      "parameters": [
+        {
+          "name": "ring",
+          "type": "enum",
+          "values": ["a", "b"]
+        }
+      ],
+      "preconditions": [
+        {
+          "require": "abs(@attitude.tandem.rate_roll_dps) < 10",
+          "reason": "spin_too_high_for_inspection"
+        }
+      ]
+    },
+    {
+      "id": "portable_co2_check",
+      "kind": "crew_task",
+      "description": "Cross-check cabin CO2 with the portable indicator.",
+      "impact": "low",
+      "phases": ["docking_ops", "docked_ops", "emergency", "return_prep"],
+      "taskId": "portable_co2_check"
+    },
+    {
+      "id": "replace_lioh",
+      "kind": "crew_task",
+      "description": "Swap in a fresh LiOH canister.",
+      "impact": "low",
+      "phases": ["docking_ops", "docked_ops", "emergency", "return_prep"],
+      "taskId": "replace_lioh",
+      "preconditions": [
+        {
+          "require": "@inventory.lioh_canister.available >= 1",
+          "reason": "no_spare_lioh"
+        }
+      ]
+    },
+    {
+      "id": "eva_retrieve_package",
+      "kind": "crew_task",
+      "description": "Pilot EVA through the Pilot hatch to retrieve the experiment package from the equipment section.",
+      "impact": "high",
+      "phases": ["docked_ops", "emergency"],
+      "taskId": "eva_retrieve_package",
+      "preconditions": [
+        {
+          "require": "abs(@attitude.tandem.rate_roll_dps) < 1",
+          "reason": "spin_too_high_for_eva"
+        },
+        {
+          "require": "@tandem/rm/hatch_2.condition != 'failed'",
+          "reason": "hatch_unavailable"
+        },
+        {
+          "require": "not @mission.event.equipment_sep.fired",
+          "reason": "package_jettisoned"
+        },
+        {
+          "require": "not @mission.event.eva_package_retrieved.fired",
+          "reason": "package_already_retrieved"
+        }
+      ],
+      "effectTextKeys": ["impact.eva_retrieve_package.cabin_depressurised", "impact.eva_retrieve_package.crew_exposed"],
+      "affects": ["tandem/rm/hatch_2", "tandem/adapter/experiment_package"]
+    },
+    {
+      "id": "install_repair",
+      "kind": "crew_task",
+      "description": "Install a repair assembly built in the engineering workspace.",
+      "impact": "high",
+      "phases": ["docking_ops", "docked_ops", "emergency", "return_prep"],
+      "taskId": "install_repair",
+      "parameters": [
+        {
+          "name": "assembly",
+          "type": "string"
+        }
+      ],
+      "preconditions": [
+        {
+          "require": "abs(@attitude.tandem.rate_roll_dps) < 10",
+          "reason": "spin_too_high_for_repair"
+        }
+      ],
+      "effectTextKeys": ["impact.install_repair.uses_parts"]
+    },
+    {
+      "id": "jettison_equipment",
+      "kind": "crew_task",
+      "description": "Jettison the equipment section (adapter).",
+      "impact": "irreversible",
+      "phases": ["docked_ops", "emergency", "return_prep"],
+      "taskId": "jettison_equipment",
+      "preconditions": [
+        {
+          "require": "not @flight.docked",
+          "reason": "still_docked"
+        },
+        {
+          "require": "not @mission.event.equipment_sep.fired",
+          "reason": "equipment_already_jettisoned"
+        }
+      ],
+      "effectTextKeys": ["impact.jettison_equipment.loses_oams_power_cryo"],
+      "affects": ["tandem/adapter/structure"]
+    },
+    {
+      "id": "retrofire",
+      "kind": "crew_task",
+      "description": "Fire the retro rocket sequence. Allowed without attitude control, but the burn then goes off-axis.",
+      "impact": "irreversible",
+      "phases": ["return_prep"],
+      "taskId": "retrofire",
+      "preconditions": [
+        {
+          "require": "not @flight.docked",
+          "reason": "still_docked"
+        },
+        {
+          "require": "@mission.event.equipment_sep.fired",
+          "reason": "equipment_section_attached"
+        },
+        {
+          "require": "not @mission.event.retrofire.fired",
+          "reason": "retrofire_already_done"
+        }
+      ],
+      "effectTextKeys": ["impact.retrofire.commits_to_entry", "impact.retrofire.attitude_control_unavailable"],
+      "affects": ["tandem/retro/rocket_1", "tandem/retro/rocket_2", "tandem/retro/rocket_3", "tandem/retro/rocket_4"]
+    },
+    {
+      "id": "jettison_retro",
+      "kind": "crew_task",
+      "description": "Jettison the spent retro section.",
+      "impact": "irreversible",
+      "phases": ["return_prep", "entry"],
+      "taskId": "jettison_retro",
+      "preconditions": [
+        {
+          "require": "@mission.event.retrofire.fired",
+          "reason": "retrofire_not_done"
+        },
+        {
+          "require": "not @mission.event.retro_sep.fired",
+          "reason": "retro_already_jettisoned"
+        }
+      ],
+      "effectTextKeys": ["impact.jettison_retro.exposes_heat_shield"],
+      "affects": ["tandem/retro/structure"]
+    },
+    {
+      "id": "deploy_drogue",
+      "kind": "crew_task",
+      "description": "Deploy the drogue parachute.",
+      "impact": "irreversible",
+      "phases": ["entry"],
+      "taskId": "deploy_drogue",
+      "preconditions": [
+        {
+          "require": "@mission.event.entry_interface.fired",
+          "reason": "not_in_atmosphere"
+        },
+        {
+          "require": "not @mission.event.drogue.fired",
+          "reason": "drogue_already_deployed"
+        }
+      ],
+      "effectTextKeys": ["impact.deploy_drogue.single_use"],
+      "affects": ["tandem/chute/drogue"]
+    },
+    {
+      "id": "deploy_main",
+      "kind": "crew_task",
+      "description": "Deploy the main parachute.",
+      "impact": "irreversible",
+      "phases": ["entry"],
+      "taskId": "deploy_main",
+      "preconditions": [
+        {
+          "require": "@mission.event.entry_interface.fired",
+          "reason": "not_in_atmosphere"
+        },
+        {
+          "require": "not @mission.event.main.fired",
+          "reason": "main_already_deployed"
+        }
+      ],
+      "effectTextKeys": ["impact.deploy_main.single_use"],
+      "affects": ["tandem/chute/main"]
+    },
+    {
+      "id": "entry_checklist",
+      "kind": "crew_task",
+      "description": "Run the entry checklist; drogue and main deploy at nominal altitudes.",
+      "impact": "high",
+      "phases": ["return_prep", "entry"],
+      "taskId": "entry_checklist",
+      "preconditions": [
+        {
+          "require": "@mission.event.retrofire.fired",
+          "reason": "retrofire_not_done"
+        }
+      ],
+      "effectTextKeys": ["impact.entry_checklist.automatic_chutes"],
+      "affects": ["tandem/chute/drogue", "tandem/chute/main"]
+    },
+    {
+      "id": "set_ration",
+      "kind": "crew_task",
+      "description": "Set food and water rations as a percentage of nominal.",
+      "impact": "high",
+      "phases": ["docking_ops", "docked_ops", "emergency", "return_prep"],
+      "taskId": "set_ration",
+      "parameters": [
+        {
+          "name": "food_pct",
+          "type": "integer",
+          "min": 25,
+          "max": 100
+        },
+        {
+          "name": "water_pct",
+          "type": "integer",
+          "min": 25,
+          "max": 100
+        }
+      ],
+      "effectTextKeys": ["impact.set_ration.crew_health_cost"],
+      "affects": ["tandem/ls/water_tank"]
+    },
+    {
+      "id": "oams_burn",
+      "kind": "crew_task",
+      "description": "Translation burn with the OAMS thrusters.",
+      "impact": "high",
+      "phases": ["docking_ops", "docked_ops", "emergency", "return_prep"],
+      "taskId": "oams_burn",
+      "parameters": [
+        {
+          "name": "direction_deg",
+          "type": "number",
+          "min": 0,
+          "max": 360
+        },
+        {
+          "name": "duration_s",
+          "type": "number",
+          "min": 0.5,
+          "max": 120
+        }
+      ],
+      "preconditions": [
+        {
+          "require": "@tandem/oams/master.closed",
+          "reason": "oams_master_off"
+        },
+        {
+          "require": "not @flight.docked",
+          "reason": "still_docked"
+        }
+      ],
+      "effectTextKeys": ["impact.oams_burn.changes_orbit", "impact.oams_burn.uses_propellant"],
+      "affects": ["tandem/oams/tank"]
+    },
+    {
+      "id": "remote_breaker",
+      "kind": "remote",
+      "description": "Ground command: open or close a remotely controlled breaker.",
+      "impact": "low",
+      "phases": ["docking_ops", "docked_ops", "emergency", "return_prep"],
+      "parameters": [
+        {
+          "name": "breaker",
+          "type": "enum",
+          "values": ["tandem/power/breaker_cabin_heater", "tandem/power/breaker_experiment", "tandem/power/breaker_lights", "tandem/power/breaker_radar"]
+        },
+        {
+          "name": "closed",
+          "type": "boolean"
+        }
+      ],
+      "preconditions": [
+        {
+          "require": "@{breaker}.closed != {closed}",
+          "reason": "breaker_already_set"
+        }
+      ],
+      "impactRules": [
+        {
+          "match": {
+            "breaker": ["tandem/power/breaker_cabin_heater"],
+            "closed": ["false"]
+          },
+          "impact": "high",
+          "effectTextKeys": ["impact.remote_breaker.survival_load_off"]
+        }
+      ],
+      "affects": ["{breaker}"],
+      "effects": [
+        {
+          "target": "{breaker}.closed",
+          "op": "set",
+          "arg": "closed"
+        }
+      ]
+    },
+    {
+      "id": "remote_bus_tie",
+      "kind": "remote",
+      "description": "Ground command: tie or split main buses A and B.",
+      "impact": "high",
+      "phases": ["docking_ops", "docked_ops", "emergency", "return_prep"],
+      "parameters": [
+        {
+          "name": "closed",
+          "type": "boolean"
+        }
+      ],
+      "preconditions": [
+        {
+          "require": "@tandem/power/bus_tie.closed != {closed}",
+          "reason": "bus_tie_already_set"
+        }
+      ],
+      "effectTextKeys": ["impact.remote_bus_tie.shares_faults"],
+      "affects": ["tandem/power/bus_tie"],
+      "effects": [
+        {
+          "target": "tandem/power/bus_tie.closed",
+          "op": "set",
+          "arg": "closed"
+        }
+      ]
+    },
+    {
+      "id": "lodestar_acs",
+      "kind": "remote",
+      "description": "Ground command: switch Agena's attitude control on or off.",
+      "impact": "low",
+      "phases": ["docking_ops", "docked_ops", "emergency", "return_prep"],
+      "parameters": [
+        {
+          "name": "on",
+          "type": "boolean"
+        }
+      ],
+      "preconditions": [
+        {
+          "require": "@lodestar/acs/power.closed != {on}",
+          "reason": "lodestar_acs_already_set"
+        }
+      ],
+      "effects": [
+        {
+          "target": "lodestar/acs/power.closed",
+          "op": "set",
+          "arg": "on"
+        }
+      ]
+    },
+    {
+      "id": "lodestar_burn",
+      "kind": "remote",
+      "description": "Ground command: fire Agena's main engine while docked.",
+      "impact": "high",
+      "phases": ["docked_ops", "emergency"],
+      "parameters": [
+        {
+          "name": "duration_s",
+          "type": "number",
+          "min": 1,
+          "max": 120
+        }
+      ],
+      "preconditions": [
+        {
+          "require": "@flight.docked",
+          "reason": "not_docked"
+        },
+        {
+          "require": "@lodestar/engine.condition != 'failed'",
+          "reason": "engine_failed"
+        }
+      ],
+      "effectTextKeys": ["impact.lodestar_burn.changes_orbit", "impact.lodestar_burn.loads_docking_adapter"],
+      "affects": ["lodestar/engine", "lodestar/docking_cone"],
+      "effects": [
+        {
+          "target": "session.burn.lodestar.duration_s",
+          "op": "set",
+          "arg": "duration_s"
+        }
+      ]
+    }
+  ]
+}

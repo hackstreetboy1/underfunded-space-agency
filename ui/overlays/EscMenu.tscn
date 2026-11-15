@@ -1,0 +1,225 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Frontend/EscMenuView.cs" id="1_script"]
+
+[node name="EscMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Cover" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="HBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 632.0
+offset_bottom = 56.0
+theme_override_constants/separation = 12
+
+[node name="Mark" type="Label" parent="Header"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"TapeLabel"
+text = "USA"
+
+[node name="MissionLine" type="Label" parent="Header"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+vertical_alignment = 1
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Column" type="VBoxContainer" parent="Center"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TitleRow" type="HBoxContainer" parent="Center/Column"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="FrozenMark" type="ColorRect" parent="Center/Column/TitleRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Title" type="Label" parent="Center/Column/TitleRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Display"
+text = "Simulation frozen"
+
+[node name="Body" type="Label" parent="Center/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
+
+[node name="MetRow" type="HBoxContainer" parent="Center/Column"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Met" type="Label" parent="Center/Column/MetRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Readout"
+
+[node name="FrozenTag" type="Label" parent="Center/Column/MetRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+vertical_alignment = 1
+
+[node name="Resume" type="Button" parent="Center/Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_type_variation = &"ButtonPrimary"
+alignment = 0
+
+[node name="Settings" type="Button" parent="Center/Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+alignment = 0
+
+[node name="Restart" type="Button" parent="Center/Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+alignment = 0
+
+[node name="Abandon" type="Button" parent="Center/Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_type_variation = &"ButtonDanger"
+alignment = 0
+
+[node name="Gap" type="Control" parent="Center/Column"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="EncyclopediaNote" type="Label" parent="Center/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+autowrap_mode = 3
+
+[node name="KeysHint" type="Label" parent="Center/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+
+[node name="ConfirmLayer" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Scrim" type="Panel" parent="ConfirmLayer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Scrim"
+
+[node name="Center" type="CenterContainer" parent="ConfirmLayer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dialog" type="PanelContainer" parent="ConfirmLayer/Center"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_type_variation = &"DialogPanel"
+
+[node name="Margin" type="MarginContainer" parent="ConfirmLayer/Center/Dialog"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Column" type="VBoxContainer" parent="ConfirmLayer/Center/Dialog/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="ConfirmTitle" type="Label" parent="ConfirmLayer/Center/Dialog/Margin/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"H1"
+
+[node name="Effects" type="PanelContainer" parent="ConfirmLayer/Center/Dialog/Margin/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Lines" type="VBoxContainer" parent="ConfirmLayer/Center/Dialog/Margin/Column/Effects"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="EffectsTitle" type="Label" parent="ConfirmLayer/Center/Dialog/Margin/Column/Effects/Lines"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"BadgeLabelCaution"
+
+[node name="ConfirmPrompt" type="Label" parent="ConfirmLayer/Center/Dialog/Margin/Column/Effects/Lines"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+autowrap_mode = 3
+
+[node name="FrozenEffect" type="Label" parent="ConfirmLayer/Center/Dialog/Margin/Column/Effects/Lines"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+autowrap_mode = 3
+
+[node name="Footer" type="HBoxContainer" parent="ConfirmLayer/Center/Dialog/Margin/Column"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="NoAutoCancel" type="Label" parent="ConfirmLayer/Center/Dialog/Margin/Column/Footer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"Meta"
+vertical_alignment = 1
+
+[node name="Cancel" type="Button" parent="ConfirmLayer/Center/Dialog/Margin/Column/Footer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Confirm" type="Button" parent="ConfirmLayer/Center/Dialog/Margin/Column/Footer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonDanger"

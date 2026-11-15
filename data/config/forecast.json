@@ -1,0 +1,16 @@
+{
+  "schema": "forecast/1",
+  "horizonH": 72,
+  "recomputePeriodS": 30,
+  "uncertainty": {
+    "fresh": 0.03,
+    "stale": 0.15,
+    "unknown": 0.4
+  },
+  "minBandFraction": 0.1,
+  "roundingH": 0.25,
+  "confidence": {
+    "highMaxRelativeWidth": 0.25,
+    "mediumMaxRelativeWidth": 0.7
+  }
+}

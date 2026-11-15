@@ -1,0 +1,128 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Console/Regions/EventLog.cs" id="1_eventlog"]
+[ext_resource type="PackedScene" path="res://ui/console/components/VirtualLogList.tscn" id="2_virtuallog"]
+[ext_resource type="PackedScene" path="res://ui/console/components/AlarmRow.tscn" id="3_alarmrow"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_filters"]
+
+[node name="EventLog" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 190)
+size_flags_vertical = 3
+script = ExtResource("1_eventlog")
+AlarmRowScene = ExtResource("3_alarmrow")
+
+[node name="Layout" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Head" type="MarginContainer" parent="Layout"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 8
+
+[node name="Bar" type="HBoxContainer" parent="Layout/Head"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Layout/Head/Bar"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"PanelHeaderTitle"
+text = "Event log"
+size_flags_horizontal = 3
+uppercase = true
+vertical_alignment = 1
+
+[node name="Filters" type="HBoxContainer" parent="Layout/Head/Bar"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="FilterAll" type="Button" parent="Layout/Head/Bar/Filters"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+text = "All"
+toggle_mode = true
+button_group = SubResource("ButtonGroup_filters")
+
+[node name="FilterAlarms" type="Button" parent="Layout/Head/Bar/Filters"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+text = "Alarms"
+toggle_mode = true
+button_group = SubResource("ButtonGroup_filters")
+
+[node name="FilterCrew" type="Button" parent="Layout/Head/Bar/Filters"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+text = "Crew"
+toggle_mode = true
+button_group = SubResource("ButtonGroup_filters")
+
+[node name="FilterCommands" type="Button" parent="Layout/Head/Bar/Filters"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+text = "Commands"
+toggle_mode = true
+button_group = SubResource("ButtonGroup_filters")
+
+[node name="FilterSystemChanges" type="Button" parent="Layout/Head/Bar/Filters"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+text = "System changes"
+toggle_mode = true
+button_group = SubResource("ButtonGroup_filters")
+
+[node name="FilterDecisions" type="Button" parent="Layout/Head/Bar/Filters"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+text = "Decisions"
+toggle_mode = true
+button_group = SubResource("ButtonGroup_filters")
+
+[node name="FilterMenu" type="OptionButton" parent="Layout/Head/Bar"]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false
+fit_to_longest_item = false
+
+[node name="Search" type="LineEdit" parent="Layout/Head/Bar"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(120, 0)
+placeholder_text = "Search   Ctrl+F"
+clear_button_enabled = true
+
+[node name="PinnedMargin" type="MarginContainer" parent="Layout"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+
+[node name="Pinned" type="VBoxContainer" parent="Layout/PinnedMargin"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 4
+visible = false
+
+[node name="ListMargin" type="MarginContainer" parent="Layout"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 4
+
+[node name="LogList" parent="Layout/ListMargin" instance=ExtResource("2_virtuallog")]
+unique_name_in_owner = true
+layout_mode = 2

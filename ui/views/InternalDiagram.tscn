@@ -1,0 +1,155 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Console/Views/InternalDiagramView.cs" id="1_view"]
+[ext_resource type="Script" path="res://src/Game/UI/Console/Views/DiagramCanvas.cs" id="2_canvas"]
+
+[node name="InternalDiagram" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+clip_contents = true
+script = ExtResource("1_view")
+
+[node name="Canvas" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+clip_contents = true
+script = ExtResource("2_canvas")
+
+[node name="Toolbar" type="HBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 452.0
+offset_bottom = 44.0
+theme_override_constants/separation = 4
+
+[node name="LayerPower" type="Button" parent="Toolbar"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+toggle_mode = true
+button_pressed = true
+text = "Power"
+
+[node name="LayerFluid" type="Button" parent="Toolbar"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+toggle_mode = true
+button_pressed = true
+text = "Fluids"
+
+[node name="LayerPropellant" type="Button" parent="Toolbar"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+toggle_mode = true
+button_pressed = true
+text = "Propellant"
+
+[node name="LayerData" type="Button" parent="Toolbar"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+toggle_mode = true
+button_pressed = true
+text = "Data"
+
+[node name="Fit" type="Button" parent="Toolbar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Fit"
+
+[node name="Inspector" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -248.0
+offset_top = 56.0
+offset_right = -12.0
+offset_bottom = -12.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_type_variation = &"TooltipPanel"
+visible = false
+
+[node name="Rows" type="VBoxContainer" parent="Inspector"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="InspectorName" type="Label" parent="Inspector/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"H2"
+custom_minimum_size = Vector2(212, 0)
+text = "OAMS thruster 8"
+autowrap_mode = 3
+
+[node name="InspectorFamily" type="Label" parent="Inspector/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Thruster"
+
+[node name="InspectorState" type="Label" parent="Inspector/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"BadgeLabel"
+text = "UNKNOWN"
+
+[node name="InspectorConfirmed" type="Label" parent="Inspector/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(212, 0)
+theme_type_variation = &"Small"
+text = "Not confirmed"
+autowrap_mode = 3
+
+[node name="InspectorFeeds" type="Label" parent="Inspector/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(212, 0)
+theme_type_variation = &"Small"
+text = "Fed by: Main bus A"
+autowrap_mode = 3
+
+[node name="AskInspect" type="Button" parent="Inspector/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 32)
+text = "Ask crew to inspect"
+
+[node name="OpenWorkspace" type="Button" parent="Inspector/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonPrimary"
+custom_minimum_size = Vector2(0, 32)
+text = "Open repair workspace"
+visible = false
+
+[node name="Tooltip" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+offset_right = 240.0
+offset_bottom = 60.0
+theme_type_variation = &"TooltipPanel"
+mouse_filter = 2
+visible = false
+
+[node name="TooltipText" type="Label" parent="Tooltip"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"TooltipLabel"
+text = "Main bus A · Bus"

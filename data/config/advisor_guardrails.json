@@ -1,0 +1,33 @@
+{
+  "schema": "advisor_guardrails/1",
+  "notes": "Ask the engineers (GDD 9.2, E.17): answers explain science and equipment and never recommend what to do. An answer is rejected (deterministic encyclopedia fallback instead) when it contains a recommendation phrase anywhere; a base-form imperative verb that starts a clause (after . ! ? ; : , or a dash, optionally after a lead word) with an equipment noun at most maxGapWords words later; any inflection of an imperative verb after a modal lead with such a noun ('would shut down the fuel cell', 'consider venting the tanks'); or an equipment noun followed by a modal lead and a passive ('fuel cell 2 should be isolated'). Matching is case-insensitive on whole words; curly apostrophes count as straight ones. Keep the lists conservative: a false positive only costs the fallback.",
+  "maxAnswerChars": 1200,
+  "maxGapWords": 4,
+  "recommendationPhrases": [
+    "you should", "you shouldn't", "you'll want to", "you will want to", "you'd want to", "you need to", "you must",
+    "you have to", "you could try", "you might try", "you can try", "I recommend", "I'd recommend", "I would recommend",
+    "we recommend", "I suggest", "I'd suggest", "I would suggest", "we suggest", "I advise", "my advice",
+    "my recommendation", "our recommendation", "the fix is", "the solution is", "the best option is", "your best bet",
+    "your best option", "go ahead and", "make sure to", "make sure you", "don't forget to", "the next step is",
+    "your next step", "the way to fix", "to fix this", "to fix it", "to solve this", "if I were you", "standard procedure",
+    "the best thing", "the safest thing", "is recommended", "are recommended", "the right call", "the right move"
+  ],
+  "imperativeVerbs": [
+    "shut down", "shut off", "power down", "power off", "power up", "turn off", "turn on", "switch off", "switch on",
+    "open", "close", "arm", "disarm", "isolate", "reset", "cycle", "pull", "jettison", "vent", "fire", "deploy",
+    "bypass", "disconnect", "reconnect", "enable", "disable", "activate", "deactivate", "replace", "swap", "stop", "start",
+    "kill", "cut", "flip", "pop", "throw", "safe", "trip", "dump", "purge", "seal", "jumper", "reroute", "undock", "retrofire"
+  ],
+  "equipmentNouns": [
+    "breaker", "breakers", "bus", "buses", "busses", "circuit", "circuits", "switch", "switches", "relay", "inverter",
+    "battery", "batteries", "fuel cell", "fuel cells", "thruster", "thrusters", "ring", "rings", "valve", "valves",
+    "RCS", "OAMS", "engine", "engines", "retros", "retrorocket", "retrorockets", "drogue", "parachute", "parachutes",
+    "chute", "chutes", "canister", "canisters", "fan", "fans", "pump", "pumps", "heater", "heaters", "radiator",
+    "coolant", "loop", "tank", "tanks", "regulator", "system", "systems"
+  ],
+  "imperativeLeads": ["please", "now", "first", "then", "next", "just", "so", "and", "immediately", "quickly", "simply"],
+  "modalLeads": [
+    "should", "must", "need to", "needs to", "have to", "has to", "ought to", "had better", "want to", "would", "consider",
+    "is to", "are to", "best to", "better to", "wise to", "safest to"
+  ]
+}

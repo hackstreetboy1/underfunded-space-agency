@@ -1,0 +1,133 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Console/Comms/CommsPanel.cs" id="1_commspanel"]
+[ext_resource type="PackedScene" path="res://ui/console/comms/TranscriptRow.tscn" id="2_transcriptrow"]
+[ext_resource type="PackedScene" path="res://ui/console/components/PanelHeader.tscn" id="3_panelheader"]
+
+[node name="CommsPanel" type="PanelContainer"]
+size_flags_vertical = 3
+script = ExtResource("1_commspanel")
+RowScene = ExtResource("2_transcriptrow")
+YouWord = "You"
+VoiceWord = "voice"
+CrewWord = "Crew"
+ReportWord = "REPORT"
+RefusedWord = "REFUSED"
+PttIdleText = "HOLD SPACE TO TALK   or Mouse 4"
+PttListeningText = "LISTENING"
+PttTranscribingText = "TRANSCRIBING…"
+PttReviewText = "Check the text, then Enter"
+PttDisabledText = "Microphone off · type your orders"
+
+[node name="Layout" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Header" parent="Layout" instance=ExtResource("3_panelheader")]
+unique_name_in_owner = true
+layout_mode = 2
+Title = "Comms"
+Aside = "Ctrl+F search"
+
+[node name="Search" type="LineEdit" parent="Layout"]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false
+placeholder_text = "Search the transcript   Esc closes"
+
+[node name="Scroll" type="ScrollContainer" parent="Layout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Margin" type="MarginContainer" parent="Layout/Scroll"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 8
+size_flags_horizontal = 3
+
+[node name="Messages" type="VBoxContainer" parent="Layout/Scroll/Margin"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+size_flags_horizontal = 3
+
+[node name="QuickMargin" type="MarginContainer" parent="Layout"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 8
+
+[node name="QuickCommands" type="HFlowContainer" parent="Layout/QuickMargin"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+
+[node name="More" type="Button" parent="Layout/QuickMargin/QuickCommands"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+text = "More…"
+visible = false
+toggle_mode = true
+
+[node name="InputMargin" type="MarginContainer" parent="Layout"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 8
+
+[node name="InputRows" type="VBoxContainer" parent="Layout/InputMargin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="InputRow" type="HBoxContainer" parent="Layout/InputMargin/InputRows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Addressee" type="OptionButton" parent="Layout/InputMargin/InputRows/InputRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(69, 32)
+tooltip_text = "Who the order is for"
+
+[node name="Input" type="LineEdit" parent="Layout/InputMargin/InputRows/InputRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Type an order…   Enter / T"
+
+[node name="Send" type="Button" parent="Layout/InputMargin/InputRows/InputRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Send"
+custom_minimum_size = Vector2(64, 32)
+
+[node name="Undo" type="Button" parent="Layout/InputMargin/InputRows/InputRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+text = "Undo (2 s)"
+visible = false
+custom_minimum_size = Vector2(0, 32)
+
+[node name="Ptt" type="Button" parent="Layout/InputMargin/InputRows"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "HOLD SPACE TO TALK   or Mouse 4"
+custom_minimum_size = Vector2(0, 28)
+
+[node name="PttLevel" type="ProgressBar" parent="Layout/InputMargin/InputRows"]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false
+custom_minimum_size = Vector2(0, 4)
+max_value = 1.0
+show_percentage = false

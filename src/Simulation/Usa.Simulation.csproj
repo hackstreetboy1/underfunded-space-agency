@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>$(UsaTargetFramework)</TargetFramework>
+    <RootNamespace>Usa.Simulation</RootNamespace>
+    <AssemblyName>Usa.Simulation</AssemblyName>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <!-- Isolated builds: -p:UsaAreas=Flight+Attitude compiles only the shared folders plus those areas,
+       so parallel work in other areas can't break this build. ('+' because MSBuild splits -p values on ','.) -->
+  <PropertyGroup Condition="'$(UsaAreas)' != ''">
+    <UsaAreaGlobs>Kernel/**/*.cs;Ports/**/*.cs;Data/**/*.cs;$([MSBuild]::Unescape($(UsaAreas.Replace('+', '/**/*.cs;'))))/**/*.cs</UsaAreaGlobs>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(UsaAreas)' != ''">
+    <Compile Remove="@(Compile)" />
+    <Compile Include="$(UsaAreaGlobs)" Exclude="bin/**;obj/**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Usa.Simulation.Tests" />
+  </ItemGroup>
+</Project>

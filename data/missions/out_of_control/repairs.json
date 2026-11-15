@@ -1,0 +1,43 @@
+{
+  "schema": "repairs/1",
+  "goals": [
+    {
+      "id": "j14_bypass",
+      "name": "J-14 bypass",
+      "description": "Jumper from main bus A aux 3 to the driver input of the RCS ring whose J-14 harness burned.",
+      "source": {
+        "component": "tandem/power/aux_outlet_a3",
+        "label": "Main bus A aux 3",
+        "connector": "d_type"
+      },
+      "sinkCandidates": [
+        {
+          "component": "tandem/rcs/driver_a",
+          "label": "RCS ring A driver input",
+          "connector": "round",
+          "repairs": "tandem/rcs/harness_j14_a",
+          "when": "@tandem/rcs/harness_j14_a.condition == 'failed'"
+        },
+        {
+          "component": "tandem/rcs/driver_b",
+          "label": "RCS ring B driver input",
+          "connector": "round",
+          "repairs": "tandem/rcs/harness_j14_b",
+          "when": "@tandem/rcs/harness_j14_b.condition == 'failed'"
+        }
+      ],
+      "loadCurrentA": 7.5,
+      "wireRatingA": 15,
+      "minLengthM": 2.5,
+      "task": {
+        "taskId": "install_repair",
+        "skill": "electrical",
+        "baseDurationS": 120,
+        "durationPerPartS": 60,
+        "baseComplexity": 1,
+        "partsPerComplexityStep": 2,
+        "maxComplexity": 5
+      }
+    }
+  ]
+}

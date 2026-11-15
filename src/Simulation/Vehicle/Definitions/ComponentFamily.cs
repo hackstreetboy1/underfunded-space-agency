@@ -1,0 +1,36 @@
+namespace Usa.Simulation.Vehicle.Definitions;
+
+/// <summary>Component families from the mission contract. Serialized as snake_case ("thruster_group").</summary>
+public enum ComponentFamily
+{
+    Structure,
+    Hatch,
+    HeatShield,
+    Thruster,
+    ThrusterGroup,
+    Driver,
+    Harness,
+    Tank,
+    Valve,
+    Switch,
+    Breaker,
+    Bus,
+    FuelCell,
+    Battery,
+    Load,
+    Sensor,
+    Compartment,
+    ThermalNode,
+    Heater,
+    Radiator,
+    Pump,
+    Fan,
+    Scrubber,
+    Regulator,
+    Docking,
+    RetroRocket,
+    Parachute,
+    Engine,
+    Outlet,
+    Payload,
+}

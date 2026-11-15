@@ -1,0 +1,55 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Console/Components/LoadRow.cs" id="1_loadrow"]
+[ext_resource type="PackedScene" path="res://ui/console/components/Badge.tscn" id="2_badge"]
+[ext_resource type="PackedScene" path="res://ui/console/components/RemoteControl.tscn" id="3_remotecontrol"]
+
+[node name="LoadRow" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+theme_override_constants/separation = 8
+script = ExtResource("1_loadrow")
+
+[node name="Name" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Cabin fan"
+size_flags_horizontal = 3
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Priority" parent="." instance=ExtResource("2_badge")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Power" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ReadoutSmall"
+text = "120 W"
+vertical_alignment = 1
+
+[node name="Heat" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = "95.0 W"
+vertical_alignment = 1
+
+[node name="Condition" parent="." instance=ExtResource("2_badge")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="State" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "ON"
+vertical_alignment = 1
+
+[node name="Switch" parent="." instance=ExtResource("3_remotecontrol")]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false

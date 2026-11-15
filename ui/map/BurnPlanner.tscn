@@ -1,0 +1,584 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Map/BurnPlannerPanel.cs" id="panel"]
+[ext_resource type="Script" path="res://src/Game/UI/Map/DirectionGlyph.cs" id="glyph"]
+
+[node name="BurnPlanner" type="PanelContainer"]
+custom_minimum_size = Vector2(300, 0)
+offset_right = 300.0
+offset_bottom = 560.0
+script = ExtResource("panel")
+
+[node name="Column" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Header" type="PanelContainer" parent="Column"]
+layout_mode = 2
+theme_type_variation = &"PanelHeader"
+
+[node name="Row" type="HBoxContainer" parent="Column/Header"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Column/Header/Row"]
+layout_mode = 2
+theme_type_variation = &"PanelHeaderTitle"
+text = "BURN PLANNER"
+size_flags_horizontal = 3
+
+[node name="ModeAside" type="Label" parent="Column/Header/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = "Normal · targets only"
+horizontal_alignment = 2
+
+[node name="CloseButton" type="Button" parent="Column/Header/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+visible = false
+text = "Close"
+tooltip_text = "Close the burn planner"
+
+[node name="Scroll" type="ScrollContainer" parent="Column"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Body" type="MarginContainer" parent="Column/Scroll"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+size_flags_horizontal = 3
+
+[node name="Content" type="VBoxContainer" parent="Column/Scroll/Body"]
+layout_mode = 2
+theme_override_constants/separation = 8
+size_flags_vertical = 3
+
+[node name="ProposeBlock" type="VBoxContainer" parent="Column/Scroll/Body/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false
+theme_override_constants/separation = 6
+
+[node name="ProposeRow" type="HBoxContainer" parent="Column/Scroll/Body/Content/ProposeBlock"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Column/Scroll/Body/Content/ProposeBlock/ProposeRow"]
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Propose burn"
+size_flags_horizontal = 3
+
+[node name="ProposeAside" type="Label" parent="Column/Scroll/Body/Content/ProposeBlock/ProposeRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = "Easy assist"
+horizontal_alignment = 2
+
+[node name="Picker" type="HBoxContainer" parent="Column/Scroll/Body/Content/ProposeBlock"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="GoalSelect" type="OptionButton" parent="Column/Scroll/Body/Content/ProposeBlock/Picker"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+fit_to_longest_item = false
+clip_text = true
+
+[node name="ProposeButton" type="Button" parent="Column/Scroll/Body/Content/ProposeBlock/Picker"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Propose"
+
+[node name="ProposalPanel" type="PanelContainer" parent="Column/Scroll/Body/Content/ProposeBlock"]
+layout_mode = 2
+visible = false
+theme_type_variation = &"BadgeInfo"
+
+[node name="ProposalNote" type="Label" parent="Column/Scroll/Body/Content/ProposeBlock/ProposalPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = ""
+autowrap_mode = 3
+custom_minimum_size = Vector2(240, 0)
+
+[node name="EngineTitle" type="Label" parent="Column/Scroll/Body/Content"]
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Engine"
+
+[node name="EngineSelect" type="OptionButton" parent="Column/Scroll/Body/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+fit_to_longest_item = false
+clip_text = true
+
+[node name="DirectionRow" type="HBoxContainer" parent="Column/Scroll/Body/Content"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Column/Scroll/Body/Content/DirectionRow"]
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Direction"
+size_flags_horizontal = 3
+
+[node name="DirectionAside" type="Label" parent="Column/Scroll/Body/Content/DirectionRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = ""
+horizontal_alignment = 2
+
+[node name="Chips" type="HBoxContainer" parent="Column/Scroll/Body/Content"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ProgradeChip" type="Button" parent="Column/Scroll/Body/Content/Chips"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(36, 28)
+toggle_mode = true
+tooltip_text = "Prograde"
+focus_mode = 2
+
+[node name="Glyph" type="Control" parent="Column/Scroll/Body/Content/Chips/ProgradeChip"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("glyph")
+Direction = 0
+
+[node name="RetrogradeChip" type="Button" parent="Column/Scroll/Body/Content/Chips"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(36, 28)
+toggle_mode = true
+tooltip_text = "Retrograde"
+focus_mode = 2
+
+[node name="Glyph" type="Control" parent="Column/Scroll/Body/Content/Chips/RetrogradeChip"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("glyph")
+Direction = 1
+
+[node name="RadialInChip" type="Button" parent="Column/Scroll/Body/Content/Chips"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(36, 28)
+toggle_mode = true
+tooltip_text = "Radial in"
+focus_mode = 2
+
+[node name="Glyph" type="Control" parent="Column/Scroll/Body/Content/Chips/RadialInChip"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("glyph")
+Direction = 2
+
+[node name="RadialOutChip" type="Button" parent="Column/Scroll/Body/Content/Chips"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(36, 28)
+toggle_mode = true
+tooltip_text = "Radial out"
+focus_mode = 2
+
+[node name="Glyph" type="Control" parent="Column/Scroll/Body/Content/Chips/RadialOutChip"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("glyph")
+Direction = 3
+
+[node name="CustomChip" type="Button" parent="Column/Scroll/Body/Content/Chips"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Custom"
+toggle_mode = true
+size_flags_horizontal = 3
+
+[node name="AngleSpin" type="SpinBox" parent="Column/Scroll/Body/Content/Chips"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(64, 0)
+min_value = -180.0
+max_value = 180.0
+step = 1.0
+suffix = "°"
+tooltip_text = "Custom angle from prograde towards radial out"
+
+[node name="DurationRow" type="HBoxContainer" parent="Column/Scroll/Body/Content"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Column/Scroll/Body/Content/DurationRow"]
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Burn duration"
+size_flags_horizontal = 3
+
+[node name="DurationAside" type="Label" parent="Column/Scroll/Body/Content/DurationRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = "Manual"
+horizontal_alignment = 2
+
+[node name="Duration" type="HBoxContainer" parent="Column/Scroll/Body/Content"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="DurationSlider" type="HSlider" parent="Column/Scroll/Body/Content/Duration"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 600.0
+step = 0.1
+
+[node name="DurationSpin" type="SpinBox" parent="Column/Scroll/Body/Content/Duration"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(84, 0)
+max_value = 600.0
+step = 0.1
+suffix = "s"
+
+[node name="FixedDetail" type="Label" parent="Column/Scroll/Body/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = ""
+visible = false
+
+[node name="StartRow" type="HBoxContainer" parent="Column/Scroll/Body/Content"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Column/Scroll/Body/Content/StartRow"]
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Start time (MET)"
+size_flags_horizontal = 3
+
+[node name="StartAside" type="Label" parent="Column/Scroll/Body/Content/StartRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = ""
+horizontal_alignment = 2
+
+[node name="Start" type="HBoxContainer" parent="Column/Scroll/Body/Content"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="AtNodeChip" type="Button" parent="Column/Scroll/Body/Content/Start"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "At node"
+toggle_mode = true
+button_pressed = true
+tooltip_text = "Start at the maneuver node; drag it along the orbit"
+
+[node name="ZonePassChip" type="Button" parent="Column/Scroll/Body/Content/Start"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Zone pass"
+toggle_mode = true
+tooltip_text = "Start at the next pass over a recovery zone"
+
+[node name="MetField" type="LineEdit" parent="Column/Scroll/Body/Content/Start"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "00:00:00"
+max_length = 12
+tooltip_text = "Start MET, HH:MM:SS"
+
+[node name="ZonePassMenu" type="PopupMenu" parent="Column/Scroll/Body/Content"]
+unique_name_in_owner = true
+
+[node name="StartHint" type="Label" parent="Column/Scroll/Body/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = "Duration is fixed, so the start time is what moves the landing point: drag the node or type a MET."
+visible = false
+autowrap_mode = 3
+
+[node name="MassRow" type="Label" parent="Column/Scroll/Body/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = ""
+visible = false
+autowrap_mode = 3
+
+[node name="Preview" type="PanelContainer" parent="Column/Scroll/Body/Content"]
+layout_mode = 2
+theme_type_variation = &"Badge"
+
+[node name="Pad" type="MarginContainer" parent="Column/Scroll/Body/Content/Preview"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Rows" type="VBoxContainer" parent="Column/Scroll/Body/Content/Preview/Pad"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Head" type="HBoxContainer" parent="Column/Scroll/Body/Content/Preview/Pad/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Column/Scroll/Body/Content/Preview/Pad/Rows/Head"]
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = "PREVIEW"
+size_flags_horizontal = 3
+
+[node name="PreviewAside" type="Label" parent="Column/Scroll/Body/Content/Preview/Pad/Rows/Head"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = "updates live"
+
+[node name="DeltaVRow" type="HBoxContainer" parent="Column/Scroll/Body/Content/Preview/Pad/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="Column/Scroll/Body/Content/Preview/Pad/Rows/DeltaVRow"]
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Δv"
+custom_minimum_size = Vector2(92, 0)
+
+[node name="DeltaV" type="Label" parent="Column/Scroll/Body/Content/Preview/Pad/Rows/DeltaVRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ReadoutSmall"
+text = "—"
+size_flags_horizontal = 3
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="PropellantRow" type="HBoxContainer" parent="Column/Scroll/Body/Content/Preview/Pad/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="Column/Scroll/Body/Content/Preview/Pad/Rows/PropellantRow"]
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Propellant"
+custom_minimum_size = Vector2(64, 0)
+
+[node name="Propellant" type="Label" parent="Column/Scroll/Body/Content/Preview/Pad/Rows/PropellantRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ReadoutSmall"
+text = "—"
+size_flags_horizontal = 3
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="PropellantBadge" type="PanelContainer" parent="Column/Scroll/Body/Content/Preview/Pad/Rows/PropellantRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"Badge"
+visible = false
+
+[node name="Text" type="Label" parent="Column/Scroll/Body/Content/Preview/Pad/Rows/PropellantRow/PropellantBadge"]
+layout_mode = 2
+theme_type_variation = &"BadgeLabel"
+text = ""
+
+[node name="ApsidesRow" type="HBoxContainer" parent="Column/Scroll/Body/Content/Preview/Pad/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="Column/Scroll/Body/Content/Preview/Pad/Rows/ApsidesRow"]
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "New Pe / Ap"
+custom_minimum_size = Vector2(92, 0)
+
+[node name="Apsides" type="Label" parent="Column/Scroll/Body/Content/Preview/Pad/Rows/ApsidesRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ReadoutSmall"
+text = "—"
+size_flags_horizontal = 3
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="LandingRow" type="HBoxContainer" parent="Column/Scroll/Body/Content/Preview/Pad/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="Column/Scroll/Body/Content/Preview/Pad/Rows/LandingRow"]
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Landing zone"
+custom_minimum_size = Vector2(92, 0)
+
+[node name="LandingZone" type="Label" parent="Column/Scroll/Body/Content/Preview/Pad/Rows/LandingRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ReadoutSmall"
+text = "—"
+size_flags_horizontal = 3
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="LandingBadge" type="PanelContainer" parent="Column/Scroll/Body/Content/Preview/Pad/Rows/LandingRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"Badge"
+visible = false
+
+[node name="Text" type="Label" parent="Column/Scroll/Body/Content/Preview/Pad/Rows/LandingRow/LandingBadge"]
+layout_mode = 2
+theme_type_variation = &"BadgeLabel"
+text = ""
+
+[node name="RecoveryRow" type="HBoxContainer" parent="Column/Scroll/Body/Content/Preview/Pad/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="Column/Scroll/Body/Content/Preview/Pad/Rows/RecoveryRow"]
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Recovery · splash"
+custom_minimum_size = Vector2(92, 0)
+
+[node name="Recovery" type="Label" parent="Column/Scroll/Body/Content/Preview/Pad/Rows/RecoveryRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ReadoutSmall"
+text = "—"
+size_flags_horizontal = 3
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="EntryRow" type="HBoxContainer" parent="Column/Scroll/Body/Content/Preview/Pad/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="Column/Scroll/Body/Content/Preview/Pad/Rows/EntryRow"]
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Entry"
+custom_minimum_size = Vector2(92, 0)
+
+[node name="Entry" type="Label" parent="Column/Scroll/Body/Content/Preview/Pad/Rows/EntryRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ReadoutSmall"
+text = "—"
+size_flags_horizontal = 3
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="CorridorBadge" type="PanelContainer" parent="Column/Scroll/Body/Content/Preview/Pad/Rows/EntryRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"Badge"
+visible = false
+
+[node name="Text" type="Label" parent="Column/Scroll/Body/Content/Preview/Pad/Rows/EntryRow/CorridorBadge"]
+layout_mode = 2
+theme_type_variation = &"BadgeLabel"
+text = ""
+
+[node name="Warnings" type="VBoxContainer" parent="Column/Scroll/Body/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Note" type="Label" parent="Column/Scroll/Body/Content"]
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = "Execute opens the confirmation dialog, then orders the crew or sends the command."
+autowrap_mode = 3
+
+[node name="Spacer" type="Control" parent="Column/Scroll/Body/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="HeldRow" type="MarginContainer" parent="Column"]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+
+[node name="HeldOrder" type="Label" parent="Column/HeldRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = ""
+autowrap_mode = 3
+
+[node name="Footer" type="MarginContainer" parent="Column"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="Buttons" type="HBoxContainer" parent="Column/Footer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ExecuteButton" type="Button" parent="Column/Footer/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonPrimary"
+text = "Execute"
+size_flags_horizontal = 3
+disabled = true
+
+[node name="ClearButton" type="Button" parent="Column/Footer/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Clear"

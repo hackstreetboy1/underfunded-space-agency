@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[node name="PrimaryButton" type="Button"]
+theme_type_variation = &"ButtonPrimary"
+text = "Confirm"
+custom_minimum_size = Vector2(0, 32)

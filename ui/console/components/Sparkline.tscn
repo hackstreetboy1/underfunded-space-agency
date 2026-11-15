@@ -1,0 +1,8 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Console/Components/Sparkline.cs" id="1_sparkline"]
+
+[node name="Sparkline" type="Control"]
+custom_minimum_size = Vector2(44, 16)
+mouse_filter = 2
+script = ExtResource("1_sparkline")

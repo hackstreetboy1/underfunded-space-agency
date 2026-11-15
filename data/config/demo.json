@@ -1,0 +1,5 @@
+{
+  "schema": "demo/1",
+  "hiddenDifficulties": ["normal"],
+  "retryNewVariant": false
+}

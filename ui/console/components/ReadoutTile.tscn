@@ -1,0 +1,102 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Console/Components/ReadoutTile.cs" id="1_readouttile"]
+[ext_resource type="PackedScene" path="res://ui/console/components/Badge.tscn" id="2_badge"]
+[ext_resource type="PackedScene" path="res://ui/console/components/Sparkline.tscn" id="3_sparkline"]
+
+[node name="ReadoutTile" type="PanelContainer"]
+custom_minimum_size = Vector2(162, 64)
+mouse_default_cursor_shape = 2
+script = ExtResource("1_readouttile")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="Rows" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="LabelRow" type="HBoxContainer" parent="Margin/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Label" type="Label" parent="Margin/Rows/LabelRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"BadgeLabel"
+text = "O2"
+size_flags_horizontal = 3
+uppercase = true
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="ValueRow" type="HBoxContainer" parent="Margin/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Value" type="Label" parent="Margin/Rows/ValueRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Readout"
+text = "6.1"
+vertical_alignment = 1
+
+[node name="Unit" type="Label" parent="Margin/Rows/ValueRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "kg"
+vertical_alignment = 2
+
+[node name="Secondary" type="Label" parent="Margin/Rows/ValueRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ReadoutSmall"
+text = "84 %"
+vertical_alignment = 2
+visible = false
+
+[node name="TrendRow" type="HBoxContainer" parent="Margin/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Detail" type="Label" parent="Margin/Rows/TrendRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Sealed"
+visible = false
+vertical_alignment = 1
+
+[node name="Trend" type="Label" parent="Margin/Rows/TrendRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "▼ −0.1 kg/h"
+vertical_alignment = 1
+
+[node name="Badge" parent="Margin/Rows/TrendRow" instance=ExtResource("2_badge")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Ask" type="Button" parent="Margin/Rows/TrendRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+text = "Ask"
+visible = false
+
+[node name="Spacer" type="Control" parent="Margin/Rows/TrendRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Sparkline" parent="Margin/Rows/TrendRow" instance=ExtResource("3_sparkline")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4

@@ -1,0 +1,47 @@
+{
+  "schema": "incidents/1",
+  "variants": [
+    { "id": "damaged_ring_harness", "options": ["tandem/rcs/harness_j14_a", "tandem/rcs/harness_j14_b"] },
+    { "id": "secondary", "options": ["none", "fc2_degraded", "co2_sensor_bias"] }
+  ],
+  "incidents": [
+    { "id": "i1_t8_short",
+      "description": "I1 + I1b: thruster 8 driver shorts on, T8 sticks open; the short burns J-14 of one RCS ring. If the crew never docks, it fires at a fixed MET instead.",
+      "raisesEvent": "incident_i1",
+      "trigger": { "type": "any", "triggers": [
+        { "type": "after_event", "event": "docked", "delayS": { "min": 1200, "max": 2100 } },
+        { "type": "condition", "when": "not @mission.event.docked.fired and @mission.met_s >= 25500" }
+      ] },
+      "effects": [
+        { "target": "tandem/oams/driver_08.condition", "op": "set", "value": "'failed'" },
+        { "target": "tandem/oams/driver_08.fault", "op": "set", "value": "'short_on'" },
+        { "target": "tandem/oams/thruster_08.condition", "op": "set", "value": "'degraded'" },
+        { "target": "tandem/oams/thruster_08.fault", "op": "set", "value": "'stuck_open'" },
+        { "target": "tandem/oams/thruster_08.stuck_fraction", "op": "set", "value": "@difficulty.stuck_thrust_fraction" },
+        { "target": "{variant.damaged_ring_harness}.condition", "op": "set", "value": "'failed'" },
+        { "target": "{variant.damaged_ring_harness}.fault", "op": "set", "value": "'open_circuit'" }
+      ] },
+
+    // I4 (docking adapter overstress) is not an incident: the Vehicle DockingModel degrades lodestar/docking_cone
+    // (fault 'overstress') after more than 60 s docked above 20 deg/s roll.
+    { "id": "v1_fc2_degraded",
+      "description": "V1 variant: fuel cell 2 output drops 40 %.",
+      "requiresVariant": { "id": "secondary", "option": "fc2_degraded" },
+      "trigger": { "type": "after_event", "event": "incident_i1", "delayS": { "min": 180, "max": 900 } },
+      "effects": [
+        { "target": "tandem/power/fuel_cell_2.efficiency", "op": "set", "value": "0.6" },
+        { "target": "tandem/power/fuel_cell_2.condition", "op": "set", "value": "'degraded'" },
+        { "target": "tandem/power/fuel_cell_2.fault", "op": "set", "value": "'output_low'" }
+      ] },
+
+    { "id": "v1_co2_sensor_bias",
+      "description": "V1 variant: the cabin CO2 sensor reads 6 mmHg high; the portable indicator shows the truth.",
+      "requiresVariant": { "id": "secondary", "option": "co2_sensor_bias" },
+      "trigger": { "type": "after_event", "event": "incident_i1", "delayS": { "min": 180, "max": 900 } },
+      "effects": [
+        { "target": "tandem/ls/co2_sensor.bias", "op": "set", "value": "6" },
+        { "target": "tandem/ls/co2_sensor.condition", "op": "set", "value": "'degraded'" },
+        { "target": "tandem/ls/co2_sensor.fault", "op": "set", "value": "'bias_high'" }
+      ] }
+  ]
+}

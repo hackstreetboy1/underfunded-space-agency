@@ -1,0 +1,32 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Console/Components/PanelHeader.cs" id="1_panelheader"]
+
+[node name="PanelHeader" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 36)
+theme_type_variation = &"PanelHeader"
+script = ExtResource("1_panelheader")
+Title = "Panel"
+Aside = ""
+
+[node name="Row" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"PanelHeaderTitle"
+text = "Panel"
+size_flags_horizontal = 3
+uppercase = true
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Aside" type="Label" parent="Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = ""
+vertical_alignment = 1

@@ -1,0 +1,415 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/Presentation/Views/CrewFeedView.cs" id="1_view"]
+[ext_resource type="Script" path="res://src/Game/Presentation/CrewFeed/Hosting/CrewFeedAnimator.cs" id="2_animator"]
+[ext_resource type="PackedScene" path="res://assets/models/crew/feed_backdrop.glb" id="3_backdrop"]
+
+[sub_resource type="Environment" id="Environment_feed"]
+background_mode = 1
+background_color = Color(0.105, 0.125, 0.153, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.62, 0.66, 0.72, 1)
+ambient_light_energy = 0.35
+reflected_light_source = 1
+tonemap_mode = 0
+tonemap_exposure = 1.0
+
+[sub_resource type="AnimationNodeAnimation" id="Anim_idle"]
+animation = &"feed_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="Anim_listen"]
+animation = &"feed_listen"
+
+[sub_resource type="AnimationNodeAnimation" id="Anim_talk"]
+animation = &"feed_talk"
+
+[sub_resource type="AnimationNodeAnimation" id="Anim_work"]
+animation = &"feed_work"
+
+[sub_resource type="AnimationNodeAnimation" id="Anim_read_gauge"]
+animation = &"feed_read_gauge"
+
+[sub_resource type="AnimationNodeAnimation" id="Anim_stressed"]
+animation = &"feed_stressed"
+
+[sub_resource type="AnimationNodeAnimation" id="Anim_spin_strain_rest"]
+animation = &"feed_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="Anim_spin_strain_clip"]
+animation = &"feed_spin_strain"
+
+[sub_resource type="AnimationNodeBlend2" id="Blend_spin_strain"]
+
+[sub_resource type="AnimationNodeBlendTree" id="Tree_spin_strain"]
+graph_offset = Vector2(-200, 0)
+nodes/rest/node = SubResource("Anim_spin_strain_rest")
+nodes/rest/position = Vector2(-160, 0)
+nodes/clip/node = SubResource("Anim_spin_strain_clip")
+nodes/clip/position = Vector2(-160, 160)
+nodes/intensity/node = SubResource("Blend_spin_strain")
+nodes/intensity/position = Vector2(80, 60)
+nodes/output/position = Vector2(300, 60)
+node_connections = [&"output", 0, &"intensity", &"intensity", 0, &"rest", &"intensity", 1, &"clip"]
+
+[sub_resource type="AnimationNodeAnimation" id="Anim_impaired"]
+animation = &"feed_impaired"
+
+[sub_resource type="AnimationNodeAnimation" id="Anim_g_load_rest"]
+animation = &"feed_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="Anim_g_load_clip"]
+animation = &"feed_g_load"
+
+[sub_resource type="AnimationNodeBlend2" id="Blend_g_load"]
+
+[sub_resource type="AnimationNodeBlendTree" id="Tree_g_load"]
+graph_offset = Vector2(-200, 0)
+nodes/rest/node = SubResource("Anim_g_load_rest")
+nodes/rest/position = Vector2(-160, 0)
+nodes/clip/node = SubResource("Anim_g_load_clip")
+nodes/clip/position = Vector2(-160, 160)
+nodes/intensity/node = SubResource("Blend_g_load")
+nodes/intensity/position = Vector2(80, 60)
+nodes/output/position = Vector2(300, 60)
+node_connections = [&"output", 0, &"intensity", &"intensity", 0, &"rest", &"intensity", 1, &"clip"]
+
+[sub_resource type="AnimationNodeAnimation" id="Anim_nod"]
+animation = &"feed_nod"
+
+[sub_resource type="AnimationNodeAnimation" id="Anim_wave"]
+animation = &"feed_wave"
+
+[sub_resource type="AnimationNodeAnimation" id="Anim_relief"]
+animation = &"feed_relief"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_start"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_0"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_1"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_2"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_3"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_4"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_5"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_6"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_7"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_8"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_9"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_10"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_11"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_12"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_13"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_14"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_15"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_16"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_17"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_18"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_19"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_20"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_21"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_22"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_23"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_24"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_25"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_26"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_27"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_28"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_29"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_30"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_31"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_32"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_33"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_34"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_35"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_36"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_37"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_38"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_39"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_40"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_41"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_42"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_43"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_44"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_45"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_46"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_47"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_48"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_49"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_50"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_51"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_52"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_53"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_54"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_55"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_56"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_57"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_58"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_59"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_60"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_61"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_62"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_63"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_64"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_65"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_66"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_67"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_68"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_69"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_70"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_71"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachine" id="StateMachine"]
+states/Start/position = Vector2(80, 160)
+states/End/position = Vector2(960, 160)
+states/idle/node = SubResource("Anim_idle")
+states/idle/position = Vector2(260, 40)
+states/listen/node = SubResource("Anim_listen")
+states/listen/position = Vector2(460, 40)
+states/talk/node = SubResource("Anim_talk")
+states/talk/position = Vector2(660, 40)
+states/work/node = SubResource("Anim_work")
+states/work/position = Vector2(260, 160)
+states/read_gauge/node = SubResource("Anim_read_gauge")
+states/read_gauge/position = Vector2(460, 160)
+states/stressed/node = SubResource("Anim_stressed")
+states/stressed/position = Vector2(660, 160)
+states/spin_strain/node = SubResource("Tree_spin_strain")
+states/spin_strain/position = Vector2(260, 280)
+states/impaired/node = SubResource("Anim_impaired")
+states/impaired/position = Vector2(460, 280)
+states/g_load/node = SubResource("Tree_g_load")
+states/g_load/position = Vector2(660, 280)
+transitions = ["Start", "idle", SubResource("Tr_start"), "idle", "listen", SubResource("Tr_0"), "idle", "talk", SubResource("Tr_1"), "idle", "work", SubResource("Tr_2"), "idle", "read_gauge", SubResource("Tr_3"), "idle", "stressed", SubResource("Tr_4"), "idle", "spin_strain", SubResource("Tr_5"), "idle", "impaired", SubResource("Tr_6"), "idle", "g_load", SubResource("Tr_7"), "listen", "idle", SubResource("Tr_8"), "listen", "talk", SubResource("Tr_9"), "listen", "work", SubResource("Tr_10"), "listen", "read_gauge", SubResource("Tr_11"), "listen", "stressed", SubResource("Tr_12"), "listen", "spin_strain", SubResource("Tr_13"), "listen", "impaired", SubResource("Tr_14"), "listen", "g_load", SubResource("Tr_15"), "talk", "idle", SubResource("Tr_16"), "talk", "listen", SubResource("Tr_17"), "talk", "work", SubResource("Tr_18"), "talk", "read_gauge", SubResource("Tr_19"), "talk", "stressed", SubResource("Tr_20"), "talk", "spin_strain", SubResource("Tr_21"), "talk", "impaired", SubResource("Tr_22"), "talk", "g_load", SubResource("Tr_23"), "work", "idle", SubResource("Tr_24"), "work", "listen", SubResource("Tr_25"), "work", "talk", SubResource("Tr_26"), "work", "read_gauge", SubResource("Tr_27"), "work", "stressed", SubResource("Tr_28"), "work", "spin_strain", SubResource("Tr_29"), "work", "impaired", SubResource("Tr_30"), "work", "g_load", SubResource("Tr_31"), "read_gauge", "idle", SubResource("Tr_32"), "read_gauge", "listen", SubResource("Tr_33"), "read_gauge", "talk", SubResource("Tr_34"), "read_gauge", "work", SubResource("Tr_35"), "read_gauge", "stressed", SubResource("Tr_36"), "read_gauge", "spin_strain", SubResource("Tr_37"), "read_gauge", "impaired", SubResource("Tr_38"), "read_gauge", "g_load", SubResource("Tr_39"), "stressed", "idle", SubResource("Tr_40"), "stressed", "listen", SubResource("Tr_41"), "stressed", "talk", SubResource("Tr_42"), "stressed", "work", SubResource("Tr_43"), "stressed", "read_gauge", SubResource("Tr_44"), "stressed", "spin_strain", SubResource("Tr_45"), "stressed", "impaired", SubResource("Tr_46"), "stressed", "g_load", SubResource("Tr_47"), "spin_strain", "idle", SubResource("Tr_48"), "spin_strain", "listen", SubResource("Tr_49"), "spin_strain", "talk", SubResource("Tr_50"), "spin_strain", "work", SubResource("Tr_51"), "spin_strain", "read_gauge", SubResource("Tr_52"), "spin_strain", "stressed", SubResource("Tr_53"), "spin_strain", "impaired", SubResource("Tr_54"), "spin_strain", "g_load", SubResource("Tr_55"), "impaired", "idle", SubResource("Tr_56"), "impaired", "listen", SubResource("Tr_57"), "impaired", "talk", SubResource("Tr_58"), "impaired", "work", SubResource("Tr_59"), "impaired", "read_gauge", SubResource("Tr_60"), "impaired", "stressed", SubResource("Tr_61"), "impaired", "spin_strain", SubResource("Tr_62"), "impaired", "g_load", SubResource("Tr_63"), "g_load", "idle", SubResource("Tr_64"), "g_load", "listen", SubResource("Tr_65"), "g_load", "talk", SubResource("Tr_66"), "g_load", "work", SubResource("Tr_67"), "g_load", "read_gauge", SubResource("Tr_68"), "g_load", "stressed", SubResource("Tr_69"), "g_load", "spin_strain", SubResource("Tr_70"), "g_load", "impaired", SubResource("Tr_71")]
+graph_offset = Vector2(0, 0)
+
+[sub_resource type="AnimationNodeTransition" id="Gesture"]
+xfade_time = 0.0
+input_count = 3
+input_0/name = "nod"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "wave"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "relief"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+
+[sub_resource type="AnimationNodeOneShot" id="GestureShot"]
+fadein_time = 0.2
+fadeout_time = 0.3
+
+[sub_resource type="AnimationNodeBlendTree" id="FeedRoot"]
+graph_offset = Vector2(-300, 0)
+nodes/state/node = SubResource("StateMachine")
+nodes/state/position = Vector2(-160, 0)
+nodes/nod/node = SubResource("Anim_nod")
+nodes/nod/position = Vector2(-420, 180)
+nodes/wave/node = SubResource("Anim_wave")
+nodes/wave/position = Vector2(-420, 300)
+nodes/relief/node = SubResource("Anim_relief")
+nodes/relief/position = Vector2(-420, 420)
+nodes/gesture/node = SubResource("Gesture")
+nodes/gesture/position = Vector2(-160, 220)
+nodes/gesture_shot/node = SubResource("GestureShot")
+nodes/gesture_shot/position = Vector2(100, 60)
+nodes/output/position = Vector2(340, 60)
+node_connections = [&"output", 0, &"gesture_shot", &"gesture_shot", 0, &"state", &"gesture_shot", 1, &"gesture", &"gesture", 0, &"nod", &"gesture", 1, &"wave", &"gesture", 2, &"relief"]
+
+[node name="CrewFeed" type="SubViewportContainer"]
+offset_right = 384.0
+offset_bottom = 288.0
+mouse_filter = 2
+stretch = true
+script = ExtResource("1_view")
+
+[node name="FeedViewport" type="SubViewport" parent="."]
+unique_name_in_owner = true
+own_world_3d = true
+handle_input_locally = false
+msaa_3d = 2
+size = Vector2i(384, 288)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="FeedViewport"]
+environment = SubResource("Environment_feed")
+
+[node name="Backdrop" parent="FeedViewport" instance=ExtResource("3_backdrop")]
+
+[node name="CrewMount" type="Node3D" parent="FeedViewport"]
+
+[node name="Key" type="DirectionalLight3D" parent="FeedViewport"]
+transform = Transform3D(0.77096, 0.26095, -0.58097, 0, 0.9122, 0.40973, 0.63688, -0.31589, 0.70328, -0.95, 1.45, 1.15)
+light_color = Color(1, 0.97, 0.93, 1)
+light_energy = 1.5
+
+[node name="Fill" type="DirectionalLight3D" parent="FeedViewport"]
+transform = Transform3D(0.98724, 0.10155, 0.12265, 0, 0.77023, -0.63776, -0.15923, 0.62962, 0.76041, 0.1, 0.32, 0.62)
+light_color = Color(1, 0.8, 0.38, 1)
+light_energy = 0.45
+light_specular = 0.0
+
+[node name="Rim" type="DirectionalLight3D" parent="FeedViewport"]
+transform = Transform3D(-0.74984, -0.28881, 0.59526, 0, 0.89969, 0.43652, -0.66162, 0.32732, -0.67462, 0.75, 1.35, -0.85)
+light_color = Color(0.62, 0.78, 1, 1)
+light_energy = 1.0
+
+[node name="Camera3D" type="Camera3D" parent="FeedViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.99992, 0.01234, 0, -0.01234, 0.99992, 0, 0.75, 1.62)
+current = true
+fov = 23.8
+near = 0.05
+far = 20.0
+
+[node name="FeedTree" type="AnimationTree" parent="FeedViewport"]
+unique_name_in_owner = true
+tree_root = SubResource("FeedRoot")
+
+[node name="Animator" type="Node" parent="FeedViewport"]
+unique_name_in_owner = true
+script = ExtResource("2_animator")

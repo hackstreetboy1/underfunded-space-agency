@@ -1,0 +1,78 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Workspace/AssigneePickerView.cs" id="picker"]
+[ext_resource type="PackedScene" path="res://ui/workspace/AssigneeOption.tscn" id="option"]
+
+[node name="AssigneePicker" type="PanelContainer"]
+custom_minimum_size = Vector2(320, 0)
+offset_right = 320.0
+offset_bottom = 300.0
+theme_type_variation = &"DialogPanel"
+script = ExtResource("picker")
+OptionScene = ExtResource("option")
+
+[node name="Pad" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="Rows" type="VBoxContainer" parent="Pad"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Head" type="HBoxContainer" parent="Pad/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Pad/Rows/Head"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"H2"
+text = "ASSIGN"
+size_flags_horizontal = 3
+
+[node name="Aside" type="Label" parent="Pad/Rows/Head"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = "crew task"
+
+[node name="Requirements" type="Label" parent="Pad/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = ""
+autowrap_mode = 3
+custom_minimum_size = Vector2(296, 0)
+
+[node name="Options" type="VBoxContainer" parent="Pad/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Note" type="Label" parent="Pad/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = ""
+autowrap_mode = 3
+custom_minimum_size = Vector2(296, 0)
+
+[node name="Buttons" type="HBoxContainer" parent="Pad/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="AssignButton" type="Button" parent="Pad/Rows/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonPrimary"
+text = "Assign"
+size_flags_horizontal = 3
+disabled = true
+
+[node name="CancelButton" type="Button" parent="Pad/Rows/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Cancel"

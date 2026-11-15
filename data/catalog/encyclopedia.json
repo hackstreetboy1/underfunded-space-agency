@@ -1,0 +1,595 @@
+{
+  "schema": "encyclopedia/1",
+  "eraLabels": {
+    "historical": "Historical",
+    "modern reference": "Modern reference"
+  },
+  "categories": {
+    "flight": "Flight",
+    "navigation": "Navigation",
+    "propulsion": "Propulsion",
+    "landing": "Return and landing",
+    "power": "Power",
+    "life_support": "Life support",
+    "thermal": "Thermal",
+    "operations": "Operations"
+  },
+  "entries": [
+    {
+      "id": "delta_v",
+      "title": "Delta-v (Δv)",
+      "term": "Delta-v",
+      "category": "propulsion",
+      "era": "modern reference",
+      "firstUse": "How much a burn changes the spacecraft's velocity, in m/s: the currency every manoeuvre is paid in.",
+      "body": "Delta-v, written Δv, is the change in velocity a burn produces, measured in metres per second. Every manoeuvre has a delta-v price: raising an orbit, matching a target, or slowing down to come home. The propellant on board sets the budget. The rocket equation links the two: the delta-v available depends on the engine's efficiency, called specific impulse, and on how much of the vehicle's mass is propellant. Because the vehicle gets lighter as it burns, the last kilograms of propellant buy more delta-v than the first. Propellant spent on anything else, such as holding attitude, comes out of the same budget.",
+      "related": [
+        "oams",
+        "prograde_retrograde",
+        "orbit",
+        "retrofire"
+      ],
+      "sources": [
+        {
+          "title": "Rocket Propulsion Elements",
+          "author": "G. P. Sutton and O. Biblarz",
+          "publisher": "Wiley",
+          "kind": "textbook"
+        },
+        {
+          "title": "Basics of Space Flight",
+          "author": "Jet Propulsion Laboratory",
+          "publisher": "NASA",
+          "url": "https://science.nasa.gov/learn/basics-of-space-flight/",
+          "kind": "web"
+        }
+      ]
+    },
+    {
+      "id": "rcs",
+      "title": "Re-entry control system (RCS)",
+      "term": "RCS",
+      "category": "propulsion",
+      "era": "historical",
+      "imageKey": "image_library:s64-03506",
+      "firstUse": "Two independent rings of small thrusters in the capsule's nose, reserved for holding attitude during retrofire and re-entry.",
+      "body": "The re-entry control system is two independent rings of small thrusters, A and B, mounted in the capsule's nose. Each ring has its own propellant supply and its own valve drivers, so either ring alone can steer the capsule. Their job is to hold attitude during retrofire and re-entry, after the equipment section and its larger thruster system have been jettisoned. Their propellant is small and cannot be replaced, so mission rules of the era treated arming the rings as a commitment: once they are used, the crew returns at the next suitable opportunity. Two rings mean redundancy: either one can do the job alone.",
+      "related": [
+        "oams",
+        "attitude",
+        "retrofire",
+        "reentry_corridor"
+      ],
+      "sources": [
+        {
+          "title": "Human Spaceflight: Mission Analysis and Design",
+          "author": "W. J. Larson and L. K. Pranke (eds.)",
+          "publisher": "McGraw-Hill, 2000",
+          "kind": "textbook"
+        },
+        {
+          "title": "Spacecraft Attitude Determination and Control",
+          "author": "J. R. Wertz (ed.)",
+          "publisher": "Reidel, 1978",
+          "kind": "textbook"
+        }
+      ]
+    },
+    {
+      "id": "oams",
+      "title": "Orbit attitude and maneuver system (OAMS)",
+      "term": "OAMS",
+      "category": "propulsion",
+      "era": "historical",
+      "imageKey": "image_library:s64-03507",
+      "firstUse": "The main thruster system in the equipment section, used both for pointing the spacecraft and for changing its orbit.",
+      "body": "The orbit attitude and maneuver system is the spacecraft's main thruster system, housed in the equipment section behind the cabin. Sixteen thrusters share one propellant supply: eight small ones turn the spacecraft, and eight larger ones push it in a straight line to change its orbit. The propellants ignite on contact, so a thruster fires the moment its valve opens and stops when the valve closes. An electronic driver opens each valve on command. Each thruster has its own breaker and its own temperature gauge in the cabin. The whole system is jettisoned with the equipment section before retrofire.",
+      "related": [
+        "rcs",
+        "attitude",
+        "delta_v",
+        "electrical_buses"
+      ],
+      "sources": [
+        {
+          "title": "Rocket Propulsion Elements",
+          "author": "G. P. Sutton and O. Biblarz",
+          "publisher": "Wiley",
+          "kind": "textbook"
+        },
+        {
+          "title": "Space Vehicle Design",
+          "author": "M. D. Griffin and J. R. French",
+          "publisher": "AIAA",
+          "kind": "textbook"
+        }
+      ]
+    },
+    {
+      "id": "attitude",
+      "title": "Attitude",
+      "term": "Attitude",
+      "category": "flight",
+      "era": "modern reference",
+      "firstUse": "Which way the spacecraft is pointing, regardless of which way it is moving.",
+      "body": "Attitude is the spacecraft's orientation: which way it points, regardless of which way it moves. In orbit nothing holds a spacecraft steady except its own thrusters, and nothing slows a rotation once it starts; a turn continues until an opposite push stops it. Pointing matters for burns, because an engine pushes along the direction it faces, and for re-entry, because the heat shield must face forward. Crews read attitude from an attitude indicator, usually called the ball, and read how fast it is changing from rate gauges. An attitude control system can hold a chosen attitude automatically or damp out unwanted rates.",
+      "related": [
+        "roll_pitch_yaw",
+        "oams",
+        "rcs",
+        "retrofire"
+      ],
+      "sources": [
+        {
+          "title": "Spacecraft Attitude Determination and Control",
+          "author": "J. R. Wertz (ed.)",
+          "publisher": "Reidel, 1978",
+          "kind": "textbook"
+        },
+        {
+          "title": "Spacecraft Dynamics and Control: A Practical Engineering Approach",
+          "author": "M. J. Sidi",
+          "publisher": "Cambridge University Press, 1997",
+          "kind": "textbook"
+        }
+      ]
+    },
+    {
+      "id": "roll_pitch_yaw",
+      "title": "Roll, pitch and yaw",
+      "term": "Roll, pitch, yaw",
+      "category": "flight",
+      "era": "modern reference",
+      "imageKey": "image_library:s64-03507",
+      "firstUse": "The three ways a spacecraft can rotate; their rates are measured in degrees per second.",
+      "body": "Rotation is described about three axes fixed to the spacecraft. Roll turns it around its long axis, like a drill bit. Pitch tips the nose up or down. Yaw swings the nose left or right. Each has a rate, measured in degrees per second; 360 °/s is one full turn every second. Thrusters create rotation by pushing off-centre, so each one turns the vehicle about one or more axes. How hard a vehicle is to turn, its moment of inertia, depends on its mass and how far that mass sits from the axis: the same push turns a light vehicle faster than a heavy one.",
+      "related": [
+        "attitude",
+        "oams",
+        "docking"
+      ],
+      "sources": [
+        {
+          "title": "Spacecraft Attitude Determination and Control",
+          "author": "J. R. Wertz (ed.)",
+          "publisher": "Reidel, 1978",
+          "kind": "textbook"
+        },
+        {
+          "title": "Basics of Space Flight",
+          "author": "Jet Propulsion Laboratory",
+          "publisher": "NASA",
+          "url": "https://science.nasa.gov/learn/basics-of-space-flight/",
+          "kind": "web"
+        }
+      ]
+    },
+    {
+      "id": "orbit",
+      "title": "Orbit",
+      "term": "Orbit",
+      "category": "navigation",
+      "era": "modern reference",
+      "imageKey": "image_library:s65-65257",
+      "firstUse": "A path on which the spacecraft falls around the Earth fast enough to keep missing it.",
+      "body": "An orbit is continuous free fall. A spacecraft about 300 km up travels at roughly 7.7 km/s, fast enough that the ground curves away beneath it as quickly as it falls, so it keeps missing the Earth. Without thrust, the path is an ellipse that repeats every lap; at this altitude one lap takes about 90 minutes. The Earth turns underneath, so each pass crosses different ground. Changing an orbit takes a burn, and the main effect shows up on the far side: a push at one point raises or lowers the opposite side of the orbit.",
+      "related": [
+        "periapsis_apoapsis",
+        "prograde_retrograde",
+        "delta_v",
+        "recovery_zones"
+      ],
+      "sources": [
+        {
+          "title": "Basics of Space Flight",
+          "author": "Jet Propulsion Laboratory",
+          "publisher": "NASA",
+          "url": "https://science.nasa.gov/learn/basics-of-space-flight/",
+          "kind": "web"
+        },
+        {
+          "title": "Orbital Mechanics for Engineering Students",
+          "author": "H. D. Curtis",
+          "publisher": "Butterworth-Heinemann",
+          "kind": "textbook"
+        }
+      ]
+    },
+    {
+      "id": "periapsis_apoapsis",
+      "title": "Periapsis and apoapsis",
+      "term": "Periapsis / apoapsis",
+      "category": "navigation",
+      "era": "modern reference",
+      "imageKey": "image_library:s66-54530",
+      "firstUse": "Periapsis is the lowest point of your orbit; apoapsis is the highest.",
+      "body": "Most orbits are slightly oval. The lowest point is the periapsis (Pe) and the highest is the apoapsis (Ap); around the Earth they are also called perigee and apogee. The spacecraft moves fastest at periapsis and slowest at apoapsis. Burning prograde at one of these points raises the opposite one; burning retrograde lowers it. Altitudes are measured above the surface. If the periapsis drops low enough to reach the thicker upper atmosphere, drag takes over and the spacecraft comes down. That is how every return from orbit begins.",
+      "related": [
+        "orbit",
+        "prograde_retrograde",
+        "retrofire",
+        "reentry_corridor"
+      ],
+      "sources": [
+        {
+          "title": "Basics of Space Flight",
+          "author": "Jet Propulsion Laboratory",
+          "publisher": "NASA",
+          "url": "https://science.nasa.gov/learn/basics-of-space-flight/",
+          "kind": "web"
+        },
+        {
+          "title": "Fundamentals of Astrodynamics",
+          "author": "R. R. Bate, D. D. Mueller et al.",
+          "publisher": "Dover, 1971",
+          "kind": "textbook"
+        }
+      ]
+    },
+    {
+      "id": "prograde_retrograde",
+      "title": "Prograde and retrograde",
+      "term": "Prograde / retrograde",
+      "category": "navigation",
+      "era": "modern reference",
+      "firstUse": "Prograde points along the direction of travel; retrograde points straight back against it.",
+      "body": "Prograde is the direction the spacecraft is moving along its orbit; retrograde is the exact opposite. A prograde burn adds speed and raises the far side of the orbit. A retrograde burn removes speed and lowers it, which is how a return from orbit starts. Radial in and radial out point toward and away from the Earth; burns in those directions change the orbit's shape and orientation rather than its size. A burn in the wrong direction does not just waste propellant. It moves the orbit somewhere you did not intend, and undoing the error costs propellant again.",
+      "related": [
+        "orbit",
+        "periapsis_apoapsis",
+        "delta_v",
+        "retrofire"
+      ],
+      "sources": [
+        {
+          "title": "Orbital Mechanics for Engineering Students",
+          "author": "H. D. Curtis",
+          "publisher": "Butterworth-Heinemann",
+          "kind": "textbook"
+        },
+        {
+          "title": "Basics of Space Flight",
+          "author": "Jet Propulsion Laboratory",
+          "publisher": "NASA",
+          "url": "https://science.nasa.gov/learn/basics-of-space-flight/",
+          "kind": "web"
+        }
+      ]
+    },
+    {
+      "id": "docking",
+      "title": "Docking",
+      "term": "Docking",
+      "category": "operations",
+      "era": "historical",
+      "imageKey": "image_library:S66-54555",
+      "firstUse": "Joining two spacecraft in orbit so they fly as one rigid stack.",
+      "body": "Docking joins two spacecraft so they fly as one rigid stack. First comes rendezvous: matching orbits until the two vehicles drift together slowly. Then the active vehicle closes at a few centimetres per second, guiding its docking bar into the target's cone until the latches catch. Once docked, one vehicle's engine can move both, and one vehicle's thrusters must turn the combined mass. The docking mechanism carries every load between the two, and it has limits. Undocking reverses the process: the latches release, the vehicles drift apart, and each must control its own attitude again.",
+      "related": [
+        "roll_pitch_yaw",
+        "attitude",
+        "orbit"
+      ],
+      "sources": [
+        {
+          "title": "Automated Rendezvous and Docking of Spacecraft",
+          "author": "W. Fehse",
+          "publisher": "Cambridge University Press, 2003",
+          "kind": "textbook"
+        },
+        {
+          "title": "Human Spaceflight: Mission Analysis and Design",
+          "author": "W. J. Larson and L. K. Pranke (eds.)",
+          "publisher": "McGraw-Hill, 2000",
+          "kind": "textbook"
+        }
+      ]
+    },
+    {
+      "id": "retrofire",
+      "title": "Retrofire",
+      "term": "Retrofire",
+      "category": "landing",
+      "era": "historical",
+      "firstUse": "The backward-pointing burn that slows the spacecraft enough to fall out of orbit.",
+      "body": "Retrofire is the burn that ends an orbital flight. With the spacecraft pointed retrograde, rockets fire to remove roughly 90 metres per second, a little over one percent of orbital speed. That is enough to lower the far side of the orbit into the atmosphere, and drag does the rest. Timing chooses the landing area: firing a minute earlier or later moves splashdown by hundreds of kilometres. Attitude must be held steady while the rockets burn, because any pointing error tilts the push and shifts the entry path. Solid retro rockets cannot be throttled or stopped once lit.",
+      "related": [
+        "prograde_retrograde",
+        "attitude",
+        "rcs",
+        "reentry_corridor",
+        "recovery_zones"
+      ],
+      "sources": [
+        {
+          "title": "Space Vehicle Design",
+          "author": "M. D. Griffin and J. R. French",
+          "publisher": "AIAA",
+          "kind": "textbook"
+        },
+        {
+          "title": "Dynamics of Atmospheric Re-Entry",
+          "author": "F. J. Regan and S. M. Anandakrishnan",
+          "publisher": "AIAA, 1993",
+          "kind": "textbook"
+        }
+      ]
+    },
+    {
+      "id": "reentry_corridor",
+      "title": "Re-entry and the entry corridor",
+      "term": "Entry corridor",
+      "category": "landing",
+      "era": "modern reference",
+      "firstUse": "The narrow range of entry angles at which a capsule can come through the atmosphere safely.",
+      "body": "Re-entry turns orbital speed into heat. The capsule meets the atmosphere at about 120 km and slows from nearly 8 km/s to a few hundred metres per second within minutes. The angle of its path decides how that goes. Too steep, and deceleration builds quickly to crushing loads on the crew. Too shallow, and the capsule skims through thin air, heating for longer and landing far beyond its target, or in the extreme skipping back out. Between those limits lies the entry corridor. Retrofire timing and pointing decide where in the corridor the capsule arrives.",
+      "related": [
+        "retrofire",
+        "heat_shield",
+        "parachutes",
+        "periapsis_apoapsis"
+      ],
+      "sources": [
+        {
+          "title": "Dynamics of Atmospheric Re-Entry",
+          "author": "F. J. Regan and S. M. Anandakrishnan",
+          "publisher": "AIAA, 1993",
+          "kind": "textbook"
+        },
+        {
+          "title": "Space Vehicle Design",
+          "author": "M. D. Griffin and J. R. French",
+          "publisher": "AIAA",
+          "kind": "textbook"
+        }
+      ]
+    },
+    {
+      "id": "heat_shield",
+      "title": "Heat shield",
+      "term": "Heat shield",
+      "category": "landing",
+      "era": "historical",
+      "imageKey": "image_library:S63-16250",
+      "firstUse": "The protective base of the capsule, which must face forward during re-entry.",
+      "body": "The heat shield covers the broad base of the capsule, which must face forward during re-entry. The shock wave ahead of it heats the air to several thousand degrees. Capsules of the era used an ablative shield: a resin-and-fibre material that chars, melts and carries heat away as it slowly erodes, keeping the structure behind it cool. It works once. The blunt shape matters as much as the material: it holds the shock wave away from the surface, so most of the heat stays in the air flowing around the capsule rather than soaking into it.",
+      "related": [
+        "reentry_corridor",
+        "attitude",
+        "parachutes"
+      ],
+      "sources": [
+        {
+          "title": "Dynamics of Atmospheric Re-Entry",
+          "author": "F. J. Regan and S. M. Anandakrishnan",
+          "publisher": "AIAA, 1993",
+          "kind": "textbook"
+        },
+        {
+          "title": "Space Vehicle Design",
+          "author": "M. D. Griffin and J. R. French",
+          "publisher": "AIAA",
+          "kind": "textbook"
+        }
+      ]
+    },
+    {
+      "id": "parachutes",
+      "title": "Parachutes: drogue and main",
+      "term": "Drogue / main parachute",
+      "category": "landing",
+      "era": "historical",
+      "firstUse": "The drogue is a small parachute that steadies and slows the capsule high up; the main parachute handles the final descent.",
+      "body": "Parachutes take over once the heat shield has done most of the slowing. The drogue, a small parachute, comes out first at around 15 km to steady the capsule and slow it further. The main parachute opens much lower, around 3 km, and brings the capsule down to a splashdown speed of roughly 9 metres per second. Each has limits: opened too high or too fast, the loads can tear it; opened too low, there is not enough height left to slow down. On this capsule the crew deploys each parachute, either one at a time or as part of the entry checklist.",
+      "related": [
+        "reentry_corridor",
+        "heat_shield",
+        "recovery_zones"
+      ],
+      "sources": [
+        {
+          "title": "Parachute Recovery Systems Design Manual",
+          "author": "T. W. Knacke",
+          "publisher": "Para Publishing, 1992",
+          "kind": "textbook"
+        }
+      ]
+    },
+    {
+      "id": "fuel_cells",
+      "title": "Fuel cells",
+      "term": "Fuel cell",
+      "category": "power",
+      "era": "historical",
+      "imageKey": "image_library:s66-22686",
+      "firstUse": "A device that makes electricity from hydrogen and oxygen, with drinkable water as its by-product.",
+      "body": "A fuel cell produces electricity by combining hydrogen and oxygen chemically, without burning them. The only by-product is water, which the crew can drink. Fuel cells made flights of a week or more practical, because batteries holding that much energy would have been too heavy to launch. The reactants are stored as very cold liquids in the equipment section. A fuel cell needs occasional purging to clear impurities and water that build up inside, and a degraded cell delivers less power. Here each cell supplies about a kilowatt, and together they carry the electrical load until the equipment section is jettisoned.",
+      "related": [
+        "electrical_buses",
+        "thermal_control",
+        "cabin_atmosphere"
+      ],
+      "sources": [
+        {
+          "title": "Fuel Cell Systems Explained",
+          "author": "J. Larminie and A. Dicks",
+          "publisher": "Wiley",
+          "kind": "textbook"
+        },
+        {
+          "title": "Spacecraft Power Systems",
+          "author": "M. R. Patel",
+          "publisher": "CRC Press, 2004",
+          "kind": "textbook"
+        }
+      ]
+    },
+    {
+      "id": "lioh_co2",
+      "title": "LiOH canisters and carbon dioxide",
+      "term": "LiOH canister",
+      "category": "life_support",
+      "era": "historical",
+      "firstUse": "A cartridge of lithium hydroxide that chemically removes carbon dioxide from the cabin air.",
+      "body": "Every breath adds carbon dioxide to the cabin. In a sealed spacecraft it has to be removed, or it builds up and causes headaches, rapid breathing, confusion and worse. Canisters of lithium hydroxide (LiOH) absorb it chemically: the cabin fan pushes air through the canister, and the CO2 reacts and stays behind. A canister has a fixed capacity and must be replaced when it is spent. Without the fan, air does not reach the canister, so the fan matters as much as the chemical. CO2 is measured as a partial pressure, in mmHg; a portable indicator gives an independent second reading.",
+      "related": [
+        "cabin_atmosphere",
+        "electrical_buses",
+        "thermal_control"
+      ],
+      "sources": [
+        {
+          "title": "Designing for Human Presence in Space: An Introduction to Environmental Control and Life Support Systems",
+          "author": "P. O. Wieland",
+          "publisher": "NASA Reference Publication 1324, 1994",
+          "kind": "report"
+        },
+        {
+          "title": "Human Spaceflight: Mission Analysis and Design",
+          "author": "W. J. Larson and L. K. Pranke (eds.)",
+          "publisher": "McGraw-Hill, 2000",
+          "kind": "textbook"
+        }
+      ]
+    },
+    {
+      "id": "cabin_atmosphere",
+      "title": "Cabin atmosphere",
+      "term": "Cabin atmosphere",
+      "category": "life_support",
+      "era": "historical",
+      "imageKey": "image_library:S65-18695",
+      "firstUse": "The air the crew breathes: here, pure oxygen at about a third of sea-level pressure.",
+      "body": "This capsule's cabin holds pure oxygen at about 34 kPa, roughly a third of sea-level pressure. Breathing pure oxygen at that pressure gives the crew about as much oxygen as ordinary air at sea level, and the lower pressure lets a lighter structure hold it in. Oxygen comes from the cryogenic supply through a regulator, the LiOH canisters remove carbon dioxide, and the fan keeps the air moving; without circulation, exhaled gas lingers around each crew member. The drawback of pure oxygen is fire: almost every material burns far more readily in it, so ignition sources are tightly controlled.",
+      "related": [
+        "lioh_co2",
+        "thermal_control",
+        "fuel_cells"
+      ],
+      "sources": [
+        {
+          "title": "Designing for Human Presence in Space: An Introduction to Environmental Control and Life Support Systems",
+          "author": "P. O. Wieland",
+          "publisher": "NASA Reference Publication 1324, 1994",
+          "kind": "report"
+        },
+        {
+          "title": "Human Spaceflight: Mission Analysis and Design",
+          "author": "W. J. Larson and L. K. Pranke (eds.)",
+          "publisher": "McGraw-Hill, 2000",
+          "kind": "textbook"
+        }
+      ]
+    },
+    {
+      "id": "electrical_buses",
+      "title": "Electrical buses and breakers",
+      "term": "Bus / breaker",
+      "category": "power",
+      "era": "historical",
+      "imageKey": "image_library:s66-22686",
+      "firstUse": "A bus is a shared power line feeding many loads; a breaker is a switch that also opens itself on overload.",
+      "body": "Power from the fuel cells and batteries is distributed on buses: shared power lines, here main buses A and B, each feeding many loads at once. A bus tie can join the two so either side can feed both. Each load connects through a breaker, a switch that can be opened by hand and that trips open by itself if too much current flows, protecting the wiring from overheating. Opening a breaker removes power from everything downstream of it. Bus voltage sags when the load is larger than its sources can comfortably supply, and the batteries take over once the fuel cells are gone.",
+      "related": [
+        "fuel_cells",
+        "thermal_control",
+        "oams"
+      ],
+      "sources": [
+        {
+          "title": "Spacecraft Power Systems",
+          "author": "M. R. Patel",
+          "publisher": "CRC Press, 2004",
+          "kind": "textbook"
+        },
+        {
+          "title": "Space Mission Analysis and Design",
+          "author": "J. R. Wertz and W. J. Larson (eds.)",
+          "publisher": "Microcosm Press",
+          "kind": "textbook"
+        }
+      ]
+    },
+    {
+      "id": "thermal_control",
+      "title": "Thermal control",
+      "term": "Thermal control",
+      "category": "thermal",
+      "era": "historical",
+      "firstUse": "Keeping cabin, equipment and batteries within safe temperatures where there is no air to carry heat away.",
+      "body": "In orbit there is no air to carry heat away, and the sunlit side of a spacecraft can be hundreds of degrees hotter than the side facing deep space. Every powered device also turns its electricity into heat. A coolant loop collects that heat and carries it to a radiator, which sheds it to space as infrared light; how well the radiator works depends on its condition and on whether it faces the Sun. Heaters keep batteries and equipment from getting too cold. Switching a load off saves power and removes its heat at the same time.",
+      "related": [
+        "electrical_buses",
+        "fuel_cells",
+        "cabin_atmosphere"
+      ],
+      "sources": [
+        {
+          "title": "Spacecraft Thermal Control Handbook, Vol. I",
+          "author": "D. G. Gilmore (ed.)",
+          "publisher": "Aerospace Press, 2002",
+          "kind": "textbook"
+        },
+        {
+          "title": "Space Mission Analysis and Design",
+          "author": "J. R. Wertz and W. J. Larson (eds.)",
+          "publisher": "Microcosm Press",
+          "kind": "textbook"
+        }
+      ]
+    },
+    {
+      "id": "recovery_zones",
+      "title": "Recovery zones",
+      "term": "Recovery zone",
+      "category": "operations",
+      "era": "historical",
+      "imageKey": "image_library:s66-34101",
+      "firstUse": "An area of ocean where ships and aircraft wait to pick up a returning capsule.",
+      "body": "A capsule that lands in the ocean needs to be found and picked up quickly. Agencies of the era stationed ships and aircraft in a few recovery zones under the spacecraft's ground track: a primary zone with the main recovery ship, secondary zones with fewer resources, and contingency zones for emergencies. Landing in the primary zone can mean recovery within half an hour. Elsewhere, the crew may wait hours in a small capsule rolling on the swell, which is tiring and wearing. Retrofire timing decides which zone the capsule reaches, so every return plan starts with the next suitable pass.",
+      "related": [
+        "retrofire",
+        "orbit",
+        "parachutes",
+        "mission_control_capcom"
+      ],
+      "sources": [
+        {
+          "title": "Human Spaceflight: Mission Analysis and Design",
+          "author": "W. J. Larson and L. K. Pranke (eds.)",
+          "publisher": "McGraw-Hill, 2000",
+          "kind": "textbook"
+        }
+      ]
+    },
+    {
+      "id": "mission_control_capcom",
+      "title": "Mission control and CAPCOM",
+      "term": "CAPCOM",
+      "category": "operations",
+      "era": "historical",
+      "imageKey": "image_library:s65-45280",
+      "firstUse": "The capsule communicator: the one person on the ground who talks directly to the crew.",
+      "body": "Mission control is the team on the ground that follows a flight around the clock. Specialists for each system watch telemetry and report to the flight director, who makes the final decisions. One voice speaks to the crew: the capsule communicator, or CAPCOM, traditionally an astronaut who knows the cockpit from the inside. A single voice avoids confusing a busy crew. Telemetry gives the ground broad trends, but many details only the crew can see or check, so asking good questions is a large part of the job. In this game, you are CAPCOM.",
+      "related": [
+        "recovery_zones",
+        "attitude",
+        "electrical_buses"
+      ],
+      "sources": [
+        {
+          "title": "Human Spaceflight: Mission Analysis and Design",
+          "author": "W. J. Larson and L. K. Pranke (eds.)",
+          "publisher": "McGraw-Hill, 2000",
+          "kind": "textbook"
+        },
+        {
+          "title": "Space Mission Analysis and Design",
+          "author": "J. R. Wertz and W. J. Larson (eds.)",
+          "publisher": "Microcosm Press",
+          "kind": "textbook"
+        }
+      ]
+    }
+  ]
+}

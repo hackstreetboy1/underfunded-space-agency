@@ -1,0 +1,8 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Console/Components/FactChipButton.cs" id="1_factchipbutton"]
+
+[node name="FactChip" type="Button"]
+theme_type_variation = &"ButtonGhost"
+text = "OAMS 212 kg · 06:58"
+script = ExtResource("1_factchipbutton")

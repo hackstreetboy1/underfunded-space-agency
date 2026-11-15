@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[node name="GhostButton" type="Button"]
+theme_type_variation = &"ButtonGhost"
+text = "Stronger hint"
+custom_minimum_size = Vector2(0, 32)

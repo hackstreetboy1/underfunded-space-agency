@@ -1,0 +1,121 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Console/Regions/TipCard.cs" id="1_tipcard"]
+[ext_resource type="PackedScene" path="res://ui/console/components/FactChip.tscn" id="2_factchip"]
+
+[node name="TipCard" type="PanelContainer"]
+visible = false
+script = ExtResource("1_tipcard")
+FactChipScene = ExtResource("2_factchip")
+
+[node name="Expanded" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="Rows" type="VBoxContainer" parent="Expanded"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Head" type="HBoxContainer" parent="Expanded/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Signature" type="Label" parent="Expanded/Rows/Head"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"BadgeLabel"
+text = "Flight Director · D. Marsh"
+size_flags_horizontal = 3
+uppercase = true
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Pips" type="HBoxContainer" parent="Expanded/Rows/Head"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 3
+size_flags_vertical = 4
+
+[node name="Pip1" type="PanelContainer" parent="Expanded/Rows/Head/Pips"]
+layout_mode = 2
+custom_minimum_size = Vector2(8, 8)
+theme_type_variation = &"Badge"
+
+[node name="Pip2" type="PanelContainer" parent="Expanded/Rows/Head/Pips"]
+layout_mode = 2
+custom_minimum_size = Vector2(8, 8)
+theme_type_variation = &"Badge"
+
+[node name="Pip3" type="PanelContainer" parent="Expanded/Rows/Head/Pips"]
+layout_mode = 2
+custom_minimum_size = Vector2(8, 8)
+theme_type_variation = &"Badge"
+
+[node name="Pip4" type="PanelContainer" parent="Expanded/Rows/Head/Pips"]
+layout_mode = 2
+custom_minimum_size = Vector2(8, 8)
+theme_type_variation = &"Badge"
+
+[node name="Pip5" type="PanelContainer" parent="Expanded/Rows/Head/Pips"]
+layout_mode = 2
+custom_minimum_size = Vector2(8, 8)
+theme_type_variation = &"Badge"
+
+[node name="StageWord" type="Label" parent="Expanded/Rows/Head"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Connect"
+vertical_alignment = 1
+
+[node name="Dismiss" type="Button" parent="Expanded/Rows/Head"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+text = "✕"
+tooltip_text = "Dismiss the tip"
+
+[node name="Text" type="Label" parent="Expanded/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "OAMS propellant is falling faster than the plan."
+autowrap_mode = 3
+
+[node name="Foot" type="HBoxContainer" parent="Expanded/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Facts" type="HFlowContainer" parent="Expanded/Rows/Foot"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+
+[node name="Stronger" type="Button" parent="Expanded/Rows/Foot"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+text = "Stronger hint"
+size_flags_vertical = 4
+
+[node name="Cooldown" type="Label" parent="Expanded/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = ""
+visible = false
+
+[node name="Collapsed" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+text = "Tip available"
+visible = false
+custom_minimum_size = Vector2(0, 32)
+alignment = 0

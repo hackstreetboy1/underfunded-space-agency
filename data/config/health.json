@@ -1,0 +1,95 @@
+{
+  "schema": "health/1",
+  "launchHealth": 100,
+  "bands": { "stableMin": 80, "stressedMin": 60, "impairedMin": 35 },
+  // About 11 points per hour while every exposure is harmless.
+  "recoveryPerS": 0.003,
+  // GDD 10.3: a mission-caused complication is more than 5 points of health loss.
+  "complicationThreshold": 5,
+  // damagePerS: [exposure input, health points lost per second], interpolated linearly, flat beyond the ends.
+  "causes": [
+    {
+      "cause": "ppco2",
+      "label": "Carbon dioxide build-up in the cabin",
+      // mmHg
+      "damagePerS": [[7.6, 0], [15, 0.003], [25, 0.015], [40, 0.06], [60, 0.2], [80, 0.5]]
+    },
+    {
+      "cause": "low_ppo2",
+      "label": "Too little oxygen to breathe",
+      // kPa oxygen partial pressure
+      "damagePerS": [[6, 0.8], [10, 0.25], [14, 0.05], [17, 0.005], [19, 0]]
+    },
+    {
+      "cause": "low_pressure",
+      "label": "Cabin pressure loss",
+      // kPa total pressure; 6.3 kPa is the Armstrong limit
+      "damagePerS": [[2, 3.0], [6.3, 1.5], [10, 0.1], [15, 0.01], [20, 0]]
+    },
+    {
+      "cause": "high_temperature",
+      "label": "Heat in the cabin",
+      // deg C
+      "damagePerS": [[30, 0], [35, 0.004], [40, 0.02], [50, 0.1], [60, 0.4]]
+    },
+    {
+      "cause": "low_temperature",
+      "label": "Cold in the cabin",
+      // deg C
+      "damagePerS": [[-10, 0.2], [0, 0.05], [8, 0.01], [13, 0.001], [15, 0]]
+    },
+    {
+      "cause": "angular_rate",
+      "label": "Disorientation and blurred vision from the spin",
+      // deg/s. GDD 12.5 I5/I6: mild above 120 growing with rate squared, critical above 250 for minutes.
+      "damagePerS": [[120, 0], [150, 0.025], [180, 0.056], [210, 0.093], [250, 0.15], [300, 0.25], [360, 0.4]]
+    },
+    {
+      "cause": "g_load",
+      "label": "Heavy deceleration during entry",
+      // g, only after 5 s above 9 g
+      "damagePerS": [[9, 0], [10, 0.3], [12, 1.0], [15, 3.0], [20, 10.0]],
+      "sustainS": 5
+    },
+    {
+      "cause": "dehydration",
+      "label": "Dehydration",
+      // litres of water deficit
+      "damagePerS": [[0.5, 0], [1, 0.0005], [2, 0.002], [3, 0.006], [5, 0.02]]
+    },
+    {
+      "cause": "malnutrition",
+      "label": "Not enough food",
+      // kcal deficit
+      "damagePerS": [[1500, 0], [3000, 0.0005], [6000, 0.002], [10000, 0.005]]
+    },
+    {
+      "cause": "fatigue",
+      "label": "Exhaustion",
+      // 0 rested to 1 exhausted
+      "damagePerS": [[0.6, 0], [0.8, 0.0005], [1, 0.002]]
+    },
+    {
+      "cause": "injury",
+      "label": "Injury",
+      // 0 none to 1 severe
+      "damagePerS": [[0, 0], [0.2, 0.005], [0.5, 0.03], [1, 0.2]]
+    }
+  ],
+  // Inputs for StateExposureSource, resolved per crew member and place (mission.json "locations"): "{crew}" is the crew id,
+  // "{cabin}" the cabin vehicle of the member's location (suited: gas, pressure and temperature read suit values), "{vehicle}"
+  // the vehicle whose motion they feel. "" reads as nominal (not simulated yet). Never point these at crew.{crew}.env.*: those
+  // paths are served from these inputs.
+  "exposurePaths": {
+    "ppco2Mmhg": "cabin.{cabin}.ppco2_mmhg",
+    "ppo2Kpa": "cabin.{cabin}.ppo2_kpa",
+    "pressureKpa": "cabin.{cabin}.pressure_kpa",
+    "temperatureC": "cabin.{cabin}.temp_c",
+    "angularRateDps": "attitude.{vehicle}.rate_total_dps",
+    "gLoad": "flight.g_load",
+    "hydrationDeficitL": "provisions.{crew}.hydration_deficit_l",
+    "nutritionDeficitKcal": "provisions.{crew}.nutrition_deficit_kcal",
+    "fatigue": "",
+    "injury": ""
+  }
+}

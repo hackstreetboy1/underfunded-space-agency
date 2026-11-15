@@ -1,0 +1,126 @@
+{
+  "schema": "mission/1",
+  "id": "out_of_control",
+  "title": "Out of Control",
+  "era": 1966,
+  "vehicles": ["tandem", "lodestar"],
+  "crew": ["cal_brandt", "june_okafor"],
+  // Where the crew can be: Tandem's cabin, or suited outside it (tethered, the spin is felt twice as strongly).
+  "locations": [
+    { "id": "cabin", "cabin": "tandem", "default": true },
+    { "id": "eva", "vehicle": "tandem", "angularRateFactor": 2 }
+  ],
+  "start": { "metS": 22800, "phase": "docking_ops" },
+  "files": {
+    "incidents": "incidents.json",
+    "flight": "flight.json",
+    "inventory": "inventory.{difficulty}.json",
+    "repairs": "repairs.json",
+    "hints": "hints.json",
+    "tutorial": "tutorial.json"
+  },
+
+  "phases": ["docking_ops", "docked_ops", "emergency", "return_prep", "entry", "recovery", "ended"],
+  "endedPhase": "ended",
+  "phaseTransitions": [
+    { "from": ["docking_ops"], "to": "docked_ops", "event": "docked" },
+    { "from": ["docking_ops", "docked_ops"], "to": "emergency", "event": "incident_i1" },
+    { "from": ["emergency"], "to": "docked_ops",
+      "when": "@flight.docked and abs(@attitude.tandem.rate_roll_dps) < 1 and @mission.met_s - @mission.phase_entered_met_s >= 120 and not @mission.rule.rcs_activation_return.active" },
+    { "from": ["docked_ops", "emergency"], "to": "return_prep",
+      "when": "@mission.rule.rcs_activation_return.active and abs(@attitude.tandem.rate_roll_dps) < 5" },
+    { "from": ["docking_ops", "docked_ops", "emergency"], "to": "return_prep", "event": "equipment_sep" },
+    { "from": ["docking_ops", "docked_ops", "emergency"], "to": "return_prep", "event": "retrofire" },
+    { "from": ["docking_ops", "docked_ops", "emergency", "return_prep"], "to": "entry", "event": "entry_interface" },
+    { "from": ["entry"], "to": "recovery", "event": "splashdown" }
+  ],
+
+  "events": [
+    { "id": "docked", "when": "@flight.docked" },
+    { "id": "undocked", "when": "@mission.event.docked.fired and not @flight.docked" },
+    { "id": "incident_i1", "source": "incident:i1_t8_short" },
+    { "id": "rcs_armed", "when": "@mission.condition.rcs_armed" },
+    { "id": "equipment_sep", "source": "task:jettison_equipment" },
+    { "id": "retrofire", "source": "task:retrofire" },
+    { "id": "retro_sep", "source": "task:jettison_retro" },
+    { "id": "entry_interface", "when": "@mission.event.retrofire.fired and @flight.altitude_km < 122" },
+    { "id": "drogue", "source": "vehicle:tandem/chute/drogue deployed" },
+    { "id": "main", "source": "vehicle:tandem/chute/main deployed" },
+    { "id": "splashdown", "when": "@flight.landed" },
+    { "id": "recovered", "source": "flight:recovery_complete" },
+    { "id": "docked_burn_complete", "when": "@session.burn.lodestar.docked_dv_mps >= 30" },
+    { "id": "eva_package_retrieved", "source": "task:eva_retrieve_package" }
+  ],
+
+  "conditions": [
+    { "id": "rcs_armed", "when": "any(@tandem/rcs/ring_a.armed, @tandem/rcs/ring_b.armed)" },
+    { "id": "spin_manageable", "when": "abs(@attitude.tandem.rate_roll_dps) < 120" },
+    { "id": "path_a_viable", "when": "abs(@attitude.tandem.rate_roll_dps) < 120 and @tandem/oams/tank.quantity_kg >= 120" },
+    // GDD 10.3 "known acceptable alternative": the crew has pinned the roll on thruster 8 since the short (read its temperature,
+    // cycled its breaker group or seen it), so letting the roll damage the adapter was avoidable.
+    { "id": "t8_identified",
+      "when": "@mission.event.incident_i1.fired and any(@knowledge.fact.oams.temp.t08.met_s > @mission.event.incident_i1.met_s, @knowledge.component.tandem/oams/driver_08.state == 'confirmed_damaged', @knowledge.component.tandem/oams/thruster_08.state == 'confirmed_damaged')" }
+  ],
+
+  "objectives": [
+    { "id": "o1_dock", "kind": "primary", "title": "Dock with Agena", "weightPct": 30,
+      "complete": "@mission.event.docked.fired",
+      "feasibility": [
+        { "id": "incident_before_docking", "state": "impossible",
+          "when": "@mission.event.incident_i1.fired and not @mission.event.docked.fired",
+          "cause": "player_avoidable", "acceptableAlternative": "true" }
+      ] },
+    { "id": "o2_docked_burn", "kind": "primary", "title": "Docked orbit-raise burn", "weightPct": 30,
+      "complete": "@mission.event.docked_burn_complete.fired",
+      "feasibility": [
+        { "id": "not_docked_after_incident", "state": "impossible",
+          "when": "@mission.event.incident_i1.fired and not @flight.docked",
+          "cause": "player_avoidable", "acceptableAlternative": "@mission.condition.path_a_viable" },
+        { "id": "docking_adapter_damaged", "state": "impossible",
+          "when": "@lodestar/docking_cone.condition != 'nominal'",
+          "cause": "player_avoidable", "acceptableAlternative": "@mission.condition.path_a_viable and @mission.condition.t8_identified" },
+        { "id": "lodestar_engine_failed", "state": "impossible",
+          "when": "@lodestar/engine.condition == 'failed'",
+          "cause": "scenario" },
+        { "id": "return_started", "state": "impossible",
+          "when": "any(@mission.event.equipment_sep.fired, @mission.event.retrofire.fired)",
+          "cause": "player_avoidable", "acceptableAlternative": "true" }
+      ] },
+    { "id": "o3_eva", "kind": "primary", "title": "Pilot EVA: retrieve the experiment package", "weightPct": 40,
+      "complete": "@mission.event.eva_package_retrieved.fired",
+      "feasibility": [
+        { "id": "oams_propellant_low", "state": "unacceptable_risk",
+          "when": "@tandem/oams/tank.quantity_kg < 120",
+          "cause": "player_avoidable", "acceptableAlternative": "@mission.condition.spin_manageable", "latched": true },
+        { "id": "pilot_health_low", "state": "unacceptable_risk",
+          "when": "@crew.june_okafor.health < 80",
+          "cause": "player_avoidable", "acceptableAlternative": "@mission.condition.spin_manageable" },
+        { "id": "pilot_lost", "state": "impossible",
+          "when": "not @crew.june_okafor.alive",
+          "cause": "player_avoidable", "acceptableAlternative": "@mission.condition.spin_manageable" },
+        { "id": "experiment_package_lost", "state": "impossible",
+          "when": "@tandem/adapter/experiment_package.condition == 'failed'",
+          "cause": "scenario" },
+        { "id": "return_started", "state": "impossible",
+          "when": "any(@mission.event.equipment_sep.fired, @mission.event.retrofire.fired)",
+          "cause": "player_avoidable", "acceptableAlternative": "true" }
+      ] },
+    { "id": "r_safe_return", "kind": "return", "title": "Return the crew safely",
+      "complete": "@mission.event.recovered.fired and @crew.alive_count > 0",
+      "feasibility": [
+        { "id": "all_crew_lost", "state": "impossible", "when": "@crew.alive_count == 0", "cause": "player_avoidable", "acceptableAlternative": "true" }
+      ] }
+  ],
+
+  "missionRules": [
+    { "id": "rcs_activation_return",
+      "when": "@mission.condition.rcs_armed",
+      "effect": { "requireReturn": "next_suitable_zone", "objectivesUnacceptable": ["o2_docked_burn", "o3_eva"] },
+      "cause": "player_avoidable", "acceptableAlternative": "@mission.condition.path_a_viable" }
+  ],
+
+  "endConditions": [
+    { "id": "all_crew_lost", "when": "@crew.alive_count == 0", "outcome": "all_crew_lost" },
+    { "id": "recovered", "event": "recovered", "outcome": "recovered" }
+  ]
+}

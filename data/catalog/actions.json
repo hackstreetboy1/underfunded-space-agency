@@ -1,0 +1,51 @@
+{
+  "schema": "actions/1",
+  // Shared actions every mission has; each mission adds its own in missions/<id>/catalog/actions.json (MissionDataSource).
+  // "phases": ["*"] means every phase of the mission except its ended phase; ["**"] every phase including it
+  // (alarms can always be acknowledged: an unacknowledged warning holds time compression at 1x).
+  "actions": [
+    {
+      "id": "stop_task",
+      "kind": "meta",
+      "description": "Stop the crew's current task.",
+      "impact": "low",
+      "phases": ["*"],
+      "meta": "stop_task",
+      "preconditions": [
+        {
+          "require": "@crew.task.active",
+          "reason": "no_active_task"
+        }
+      ]
+    },
+    {
+      "id": "acknowledge_alarms",
+      "kind": "meta",
+      "description": "Acknowledge and silence the active alarms.",
+      "impact": "low",
+      "phases": ["**"],
+      "meta": "acknowledge_alarms"
+    },
+    {
+      "id": "status_report",
+      "kind": "meta",
+      "description": "Ask a crew member for a summary of what they know.",
+      "impact": "low",
+      "phases": ["*"],
+      "meta": "status_report",
+      "usesCrew": true
+    },
+    {
+      "id": "register_repair_design",
+      "kind": "meta",
+      "description": "Record a repair design from the engineering workspace.",
+      "impact": "low",
+      "phases": ["*"],
+      "meta": "register_repair_design",
+      "parameters": [
+        { "name": "assembly", "type": "string" },
+        { "name": "design", "type": "string" }
+      ]
+    }
+  ]
+}

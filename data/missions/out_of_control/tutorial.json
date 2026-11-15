@@ -1,0 +1,373 @@
+{
+  "schema": "tutorial/1",
+  "missionId": "out_of_control",
+  "minDisplayS": 2,
+  "beats": [
+    {
+      "id": "walk_dock",
+      "anchor": "comms_input",
+      "title": "Dock with Agena",
+      "text": "First job: dock with Agena, the target vehicle ahead of you. Send Cal the order below and he'll fly the approach.",
+      "trigger": "@difficulty.nav_assist == 'propose'",
+      "completion": "@crew.task.id == 'dock' or @mission.event.docked.fired",
+      "suggestedOrder": { "action": "dock", "crew": "cal_brandt", "text": "Cal, dock with Agena" },
+      "maxTimeRate": 1,
+      "rail": { "do": "Click Send.", "wait": "Wait — Cal is flying the docking approach (a few seconds).", "view": "external", "viewOn": "wait" }
+    },
+    {
+      "id": "walk_docked",
+      "anchor": "resource_strip",
+      "title": "Docked",
+      "text": "Docked and steady. Time runs faster while nothing needs you, and the console slows it down the moment something does.",
+      "trigger": "@mission.event.docked.fired",
+      "after": "walk_dock",
+      "completion": "@mission.event.incident_i1.fired",
+      "rail": { "do": "Wait — time runs fast until the console needs you." }
+    },
+    {
+      "id": "walk_alarm",
+      "anchor": "alarm_ack",
+      "title": "Acknowledge the alarm",
+      "text": "Something is firing on its own and the stack has started to roll. Press ACK once the alarm sounds, or Got it to go straight after the culprit.",
+      "trigger": "@mission.event.incident_i1.fired",
+      "after": "walk_docked",
+      "completion": "@crew.task.id == 'read_thruster_temps' or @mission.condition.t8_identified or not @tandem/power/breaker_oams_08.closed",
+      "maxTimeRate": 1,
+      "rail": { "do": "Press ACK when the alarm sounds, or Got it to go straight on.", "skip": true }
+    },
+    {
+      "id": "walk_temps",
+      "anchor": "comms_input",
+      "title": "Find the stuck thruster",
+      "text": "A thruster that won't stop firing runs hot. Ask June to read the thruster temperatures and the culprit will give itself away.",
+      "trigger": "@mission.event.incident_i1.fired",
+      "after": "walk_alarm",
+      "completion": "@crew.task.id == 'read_thruster_temps' or @mission.condition.t8_identified or not @tandem/power/breaker_oams_08.closed",
+      "suggestedOrder": { "action": "read_thruster_temps", "crew": "june_okafor", "text": "June, read the thruster temps" },
+      "maxTimeRate": 1,
+      "rail": { "do": "Click Send.", "wait": "Wait — June is reading the thruster temperatures (a few seconds)." }
+    },
+    {
+      "id": "walk_open_t8",
+      "anchor": "comms_input",
+      "title": "Cut power to T8",
+      "text": "Thruster 8 is the hot one: its driver has shorted and it keeps firing. Have June open its breaker to stop it.",
+      "trigger": "@mission.condition.t8_identified or not @tandem/power/breaker_oams_08.closed",
+      "after": "walk_temps",
+      "completion": "@crew.task.id == 'open_breaker' or not @tandem/power/breaker_oams_08.closed",
+      "suggestedOrder": {
+        "action": "open_breaker", "crew": "june_okafor", "text": "June, open the T8 breaker",
+        "args": { "breaker": "tandem/power/breaker_oams_08" }
+      },
+      "maxTimeRate": 1,
+      "rail": { "do": "Click Send.", "wait": "Wait — June is opening the T8 breaker (a few seconds)." }
+    },
+    {
+      "id": "walk_damp_oams",
+      "anchor": "comms_input",
+      "title": "Stop the roll",
+      "text": "T8 is quiet, but the stack is still rolling. Have Cal rate damp on the OAMS thrusters to bring it to rest.",
+      "trigger": "not @tandem/power/breaker_oams_08.closed and not @crew.task.active",
+      "after": "walk_open_t8",
+      "completion": "@crew.task.id == 'rate_damp' or abs(@attitude.tandem.rate_roll_dps) < 0.5 or @mission.event.docked_burn_complete.fired or @mission.event.undocked.fired",
+      "suggestedOrder": { "action": "rate_damp", "crew": "cal_brandt", "text": "Cal, rate damp on OAMS", "args": { "system": "oams" } },
+      "maxTimeRate": 1,
+      "rail": { "do": "Click Send.", "wait": "Wait — Cal is damping the roll." }
+    },
+    {
+      "id": "walk_burn",
+      "anchor": "comms_input",
+      "title": "Raise the orbit",
+      "text": "The roll has stopped. Fire Agena's engine for three and a half seconds to raise the orbit while you're docked, then confirm.",
+      "trigger": "(abs(@attitude.tandem.rate_roll_dps) < 0.5 and not @crew.task.active) or @mission.event.docked_burn_complete.fired",
+      "after": "walk_damp_oams",
+      "completion": "@session.burn.lodestar.docked_dv_mps > 0 or @mission.event.docked_burn_complete.fired or @mission.event.undocked.fired",
+      "suggestedOrder": { "action": "lodestar_burn", "text": "Fire Agena's engine for 3.5 s", "args": { "duration_s": 3.5 } },
+      "maxTimeRate": 1,
+      "rail": { "do": "Click Send, then Confirm.", "wait": "Wait — Agena's engine is firing (a few seconds)." }
+    },
+    {
+      "id": "walk_eva",
+      "anchor": "comms_input",
+      "title": "Fetch the experiment",
+      "text": "Orbit raised. Send June outside to retrieve the experiment package, then confirm; it's the reason you came up here.",
+      "trigger": "(@mission.event.docked_burn_complete.fired and not @crew.task.active) or @mission.event.eva_package_retrieved.fired or @mission.event.undocked.fired",
+      "after": "walk_burn",
+      "completion": "@crew.task.id == 'eva_retrieve_package' or @mission.event.eva_package_retrieved.fired or @mission.event.undocked.fired",
+      "suggestedOrder": { "action": "eva_retrieve_package", "crew": "june_okafor", "text": "June, fetch the experiment package" },
+      "maxTimeRate": 1,
+      "rail": { "do": "Click Send, then Confirm.", "wait": "Wait — June is outside fetching the package (time runs faster)." }
+    },
+    {
+      "id": "walk_undock",
+      "anchor": "comms_input",
+      "title": "Undock",
+      "text": "Package aboard and June's back inside. Have Cal undock from Agena; it's time to go home.",
+      "trigger": "(@mission.event.eva_package_retrieved.fired and not @crew.task.active) or @mission.event.undocked.fired",
+      "after": "walk_eva",
+      "completion": "@crew.task.id == 'undock' or @mission.event.undocked.fired",
+      "suggestedOrder": { "action": "undock", "crew": "cal_brandt", "text": "Cal, undock from Agena" },
+      "maxTimeRate": 1,
+      "rail": { "do": "Click Send.", "wait": "Wait — Cal is undocking from Agena." }
+    },
+    {
+      "id": "walk_arm_ring",
+      "anchor": "comms_input",
+      "title": "Arm the RCS",
+      "text": "Away from Agena you steer with the RCS. Ring A's harness is damaged, so have Cal arm ring B, then confirm.",
+      "trigger": "(@mission.event.undocked.fired and not @crew.task.active) or @mission.condition.rcs_armed",
+      "after": "walk_undock",
+      "completion": "@crew.task.id == 'arm_rcs_ring' or @mission.condition.rcs_armed",
+      "suggestedOrder": { "action": "arm_rcs_ring", "crew": "cal_brandt", "text": "Cal, arm RCS ring B", "args": { "ring": "b" } },
+      "maxTimeRate": 1,
+      "alternatives": [
+        {
+          "when": "@variant.damaged_ring_harness == 'tandem/rcs/harness_j14_b'",
+          "text": "Away from Agena you steer with the RCS. Ring B's harness is damaged, so have Cal arm ring A, then confirm.",
+          "suggestedOrder": { "action": "arm_rcs_ring", "crew": "cal_brandt", "text": "Cal, arm RCS ring A", "args": { "ring": "a" } }
+        }
+      ],
+      "rail": { "do": "Click Send, then Confirm.", "wait": "Wait — Cal is arming the ring (a few seconds)." }
+    },
+    {
+      "id": "walk_damp_rcs",
+      "anchor": "comms_input",
+      "title": "Hold her steady",
+      "text": "Ring armed. Have Cal rate damp on the RCS so the capsule holds still for the burn home.",
+      "trigger": "@mission.condition.rcs_armed and not @crew.task.active",
+      "after": "walk_arm_ring",
+      "completion": "@crew.task.id == 'rate_damp' or @attitude.tandem.control_set == 'rcs' or @mission.event.equipment_sep.fired or @mission.event.retrofire.fired",
+      "suggestedOrder": { "action": "rate_damp", "crew": "cal_brandt", "text": "Cal, rate damp on RCS", "args": { "system": "rcs" } },
+      "maxTimeRate": 1,
+      "rail": { "do": "Click Send.", "wait": "Wait — Cal is steadying the capsule." }
+    },
+    {
+      "id": "walk_jettison",
+      "anchor": "comms_input",
+      "title": "Drop the equipment section",
+      "text": "The equipment section has done its job. Have Cal jettison it, then confirm; only the retro pack and the capsule come home.",
+      "trigger": "(@attitude.tandem.control_set == 'rcs' and not @crew.task.active) or @mission.event.equipment_sep.fired",
+      "after": "walk_damp_rcs",
+      "completion": "@crew.task.id == 'jettison_equipment' or @mission.event.equipment_sep.fired or @mission.event.retrofire.fired",
+      "suggestedOrder": { "action": "jettison_equipment", "crew": "cal_brandt", "text": "Cal, jettison the equipment section" },
+      "maxTimeRate": 1,
+      "rail": { "do": "Click Send, then Confirm.", "wait": "Wait — Cal is jettisoning the equipment section." }
+    },
+    {
+      "id": "walk_retro_engine",
+      "anchor": "planner_engine",
+      "title": "Choose the retro engine",
+      "text": "Now the burn home. Open the Orbit tab and the burn planner, then choose Retro sequence as the engine.",
+      "trigger": "(@mission.event.equipment_sep.fired and not @crew.task.active) or @mission.event.retrofire.fired",
+      "after": "walk_jettison",
+      "completion": "@crew.task.id == 'retrofire' or @mission.event.retrofire.fired",
+      "maxTimeRate": 10,
+      "rail": { "do": "Open the Burn planner, then choose Retro sequence.", "choose": "retro_sequence", "view": "orbit" }
+    },
+    {
+      "id": "walk_retro_zone",
+      "anchor": "planner_goal",
+      "title": "Pick the landing zone",
+      "text": "Set the goal to Zone: Primary Atlantic. That's where the recovery ships are waiting.",
+      "trigger": "true",
+      "after": "walk_retro_engine",
+      "completion": "@crew.task.id == 'retrofire' or @mission.event.retrofire.fired",
+      "maxTimeRate": 10,
+      "rail": { "do": "Choose Zone: Primary Atlantic in the goal list.", "choose": "primary_atlantic" }
+    },
+    {
+      "id": "walk_retro_propose",
+      "anchor": "planner_propose",
+      "title": "Propose the burn",
+      "text": "Press Propose and the flight computer works out when and how to fire the retros.",
+      "trigger": "true",
+      "after": "walk_retro_zone",
+      "completion": "@crew.task.id == 'retrofire' or @mission.event.retrofire.fired",
+      "maxTimeRate": 10,
+      "rail": { "do": "Click Propose." }
+    },
+    {
+      "id": "walk_retro_execute",
+      "anchor": "planner_execute",
+      "title": "Execute the burn",
+      "text": "Check that the ghost track ends in the zone, then press Execute.",
+      "trigger": "true",
+      "after": "walk_retro_propose",
+      "completion": "@crew.task.id == 'retrofire' or @mission.event.retrofire.fired",
+      "maxTimeRate": 10,
+      "rail": { "do": "Click Execute." }
+    },
+    {
+      "id": "walk_retro_confirm",
+      "anchor": "confirm_dialog",
+      "title": "Confirm the retrofire",
+      "text": "Confirm the order. The computer holds it and fires the retros at exactly the right moment.",
+      "trigger": "true",
+      "after": "walk_retro_execute",
+      "completion": "@crew.task.id == 'retrofire' or @mission.event.retrofire.fired",
+      "maxTimeRate": 10,
+      "rail": { "do": "Click Confirm in the dialog (closed it? Click Execute again)." }
+    },
+    {
+      "id": "walk_retro_wait",
+      "anchor": "orbit_map",
+      "title": "Wait for the retrofire",
+      "text": "The burn is booked. Time speeds up until it's due, then slows down so you can watch Cal fire the retros.",
+      "trigger": "true",
+      "after": "walk_retro_confirm",
+      "completion": "@crew.task.id == 'retrofire' or @mission.event.retrofire.fired",
+      "rail": { "do": "Wait — time runs fast until the retros fire.", "wait": "Wait — the retros are still burning." }
+    },
+    {
+      "id": "walk_jettison_retro",
+      "anchor": "comms_input",
+      "title": "Drop the retro pack",
+      "text": "Retros done. Have Cal jettison the spent retro pack, then confirm; the capsule meets the air on its own.",
+      "trigger": "(@tandem/retro/rocket_4.fired and not @tandem/retro/rocket_1.burning and not @tandem/retro/rocket_2.burning and not @tandem/retro/rocket_3.burning and not @tandem/retro/rocket_4.burning and not @crew.task.active) or @mission.event.retro_sep.fired",
+      "after": "walk_retro_wait",
+      "completion": "@crew.task.id == 'jettison_retro' or @mission.event.retro_sep.fired",
+      "suggestedOrder": { "action": "jettison_retro", "crew": "cal_brandt", "text": "Cal, jettison the retro pack" },
+      "maxTimeRate": 1,
+      "rail": { "do": "Click Send, then Confirm.", "wait": "Wait — Cal is jettisoning the retro pack." }
+    },
+    {
+      "id": "walk_checklist",
+      "anchor": "comms_input",
+      "title": "Run the entry checklist",
+      "text": "Last job before the air gets thick. Have Cal run the entry checklist so the parachutes come out on time.",
+      "trigger": "(@mission.event.retro_sep.fired and not @crew.task.active) or @session.entry_checklist.armed",
+      "after": "walk_jettison_retro",
+      "completion": "@crew.task.id == 'entry_checklist' or @session.entry_checklist.armed or @mission.event.drogue.fired",
+      "suggestedOrder": { "action": "entry_checklist", "crew": "cal_brandt", "text": "Cal, run the entry checklist" },
+      "maxTimeRate": 1,
+      "rail": { "do": "Click Send.", "wait": "Wait — Cal is running the entry checklist." }
+    },
+    {
+      "id": "walk_entry",
+      "anchor": "task_bar",
+      "title": "Ride it down",
+      "text": "All set: expect heat, noise and a few g. The checklist deploys the drogue, then the main chute, so sit tight.",
+      "trigger": "@session.entry_checklist.armed or @mission.event.entry_interface.fired",
+      "after": "walk_checklist",
+      "completion": "@mission.event.splashdown.fired",
+      "rail": { "do": "Wait — sit tight until splashdown (time runs fast).", "view": "external", "viewOn": "drogue" }
+    },
+    {
+      "id": "walk_splashdown",
+      "anchor": "recovery_card",
+      "title": "Splashdown",
+      "text": "You're down and afloat. The recovery forces are on their way, and time runs fast until they arrive.",
+      "trigger": "@mission.event.splashdown.fired",
+      "after": "walk_entry",
+      "completion": "@mission.event.recovered.fired",
+      "rail": { "do": "Wait — the recovery ships are on their way (time runs fast)." }
+    },
+    {
+      "id": "walk_proceed",
+      "anchor": "proceed_debrief",
+      "title": "Go to the debrief",
+      "text": "Crew recovered, mission complete. Press Proceed to debrief to see how it went.",
+      "trigger": "@mission.event.recovered.fired",
+      "after": "walk_splashdown",
+      "rail": { "do": "Click Proceed to debrief." }
+    },
+    {
+      "id": "knowledge_unknowns",
+      "anchor": "readout_ask",
+      "title": "Unknown values",
+      "text": "Grey numbers are unknown: press Ask, then send the request so the crew reads them.",
+      "trigger": "@difficulty.nav_assist != 'propose' and @mission.phase == 'docking_ops'",
+      "completion": "any(@knowledge.fact.oams.prop_kg.state == 'known', @knowledge.fact.tandem.rate.roll_dps.state == 'known', @knowledge.fact.power.battery_kwh.state == 'known', @knowledge.fact.ls.o2_kg.state == 'known')"
+    },
+    {
+      "id": "knowledge_source",
+      "anchor": "fact_source_stamp",
+      "title": "Source and age",
+      "text": "Each reading shows who took it and when, and old readings turn stale.",
+      "trigger": "true",
+      "after": "knowledge_unknowns"
+    },
+    {
+      "id": "crew_one_task",
+      "anchor": "comms_quick",
+      "title": "Give your first order",
+      "text": "Pick a quick command or type an order to dock with Agena, and the crew starts the task.",
+      "trigger": "true",
+      "after": "knowledge_source",
+      "completion": "@crew.task.active or @mission.event.docked.fired"
+    },
+    {
+      "id": "resources_forecast",
+      "anchor": "resource_strip",
+      "title": "Resources and forecast",
+      "text": "The resource strip shows what is left and which supply runs out first.",
+      "trigger": "@crew.task.active or @mission.event.docked.fired",
+      "after": "crew_one_task"
+    },
+    {
+      "id": "power_and_temperature",
+      "anchor": "systems_power",
+      "title": "Power and temperature",
+      "text": "Each load shows its watts and what it depends on, and shedding the experiment package heater buys margin.",
+      "trigger": "@mission.event.docked.fired",
+      "after": "resources_forecast",
+      "completion": "not @tandem/power/breaker_experiment.closed"
+    },
+    {
+      "id": "orbit_map",
+      "anchor": "orbit_map",
+      "title": "Orbit map",
+      "text": "Prograde, retrograde and nodes live here, and the ghost track previews a burn before you commit.",
+      "trigger": "@mission.event.docked.fired",
+      "after": "power_and_temperature",
+      "alternatives": [
+        {
+          "when": "@difficulty.nav_assist == 'propose'",
+          "text": "Prograde, retrograde and nodes live here: pick a goal and the computer will propose a burn."
+        }
+      ]
+    },
+    {
+      "id": "alarm_ack",
+      "anchor": "alarm_ack",
+      "title": "Acknowledge the alarm",
+      "text": "Press ACK to silence the alarm, then read what went wrong.",
+      "trigger": "@difficulty.nav_assist != 'propose' and @mission.event.incident_i1.fired",
+      "completion": "@mission.event.retrofire.fired"
+    },
+    {
+      "id": "retro_engine",
+      "anchor": "planner_engine",
+      "title": "Choose the engine",
+      "text": "Open the Orbit tab and the burn planner, then choose the engine for the retrofire.",
+      "trigger": "@mission.event.incident_i1.fired",
+      "after": "alarm_ack",
+      "completion": "@mission.event.retrofire.fired"
+    },
+    {
+      "id": "retro_propose",
+      "anchor": "planner_propose",
+      "title": "Ask for a proposal",
+      "text": "Press Propose and the flight computer plans the retrofire for you.",
+      "trigger": "true",
+      "after": "retro_engine",
+      "completion": "@mission.event.retrofire.fired"
+    },
+    {
+      "id": "retro_execute",
+      "anchor": "planner_execute",
+      "title": "Execute the burn",
+      "text": "Check the preview, then press Execute to order the retrofire.",
+      "trigger": "true",
+      "after": "retro_propose",
+      "completion": "@mission.event.retrofire.fired"
+    },
+    {
+      "id": "proceed_debrief",
+      "anchor": "proceed_debrief",
+      "title": "Go to the debrief",
+      "text": "Press Proceed to see how the mission went.",
+      "trigger": "@difficulty.nav_assist != 'propose' and @mission.event.recovered.fired"
+    }
+  ]
+}

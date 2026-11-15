@@ -1,0 +1,25 @@
+{
+  "schema": "ai_guardrails/1",
+  "forbiddenWords": [
+    "nasa",
+    "armstrong", "scott", "lovell", "haise", "swigert", "aldrin", "collins", "glenn", "grissom", "ed white", "shepard",
+    "chaffee", "conrad", "cernan", "stafford", "schirra", "cunningham", "eisele", "mcdivitt", "borman",
+    "slayton", "kranz", "gagarin", "tereshkova", "leonov",
+    "hodge", "kraft", "lunney", "dick gordon", "leonard f. mason", "uss leonard", "uss mason",
+    "titan", "apollo", "mercury", "vostok", "voskhod", "soyuz", "skylab", "sputnik", "redstone",
+    "saturn v", "saturn ib",
+    "houston", "canaveral", "cape kennedy", "kennedy space center", "johnson space center", "manned spacecraft center",
+    "baikonur", "roscosmos",
+    "elevenlabs", "eleven labs", "elevenlabs scribe", "google", "deepmind", "openai", "gpt", "chatgpt", "claude", "anthropic",
+    "gemini flash", "gemini pro", "gemini api", "gemini ai"
+  ],
+  "units": [
+    "kg", "%", "°", "°C", "°F", "°/s", "deg", "kW", "kWh", "W", "V", "VDC", "VAC", "mV", "A", "mA", "kPa", "psi", "psia",
+    "psig", "mmHg", "L", "K", "km", "km/h", "m/s", "m", "min", "mins", "h", "hr", "hrs", "s", "sec", "secs", "ms", "g",
+    "N", "rpm", "ft", "mph", "lb", "lbs", "lbf",
+    "percent", "degrees", "seconds", "second", "minutes", "minute", "hours", "hour",
+    "kilograms", "kilogram", "kilos", "kilo", "pounds", "volts", "amps", "watts", "kilowatts", "meters", "metres",
+    "kilometers", "kilometres", "liters", "litres", "kelvin"
+  ],
+  "componentIdPrefixes": ["tandem/", "lodestar/"]
+}

@@ -1,0 +1,68 @@
+{
+  "schema": "crew/1",
+  // Mission 1 crew (merged with crew/crew.json at load; performance tuning is shared).
+  "members": [
+    {
+      "id": "cal_brandt",
+      "name": "Cal Brandt",
+      "role": "Command Pilot",
+      "age": 41,
+      "background": "Former naval test pilot on his second flight.",
+      "skills": {
+        "flight_ops": 5,
+        "attitude": 5,
+        "navigation": 4,
+        "propulsion": 3,
+        "electrical": 2,
+        "life_support": 2,
+        "thermal": 2,
+        "eva": 2,
+        "medical": 2
+      },
+      "experience": 0.85,
+      "persona": {
+        "personality": "Terse, calm and understated. Trusts procedure and his instruments; says what he sees, not what he guesses.",
+        "cadence": "Short, complete sentences at an unhurried pace. Reads numbers back plainly.",
+        "stressExpression": "Gets shorter and slower. Drops pleasantries, keeps every word load-bearing.",
+        "humor": "Dry understatement, sparingly.",
+        "sampleLines": [
+          "Well. That's new.",
+          "Rates are climbing. Roll, mostly.",
+          "Copy. Breaker's open."
+        ]
+      },
+      "voiceId": "3RbK5MAeB6NkutT3d6qF"
+    },
+    {
+      "id": "june_okafor",
+      "name": "June Okafor",
+      "role": "Pilot",
+      "age": 34,
+      "background": "Aerospace electrical engineer turned astronaut, on her first flight and assigned the EVA.",
+      "skills": {
+        "flight_ops": 3,
+        "attitude": 3,
+        "navigation": 3,
+        "propulsion": 4,
+        "electrical": 5,
+        "life_support": 4,
+        "thermal": 3,
+        "eva": 5,
+        "medical": 2
+      },
+      "experience": 0.6,
+      "persona": {
+        "personality": "Warm and precise. Thinks aloud, notices details others miss, explains the electrical picture in plain words.",
+        "cadence": "Slightly quick, with careful qualifiers and exact figures.",
+        "stressExpression": "Speeds up and becomes very exact; lists what she has checked.",
+        "humor": "The occasional nervous joke, quickly followed by the facts.",
+        "sampleLines": [
+          "Okay, that one's reading hot. Like, really hot.",
+          "No response on any valve. That's not a coincidence.",
+          "I'll call that a successful test. Mostly."
+        ]
+      },
+      "voiceId": "052jzHJceQiZr7ltnY0C"
+    }
+  ]
+}

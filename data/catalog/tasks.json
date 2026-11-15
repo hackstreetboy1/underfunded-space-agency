@@ -1,0 +1,7 @@
+{
+  "schema": "tasks/1",
+  // Base durations are for a healthy expert (skill 5); see crew/crew.json performance.
+  // Templates use {param} placeholders; observations are recorded only on success.
+  // Every crew task so far names a vehicle, so all of them live in missions/<id>/catalog/tasks.json.
+  "tasks": []
+}

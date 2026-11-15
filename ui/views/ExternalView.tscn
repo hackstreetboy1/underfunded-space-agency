@@ -1,0 +1,183 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Console/Views/ExternalViewChrome.cs" id="1_chrome"]
+[ext_resource type="PackedScene" path="res://scenes/views/ExternalView.tscn" id="2_view3d"]
+[ext_resource type="PackedScene" path="res://ui/entry/EntryHud.tscn" id="3_entryhud"]
+
+[node name="ExternalView" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+clip_contents = true
+script = ExtResource("1_chrome")
+
+[node name="Viewport3D" parent="." instance=ExtResource("2_view3d")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EntryHud" parent="." instance=ExtResource("3_entryhud")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Tags" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="FirstUse" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -296.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 136.0
+grow_horizontal = 0
+theme_type_variation = &"TooltipPanel"
+
+[node name="Rows" type="VBoxContainer" parent="FirstUse"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="FirstUseText" type="Label" parent="FirstUse/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(248, 0)
+text = "Grey means not yet confirmed, not undamaged."
+autowrap_mode = 3
+
+[node name="FirstUseDetail" type="Label" parent="FirstUse/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(248, 0)
+theme_type_variation = &"Small"
+text = "A part turns to full colour only when someone has actually looked at it or tested it. Alarms and guesses never colour anything in."
+autowrap_mode = 3
+
+[node name="FirstUseDismiss" type="Button" parent="FirstUse/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+custom_minimum_size = Vector2(0, 32)
+text = "Got it"
+
+[node name="Legend" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -112.0
+offset_right = 248.0
+offset_bottom = -16.0
+grow_vertical = 0
+theme_type_variation = &"TooltipPanel"
+mouse_filter = 2
+
+[node name="Rows" type="VBoxContainer" parent="Legend"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="LegendNominalRow" type="HBoxContainer" parent="Legend/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LegendNominal" type="Label" parent="Legend/Rows/LegendNominalRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "confirmed nominal"
+
+[node name="LegendDamageRow" type="HBoxContainer" parent="Legend/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LegendDamage" type="Label" parent="Legend/Rows/LegendDamageRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "confirmed damage"
+
+[node name="LegendUnconfirmedRow" type="HBoxContainer" parent="Legend/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LegendUnconfirmed" type="Label" parent="Legend/Rows/LegendUnconfirmedRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "not yet confirmed (grey)"
+
+[node name="LegendOlderRow" type="HBoxContainer" parent="Legend/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LegendOlder" type="Label" parent="Legend/Rows/LegendOlderRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "older observation"
+
+[node name="Camera" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -560.0
+offset_top = -48.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 2
+theme_override_constants/separation = 8
+
+[node name="ResetButton" type="Button" parent="Camera"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 32)
+text = "Reset"
+
+[node name="FocusComponentButton" type="Button" parent="Camera"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 32)
+text = "Focus selected part"
+
+[node name="FocusLastButton" type="Button" parent="Camera"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 32)
+text = "Focus last revealed"
+
+[node name="FocusVehicleButton" type="Button" parent="Camera"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 32)
+text = "Focus vehicle"

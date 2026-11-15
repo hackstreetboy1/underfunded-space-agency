@@ -1,0 +1,189 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Entry/RecoveryCardView.cs" id="card"]
+[ext_resource type="Script" path="res://src/Game/UI/Entry/RecoveryTrack.cs" id="track"]
+[ext_resource type="PackedScene" path="res://ui/entry/CrewMiniRow.tscn" id="crew"]
+
+[node name="RecoveryCard" type="PanelContainer"]
+custom_minimum_size = Vector2(520, 0)
+offset_right = 520.0
+offset_bottom = 376.0
+theme_type_variation = &"DialogPanel"
+script = ExtResource("card")
+CrewScene = ExtResource("crew")
+
+[node name="Column" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Header" type="PanelContainer" parent="Column"]
+layout_mode = 2
+theme_type_variation = &"PanelHeader"
+
+[node name="Row" type="HBoxContainer" parent="Column/Header"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Column/Header/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"PanelHeaderTitle"
+text = "SPLASHDOWN"
+size_flags_horizontal = 3
+
+[node name="Body" type="MarginContainer" parent="Column"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 12
+
+[node name="Rows" type="VBoxContainer" parent="Column/Body"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ZoneTitle" type="Label" parent="Column/Body/Rows"]
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Landing zone"
+
+[node name="ZoneRow" type="HBoxContainer" parent="Column/Body/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Zone" type="Label" parent="Column/Body/Rows/ZoneRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "—"
+
+[node name="ZoneBadge" type="PanelContainer" parent="Column/Body/Rows/ZoneRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"BadgeOk"
+
+[node name="Text" type="Label" parent="Column/Body/Rows/ZoneRow/ZoneBadge"]
+layout_mode = 2
+theme_type_variation = &"BadgeLabelOk"
+text = "IN ZONE"
+
+[node name="DistanceRow" type="HBoxContainer" parent="Column/Body/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false
+
+[node name="Title" type="Label" parent="Column/Body/Rows/DistanceRow"]
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "To recovery ship"
+size_flags_horizontal = 3
+
+[node name="Distance" type="Label" parent="Column/Body/Rows/DistanceRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ReadoutSmall"
+text = "—"
+
+[node name="WaitRow" type="HBoxContainer" parent="Column/Body/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="WaitTitle" type="Label" parent="Column/Body/Rows/WaitRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Estimated recovery wait"
+size_flags_horizontal = 3
+
+[node name="WaitEstimate" type="Label" parent="Column/Body/Rows/WaitRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ReadoutSmall"
+text = "—"
+
+[node name="WaitBadge" type="PanelContainer" parent="Column/Body/Rows/WaitRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"BadgeInfo"
+
+[node name="Text" type="Label" parent="Column/Body/Rows/WaitRow/WaitBadge"]
+layout_mode = 2
+theme_type_variation = &"BadgeLabelInfo"
+text = "EST"
+
+[node name="Track" type="Control" parent="Column/Body/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 24)
+mouse_filter = 2
+script = ExtResource("track")
+
+[node name="RemainingRow" type="HBoxContainer" parent="Column/Body/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Column/Body/Rows/RemainingRow"]
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Recovery forces"
+size_flags_horizontal = 3
+
+[node name="Remaining" type="Label" parent="Column/Body/Rows/RemainingRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ReadoutSmall"
+text = "—"
+
+[node name="Compression" type="PanelContainer" parent="Column/Body/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false
+theme_type_variation = &"Badge"
+
+[node name="Text" type="Label" parent="Column/Body/Rows/Compression"]
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "» Recovery wait time-compresses automatically"
+
+[node name="CrewTitle" type="Label" parent="Column/Body/Rows"]
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Crew status"
+
+[node name="CrewRows" type="VBoxContainer" parent="Column/Body/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="CrewSummary" type="Label" parent="Column/Body/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = ""
+
+[node name="Footer" type="MarginContainer" parent="Column"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 12
+
+[node name="Row" type="HBoxContainer" parent="Column/Footer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="FooterNote" type="Label" parent="Column/Footer/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = "Available when the crew is aboard the ship."
+size_flags_horizontal = 3
+autowrap_mode = 3
+
+[node name="ProceedButton" type="Button" parent="Column/Footer/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonPrimary"
+text = "Proceed to debrief"
+disabled = true

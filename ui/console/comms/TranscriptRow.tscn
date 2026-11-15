@@ -1,0 +1,144 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Console/Comms/TranscriptRowView.cs" id="1_transcriptrowview"]
+[ext_resource type="PackedScene" path="res://ui/console/components/Badge.tscn" id="2_badge"]
+
+[node name="TranscriptRow" type="HBoxContainer"]
+theme_override_constants/separation = 0
+script = ExtResource("1_transcriptrowview")
+FactChipScene = ExtResource("2_badge")
+
+[node name="Lead" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Bubble" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Rows" type="VBoxContainer" parent="Bubble"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Head" type="HBoxContainer" parent="Bubble/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Speaker" type="Label" parent="Bubble/Rows/Head"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"BadgeLabel"
+text = "Okafor"
+uppercase = true
+vertical_alignment = 1
+
+[node name="Met" type="Label" parent="Bubble/Rows/Head"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ReadoutSmall"
+text = "06:58:12"
+vertical_alignment = 1
+
+[node name="Badge" parent="Bubble/Rows/Head" instance=ExtResource("2_badge")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Text" type="Label" parent="Bubble/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "OAMS reads two-twelve. Below the plan line."
+autowrap_mode = 3
+
+[node name="Reason" type="Label" parent="Bubble/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = ""
+visible = false
+autowrap_mode = 3
+
+[node name="Facts" type="HFlowContainer" parent="Bubble/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+
+[node name="Options" type="HFlowContainer" parent="Bubble/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+
+[node name="ReadOffer" type="Button" parent="Bubble/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+text = "Read OAMS propellant"
+visible = false
+size_flags_horizontal = 0
+
+[node name="Meta" type="Label" parent="Bubble/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = "You → Okafor · voice · 06:57:48"
+visible = false
+
+[node name="EditResend" type="Button" parent="Bubble/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+text = "Edit & resend"
+visible = false
+size_flags_horizontal = 8
+
+[node name="Trail" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="System" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = "Task started · Okafor · Cycle T5–T8 breakers · 06:57:50"
+visible = false
+size_flags_horizontal = 3
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Pending" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 6
+visible = false
+size_flags_horizontal = 3
+
+[node name="PendingText" type="Label" parent="Pending"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Brandt is responding"
+vertical_alignment = 1
+
+[node name="Dots" type="Label" parent="Pending"]
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "•••"
+vertical_alignment = 1
+
+[node name="Cancel" type="Button" parent="Pending"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+text = "✕"
+tooltip_text = "Cancel the request"

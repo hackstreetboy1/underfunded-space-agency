@@ -1,0 +1,506 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Workspace/EngineeringWorkspaceView.cs" id="view"]
+[ext_resource type="Script" path="res://src/Game/UI/Workspace/BoardCanvas.cs" id="board"]
+[ext_resource type="PackedScene" path="res://ui/workspace/InventoryCard.tscn" id="card"]
+[ext_resource type="PackedScene" path="res://ui/workspace/CheckRow.tscn" id="check"]
+[ext_resource type="PackedScene" path="res://ui/workspace/AssigneePicker.tscn" id="picker"]
+[ext_resource type="Script" path="res://src/Game/UI/Entry/LegendSwatch.cs" id="swatch"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/port/icon_port_d_type.svg" id="dtype"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/port/icon_port_round.svg" id="round"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/status/icon_status_nominal.svg" id="nominal"]
+
+[node name="EngineeringWorkspace" type="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("view")
+CardScene = ExtResource("card")
+CheckScene = ExtResource("check")
+
+[node name="GoalHeader" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 56.0
+grow_horizontal = 2
+custom_minimum_size = Vector2(0, 56)
+
+[node name="Pad" type="MarginContainer" parent="GoalHeader"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 6
+
+[node name="Lines" type="VBoxContainer" parent="GoalHeader/Pad"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Top" type="HBoxContainer" parent="GoalHeader/Pad/Lines"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="GoalTitle" type="Label" parent="GoalHeader/Pad/Lines/Top"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"H2"
+text = "GOAL"
+
+[node name="GoalDescription" type="Label" parent="GoalHeader/Pad/Lines/Top"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = ""
+size_flags_horizontal = 3
+text_overrun_behavior = 3
+
+[node name="Bottom" type="HBoxContainer" parent="GoalHeader/Pad/Lines"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="GoalSource" type="Label" parent="GoalHeader/Pad/Lines/Bottom"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = ""
+text_overrun_behavior = 3
+
+[node name="GoalSink" type="Label" parent="GoalHeader/Pad/Lines/Bottom"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = ""
+size_flags_horizontal = 3
+text_overrun_behavior = 3
+
+[node name="GoalLimits" type="Label" parent="GoalHeader/Pad/Lines/Bottom"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ReadoutSmall"
+text = ""
+
+[node name="Columns" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 56.0
+offset_right = -260.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Tray" type="PanelContainer" parent="Columns"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(240, 0)
+
+[node name="Column" type="VBoxContainer" parent="Columns/Tray"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Header" type="PanelContainer" parent="Columns/Tray/Column"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 36)
+theme_type_variation = &"PanelHeader"
+
+[node name="Row" type="HBoxContainer" parent="Columns/Tray/Column/Header"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TrayTitle" type="Label" parent="Columns/Tray/Column/Header/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"PanelHeaderTitle"
+text = "INVENTORY"
+size_flags_horizontal = 3
+
+[node name="TrayAside" type="Label" parent="Columns/Tray/Column/Header/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = "drag → board"
+horizontal_alignment = 2
+
+[node name="Scroll" type="ScrollContainer" parent="Columns/Tray/Column"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Pad" type="MarginContainer" parent="Columns/Tray/Column/Scroll"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 8
+size_flags_horizontal = 3
+
+[node name="TrayRows" type="VBoxContainer" parent="Columns/Tray/Column/Scroll/Pad"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="Hint" type="MarginContainer" parent="Columns/Tray/Column"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 8
+
+[node name="TrayHint" type="Label" parent="Columns/Tray/Column/Hint"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = "Right-click a placed part to return it."
+autowrap_mode = 3
+
+[node name="BoardColumn" type="PanelContainer" parent="Columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Column" type="VBoxContainer" parent="Columns/BoardColumn"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Header" type="PanelContainer" parent="Columns/BoardColumn/Column"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 36)
+theme_type_variation = &"PanelHeader"
+
+[node name="Row" type="HBoxContainer" parent="Columns/BoardColumn/Column/Header"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="BoardTitle" type="Label" parent="Columns/BoardColumn/Column/Header/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"PanelHeaderTitle"
+text = "BOARD"
+size_flags_horizontal = 3
+
+[node name="BoardAside" type="Label" parent="Columns/BoardColumn/Column/Header/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = "16 px grid · drag port → port to wire"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+size_flags_horizontal = 3
+
+[node name="TestToggle" type="Button" parent="Columns/BoardColumn/Column/Header/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false
+toggle_mode = true
+text = "Test"
+tooltip_text = "Open the test panel"
+
+[node name="BoardArea" type="Control" parent="Columns/BoardColumn/Column"]
+layout_mode = 2
+size_flags_vertical = 3
+clip_contents = true
+
+[node name="BoardScroll" type="ScrollContainer" parent="Columns/BoardColumn/Column/BoardArea"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BoardHolder" type="Control" parent="Columns/BoardColumn/Column/BoardArea/BoardScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Board" type="Control" parent="Columns/BoardColumn/Column/BoardArea/BoardScroll/BoardHolder"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 2.0
+offset_top = 4.0
+offset_right = 498.0
+offset_bottom = 500.0
+clip_contents = true
+mouse_filter = 0
+focus_mode = 1
+script = ExtResource("board")
+
+[node name="GridLayer" type="Control" parent="Columns/BoardColumn/Column/BoardArea/BoardScroll/BoardHolder/Board"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+modulate = Color(1, 1, 1, 0.25)
+
+[node name="ContentLayer" type="Control" parent="Columns/BoardColumn/Column/BoardArea/BoardScroll/BoardHolder/Board"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Legend" type="PanelContainer" parent="Columns/BoardColumn/Column/BoardArea"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -36.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_vertical = 0
+anchor_right = 1.0
+mouse_filter = 2
+
+[node name="Row" type="HFlowContainer" parent="Columns/BoardColumn/Column/BoardArea/Legend"]
+layout_mode = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 2
+mouse_filter = 2
+
+[node name="DType" type="HBoxContainer" parent="Columns/BoardColumn/Column/BoardArea/Legend/Row"]
+layout_mode = 2
+theme_override_constants/separation = 4
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="Columns/BoardColumn/Column/BoardArea/Legend/Row/DType"]
+layout_mode = 2
+custom_minimum_size = Vector2(14, 14)
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("dtype")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Text" type="Label" parent="Columns/BoardColumn/Column/BoardArea/Legend/Row/DType"]
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = "D-type"
+
+[node name="Round" type="HBoxContainer" parent="Columns/BoardColumn/Column/BoardArea/Legend/Row"]
+layout_mode = 2
+theme_override_constants/separation = 4
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="Columns/BoardColumn/Column/BoardArea/Legend/Row/Round"]
+layout_mode = 2
+custom_minimum_size = Vector2(14, 14)
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("round")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Text" type="Label" parent="Columns/BoardColumn/Column/BoardArea/Legend/Row/Round"]
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = "round"
+
+[node name="Wire" type="HBoxContainer" parent="Columns/BoardColumn/Column/BoardArea/Legend/Row"]
+layout_mode = 2
+theme_override_constants/separation = 4
+mouse_filter = 2
+
+[node name="Swatch" type="Control" parent="Columns/BoardColumn/Column/BoardArea/Legend/Row/Wire"]
+layout_mode = 2
+custom_minimum_size = Vector2(14, 12)
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("swatch")
+Kind = 0
+Token = "caution"
+
+[node name="Text" type="Label" parent="Columns/BoardColumn/Column/BoardArea/Legend/Row/Wire"]
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = "power wire"
+
+[node name="Invalid" type="HBoxContainer" parent="Columns/BoardColumn/Column/BoardArea/Legend/Row"]
+layout_mode = 2
+theme_override_constants/separation = 4
+mouse_filter = 2
+
+[node name="Swatch" type="Control" parent="Columns/BoardColumn/Column/BoardArea/Legend/Row/Invalid"]
+layout_mode = 2
+custom_minimum_size = Vector2(14, 12)
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("swatch")
+Kind = 5
+Token = "critical"
+
+[node name="Text" type="Label" parent="Columns/BoardColumn/Column/BoardArea/Legend/Row/Invalid"]
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = "invalid"
+
+[node name="RouteText" type="Label" parent="Columns/BoardColumn/Column/BoardArea/Legend/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+theme_type_variation = &"ReadoutSmall"
+text = ""
+
+[node name="BoardStatus" type="Label" parent="Columns/BoardColumn/Column/BoardArea"]
+unique_name_in_owner = true
+layout_mode = 1
+theme_type_variation = &"Small"
+text = ""
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 492.0
+offset_bottom = 40.0
+visible = false
+autowrap_mode = 3
+
+[node name="Test" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -260.0
+offset_top = 56.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Column" type="VBoxContainer" parent="Test"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Header" type="PanelContainer" parent="Test/Column"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 36)
+theme_type_variation = &"PanelHeader"
+
+[node name="Row" type="HBoxContainer" parent="Test/Column/Header"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TestTitle" type="Label" parent="Test/Column/Header/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"PanelHeaderTitle"
+text = "TEST"
+size_flags_horizontal = 3
+
+[node name="DifficultyAside" type="Label" parent="Test/Column/Header/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = ""
+horizontal_alignment = 2
+
+[node name="TestClose" type="Button" parent="Test/Column/Header/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+visible = false
+text = "Close"
+tooltip_text = "Close the test panel"
+
+[node name="Body" type="MarginContainer" parent="Test/Column"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 8
+size_flags_vertical = 3
+
+[node name="Rows" type="VBoxContainer" parent="Test/Column/Body"]
+layout_mode = 2
+theme_override_constants/separation = 8
+size_flags_vertical = 3
+
+[node name="Summary" type="PanelContainer" parent="Test/Column/Body/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"BadgeOk"
+visible = false
+
+[node name="Row" type="HBoxContainer" parent="Test/Column/Body/Rows/Summary"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="SummaryIcon" type="TextureRect" parent="Test/Column/Body/Rows/Summary/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(14, 14)
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("nominal")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SummaryText" type="Label" parent="Test/Column/Body/Rows/Summary/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+autowrap_mode = 3
+theme_type_variation = &"BadgeLabelOk"
+text = ""
+
+[node name="Scroll" type="ScrollContainer" parent="Test/Column/Body/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="CheckRows" type="VBoxContainer" parent="Test/Column/Body/Rows/Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Buttons" type="HBoxContainer" parent="Test/Column/Body/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="RunTestButton" type="Button" parent="Test/Column/Body/Rows/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Run test"
+size_flags_horizontal = 3
+
+[node name="AssignButton" type="Button" parent="Test/Column/Body/Rows/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonPrimary"
+text = "Assign"
+size_flags_horizontal = 3
+disabled = true
+
+[node name="AssignReason" type="Label" parent="Test/Column/Body/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = "Assign unlocks after a passing test."
+autowrap_mode = 3
+
+[node name="AssigneePicker" parent="." instance=ExtResource("picker")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 412.0
+offset_top = 230.0
+offset_right = 732.0
+offset_bottom = 590.0
+visible = false
+
+[node name="ContextMenu" type="PopupMenu" parent="."]
+unique_name_in_owner = true

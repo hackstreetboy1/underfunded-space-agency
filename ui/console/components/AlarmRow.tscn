@@ -1,0 +1,73 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Console/Components/AlarmRowView.cs" id="1_alarmrowview"]
+
+[node name="AlarmRow" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 48)
+theme_type_variation = &"AlarmRowCaution"
+script = ExtResource("1_alarmrowview")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 6
+
+[node name="Row" type="HBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Glyph" type="Control" parent="Margin/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(16, 16)
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Body" type="VBoxContainer" parent="Margin/Row"]
+layout_mode = 2
+theme_override_constants/separation = 0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Head" type="HBoxContainer" parent="Margin/Row/Body"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Priority" type="Label" parent="Margin/Row/Body/Head"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"BadgeLabelCaution"
+text = "CAUTION"
+uppercase = true
+vertical_alignment = 1
+
+[node name="Met" type="Label" parent="Margin/Row/Body/Head"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ReadoutSmall"
+text = "06:52:34"
+vertical_alignment = 1
+
+[node name="Text" type="Label" parent="Margin/Row/Body"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "OAMS propellant below plan"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Source" type="Label" parent="Margin/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Ground band"
+vertical_alignment = 1
+
+[node name="Ack" type="Button" parent="Margin/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+text = "ACK"
+size_flags_vertical = 4
+tooltip_text = "Acknowledge alarms (Ctrl+A)"

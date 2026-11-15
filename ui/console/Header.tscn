@@ -1,0 +1,134 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Console/Regions/ConsoleHeader.cs" id="1_consoleheader"]
+[ext_resource type="PackedScene" path="res://ui/console/components/ObjectiveChip.tscn" id="2_objectivechip"]
+[ext_resource type="PackedScene" path="res://ui/console/components/Badge.tscn" id="3_badge"]
+
+[node name="Header" type="MarginContainer"]
+custom_minimum_size = Vector2(0, 56)
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+script = ExtResource("1_consoleheader")
+ObjectiveChipScene = ExtResource("2_objectivechip")
+
+[node name="Row" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="AgencyMark" type="Label" parent="Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"TapeLabel"
+text = "USA"
+size_flags_vertical = 4
+
+[node name="TitleBlock" type="VBoxContainer" parent="Row"]
+layout_mode = 2
+theme_override_constants/separation = 0
+size_flags_vertical = 4
+
+[node name="MissionTitle" type="Label" parent="Row/TitleBlock"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"H1"
+text = "Out of Control"
+
+[node name="VehicleName" type="Label" parent="Row/TitleBlock"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Gemini 8 · docked with Agena"
+
+[node name="Phase" parent="Row" instance=ExtResource("3_badge")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="MetClock" type="Label" parent="Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"MetClock"
+text = "MET 06:58:12"
+vertical_alignment = 1
+
+[node name="Compression" type="HBoxContainer" parent="Row"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="CompressionRate" type="Label" parent="Row/Compression"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Readout"
+text = "1×"
+vertical_alignment = 1
+
+[node name="CompressionReason" type="Label" parent="Row/Compression"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "held: caution active"
+vertical_alignment = 1
+
+[node name="Advance" type="Button" parent="Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+text = "Advance to next event   N"
+size_flags_vertical = 4
+disabled = true
+
+[node name="Spacer" type="Control" parent="Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Objectives" type="HBoxContainer" parent="Row"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ObjectivesCaption" type="Label" parent="Row/Objectives"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Objectives"
+vertical_alignment = 1
+
+[node name="ObjectiveList" type="HBoxContainer" parent="Row/Objectives"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ObjectivesSummary" type="Label" parent="Row/Objectives"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = ""
+visible = false
+vertical_alignment = 1
+
+[node name="AlarmCount" parent="Row" instance=ExtResource("3_badge")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+visible = false
+
+[node name="Link" parent="Row" instance=ExtResource("3_badge")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="MasterAlarm" type="Button" parent="Row"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "MASTER ALARM\nCtrl+A"
+custom_minimum_size = Vector2(114, 36)
+size_flags_vertical = 4
+toggle_mode = true
+tooltip_text = "Acknowledge alarms (Ctrl+A)"
+
+[node name="Menu" type="Button" parent="Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+text = "Menu"
+size_flags_vertical = 4

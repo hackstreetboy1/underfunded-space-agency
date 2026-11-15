@@ -1,0 +1,243 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/Presentation/Spacecraft/SpacecraftView.cs" id="1_view"]
+[ext_resource type="Script" path="res://src/Game/Presentation/Spacecraft/EarthBackdrop.cs" id="2_backdrop"]
+[ext_resource type="Script" path="res://src/Game/Presentation/Rendering/RevealController.cs" id="3_reveal"]
+[ext_resource type="Script" path="res://src/Game/Presentation/Spacecraft/VehicleRig.cs" id="4_rig"]
+[ext_resource type="Script" path="res://src/Game/Presentation/Spacecraft/ThrusterVfxDriver.cs" id="5_vfx"]
+[ext_resource type="Script" path="res://src/Game/Presentation/Spacecraft/OrbitCameraRig.cs" id="6_camera"]
+[ext_resource type="Script" path="res://src/Game/Presentation/Spacecraft/KnowledgeBinding.cs" id="7_knowledge"]
+[ext_resource type="Script" path="res://src/Game/Presentation/Spacecraft/ComponentPicker.cs" id="8_picker"]
+[ext_resource type="PackedScene" path="res://scenes/placeholders/TandemPlaceholder.tscn" id="9_tandem"]
+[ext_resource type="PackedScene" path="res://scenes/placeholders/LodestarPlaceholder.tscn" id="10_lodestar"]
+[ext_resource type="PackedScene" path="res://scenes/placeholders/ChutesPlaceholder.tscn" id="11_chutes"]
+[ext_resource type="Material" path="res://assets/materials/starfield_sky.tres" id="12_sky"]
+[ext_resource type="Material" path="res://assets/materials/earth_surface.tres" id="13_earth"]
+[ext_resource type="Material" path="res://assets/materials/earth_atmosphere.tres" id="14_atmo"]
+[ext_resource type="Shader" path="res://assets/shaders/entry_glow.gdshader" id="15_rim"]
+[ext_resource type="Script" path="res://src/Game/Presentation/Spacecraft/Vfx/SplashVfx.cs" id="21_splash"]
+[ext_resource type="Material" path="res://assets/materials/reveal_transition.tres" id="16_reveal"]
+[ext_resource type="Script" path="res://src/Game/Presentation/Spacecraft/RevealOutlineFlash.cs" id="17_flash"]
+[ext_resource type="Script" path="res://src/Game/Presentation/Spacecraft/LodestarStatusLights.cs" id="18_lights"]
+[ext_resource type="PackedScene" path="res://scenes/views/RecoveryDressing.tscn" id="19_recovery"]
+[ext_resource type="Script" path="res://src/Game/Presentation/Spacecraft/EvaRig.cs" id="20_eva"]
+
+[sub_resource type="Sky" id="Sky_stars"]
+sky_material = ExtResource("12_sky")
+
+[sub_resource type="Environment" id="Environment_orbit"]
+resource_local_to_scene = true
+background_mode = 2
+sky = SubResource("Sky_stars")
+ambient_light_source = 2
+ambient_light_color = Color(0.55, 0.58, 0.64, 1)
+ambient_light_energy = 0.45
+tonemap_mode = 2
+tonemap_exposure = 1.2
+tonemap_white = 4.0
+glow_enabled = true
+glow_intensity = 0.25
+glow_hdr_threshold = 1.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_earth"]
+radius = 1.0
+height = 2.0
+radial_segments = 128
+rings = 64
+
+[sub_resource type="SphereMesh" id="SphereMesh_atmo"]
+radius = 1.0
+height = 2.0
+radial_segments = 96
+rings = 48
+
+[sub_resource type="SphereMesh" id="SphereMesh_glow"]
+radius = 1.0
+height = 2.0
+radial_segments = 32
+rings = 16
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_entry_glow"]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource("15_rim")
+shader_parameter/cool_color = Color(1, 0.45, 0.2, 1)
+shader_parameter/hot_color = Color(1, 0.92, 0.8, 1)
+shader_parameter/heat = 0.0
+shader_parameter/energy = 2.0
+shader_parameter/rim_power = 2.2
+shader_parameter/calm = 0.0
+shader_parameter/trail = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_entry_trail"]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource("15_rim")
+shader_parameter/cool_color = Color(1, 0.45, 0.2, 1)
+shader_parameter/hot_color = Color(1, 0.92, 0.8, 1)
+shader_parameter/heat = 0.0
+shader_parameter/energy = 0.9
+shader_parameter/calm = 0.0
+shader_parameter/trail = true
+shader_parameter/trail_height_m = 3.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_trail"]
+top_radius = 0.0
+bottom_radius = 0.9
+height = 3.0
+radial_segments = 24
+rings = 1
+cap_top = false
+cap_bottom = false
+
+[node name="SpacecraftView" type="Node3D"]
+script = ExtResource("1_view")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+unique_name_in_owner = true
+environment = SubResource("Environment_orbit")
+
+[node name="Backdrop" type="Node3D" parent="." node_paths=PackedStringArray("Earth", "Atmosphere", "Sun", "EarthShine", "CameraFill", "WorldEnvironment")]
+unique_name_in_owner = true
+script = ExtResource("2_backdrop")
+Earth = NodePath("Earth")
+Atmosphere = NodePath("Atmosphere")
+Sun = NodePath("Sun")
+EarthShine = NodePath("EarthShine")
+CameraFill = NodePath("../CameraRig/Camera3D/CameraFill")
+WorldEnvironment = NodePath("../WorldEnvironment")
+
+[node name="Earth" type="MeshInstance3D" parent="Backdrop"]
+transform = Transform3D(3820, 0, 0, 0, 3820, 0, 0, 0, 3820, 0, -4000, 0)
+layers = 2
+cast_shadow = 0
+mesh = SubResource("SphereMesh_earth")
+material_override = ExtResource("13_earth")
+
+[node name="Atmosphere" type="MeshInstance3D" parent="Backdrop"]
+transform = Transform3D(3915.5, 0, 0, 0, 3915.5, 0, 0, 0, 3915.5, 0, -4000, 0)
+layers = 2
+cast_shadow = 0
+mesh = SubResource("SphereMesh_atmo")
+material_override = ExtResource("14_atmo")
+
+[node name="Sun" type="DirectionalLight3D" parent="Backdrop"]
+transform = Transform3D(0.76604, 0.45452, -0.45452, 0, 0.70711, 0.70711, 0.64279, -0.54168, 0.54168, 0, 0, 0)
+light_color = Color(1, 0.96, 0.9, 1)
+light_energy = 1.3
+shadow_enabled = true
+shadow_blur = 1.5
+directional_shadow_max_distance = 60.0
+
+[node name="EarthShine" type="DirectionalLight3D" parent="Backdrop"]
+light_color = Color(0.55, 0.68, 0.86, 1)
+light_energy = 0.45
+light_cull_mask = 4294967293
+
+[node name="RevealController" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_reveal")
+Template = ExtResource("16_reveal")
+
+[node name="Vehicles" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="TandemRig" type="Node3D" parent="Vehicles" node_paths=PackedStringArray("Model", "DockingPort", "Thrusters", "EntryGlow", "EntryTrail", "Chutes")]
+script = ExtResource("4_rig")
+VehicleId = "tandem"
+Model = NodePath("Model")
+DockingPort = NodePath("DockingPort")
+Thrusters = NodePath("Thrusters")
+EntryGlow = NodePath("EntryGlow")
+EntryTrail = NodePath("EntryTrail")
+Chutes = NodePath("Chutes")
+
+[node name="Model" parent="Vehicles/TandemRig" instance=ExtResource("9_tandem")]
+
+[node name="DockingPort" type="Marker3D" parent="Vehicles/TandemRig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.835, 0, 0)
+
+[node name="Thrusters" type="Node" parent="Vehicles/TandemRig"]
+script = ExtResource("5_vfx")
+
+[node name="EntryGlow" type="MeshInstance3D" parent="Vehicles/TandemRig"]
+transform = Transform3D(0.45, 0, 0, 0, 1.05, 0, 0, 0, 1.05, -0.12, 0, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("SphereMesh_glow")
+material_override = SubResource("ShaderMaterial_entry_glow")
+
+[node name="EntryTrail" type="MeshInstance3D" parent="Vehicles/TandemRig"]
+transform = Transform3D(0, 1, 0, -0.8, 0, 0, 0, 0, 0.8, 3.1, 0, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_trail")
+material_override = SubResource("ShaderMaterial_entry_trail")
+
+[node name="EvaRig" type="Node3D" parent="Vehicles/TandemRig"]
+unique_name_in_owner = true
+script = ExtResource("20_eva")
+
+[node name="Chutes" parent="Vehicles/TandemRig" instance=ExtResource("11_chutes")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.95, 0, 0)
+
+[node name="LodestarRig" type="Node3D" parent="Vehicles" node_paths=PackedStringArray("Model", "DockingPort", "Thrusters")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 1.834, 0, 0)
+script = ExtResource("4_rig")
+VehicleId = "lodestar"
+Model = NodePath("Model")
+DockingPort = NodePath("DockingPort")
+Thrusters = NodePath("Thrusters")
+
+[node name="Model" parent="Vehicles/LodestarRig" instance=ExtResource("10_lodestar")]
+
+[node name="DockingPort" type="Marker3D" parent="Vehicles/LodestarRig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.001, 0, 0)
+
+[node name="Thrusters" type="Node" parent="Vehicles/LodestarRig"]
+script = ExtResource("5_vfx")
+
+[node name="CameraRig" type="Node3D" parent="." node_paths=PackedStringArray("Camera")]
+unique_name_in_owner = true
+script = ExtResource("6_camera")
+Camera = NodePath("Camera3D")
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)
+current = true
+fov = 50.0
+near = 0.05
+far = 12000.0
+
+[node name="CameraFill" type="DirectionalLight3D" parent="CameraRig/Camera3D"]
+transform = Transform3D(0.9806, 0.0467, -0.1905, 0, 0.9713, 0.2381, 0.1961, -0.2335, 0.9524, 0, 0, 0)
+light_color = Color(0.92, 0.94, 1, 1)
+light_energy = 0.65
+light_specular = 0.5
+light_cull_mask = 4294967293
+
+[node name="RevealOutlineFlash" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("17_flash")
+
+[node name="LodestarStatusLights" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("18_lights")
+
+[node name="KnowledgeBinding" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("7_knowledge")
+
+[node name="ComponentPicker" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("8_picker")
+
+[node name="Recovery" parent="." instance=ExtResource("19_recovery")]
+unique_name_in_owner = true
+
+[node name="SplashVfx" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("21_splash")
+
+[node name="PairFocus" type="Marker3D" parent="."]
+unique_name_in_owner = true

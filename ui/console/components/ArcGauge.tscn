@@ -1,0 +1,64 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Console/Components/ArcGaugeView.cs" id="1_arcgauge"]
+[ext_resource type="Script" path="res://src/Game/UI/Console/Components/ArcDial.cs" id="2_arcdial"]
+[ext_resource type="PackedScene" path="res://ui/console/components/Badge.tscn" id="3_badge"]
+
+[node name="ArcGauge" type="VBoxContainer"]
+custom_minimum_size = Vector2(128, 0)
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+script = ExtResource("1_arcgauge")
+
+[node name="Dial" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(120, 112)
+size_flags_horizontal = 4
+mouse_filter = 2
+script = ExtResource("2_arcdial")
+
+[node name="Centre" type="VBoxContainer" parent="Dial"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+theme_override_constants/separation = 0
+mouse_filter = 2
+
+[node name="Name" type="Label" parent="Dial/Centre"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"BadgeLabel"
+text = "Roll"
+uppercase = true
+horizontal_alignment = 1
+
+[node name="Value" type="Label" parent="Dial/Centre"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ReadoutLarge"
+text = "38.6"
+horizontal_alignment = 1
+
+[node name="Unit" type="Label" parent="Dial/Centre"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "°/s"
+horizontal_alignment = 1
+
+[node name="Status" parent="." instance=ExtResource("3_badge")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Meta" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Brandt · MET 06:57"
+horizontal_alignment = 1

@@ -1,0 +1,131 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Console/Overlays/ConfirmDialog.cs" id="1_confirmdialog"]
+[ext_resource type="PackedScene" path="res://ui/console/components/Badge.tscn" id="2_badge"]
+
+[node name="ConfirmDialog" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+visible = false
+script = ExtResource("1_confirmdialog")
+IrreversibleText = "IRREVERSIBLE"
+UnsafeToStopText = "UNSAFE TO STOP"
+TimerFormat = "Auto-cancels in {0} s"
+FrozenText = "Simulation frozen · confirm once it resumes"
+ExecutorFormat = "Executes: {0}"
+
+[node name="Scrim" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Scrim"
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dialog" type="PanelContainer" parent="Center"]
+layout_mode = 2
+custom_minimum_size = Vector2(520, 0)
+theme_type_variation = &"DialogPanel"
+
+[node name="Margin" type="MarginContainer" parent="Center/Dialog"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Rows" type="VBoxContainer" parent="Center/Dialog/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TitleRow" type="HBoxContainer" parent="Center/Dialog/Margin/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Center/Dialog/Margin/Rows/TitleRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"H1"
+text = "Arm RCS ring A"
+size_flags_horizontal = 3
+autowrap_mode = 3
+
+[node name="Irreversible" parent="Center/Dialog/Margin/Rows/TitleRow" instance=ExtResource("2_badge")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Unsafe" parent="Center/Dialog/Margin/Rows/TitleRow" instance=ExtResource("2_badge")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="EffectsBox" type="PanelContainer" parent="Center/Dialog/Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"AlarmRowWarning"
+
+[node name="EffectsMargin" type="MarginContainer" parent="Center/Dialog/Margin/Rows/EffectsBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 8
+
+[node name="Effects" type="VBoxContainer" parent="Center/Dialog/Margin/Rows/EffectsBox/EffectsMargin"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Executor" type="Label" parent="Center/Dialog/Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Executes: Cal Brandt"
+
+[node name="Timer" type="Label" parent="Center/Dialog/Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Auto-cancels in 20 s"
+
+[node name="Countdown" type="ProgressBar" parent="Center/Dialog/Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 4)
+max_value = 20.0
+value = 20.0
+show_percentage = false
+
+[node name="Buttons" type="HBoxContainer" parent="Center/Dialog/Margin/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 2
+
+[node name="Cancel" type="Button" parent="Center/Dialog/Margin/Rows/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Cancel   Esc"
+custom_minimum_size = Vector2(0, 32)
+
+[node name="Confirm" type="Button" parent="Center/Dialog/Margin/Rows/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonPrimary"
+text = "Confirm   Enter"
+custom_minimum_size = Vector2(0, 32)
+metadata/usa_ui_sound = "confirm"

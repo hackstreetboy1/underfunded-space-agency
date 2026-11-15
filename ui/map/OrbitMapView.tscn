@@ -1,0 +1,543 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Map/OrbitMapView.cs" id="view"]
+[ext_resource type="Script" path="res://src/Game/UI/Map/OrbitMapCanvas.cs" id="canvas"]
+[ext_resource type="PackedScene" path="res://ui/map/BurnPlanner.tscn" id="planner"]
+[ext_resource type="Script" path="res://src/Game/UI/Entry/LegendSwatch.cs" id="swatch"]
+
+[node name="OrbitMapView" type="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("view")
+
+[node name="MapCanvas" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -300.0
+grow_horizontal = 2
+grow_vertical = 2
+clip_contents = true
+custom_minimum_size = Vector2(400, 240)
+focus_mode = 2
+script = ExtResource("canvas")
+
+[node name="Background" type="Panel" parent="MapCanvas"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BaseLayer" type="Control" parent="MapCanvas"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LandLayer" type="Control" parent="MapCanvas"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+modulate = Color(1, 1, 1, 0.6)
+
+[node name="BandLayer" type="Control" parent="MapCanvas"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+modulate = Color(1, 1, 1, 0.28)
+
+[node name="CorridorLayer" type="Control" parent="MapCanvas"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+modulate = Color(1, 1, 1, 0.4)
+
+[node name="PathLayer" type="Control" parent="MapCanvas"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="RingLayer" type="Control" parent="MapCanvas"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+modulate = Color(1, 1, 1, 0.7)
+
+[node name="InfoChips" type="VBoxContainer" parent="MapCanvas"]
+layout_mode = 1
+theme_override_constants/separation = 4
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 320.0
+offset_bottom = 120.0
+mouse_filter = 2
+
+[node name="OrbitChip" type="PanelContainer" parent="MapCanvas/InfoChips"]
+layout_mode = 2
+
+[node name="Pad" type="MarginContainer" parent="MapCanvas/InfoChips/OrbitChip"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="Lines" type="VBoxContainer" parent="MapCanvas/InfoChips/OrbitChip/Pad"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Row" type="HBoxContainer" parent="MapCanvas/InfoChips/OrbitChip/Pad/Lines"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="OrbitTitle" type="Label" parent="MapCanvas/InfoChips/OrbitChip/Pad/Lines/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = "ORBIT"
+
+[node name="OrbitText" type="Label" parent="MapCanvas/InfoChips/OrbitChip/Pad/Lines/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ReadoutSmall"
+text = "—"
+
+[node name="OrbitBadge" type="PanelContainer" parent="MapCanvas/InfoChips/OrbitChip/Pad/Lines/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"Badge"
+visible = false
+
+[node name="Text" type="Label" parent="MapCanvas/InfoChips/OrbitChip/Pad/Lines/Row/OrbitBadge"]
+layout_mode = 2
+theme_type_variation = &"BadgeLabel"
+text = ""
+
+[node name="OrbitMeta" type="Label" parent="MapCanvas/InfoChips/OrbitChip/Pad/Lines"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = ""
+visible = false
+
+[node name="NavChip" type="PanelContainer" parent="MapCanvas/InfoChips"]
+layout_mode = 2
+
+[node name="Pad" type="MarginContainer" parent="MapCanvas/InfoChips/NavChip"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="Lines" type="VBoxContainer" parent="MapCanvas/InfoChips/NavChip/Pad"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Row" type="HBoxContainer" parent="MapCanvas/InfoChips/NavChip/Pad/Lines"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="NavTitle" type="Label" parent="MapCanvas/InfoChips/NavChip/Pad/Lines/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = "NAV"
+
+[node name="NavText" type="Label" parent="MapCanvas/InfoChips/NavChip/Pad/Lines/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ReadoutSmall"
+text = "—"
+
+[node name="NavBadge" type="PanelContainer" parent="MapCanvas/InfoChips/NavChip/Pad/Lines/Row"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"BadgeInfo"
+
+[node name="Text" type="Label" parent="MapCanvas/InfoChips/NavChip/Pad/Lines/Row/NavBadge"]
+layout_mode = 2
+theme_type_variation = &"BadgeLabelInfo"
+text = "EST"
+
+[node name="NavMeta" type="Label" parent="MapCanvas/InfoChips/NavChip/Pad/Lines"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = ""
+visible = false
+
+[node name="AltitudeNote" type="Label" parent="MapCanvas/InfoChips"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = "Altitude drawn ×11 for legibility"
+
+[node name="RightChips" type="VBoxContainer" parent="MapCanvas"]
+unique_name_in_owner = true
+layout_mode = 1
+theme_override_constants/separation = 4
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -332.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = 80.0
+grow_horizontal = 0
+alignment = 0
+mouse_filter = 2
+
+[node name="NodeChip" type="PanelContainer" parent="MapCanvas/RightChips"]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false
+
+[node name="Pad" type="MarginContainer" parent="MapCanvas/RightChips/NodeChip"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="Row" type="HBoxContainer" parent="MapCanvas/RightChips/NodeChip/Pad"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="NodeTitle" type="Label" parent="MapCanvas/RightChips/NodeChip/Pad/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = "NODE"
+
+[node name="NodeText" type="Label" parent="MapCanvas/RightChips/NodeChip/Pad/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ReadoutSmall"
+text = ""
+
+[node name="NextFixChip" type="PanelContainer" parent="MapCanvas/RightChips"]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false
+size_flags_horizontal = 8
+
+[node name="Pad" type="MarginContainer" parent="MapCanvas/RightChips/NextFixChip"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="NextFixText" type="Label" parent="MapCanvas/RightChips/NextFixChip/Pad"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = ""
+
+[node name="Controls" type="VBoxContainer" parent="MapCanvas"]
+layout_mode = 1
+theme_override_constants/separation = 4
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -44.0
+offset_top = -160.0
+offset_right = -12.0
+offset_bottom = -56.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ZoomInButton" type="Button" parent="MapCanvas/Controls"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "+"
+custom_minimum_size = Vector2(32, 32)
+tooltip_text = "Zoom in (wheel)"
+
+[node name="ZoomOutButton" type="Button" parent="MapCanvas/Controls"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "−"
+custom_minimum_size = Vector2(32, 32)
+tooltip_text = "Zoom out (wheel)"
+
+[node name="LabelsButton" type="Button" parent="MapCanvas/Controls"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Aa"
+custom_minimum_size = Vector2(32, 32)
+toggle_mode = true
+button_pressed = true
+tooltip_text = "Show labels"
+
+[node name="FocusButton" type="Button" parent="MapCanvas"]
+unique_name_in_owner = true
+layout_mode = 1
+text = "Focus vehicle"
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -156.0
+offset_top = -200.0
+offset_right = -12.0
+offset_bottom = -168.0
+grow_horizontal = 0
+grow_vertical = 0
+tooltip_text = "Centre the map on the vehicle"
+
+[node name="Legend" type="PanelContainer" parent="MapCanvas"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = -82.0
+offset_right = 532.0
+offset_bottom = -12.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Pad" type="MarginContainer" parent="MapCanvas/Legend"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="Items" type="HFlowContainer" parent="MapCanvas/Legend/Pad"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 2
+mouse_filter = 2
+
+[node name="CurrentOrbit" type="HBoxContainer" parent="MapCanvas/Legend/Pad/Items"]
+layout_mode = 2
+theme_override_constants/separation = 4
+mouse_filter = 2
+
+[node name="Swatch" type="Control" parent="MapCanvas/Legend/Pad/Items/CurrentOrbit"]
+layout_mode = 2
+custom_minimum_size = Vector2(18, 12)
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("swatch")
+Kind = 0
+Token = "info"
+
+[node name="Text" type="Label" parent="MapCanvas/Legend/Pad/Items/CurrentOrbit"]
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Current orbit"
+
+[node name="Planned" type="HBoxContainer" parent="MapCanvas/Legend/Pad/Items"]
+layout_mode = 2
+theme_override_constants/separation = 4
+mouse_filter = 2
+
+[node name="Swatch" type="Control" parent="MapCanvas/Legend/Pad/Items/Planned"]
+layout_mode = 2
+custom_minimum_size = Vector2(18, 12)
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("swatch")
+Kind = 1
+Token = "info-ghost"
+
+[node name="Text" type="Label" parent="MapCanvas/Legend/Pad/Items/Planned"]
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Planned (preview)"
+
+[node name="NavBand" type="HBoxContainer" parent="MapCanvas/Legend/Pad/Items"]
+layout_mode = 2
+theme_override_constants/separation = 4
+mouse_filter = 2
+
+[node name="Swatch" type="Control" parent="MapCanvas/Legend/Pad/Items/NavBand"]
+layout_mode = 2
+custom_minimum_size = Vector2(18, 12)
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("swatch")
+Kind = 2
+Token = "info"
+
+[node name="Text" type="Label" parent="MapCanvas/Legend/Pad/Items/NavBand"]
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Nav uncertainty (2σ)"
+
+[node name="Corridor" type="HBoxContainer" parent="MapCanvas/Legend/Pad/Items"]
+layout_mode = 2
+theme_override_constants/separation = 4
+mouse_filter = 2
+
+[node name="Swatch" type="Control" parent="MapCanvas/Legend/Pad/Items/Corridor"]
+layout_mode = 2
+custom_minimum_size = Vector2(18, 12)
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("swatch")
+Kind = 3
+Token = "ok"
+
+[node name="Text" type="Label" parent="MapCanvas/Legend/Pad/Items/Corridor"]
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Entry corridor (amber = margins)"
+
+[node name="Zone" type="HBoxContainer" parent="MapCanvas/Legend/Pad/Items"]
+layout_mode = 2
+theme_override_constants/separation = 4
+mouse_filter = 2
+
+[node name="Swatch" type="Control" parent="MapCanvas/Legend/Pad/Items/Zone"]
+layout_mode = 2
+custom_minimum_size = Vector2(18, 12)
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("swatch")
+Kind = 4
+Token = "ok"
+
+[node name="Text" type="Label" parent="MapCanvas/Legend/Pad/Items/Zone"]
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Recovery zone"
+
+[node name="Landing" type="HBoxContainer" parent="MapCanvas/Legend/Pad/Items"]
+layout_mode = 2
+theme_override_constants/separation = 4
+mouse_filter = 2
+
+[node name="Swatch" type="Control" parent="MapCanvas/Legend/Pad/Items/Landing"]
+layout_mode = 2
+custom_minimum_size = Vector2(18, 12)
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("swatch")
+Kind = 5
+Token = "text.hi"
+
+[node name="Text" type="Label" parent="MapCanvas/Legend/Pad/Items/Landing"]
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Landing"
+
+[node name="ZoneAtSplash" type="HBoxContainer" parent="MapCanvas/Legend/Pad/Items"]
+layout_mode = 2
+theme_override_constants/separation = 4
+mouse_filter = 2
+
+[node name="Swatch" type="Control" parent="MapCanvas/Legend/Pad/Items/ZoneAtSplash"]
+layout_mode = 2
+custom_minimum_size = Vector2(18, 12)
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("swatch")
+Kind = 1
+Token = "info-ghost"
+
+[node name="Text" type="Label" parent="MapCanvas/Legend/Pad/Items/ZoneAtSplash"]
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Zone at splashdown"
+
+[node name="Station" type="HBoxContainer" parent="MapCanvas/Legend/Pad/Items"]
+layout_mode = 2
+theme_override_constants/separation = 4
+mouse_filter = 2
+
+[node name="Swatch" type="Control" parent="MapCanvas/Legend/Pad/Items/Station"]
+layout_mode = 2
+custom_minimum_size = Vector2(18, 12)
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("swatch")
+Kind = 6
+Token = "text.mid"
+
+[node name="Text" type="Label" parent="MapCanvas/Legend/Pad/Items/Station"]
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Station"
+
+[node name="Gestures" type="Label" parent="MapCanvas/Legend/Pad/Items"]
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "↺ Earth rotates · drag to pan · wheel to zoom"
+
+[node name="PlannerToggle" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -156.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = 44.0
+grow_horizontal = 0
+visible = false
+toggle_mode = true
+text = "Burn planner"
+tooltip_text = "Open the burn planner"
+
+[node name="BurnPlanner" parent="." instance=ExtResource("planner")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 2

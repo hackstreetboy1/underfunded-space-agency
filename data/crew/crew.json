@@ -1,0 +1,26 @@
+{
+  "schema": "crew/1",
+  // Each mission brings its own crew in missions/<id>/crew.json; this file holds the shared performance tuning.
+  "members": [],
+  "performance": {
+    // Base durations are written for an expert (skill 5); [skill level, duration multiplier].
+    "skillDurationFactor": [[1, 2.0], [2, 1.6], [3, 1.35], [4, 1.15], [5, 1.0]],
+    // [health %, duration multiplier].
+    "healthDurationFactor": [[0, 2.2], [35, 1.6], [60, 1.25], [80, 1.0], [100, 1.0]],
+    // GDD 12.5 I5: above ~120 deg/s the crew can't keep up.
+    "rateImpairment": {
+      "thresholdDps": 120,
+      "durationMultiplier": 1.5,
+      "errorAdd": 0.1
+    },
+    // GDD 5.4 error model.
+    "errors": {
+      "complexityWeight": 0.04,
+      "experienceWeight": 0.05,
+      "healthWeight": 0.5,
+      "base": 0.0,
+      "min": 0.01,
+      "max": 0.9
+    }
+  }
+}

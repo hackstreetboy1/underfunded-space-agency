@@ -1,0 +1,72 @@
+{
+  "schema": "scoring/1",
+  "weights": {
+    "crew": 35,
+    "safeReturn": 25,
+    "objectives": 20,
+    "vehicle": 10,
+    "decisions": 10
+  },
+  "crew": {
+    "survival": 0.40,
+    "healthRetained": 0.25,
+    "worstHealth": 0.15,
+    "complications": 0.10,
+    "avoidableExposure": 0.10,
+    "complicationThresholdPoints": 5,
+    "exposureZeroCreditS": 600
+  },
+  "safeReturn": {
+    "landed": 0.40,
+    "entryLoads": 0.20,
+    "recoveryZone": 0.15,
+    "recoveryWait": 0.10,
+    "procedures": 0.15,
+    "entryFullCreditG": 8.5,
+    "entryZeroCreditG": 12.0,
+    "waitFullCreditH": 3.0,
+    "waitZeroCreditH": 18.0,
+    "zoneCredit": {
+      "primary_atlantic": 1.0,
+      "secondary_west_pacific": 0.95,
+      "contingency_indian": 0.7
+    },
+    "unlistedZoneCredit": 0.3
+  },
+  "vehicle": {
+    "criticalSystems": 0.50,
+    "damageContainment": 0.30,
+    "redundancy": 0.20,
+    "redundancyLostCredit": 0.5,
+    "damagePenaltyPerEvent": 0.5
+  },
+  "decisions": {
+    "propellantDiscipline": 0.30,
+    "riskAvoidance": 0.30,
+    "avoidableLosses": 0.25,
+    "procedures": 0.15,
+    "propellantZeroCreditKg": 120,
+    "riskZeroCreditS": 600
+  },
+  "grades": [
+    { "grade": "f", "label": "F", "minPoints": 0 },
+    { "grade": "f_plus", "label": "F+", "minPoints": 20 },
+    { "grade": "d_minus", "label": "D-", "minPoints": 30 },
+    { "grade": "d", "label": "D", "minPoints": 35 },
+    { "grade": "d_plus", "label": "D+", "minPoints": 40 },
+    { "grade": "c_minus", "label": "C-", "minPoints": 45 },
+    { "grade": "c", "label": "C", "minPoints": 50 },
+    { "grade": "c_plus", "label": "C+", "minPoints": 55 },
+    { "grade": "b_minus", "label": "B-", "minPoints": 60 },
+    { "grade": "b", "label": "B", "minPoints": 65 },
+    { "grade": "b_plus", "label": "B+", "minPoints": 70 },
+    { "grade": "a_minus", "label": "A-", "minPoints": 75 },
+    { "grade": "a", "label": "A", "minPoints": 80 },
+    { "grade": "a_plus", "label": "A+", "minPoints": 85 },
+    { "grade": "s_minus", "label": "S-", "minPoints": 90 },
+    { "grade": "s", "label": "S", "minPoints": 95 },
+    { "grade": "s_plus", "label": "S+", "minPoints": 98 }
+  ],
+  "debriefBestDecisions": 3,
+  "outsideZoneCapPoints": 60
+}

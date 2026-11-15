@@ -1,0 +1,57 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Workspace/CheckRowView.cs" id="row"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/status/icon_status_unknown.svg" id="unknown"]
+
+[node name="CheckRow" type="PanelContainer"]
+theme_type_variation = &"Badge"
+self_modulate = Color(1, 1, 1, 0)
+script = ExtResource("row")
+
+[node name="Pad" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 2
+
+[node name="Row" type="HBoxContainer" parent="Pad"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Mark" type="TextureRect" parent="Pad/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+custom_minimum_size = Vector2(14, 18)
+mouse_filter = 2
+texture = ExtResource("unknown")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Lines" type="VBoxContainer" parent="Pad/Row"]
+layout_mode = 2
+theme_override_constants/separation = 2
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="Pad/Row/Lines"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "check"
+autowrap_mode = 3
+
+[node name="Explanation" type="Label" parent="Pad/Row/Lines"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = ""
+visible = false
+autowrap_mode = 3
+
+[node name="Word" type="Label" parent="Pad/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"BadgeLabel"
+text = ""
+size_flags_vertical = 0

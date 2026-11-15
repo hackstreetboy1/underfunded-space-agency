@@ -1,0 +1,21 @@
+{
+  "schema": "navigation/1",
+  // Ground tracking (X8 stage 2). A radar fix needs this long of coasting track inside one station pass.
+  "fixAfterTrackS": 120,
+  // 1σ error of a fresh fix, and how fast it grows per orbital period until the next fix.
+  "fixSigma": { "alongM": 600, "radialM": 150 },
+  "growthPerOrbit": { "alongM": 800, "radialM": 30 },
+  // A commanded burn the ground applies to its estimate: execution error as a fraction of the burn's Δv, and the
+  // pointing error with attitude control holding the burn, and without it (GDD 7.2).
+  "burnExecutionFraction": 0.015,
+  "pointingSigmaDeg": 1,
+  "pointingSigmaNoAttitudeDeg": 15,
+  // Ground mass ledger: design dry masses are known to this fraction (1σ).
+  "ledgerFraction": 0.003,
+  // An estimate with no fix for this long is STALE.
+  "staleAfterS": 1800,
+  // Seeded fix errors are clamped to this many σ; displayed bands are this many σ, never thinner than minBandPx.
+  "clampSigma": 3,
+  "displaySigma": 2,
+  "minBandPx": 3
+}

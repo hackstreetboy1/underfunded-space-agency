@@ -1,0 +1,43 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Entry/HudReadoutRowView.cs" id="row"]
+
+[node name="HudReadoutRow" type="VBoxContainer"]
+theme_override_constants/separation = 0
+script = ExtResource("row")
+
+[node name="Title" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Small"
+text = "Readout"
+
+[node name="ValueRow" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Value" type="Label" parent="ValueRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Readout"
+text = "—"
+
+[node name="Badge" type="PanelContainer" parent="ValueRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"Badge"
+visible = false
+
+[node name="Text" type="Label" parent="ValueRow/Badge"]
+layout_mode = 2
+theme_type_variation = &"BadgeLabel"
+text = ""
+
+[node name="Meta" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Meta"
+text = ""
+visible = false
+text_overrun_behavior = 3

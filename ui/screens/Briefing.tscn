@@ -1,0 +1,218 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/Game/UI/Frontend/BriefingScreen.cs" id="1_script"]
+
+[node name="Briefing" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Column" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Header" type="HBoxContainer" parent="Margin/Column"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Back" type="Button" parent="Margin/Column/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_type_variation = &"ButtonGhost"
+
+[node name="Titles" type="VBoxContainer" parent="Margin/Column/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Title" type="Label" parent="Margin/Column/Header/Titles"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"H1"
+
+[node name="HeaderLine" type="Label" parent="Margin/Column/Header/Titles"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_type_variation = &"Small"
+autowrap_mode = 3
+
+[node name="DifficultyBadge" type="MarginContainer" parent="Margin/Column/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Columns" type="HBoxContainer" parent="Margin/Column"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 24
+
+[node name="LeftScroll" type="ScrollContainer" parent="Margin/Column/Columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_scroll_mode = 0
+
+[node name="Left" type="VBoxContainer" parent="Margin/Column/Columns/LeftScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="MiddleScroll" type="ScrollContainer" parent="Margin/Column/Columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_scroll_mode = 0
+
+[node name="Middle" type="VBoxContainer" parent="Margin/Column/Columns/MiddleScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="Right" type="VBoxContainer" parent="Margin/Column/Columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="ImageFrame" type="PanelContainer" parent="Margin/Column/Columns/Right"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 360)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="Margin/Column/Columns/Right/ImageFrame"]
+unique_name_in_owner = true
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ImagePlaceholder" type="Label" parent="Margin/Column/Columns/Right/ImageFrame"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_type_variation = &"Meta"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Carousel" type="HBoxContainer" parent="Margin/Column/Columns/Right"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Previous" type="Button" parent="Margin/Column/Columns/Right/Carousel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+
+[node name="Counter" type="Label" parent="Margin/Column/Columns/Right/Carousel"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"ReadoutSmall"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Next" type="Button" parent="Margin/Column/Columns/Right/Carousel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonGhost"
+
+[node name="Caption" type="Label" parent="Margin/Column/Columns/Right"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+autowrap_mode = 3
+
+[node name="Credit" type="Label" parent="Margin/Column/Columns/Right"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_type_variation = &"Meta"
+autowrap_mode = 3
+
+[node name="HistoryPanel" type="PanelContainer" parent="Margin/Column/Columns/Right"]
+layout_mode = 2
+
+[node name="HistoryMargin" type="MarginContainer" parent="Margin/Column/Columns/Right/HistoryPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="History" type="VBoxContainer" parent="Margin/Column/Columns/Right/HistoryPanel/HistoryMargin"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Spacer" type="Control" parent="Margin/Column/Columns/Right"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="GuidedPanel" type="PanelContainer" parent="Margin/Column/Columns/Right"]
+layout_mode = 2
+
+[node name="GuidedMargin" type="MarginContainer" parent="Margin/Column/Columns/Right/GuidedPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="GuidedRow" type="HBoxContainer" parent="Margin/Column/Columns/Right/GuidedPanel/GuidedMargin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="GuidedText" type="VBoxContainer" parent="Margin/Column/Columns/Right/GuidedPanel/GuidedMargin/GuidedRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GuidedLabel" type="Label" parent="Margin/Column/Columns/Right/GuidedPanel/GuidedMargin/GuidedRow/GuidedText"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="GuidedHint" type="Label" parent="Margin/Column/Columns/Right/GuidedPanel/GuidedMargin/GuidedRow/GuidedText"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_type_variation = &"Small"
+autowrap_mode = 3
+
+[node name="Guided" type="CheckButton" parent="Margin/Column/Columns/Right/GuidedPanel/GuidedMargin/GuidedRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Footer" type="HBoxContainer" parent="Margin/Column/Columns/Right"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="NoPause" type="Label" parent="Margin/Column/Columns/Right/Footer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"Meta"
+vertical_alignment = 1
+
+[node name="Begin" type="Button" parent="Margin/Column/Columns/Right/Footer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_type_variation = &"ButtonPrimary"

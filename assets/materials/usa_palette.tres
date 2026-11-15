@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://assets/shaders/usa_palette_surface.gdshader" id="1_shader"]
+[ext_resource type="Texture2D" path="res://assets/materials/usa_palette.png" id="2_albedo"]
+[ext_resource type="Texture2D" path="res://assets/materials/usa_palette_rm.png" id="3_rm"]
+
+[resource]
+resource_name = "USA_Palette"
+shader = ExtResource("1_shader")
+shader_parameter/palette_albedo = ExtResource("2_albedo")
+shader_parameter/palette_rm = ExtResource("3_rm")
+shader_parameter/indicator_emission = true
+shader_parameter/emissive_swatch = 9
+shader_parameter/indicator_energy = 2.5

@@ -1,0 +1,14 @@
+{
+  "schema": "inventory/1",
+  "mission": "out_of_control",
+  "difficulty": "easy",
+  "items": [
+    { "part": "harness_2m", "count": 2 },
+    { "part": "harness_ext_1m", "count": 2 },
+    { "part": "adapter_round_d", "count": 2 },
+    { "part": "fuse_10a", "count": 4 },
+    { "part": "breaker_5a", "count": 1 },
+    { "part": "gaffer_tape", "count": 1 },
+    { "part": "lioh_canister", "count": 3 }
+  ]
+}

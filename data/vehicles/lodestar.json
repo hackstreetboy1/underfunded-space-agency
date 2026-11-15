@@ -1,0 +1,140 @@
+{
+  "schema": "vehicle/1",
+  "id": "lodestar",
+  "displayName": "Agena",
+  "sections": [
+    { "id": "lodestar", "name": "Target vehicle", "dryMassKg": 1880, "centerOfMassM": [0, 0, 0], "inertiaKgM2": { "roll": 1650, "pitch": 5200, "yaw": 5200 }, "jettison": null }
+  ],
+  "components": [
+    {
+      "id": "lodestar/structure",
+      "family": "structure",
+      "name": "Agena structure",
+      "section": "lodestar",
+      "diagram": { "x": 1300, "y": 300, "compartment": "lodestar" }
+    },
+    {
+      "id": "lodestar/forward_body",
+      "family": "structure",
+      "name": "Agena forward body",
+      "section": "lodestar",
+      "revealable": true,
+      "diagram": { "x": 1380, "y": 300, "compartment": "lodestar" }
+    },
+    {
+      "id": "lodestar/bus",
+      "family": "bus",
+      "name": "Agena main bus",
+      "section": "lodestar",
+      "diagram": { "x": 1300, "y": 520, "compartment": "lodestar" },
+      "bus": { "nominalV": 28, "brownoutV": 22, "droopV": 1.5 }
+    },
+    {
+      "id": "lodestar/battery",
+      "family": "battery",
+      "name": "Agena battery",
+      "section": "lodestar",
+      "diagram": { "x": 1340, "y": 520, "compartment": "lodestar" },
+      "battery": { "bus": "lodestar/bus", "capacityKwh": 8, "initialKwh": 7.6, "maxDischargeW": 1200 }
+    },
+    {
+      "id": "lodestar/docking_cone",
+      "family": "docking",
+      "name": "Docking cone",
+      "section": "lodestar",
+      "revealable": true,
+      "diagram": { "x": 1060, "y": 300, "compartment": "lodestar" },
+      "docking": { "partner": "tandem/nose/docking_bar", "fullLoadRollRateDps": 25, "alarmRollRateDps": 20, "damageAfterS": 60 },
+      "load": { "bus": "lodestar/bus", "powerW": 25, "priority": "support" }
+    },
+    {
+      "id": "lodestar/status_panel",
+      "family": "sensor",
+      "name": "Status display panel",
+      "section": "lodestar",
+      "revealable": true,
+      "diagram": { "x": 1080, "y": 240, "compartment": "lodestar" },
+      "sensor": { "channels": [{ "field": "acs_activity", "measures": "lodestar/acs.activity_level" }] },
+      "load": { "bus": "lodestar/bus", "powerW": 15, "priority": "support" }
+    },
+    {
+      "id": "lodestar/acs",
+      "family": "thruster_group",
+      "name": "Attitude control system",
+      "section": "lodestar",
+      "revealable": true,
+      "diagram": { "x": 1500, "y": 300, "compartment": "lodestar" },
+      "thrusterGroup": { "initiallyArmed": true, "lowActivityFraction": 0.01, "highActivityFraction": 0.08 },
+      "load": { "powerW": 40, "priority": "return" }
+    },
+    {
+      "id": "lodestar/acs/power",
+      "family": "switch",
+      "name": "ACS power",
+      "section": "lodestar",
+      "control": "remote",
+      "diagram": { "x": 1460, "y": 520, "compartment": "lodestar" },
+      "switch": { "from": "lodestar/bus", "to": "lodestar/acs" }
+    },
+    {
+      "id": "lodestar/acs/tank",
+      "family": "tank",
+      "name": "ACS cold gas",
+      "section": "lodestar",
+      "diagram": { "x": 1460, "y": 340, "compartment": "lodestar" },
+      "tank": { "resource": "n2", "capacityKg": 70, "initialKg": 62, "positionM": [-1, 0, 0] }
+    },
+    // ACS thrust is tuned so the docked ACS (rate_damp) can NOT cancel the stuck Tandem T8 at Normal:
+    // roll reaches 20 deg/s about 205 s after the short (docs/dev/STATE_PATHS.md, "Docked spin budget").
+    {
+      "id": "lodestar/acs/t01",
+      "family": "thruster",
+      "name": "ACS thruster 1",
+      "section": "lodestar",
+      "diagram": { "x": 1520, "y": 260, "compartment": "lodestar" },
+      "thruster": { "thrustN": 6.9, "ispS": 65, "positionM": [-3.2, 0, 0.75], "directionUnit": [0, -1, 0], "tank": "lodestar/acs/tank", "driver": "lodestar/acs", "group": "lodestar/acs", "coldC": 5, "hotC": 5, "thermalTimeConstantS": 60 }
+    },
+    {
+      "id": "lodestar/acs/t02",
+      "family": "thruster",
+      "name": "ACS thruster 2",
+      "section": "lodestar",
+      "diagram": { "x": 1536, "y": 260, "compartment": "lodestar" },
+      "thruster": { "thrustN": 6.9, "ispS": 65, "positionM": [-3.2, 0, 0.75], "directionUnit": [0, 1, 0], "tank": "lodestar/acs/tank", "driver": "lodestar/acs", "group": "lodestar/acs", "coldC": 5, "hotC": 5, "thermalTimeConstantS": 60 }
+    },
+    {
+      "id": "lodestar/acs/t03",
+      "family": "thruster",
+      "name": "ACS thruster 3",
+      "section": "lodestar",
+      "diagram": { "x": 1552, "y": 260, "compartment": "lodestar" },
+      "thruster": { "thrustN": 6.9, "ispS": 65, "positionM": [-3.2, 0, -0.75], "directionUnit": [0, 1, 0], "tank": "lodestar/acs/tank", "driver": "lodestar/acs", "group": "lodestar/acs", "coldC": 5, "hotC": 5, "thermalTimeConstantS": 60 }
+    },
+    {
+      "id": "lodestar/acs/t04",
+      "family": "thruster",
+      "name": "ACS thruster 4",
+      "section": "lodestar",
+      "diagram": { "x": 1568, "y": 260, "compartment": "lodestar" },
+      "thruster": { "thrustN": 6.9, "ispS": 65, "positionM": [-3.2, 0, -0.75], "directionUnit": [0, -1, 0], "tank": "lodestar/acs/tank", "driver": "lodestar/acs", "group": "lodestar/acs", "coldC": 5, "hotC": 5, "thermalTimeConstantS": 60 }
+    },
+    {
+      "id": "lodestar/engine",
+      "family": "engine",
+      "name": "Main engine",
+      "section": "lodestar",
+      "revealable": true,
+      "diagram": { "x": 1560, "y": 300, "compartment": "lodestar" },
+      "engine": { "thrustN": 71000, "ispS": 290, "positionM": [-3.6, 0, 0], "directionUnit": [1, 0, 0], "tank": "lodestar/engine/tank", "coldC": 5, "hotC": 900, "thermalTimeConstantS": 30 },
+      "load": { "bus": "lodestar/bus", "powerW": 30, "priority": "support" }
+    },
+    {
+      "id": "lodestar/engine/tank",
+      "family": "tank",
+      "name": "Main engine propellant",
+      "section": "lodestar",
+      "diagram": { "x": 1400, "y": 340, "compartment": "lodestar" },
+      "tank": { "resource": "propellant", "capacityKg": 1400, "initialKg": 1300, "positionM": [-1.8, 0, 0] }
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://assets/shaders/ocean_stylized.gdshader" id="1_shader"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ocean"]
+seed = 8
+frequency = 0.03
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ocean"]
+width = 256
+height = 256
+seamless = true
+as_normal_map = true
+bump_strength = 6.0
+noise = SubResource("FastNoiseLite_ocean")
+
+[resource]
+resource_name = "Ocean"
+shader = ExtResource("1_shader")
+shader_parameter/water_color = Color(0.173, 0.431, 0.608, 1)
+shader_parameter/crest_color = Color(0.29, 0.553, 0.722, 1)
+shader_parameter/foam_color = Color(0.918, 0.949, 0.961, 1)
+shader_parameter/water_roughness = 0.45
+shader_parameter/water_specular = 0.35
+shader_parameter/wave_height_m = 0.35
+shader_parameter/wave_length_m = 48.0
+shader_parameter/wave_direction = Vector2(1, 0.35)
+shader_parameter/wave_time_scale = 1.0
+shader_parameter/ripple_length_m = 9.0
+shader_parameter/ripple_weight = 0.35
+shader_parameter/crest_threshold = 0.58
+shader_parameter/crest_bands = 2
+shader_parameter/normal_noise = SubResource("NoiseTexture2D_ocean")
+shader_parameter/normal_noise_scale_m = 22.0
+shader_parameter/normal_noise_strength = 0.3
+shader_parameter/normal_noise_speed_mps = 0.6
+shader_parameter/foam_center = Vector3(0, 0, 0)
+shader_parameter/foam_ring_radius_m = 2.2
+shader_parameter/foam_ring_width_m = 0.35
+shader_parameter/foam_inner_fill = 0.25
+shader_parameter/foam_wobble_m = 0.12
+shader_parameter/foam_strength = 1.0

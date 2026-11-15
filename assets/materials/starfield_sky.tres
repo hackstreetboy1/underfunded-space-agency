@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://assets/shaders/starfield_sky.gdshader" id="1_shader"]
+
+[resource]
+resource_name = "Starfield_Sky"
+shader = ExtResource("1_shader")
+shader_parameter/space_color = Color(0.012, 0.016, 0.031, 1)
+shader_parameter/warm_tint = Color(1, 0.93, 0.82, 1)
+shader_parameter/cool_tint = Color(0.82, 0.89, 1, 1)
+shader_parameter/dim_density = 100.0
+shader_parameter/dim_probability = 0.012
+shader_parameter/dim_size_deg = 0.045
+shader_parameter/dim_energy = 0.7
+shader_parameter/bright_density = 40.0
+shader_parameter/bright_probability = 0.005
+shader_parameter/bright_size_deg = 0.09
+shader_parameter/bright_energy = 4.0
