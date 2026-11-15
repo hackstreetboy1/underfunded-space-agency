@@ -9,7 +9,8 @@
 .PARAMETER NoBackend
     Launch only the game; do not start or wait for a proxy.
 .PARAMETER Godot
-    Godot .NET executable (non-console). Overrides $env:USA_GODOT and the default download location.
+    Godot 4.7 .NET executable (non-console). Overrides $env:USA_GODOT; without either, the launcher searches PATH,
+    the folder next to this one, Downloads, Desktop, Documents, C:\Godot and Program Files.
 .PARAMETER DryRun
     Print what would run and exit without starting anything.
 .PARAMETER BackendOnly
@@ -30,8 +31,39 @@ $Live = -not $Offline
 
 $repo = (Resolve-Path $PSScriptRoot).Path
 $healthUrl = 'http://127.0.0.1:8787/health'
-$defaultGodot = 'C:\Users\initi\Downloads\Godot_v4.7.2-stable_mono_win64\Godot_v4.7.2-stable_mono_win64\Godot_v4.7.2-stable_mono_win64.exe'
-if (-not $Godot) { $Godot = if ($env:USA_GODOT) { $env:USA_GODOT } else { $defaultGodot } }
+$godotDownload = 'https://godotengine.org/download/archive/4.7.2-stable/'
+$otherGodots = @()
+
+function Find-Godot {
+    # The project needs Godot 4.7 with .NET (the "mono" build; the standard build cannot run C#). Prefer 4.7.2 exactly,
+    # then the newest 4.7.x. Other versions are remembered only to name them in the error message.
+    $found = @()
+    $onPath = Get-Command 'Godot*mono*win64.exe' -CommandType Application -ErrorAction SilentlyContinue
+    if ($onPath) { $found += $onPath | ForEach-Object { Get-Item -LiteralPath $_.Source } }
+    $roots = @(
+        (Split-Path $repo -Parent),
+        (Join-Path $env:USERPROFILE 'Downloads'),
+        [Environment]::GetFolderPath('Desktop'),
+        [Environment]::GetFolderPath('MyDocuments'),
+        'C:\Godot',
+        (Join-Path $env:ProgramFiles 'Godot'),
+        (Join-Path $env:LOCALAPPDATA 'Programs'),
+        (Join-Path $env:USERPROFILE 'scoop\apps')
+    ) | Where-Object { $_ -and (Test-Path -LiteralPath $_) } | Select-Object -Unique
+    foreach ($root in $roots) {
+        $found += Get-ChildItem -LiteralPath $root -Filter 'Godot_v4*mono_win64.exe' -File -Recurse -Depth 3 -ErrorAction SilentlyContinue
+    }
+    $found = $found | Sort-Object FullName -Unique
+    $script:otherGodots = @($found | Where-Object { $_.Name -notlike 'Godot_v4.7*' } | ForEach-Object { $_.FullName })
+    $exact = $found | Where-Object { $_.Name -like 'Godot_v4.7.2-*' } | Select-Object -First 1
+    if ($exact) { return $exact.FullName }
+    $minor = $found | Where-Object { $_.Name -like 'Godot_v4.7*' } | Sort-Object Name -Descending | Select-Object -First 1
+    if ($minor) { return $minor.FullName }
+    return $null
+}
+
+if (-not $Godot) { $Godot = $env:USA_GODOT }
+if (-not $Godot -and -not $BackendOnly) { $Godot = Find-Godot }
 $logDir = Join-Path $env:TEMP 'usa-demo'
 $backendScript = Join-Path $repo 'backend\run_backend.ps1'
 $userData = Join-Path $env:APPDATA 'Godot\app_userdata\Underfunded Space Agency'
@@ -135,7 +167,7 @@ elseif ($Live) { $mode = 'LIVE providers' }
 else { $mode = 'offline practice (fake providers)' }
 Write-Host "Mode : $mode"
 Write-Host "Repo : $repo"
-Write-Host "Godot: $Godot"
+Write-Host "Godot: $(if ($Godot) { $Godot } elseif ($BackendOnly) { '(not needed)' } else { '(not found)' })"
 if ($Live -and -not $NoBackend) {
     Write-Host 'WARNING: live mode uses API quota (Gemini / ElevenLabs).' -ForegroundColor Yellow
 }
@@ -161,8 +193,33 @@ if ($DryRun) {
     exit 0
 }
 
-if (-not $BackendOnly -and -not (Test-Path -LiteralPath $Godot)) {
-    throw "Godot not found at '$Godot'. Pass -Godot <path> or set `$env:USA_GODOT."
+function Stop-WithMessage([string[]]$Lines) {
+    Write-Host ''
+    foreach ($line in $Lines) { Write-Host $line -ForegroundColor Red }
+    exit 1
+}
+
+if (-not $BackendOnly) {
+    if (-not $Godot) {
+        $lines = @(
+            'Godot 4.7 .NET was not found.',
+            "Download 'Godot Engine - .NET' 4.7.2 for Windows from $godotDownload",
+            'and unzip it into your Downloads folder (or next to this folder), then run the demo again.',
+            'Or point the launcher at it: Start-Demo.bat -Godot "C:\path\to\Godot_v4.7.2-stable_mono_win64.exe"'
+        )
+        if ($otherGodots.Count) { $lines += "Found other Godot versions, which cannot run this project: $($otherGodots -join '; ')" }
+        Stop-WithMessage $lines
+    }
+    if (-not (Test-Path -LiteralPath $Godot)) {
+        Stop-WithMessage @("Godot not found at '$Godot' (from -Godot or `$env:USA_GODOT). Check the path and run the demo again.")
+    }
+    if ((Split-Path $Godot -Leaf) -notmatch 'mono') {
+        Stop-WithMessage @("'$Godot' is the standard Godot build; this game needs the .NET build ('Godot Engine - .NET', file name ending in _mono_win64.exe) from $godotDownload")
+    }
+    $sdks = if (Get-Command dotnet -ErrorAction SilentlyContinue) { & dotnet --list-sdks 2>$null } else { @() }
+    if (-not ($sdks | Where-Object { $_ -match '^(1[1-9]|[2-9]\d)\.' })) {
+        Stop-WithMessage @('The .NET 11 SDK is needed to build the game. Install it from https://dotnet.microsoft.com/download/dotnet/11.0 and run the demo again.')
+    }
 }
 
 $backendProc = $null

@@ -1,2 +1,7 @@
 # Normalize EOL for all files that Git considers text files.
 * text=auto eol=lf
+
+# Windows batch files must keep CRLF: cmd.exe misreads LF-only scripts. Stored as-is (no conversion), so clones and
+# GitHub's ZIP download both get CRLF.
+*.bat -text
+*.cmd -text
